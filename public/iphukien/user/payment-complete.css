@@ -1,0 +1,60 @@
+.payment-complete-container {
+    max-width: 670px;
+    margin: 0 auto;
+    padding-top: 115px;
+}
+.complete-avatar {
+    background-image: url(/public/assets/images/payment-complete/complete.svg);
+    background-position: center;
+    background-size: 98px 98px;
+    background-repeat: no-repeat;
+    width: 98px;
+    height: 98px;
+    margin: 0 auto;
+}
+.complete-title {
+    margin-top: 16px;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 35px;
+    text-transform: uppercase;
+    color: #000;
+    text-align: center;
+}
+.complete-info-txt {
+    margin-top: 35px;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 18px;
+    color: #000;
+}
+.order-code, .order-cost, .order-name, .welcome-txt {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 18px;
+    color: #000;
+    margin-top: 5px;
+}
+.welcome-txt {
+    margin-top: 20px;
+}
+.list-btn {
+    padding-top: 98px;
+    padding-bottom: 114px;
+    text-align: center;
+}
+.list-btn a {
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    padding: 12px 40px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #000;
+    margin-left: 50px;
+}
+.list-btn a:first-child {
+    margin-left: 0;
+}
