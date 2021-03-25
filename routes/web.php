@@ -1,7 +1,6 @@
 <?php
 
 Route::middleware(['runall', 'locale'])->group(function () {
-    // Route::get('/', 'MainController@getHome')->name('getHome');
     Route::get('change-language/{language}', 'MainController@changeLanguage')->name('user.change-language');
     Auth::routes();
 
@@ -80,7 +79,7 @@ Route::middleware(['runall', 'locale'])->group(function () {
 
     Route::post('/post-contact', 'User\HomeController@postContact')->name('postContact');
     //============================================================================
-    Route::get('/', 'User\HomeController@index')->name('home');
+    Route::get('/', 'User\HomeController@index')->name('getHome');
 Route::get('/login', 'User\UserController@login')->name('login');
 Route::get('/forgot-password', 'User\UserController@forgotPassword')->name('forgot-password');
 Route::get('/signup', 'User\UserController@signup')->name('signup');

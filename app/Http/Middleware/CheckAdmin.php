@@ -18,7 +18,7 @@ class CheckAdmin
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::check() && Auth::user()->admin == 1) {
+        if (Auth::check() && Auth::user()->role_id == 1) {
             return $next($request);
         }
 

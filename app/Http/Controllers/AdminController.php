@@ -23,7 +23,7 @@ class AdminController extends Controller
     public function getLogin()
     {
         if (Auth::check()) {
-            if (Auth::user()->admin == 1) {
+            if (Auth::user()->role_id == 1) {
                 return redirect()->route('adgetHome');
             } else {
                 return redirect()->route('getHome');
@@ -40,7 +40,7 @@ class AdminController extends Controller
     {
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             // Authentication passed...
-            if (Auth::user()->admin == 1) {
+            if (Auth::user()->role_id == 1) {
                 return redirect()->route('adgetHome');
             } else {
                 return redirect()->route('getHome');
