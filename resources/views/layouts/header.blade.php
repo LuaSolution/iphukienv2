@@ -22,7 +22,7 @@
             <a href="" class="ipk-header-right-icon wishlist-icon"></a>
         </div>
         <div class="header-right-btn">
-            <a href="" class="ipk-header-right-icon cart-icon">
+            <a href="{{ route('user.cart') }}" class="ipk-header-right-icon cart-icon">
                 <span>10</span>
             </a>
         </div>

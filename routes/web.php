@@ -44,20 +44,41 @@ Route::middleware(['runall', 'locale'])->group(function () {
     // END Admin ***********
 
     // FRONDEND ***********
-    Route::get('/gioi-thieu', function () {
-        return view('client.about');
-    })->name('getIntro');
-    Route::get('/lien-he', function () {
-        return view('client.contact');
-    })->name('getContact');
-    Route::get('/dat-sach', function () {
-        return view('client.orderbook');
-    })->name('getOrderBook');
-    Route::post('/post-contact', 'MainController@postContact')->name('postContact');
-    Route::post('/post-order', 'MainController@postOrder')->name('postOrder');
-    Route::get('/tin-tuc', 'MainController@getAllNews')->name('getAllNews');
-    Route::get('/tin-tuc/{news}', 'MainController@getNews')->name('getNews');
+    Route::get('/phuong-thuc-thanh-toan', function () {
+        return view('user.blank');
+    });
+    Route::get('/chinh-sach-doi-tra', function () {
+        return view('user.blank');
+    });
 
+    Route::get('/cach-thuc-thanh-toan', function () {
+        return view('user.blank');
+    });
+
+    Route::get('/thong-tin-ngan-hang', function () {
+        return view('user.blank');
+    });
+
+    Route::get('/hoa-don-dien-tu', function () {
+        return view('user.blank');
+    });
+
+    Route::get('/chinh-sach-bao-mat', function () {
+        return view('user.blank');
+    });
+
+    Route::get('/gioi-thieu', function () {
+        return view('user.blank');
+    });
+
+    Route::get('/tuyen-dung', function () {
+        return view('user.blank');
+    });
+    Route::get('/gop-y', function () {
+        return view('user.blank');
+    });
+
+    Route::post('/post-contact', 'User\HomeController@postContact')->name('postContact');
     //============================================================================
     Route::get('/', 'User\HomeController@index')->name('home');
 Route::get('/login', 'User\UserController@login')->name('login');

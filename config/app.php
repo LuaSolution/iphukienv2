@@ -26,7 +26,9 @@ return [
      */
 
     'env' => env('APP_ENV', 'production'),
-
+    'nhanh_api_host' => env('NHANH_API_HOST'),
+    'nhanh_api_user_name' => env('NHANH_API_USER_NAME'),
+    'nhanh_api_secret_key' => env('NHANH_API_SECRET_KEY'),
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

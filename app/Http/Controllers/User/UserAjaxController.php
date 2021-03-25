@@ -4,11 +4,12 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Helpers\Helpers;
 
 class UserAjaxController extends Controller
 {
     public function getLocation(Request $request, $type, $parentId = null) {
-        $listData = callNhanhApi([
+        $listData = Helpers::callNhanhApi([
             "type" => $type,
             "parentId" => $parentId
         ], "/shipping/location");

@@ -35,7 +35,12 @@
             <div class="status"><span>Đang giao hàng</span></div>
             <div class="status"><span>Thành công</span></div>
         </div>
-        <div class="detail-table">
+        <?php $data = config('app.nhanh_api_user_name') . '14742630';
+            $checksum = md5(md5(config('app.nhanh_api_secret_key') . $data) . $data);
+            $src = "https://dev.nhanh.vn/api/shipping/trackingframe?apiUsername=" . config('app.nhanh_api_user_name') . "&orderId=14742630&checksum=" . $checksum;
+            ?>
+        <iframe src="{{$src}}"  width="100%" height="600"></iframe>
+        <!-- <div class="detail-table">
             <table class="responsive-table">
                 <thead>
                     <tr>
@@ -90,7 +95,7 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </div> -->
         <div class="list-products">
             <div class="row products">
                 <div class="product col l3">

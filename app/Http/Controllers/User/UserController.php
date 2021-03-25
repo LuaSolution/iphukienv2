@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Helpers\Helpers;
 
 class UserController extends Controller
 {
@@ -25,7 +26,7 @@ class UserController extends Controller
     }
 
     public function payment(Request $request) {
-        $listCity = callNhanhApi([
+        $listCity = Helpers::callNhanhApi([
             "type" => "CITY",
             "parentId" => 0
         ], "/shipping/location");

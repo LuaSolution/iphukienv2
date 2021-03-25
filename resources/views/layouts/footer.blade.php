@@ -14,27 +14,26 @@
             <div class="col l2 s12">
                 <div class="name">IPHUKIEN</div>
                 <div class="footer-link">
-                    <a href="#!">Giới thiệu về iPhuKien</a>
-                    <a href="#!">Tin tức</a>
-                    <a href="#!">Tuyển dụng</a>
-                    <a href="#!">Góp ý</a>
+                    <a href="{{ url('gioi-thieu') }}">Giới thiệu về iPhuKien</a>
+                    <a href="{{ url('tin-tuc') }}">Tin tức</a>
+                    <a href="{{ url('tuyen-dung') }}">Tuyển dụng</a>
+                    <a href="{{ url('gop-y') }}">Góp ý</a>
                 </div>
             </div>
             <div class="col l4 s12">
                 <div class="name">Hỗ trợ</div>
                 <div class="footer-link">
-                    <a href="#!">Phương Thức Thanh Toán</a>
-                    <a href="#!">Chính sách vận chuyển & đổi hàng</a>
-                    <a href="#!">Tình trạng đơn hàng</a>
-                    <a href="#!">Cách thức thanh toán</a>
-                    <a href="#!">Thông tin tài khoản ngân hàng</a>
-                    <a href="#!">Hóa đơn điện tử</a>
-                    <a href="#!">Chính sách bảo mật thông tin</a>
+                    <a href="{{ url('phuong-thuc-thanh-toan') }}">Phương Thức Thanh Toán</a>
+                    <a href="{{ url('chinh-sach-doi-tra') }}">Chính sách vận chuyển & đổi hàng</a>
+                    <a href="{{ url('cach-thuc-thanh-toan') }}">Cách thức thanh toán</a>
+                    <a href="{{ url('thong-tin-ngan-hang') }}">Thông tin tài khoản ngân hàng</a>
+                    <a href="{{ url('hoa-don-dien-tu') }}">Hóa đơn điện tử</a>
+                    <a href="{{ url('chinh-sach-bao-mat') }}">Chính sách bảo mật thông tin</a>
                 </div>
             </div>
             <div class="col l2 s12">
                 <div class="social-icons">
-                    <a href="https://www.facebook.com/" class="ipk-footer-icon facebook-icon"></a>
+                    <a href="https://www.facebook.com/iPhukien" class="ipk-footer-icon facebook-icon"></a>
                     <a href="https://www.instagram.com/" class="ipk-footer-icon instagram-icon"></a>
                     <a href="https://www.youtube.com/" class="ipk-footer-icon youtube-icon"></a>
                 </div>
