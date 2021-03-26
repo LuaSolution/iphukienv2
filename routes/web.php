@@ -87,7 +87,6 @@ Route::middleware(['runall', 'locale'])->group(function () {
     
     //============================================================================
     Route::get('/', 'User\HomeController@index')->name('getHome');
-    Route::get('/{url}', 'User\HomeController@getStaticPage')->name('getStaticPage');
     Route::get('/login', 'User\UserController@login')->name('login');
     Route::get('/forgot-password', 'User\UserController@forgotPassword')->name('forgot-password');
     Route::get('/signup', 'User\UserController@signup')->name('signup');
@@ -107,4 +106,6 @@ Route::middleware(['runall', 'locale'])->group(function () {
     Route::get('/user-wishlist', 'User\UserController@getUserWishlist')->name('user.wishlist');
     Route::get('/news', 'User\NewsController@index')->name('news.index');
     Route::get('/news/{id}', 'User\NewsController@show')->name('news.show');
+
+    Route::get('/{url}', 'User\HomeController@getStaticPage')->name('getStaticPage');
 });
