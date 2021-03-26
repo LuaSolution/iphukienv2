@@ -181,11 +181,11 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- BEGIN PAGE BREADCRUMB -->
                 <ul class="page-breadcrumb breadcrumb">
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="{{ route('adMgetHome') }}">Dashboard</a>
                         <i class="fa fa-circle"></i>
                     </li>
                     <li>
-                        <span class="active">Form Stuff</span>
+                        <span class="active">@yield('page_title')</span>
                     </li>
                 </ul>
                 <!-- END PAGE BREADCRUMB -->

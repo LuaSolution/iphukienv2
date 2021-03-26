@@ -1,5 +1,6 @@
 @extends('metronic_admin.layouts.app')
 
+@section('page_title', 'Dashboard')
 @section('home_active', 'active')
 
 @section('content')
