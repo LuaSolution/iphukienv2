@@ -32,22 +32,17 @@
                     <span class="title">Danh sách bài viết</span>
                 </a>
             </li>
-            <li class="nav-item @yield('page_layouts_active')">
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-layers"></i>
-                    <span class="title">Trang tĩnh</span>
-                    <span class="arrow"></span>
+            <li class="nav-item @yield('add_page_active')">
+                <a href="{{ route('adMgetAddStaticPage') }}" class="nav-link">
+                    <i class="icon-bar-chart"></i>
+                    <span class="title">Thêm page mới</span>
                 </a>
-                <ul class="sub-menu">
-                    <?php $menus = \App\StaticPage::get(); ?>
-                    @foreach($menus as $menu)
-                        <li class="nav-item">
-                            <a href="{{ route('adMgetEditStaticPages', ['id' => $menu->id]) }}" class="nav-link ">
-                                <span class="title"><i class="{{ $menu->icon}}"></i> {{ $menu->name}}</span>
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
+            </li>
+            <li class="nav-item @yield('list_page_active')">
+                <a href="{{ route('adMgetListStaticPage') }}" class="nav-link">
+                    <i class="icon-bar-chart"></i>
+                    <span class="title">Danh sách page</span>
+                </a>
             </li>
         </ul>
         <!-- END SIDEBAR MENU -->

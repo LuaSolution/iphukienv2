@@ -876,4 +876,48 @@ class AdminController extends Controller
             return redirect()->route('adMgetHome');
         }
     }
+
+    /**
+     * News edit news page
+     */
+    public function postEditStaticPages($id, Request $request)
+    {
+
+        // title
+        $title = $request->input('name');
+        if (!$title) {
+            $title = "News " . time();
+        }
+        // title
+        $icon = $request->input('icon');
+        if (!$icon) {
+            $icon = 'icon-layers';
+        }
+        // slug
+        $slug = $request->input('slug');
+        if (!$slug) {
+            $slug = str_slug($title, '-');
+        } else {
+            $slug = str_slug($slug, '-');
+        }
+        // content
+        $content = $request->input('content');
+        if (!$content) {
+            $content = "";
+        }
+
+        $model = StaticPage::findOrFail($id);
+        $model->name=$title;
+        $model->url = $slug;
+        $model->content = $content;
+        $model->icon=$icon;
+        $model->created_at = date('Y-m-d');
+        $model->save();
+
+        if ($model) {
+            return redirect()->route('adMgetEditStaticPages', ['id' => $id])->with('success', 'Cập nhật thành công!');
+        } else {
+            return redirect()->route('adMgetEditStaticPages', ['id' => $id])->with('error', 'Cập nhật thất bại!');
+        }
+    }
 }

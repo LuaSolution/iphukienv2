@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Cate;
 use App\Product;
 use App\Mail;
+use App\StaticPage;
 
 class HomeController extends Controller
 {
@@ -30,7 +31,17 @@ class HomeController extends Controller
         $m->email = $req->email;
         $m->created_at=date('Y-m-d');
         $m->updated_at=date('Y-m-d');
-       $m->save();
+        $m->save();
         return redirect()->back();
+    }
+
+    public function getStaticPage($url) {
+        $data = StaticPage::where('url', $url)->first();
+        if ($data) {
+            $this->data['data'] = $data;
+            return view('user.blank', $this->data);
+        } else {
+            return redirect()->route('getHome');
+        }
     }
 }

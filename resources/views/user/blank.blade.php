@@ -12,16 +12,11 @@
 @endsection
 
 @section('content')
-<div class="ipk-container product-breadcrumbs">
+<div class="ipk-container login-container">
     <div class="ipk-content-container">
-        <nav>
-            <div class="nav-wrapper">
-                <div class="col s12">
-                    <a href="{{ route('getHome') }}" class="breadcrumb">Trang chủ</a>
-                    <a href="javascript:void(0)" class="breadcrumb">Danh mục sản phẩm</a>
-                </div>
-            </div>
-        </nav>
+        <div class="row">
+            {!! $data->content !!}
+        </div>
     </div>
 </div>
 @endsection

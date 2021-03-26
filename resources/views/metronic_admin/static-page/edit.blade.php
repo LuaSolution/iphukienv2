@@ -1,6 +1,6 @@
 @extends('metronic_admin.layouts.app')
 
-@section('edit_data_active', 'active')
+@section('list_page_active', 'active')
 
 @section('content')
 
@@ -11,12 +11,12 @@
             <div class="portlet-title">
                 <div class="caption font-red-sunglo">
                     <i class="icon-settings font-red-sunglo"></i>
-                    <span class="caption-subject bold uppercase"> Chỉnh sửa trang tĩnh</span>
+                    <span class="caption-subject bold uppercase"> Chỉnh sửa bài viết</span>
                 </div>
                 <div class="actions">
                     <div class="btn-group">
                         <a class="btn btn-sm green dropdown-toggle" href="javascript:;" data-toggle="dropdown">
-                            Danh sách trang tĩnh
+                            Danh sách bài viết
                         </a>
                     </div>
                 </div>
@@ -27,19 +27,24 @@
                     {{ csrf_field() }}
                     <div class="form-body">
                         <div class="form-group form-md-line-input has-success">
-                            <input type="text" class="form-control" id="form-name" name="name" required=""
-                                value="{{ $data->name }}">
-                            <label for="form-name">Tên trang tĩnh</label>
+                            <input type="text" class="form-control" id="form-title" name="title" required=""
+                                value="{{ $data->title }}">
+                            <label for="form-title">Tên bài viết</label>
                         </div>
                         <div class="form-group form-md-line-input has-success">
                             <input type="text" class="form-control" id="form-slug" name="slug" required=""
-                                value="{{ $data->url }}">
-                            <label for="form-slug">Link</label>
+                                value="{{ $data->slug }}">
+                            <label for="form-slug">Link thân thiện</label>
                         </div>
                         <div class="form-group form-md-line-input has-success">
-                            <input type="text" class="form-control" id="form-icon" name="icon" required=""
-                                value="{{ $data->icon }}">
-                            <label for="form-icon">Icon</label>
+                            <textarea id="form-description-txt" class="text-content form-control"
+                                name="description">{{ $data->description }}</textarea>
+                            <label>Mô tả</label>
+                        </div>
+                        <div class="form-group form-md-line-input has-success">
+                            <input type="number" class="form-control" id="form-pos" name="pos"
+                                value="{{ $data->pos }}">
+                            <label>Thứ tự hiển thị</label>
                         </div>
                         <div class="form-group form-md-line-input">
                             <textarea id="form-content-txt" class="text-content form-control"
@@ -51,6 +56,19 @@
                                     filebrowserUploadMethod: "form"
                                 });
                             </script>
+                        </div>
+                        <div class="form-group form-md-line-input has-success">
+                            <label class="col-sm-2 form-control-label">Hình đại diện:</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="form-avatar" name="cover">
+                                <label class="custom-file-label" for="form-avatar">@if($StaticPage->cover != "")
+                                    {{ substr($StaticPage->cover,0,strpos($StaticPage->cover,'?')) }}
+                                @elseChoose file
+                                    @endif</label>
+                            </div>
+                            <img id="file-show" @if($StaticPage->cover != "")
+                            src="{{ asset('/public/img/post/' .$StaticPage->cover) }}" @else
+                            class="hidden" @endif >
                         </div>
                     </div>
                     <div class="form-actions noborder">
@@ -64,4 +82,8 @@
         <!-- END SAMPLE FORM PORTLET-->
     </div>
 </div>
+@endsection
+
+@section('admin_js')
+<script src="{{ asset('public/admin/js/post.js') }}" type="text/javascript"></script>
 @endsection

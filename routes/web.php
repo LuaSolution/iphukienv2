@@ -41,47 +41,53 @@ Route::middleware(['runall', 'locale'])->group(function () {
             Route::post('/upload-img', 'AdminController@uploadImage')->name('uploadImage');
 
             //Static page
-            Route::get('/static-edit/{id}', 'AdminController@getEditStaticPages')->name('adMgetEditStaticPages');
+            Route::get('/static-add', 'StaticPagesController@getAddStaticPages')->name('adMgetAddStaticPage');
+            Route::post('/static-add', 'StaticPagesController@postAddStaticPages')->name('adMpostAddStaticPages');
+            Route::get('/static', 'StaticPagesController@getListStaticPages')->name('adMgetListStaticPage');
+            Route::get('/static-del/{id}', 'StaticPagesController@getDeStaticPages')->name('adMgetDelStaticPages');
+            Route::get('/static-edit/{id}', 'StaticPagesController@getEditStaticPages')->name('adMgetEditStaticPages');
+            Route::post('/static-edit/{id}', 'StaticPagesController@postEditStaticPages')->name('adMpostEditStaticPages');
         });
 
     });
     // FRONDEND ***********
-    Route::get('/phuong-thuc-thanh-toan', function () {
-        return view('user.blank');
-    });
-    Route::get('/chinh-sach-doi-tra', function () {
-        return view('user.blank');
-    });
+    // Route::get('/phuong-thuc-thanh-toan', function () {
+    //     return view('user.blank');
+    // });
+    // Route::get('/chinh-sach-doi-tra', function () {
+    //     return view('user.blank');
+    // });
 
-    Route::get('/cach-thuc-thanh-toan', function () {
-        return view('user.blank');
-    });
+    // Route::get('/cach-thuc-thanh-toan', function () {
+    //     return view('user.blank');
+    // });
 
-    Route::get('/thong-tin-ngan-hang', function () {
-        return view('user.blank');
-    });
+    // Route::get('/thong-tin-ngan-hang', function () {
+    //     return view('user.blank');
+    // });
 
-    Route::get('/hoa-don-dien-tu', function () {
-        return view('user.blank');
-    });
+    // Route::get('/hoa-don-dien-tu', function () {
+    //     return view('user.blank');
+    // });
 
-    Route::get('/chinh-sach-bao-mat', function () {
-        return view('user.blank');
-    });
+    // Route::get('/chinh-sach-bao-mat', function () {
+    //     return view('user.blank');
+    // });
 
-    Route::get('/gioi-thieu', function () {
-        return view('user.blank');
-    });
+    // Route::get('/gioi-thieu', function () {
+    //     return view('user.blank');
+    // });
 
-    Route::get('/tuyen-dung', function () {
-        return view('user.blank');
-    });
-    Route::get('/gop-y', function () {
-        return view('user.blank');
-    });
+    // Route::get('/tuyen-dung', function () {
+    //     return view('user.blank');
+    // });
+    // Route::get('/gop-y', function () {
+    //     return view('user.blank');
+    // });
     
     //============================================================================
     Route::get('/', 'User\HomeController@index')->name('getHome');
+    Route::get('/{url}', 'User\HomeController@getStaticPage')->name('getStaticPage');
     Route::get('/login', 'User\UserController@login')->name('login');
     Route::get('/forgot-password', 'User\UserController@forgotPassword')->name('forgot-password');
     Route::get('/signup', 'User\UserController@signup')->name('signup');
