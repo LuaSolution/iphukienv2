@@ -26,10 +26,6 @@ class News extends Model
     {
         return News::where('slug', '=', $slug)->first();
     }
-    public function getListNews()
-    {
-        return News::orderBy('pos', 'asc')->orderBy('created_at', 'desc')->paginate(5);
-    }
     public function deleteNews($id)
     {
         return News::where('id', '=', $id)->delete();

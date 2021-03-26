@@ -173,9 +173,7 @@ class NewsController extends Controller
      */
     public function getListNews()
     {
-
-        $newsModel = new News();
-        $newss = $newsModel->getListNews();
+        $newss = News::orderBy('pos', 'asc')->orderBy('created_at', 'desc')->paginate(5);
         $this->data['newss'] = $newss;
 
         return view('metronic_admin.news.list', $this->data);
