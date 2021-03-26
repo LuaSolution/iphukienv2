@@ -7,10 +7,8 @@
 @endsection
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('public/iphukien/user/header.css') }}">
 <link rel="stylesheet" href="{{ asset('public/iphukien/user/ipk-breadcrumb.css') }}">
 <link rel="stylesheet" href="{{ asset('public/iphukien/user/category-details.css') }}">
-<link rel="stylesheet" href="{{ asset('public/iphukien/user/footer.css') }}">
 @endsection
 
 @section('content')
@@ -19,7 +17,7 @@
         <nav>
             <div class="nav-wrapper">
                 <div class="col s12">
-                    <a href="{{ route('home') }}" class="breadcrumb">Trang chủ</a>
+                    <a href="{{ route('getHome') }}" class="breadcrumb">Trang chủ</a>
                     <a href="javascript:void(0)" class="breadcrumb">Danh mục sản phẩm</a>
                 </div>
             </div>
@@ -33,6 +31,5 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('public/assets/scripts/iphukien/user/header.js') }}"></script>
 <script src="{{ asset('public/assets/scripts/iphukien/user/category-details.js') }}"></script>
 @endsection

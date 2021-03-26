@@ -19,7 +19,7 @@
             <a href="" class="ipk-header-right-icon user-icon" data-target='user-dropdown'></a>
         </div> -->
         <div class="header-right-btn">
-            <a href="" class="ipk-header-right-icon wishlist-icon"></a>
+            <a href="{{ route('user.wishlist') }}" class="ipk-header-right-icon wishlist-icon"></a>
         </div>
         <div class="header-right-btn">
             <a href="{{ route('user.cart') }}" class="ipk-header-right-icon cart-icon">

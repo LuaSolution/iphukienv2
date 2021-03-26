@@ -7,9 +7,7 @@
 @endsection
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('public/iphukien/user/header.css') }}">
 <link rel="stylesheet" href="{{ asset('public/iphukien/user/order-details.css') }}">
-<link rel="stylesheet" href="{{ asset('public/iphukien/user/footer.css') }}">
 @endsection
 
 @section('content')
@@ -187,8 +185,4 @@
 
 @section('footer')
 @include('layouts.footer', ['status' => 'complete'])
-@endsection
-
-@section('scripts')
-<script src="{{ asset('public/assets/scripts/iphukien/user/header.js') }}"></script>
 @endsection

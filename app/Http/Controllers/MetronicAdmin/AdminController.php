@@ -10,6 +10,7 @@ use App\Product;
 use App\Store;
 use App\User;
 use App\Order;
+use App\StaticPage;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -859,5 +860,20 @@ class AdminController extends Controller
         ->where('id', $id)
         ->update(['status' => 1]);
         return redirect()->back();
+    }
+
+    /**
+     * Get edit static page
+     */
+    public function getEditStaticPages($id)
+    {
+        $data = StaticPage::findOrFail($id);
+
+        if ($data) {
+            $this->data['data'] = $data;
+            return view('metronic_admin.static-edit', $this->data);
+        } else {
+            return redirect()->route('adMgetHome');
+        }
     }
 }

@@ -7,9 +7,7 @@
 @endsection
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('public/iphukien/user/header.css') }}">
-<link rel="stylesheet" href="{{ asset('public/iphukien/user/payment.css') }}">
-<link rel="stylesheet" href="{{ asset('public/iphukien/user/footer.css') }}">
+<link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/payment.css') }}">
 @endsection
 
 @section('content')
@@ -101,23 +99,24 @@
 <!-- Modal Structure -->
 <div id="new-address-popup" class="modal">
     <div class="modal-content">
+        <a href="#!" class="modal-close close-add-address-popup"><a>
         <div class="new-address-popup-title">
             Thêm địa chỉ mới
         </div>
-        <form method="post" class="add-new-address-form">
-            <div class="form-input">
+        <form method="post" class="row add-new-address-form">
+            <div class="col m6 s12 form-input">
                 <input type="text" placeholder="HỌ VÀ TÊN *" />
                 <span>Vui lòng điền đầy đủ Họ và Tên</span>
             </div>
-            <div class="form-input">
+            <div class="col m6 s12 form-input">
                 <input type="text" placeholder="SỐ ĐIỆN THOẠI *" />
                 <span>Ví dụ: 0866 909 606</span>
             </div>
-            <div class="form-input">
+            <div class="col m6 s12 form-input">
                 <input type="text" placeholder="SỐ ĐIỆN THOẠI *" />
                 <span>Ví dụ: 0866 909 606</span>
             </div>
-            <div class="form-input">
+            <div class="col m6 s12 form-input">
                 <div class="input-field">
                     <select name="city" id="city">
                         <option value="" disabled selected>Chọn tỉnh/ thành phố</option>
@@ -127,12 +126,36 @@
                     </select>
                 </div>
             </div>
-            <div class="form-input">
+            <div class="col m6 s12 form-input">
                 <div class="input-field">
                     <select name="district" id="district">
                         <option value="" disabled selected>Chọn quận/ huyện</option>
                     </select>
                 </div>
+            </div>
+            <div class="col m6 s12 form-input">
+                <div class="input-field">
+                    <select name="district" id="district">
+                        <option value="" disabled selected>Chọn phường/ xã</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col m6 s12 form-input">
+                <input type="text" placeholder="SỐ NHÀ/ TÊN ĐƯỜNG *" />
+                <span>Ví dụ: 86-88 đường Đinh Tiên Hoàng</span>
+            </div>
+            <div class="col s12 form-input">
+                <div class="set-default-address">
+                    <p>
+                        <label>
+                            <input type="checkbox" name="default-address" />
+                            <span>Đặt làm địa chỉ mặc định</span>
+                        </label>
+                    </p>
+                </div>
+            </div>
+            <div class="col s12 form-input center-align">
+                <button type="submit" value="Cập nhật">Cập nhật</button>
             </div>
         </form>
     </div>
@@ -144,7 +167,6 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('public/assets/scripts/iphukien/user/header.js') }}"></script>
 <script src="{{ asset('public/assets/scripts/iphukien/user/payment.js') }}"></script>
 <script>
 $(document).on("change", "#city", function () {

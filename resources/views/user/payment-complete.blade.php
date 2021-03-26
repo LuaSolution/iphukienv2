@@ -7,9 +7,7 @@
 @endsection
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('public/iphukien/user/header.css') }}">
-<link rel="stylesheet" href="{{ asset('public/iphukien/user/payment-complete.css') }}">
-<link rel="stylesheet" href="{{ asset('public/iphukien/user/footer.css') }}">
+<link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/payment-complete.css') }}">
 @endsection
 
 @section('content')
@@ -24,7 +22,7 @@
             <div class="order-cost">Tổng tiền: 32.000.000 đ</div>
             <div class="welcome-txt">Rất hân hạnh được phục vụ bạn</div>
             <div class="list-btn">
-                <a href="{{ route('home') }}">Tiếp tục mua sản phẩm</a>
+                <a href="{{ route('getHome') }}">Tiếp tục mua sản phẩm</a>
                 <a href="{{ route('user.order-details', 1) }}">Chi tiết đơn hàng</a>
             </div>
         </div>
@@ -34,8 +32,4 @@
 
 @section('footer')
 @include('layouts.footer', ['status' => 'complete'])
-@endsection
-
-@section('scripts')
-<script src="{{ asset('public/assets/scripts/iphukien/user/header.js') }}"></script>
 @endsection

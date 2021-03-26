@@ -7,9 +7,7 @@
 @endsection
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('public/iphukien/user/header.css') }}">
-<link rel="stylesheet" href="{{ asset('public/iphukien/user/cart.css') }}">
-<link rel="stylesheet" href="{{ asset('public/iphukien/user/footer.css') }}">
+<link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/cart.css') }}">
 @endsection
 
 @section('content')
@@ -148,6 +146,5 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('public/assets/scripts/iphukien/user/header.js') }}"></script>
 <script src="{{ asset('public/assets/scripts/iphukien/user/cart.js') }}"></script>
 @endsection

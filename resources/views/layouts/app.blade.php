@@ -5,9 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>@yield('title')</title>
-
-    <link rel="icon" href="{{ asset('public/assets/images/header/favicon.svg') }}" type="image/gif" sizes="16x16">
+    <title>{{config('config.title')}} | @yield('title')</title>
+    <meta content="{{config('config.description')}}"
+        name="description" />
+    <link rel="icon" href="{{ asset('public/assets/images/header/favicon.svg') }}"
+        type="image/gif" sizes="16x16">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -19,8 +21,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- iPhuKien css -->
     <link rel="stylesheet" href="{{ asset('public/iphukien/user/common.css') }}">
-    @yield('styles')
+    <link rel="stylesheet" href="{{ asset('public/iphukien/user/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/iphukien/user/footer.css') }}">
     @yield('fb-meta-tags')
+    @section('styles')
+    @show
 </head>
 
 <body>
@@ -35,9 +40,9 @@
         <!-- Materialize -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <!-- header js -->
-        @yield('scripts')
+        <script src="{{ asset('public/assets/scripts/iphukien/user/header.js') }}"></script>
+        @section('scripts')
+        @show
     </footer>
-
 </body>
-
 </html>

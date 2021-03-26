@@ -60,7 +60,7 @@
                 <a class="modal-trigger" href="#quickview">Xem nhanh</a>
             </div>
         </div>
-        @if(@fromPage == 'home')
+        @if(@fromPage == 'getHome')
         <div class="product col l3">
             <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
             <div class="name">
@@ -138,7 +138,7 @@
         </div>
         @endif
     </div>
-    @if(@fromPage == 'home')
+    @if(@fromPage == 'getHome')
     <a href="#!" class="view-more">Xem thêm</a>
     @endif
 </div>
