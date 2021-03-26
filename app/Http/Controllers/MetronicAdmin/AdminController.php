@@ -41,12 +41,14 @@ class AdminController extends Controller
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             // Authentication passed...
             if (Auth::user()->role_id == 1) {
+                toast()->success('Đăng nhập thành công');
                 return redirect()->route('adMgetHome');
             } else {
                 return redirect()->route('getHome');
             }
         } else {
-            return redirect()->route('adMgetLogin')->with('error', 'Mật khẩu hoặc tài khoản không đúng');
+            toast()->error('Mật khẩu hoặc tài khoản không đúng');
+            return redirect()->route('adMgetLogin');
         }
     }
 
@@ -537,9 +539,11 @@ class AdminController extends Controller
         $newsModel = new News();
         $result = $newsModel->insertNews($dataInsert);
         if ($result > 0) {
-            return redirect()->route('adMgetListNews')->with('success', 'Thêm thành công!');
+            toast()->success('Thêm thông tin bài viết thành công');
+            return redirect()->route('adMgetListNews');
         } else {
-            return redirect()->route('adMgetListNews')->with('error', 'Thêm thất bại!');
+            toast()->error('Thêm thông tin bài viết thất bại');
+            return redirect()->route('adMgetListNews');
         }
 
     }
@@ -621,9 +625,11 @@ class AdminController extends Controller
         $newsModel = new News();
         $result = $newsModel->updateNews($id, $dataUpdate);
         if ($result > 0) {
-            return redirect()->route('adMgetEditNews', ['id' => $id])->with('success', 'Cập nhật thành công!');
+            toast()->success('Thay đổi thông tin bài viết thành công');
+            return redirect()->route('adMgetEditNews', ['id' => $id]);
         } else {
-            return redirect()->route('adMgetEditNews', ['id' => $id])->with('error', 'Cập nhật thất bại!');
+            toast()->error('Thay đổi thông tin bài viết thất bại');
+            return redirect()->route('adMgetEditNews', ['id' => $id]);
         }
 
     }
@@ -675,8 +681,10 @@ class AdminController extends Controller
         $result = $newsModel->deleteNews($id);
 
         if ($result > 0) {
+            toast()->success('Xóa thông tin bài viết thành công');
             return redirect()->route('adMgetListNews')->with('success', 'Xóa thành công!');
         } else {
+            toast()->error('Xóa thông tin bài viết thất bại');
             return redirect()->route('adMgetListNews')->with('error', 'Xóa thất bại!');
         }
     }

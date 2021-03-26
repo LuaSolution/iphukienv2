@@ -50,6 +50,7 @@
     <script
         src="{{ asset('public/metronic_assets/global/plugins/bootstrap/js/bootstrap.min.js') }}"
         type="text/javascript"></script>
+        @include('toast::messages-jquery')
 </body>
 
 </html>

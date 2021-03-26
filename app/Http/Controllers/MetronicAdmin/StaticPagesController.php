@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\News;
 use App\StaticPage;
 use Illuminate\Http\Request;
+use Toast;
 
 class StaticPagesController extends Controller
 {
@@ -14,6 +15,7 @@ class StaticPagesController extends Controller
      */
     public function getAddStaticPages()
     {
+        toast()->success('message', 'title');
         return view('metronic_admin.static-page.add');
     }
 
@@ -97,24 +99,20 @@ class StaticPagesController extends Controller
 
     public function postAddStaticPages(Request $request)
     {
-// title
         $title = $request->input('name');
         if (!$title) {
             $title = "News " . time();
         }
-// title
         $icon = $request->input('icon');
         if (!$icon) {
             $icon = 'icon-layers';
         }
-// slug
         $slug = $request->input('slug');
         if (!$slug) {
             $slug = str_slug($title, '-');
         } else {
             $slug = str_slug($slug, '-');
         }
-// content
         $content = $request->input('content');
         if (!$content) {
             $content = "";

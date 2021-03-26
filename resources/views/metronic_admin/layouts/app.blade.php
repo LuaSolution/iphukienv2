@@ -74,7 +74,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END HEAD -->
 
 <body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo page-md">
-    <!-- BEGIN HEADER -->
+<!-- BEGIN HEADER -->
     @include('metronic_admin.layouts.top-nav')
     <!-- END HEADER -->
     <!-- BEGIN HEADER & CONTENT DIVIDER -->
@@ -287,6 +287,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     @section('admin_js')
     @show
+    @include('toast::messages-jquery')
     <!-- END PAGE LEVEL SCRIPTS -->
 
     <!-- BEGIN THEME LAYOUT SCRIPTS -->
@@ -301,5 +302,4 @@ License: You must have a valid license purchased only from themeforest(the above
         type="text/javascript"></script>
     <!-- END THEME LAYOUT SCRIPTS -->
 </body>
-
 </html>
