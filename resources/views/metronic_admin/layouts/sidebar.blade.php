@@ -20,29 +20,50 @@
             <li class="heading">
                 <h3 class="uppercase">Quản trị</h3>
             </li>
-            <li class="nav-item @yield('add_news_active')">
-                <a href="{{ route('adMgetAddNews') }}" class="nav-link">
-                    <i class="icon-bar-chart"></i>
-                    <span class="title">Thêm bài viết mới</span>
+            <li class="nav-item start @yield('add_page_active') @yield('list_page_active')">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Trang tĩnh</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
                 </a>
+                <ul class="sub-menu">
+                    <li class="nav-item @yield('add_page_active')">
+                        <a href="{{ route('adMgetAddStaticPage') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Thêm page mới</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @yield('list_page_active')">
+                        <a href="{{ route('adMgetListStaticPage') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Danh sách page</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <li class="nav-item @yield('list_news_active')">
-                <a href="{{ route('adMgetListNews') }}" class="nav-link">
-                    <i class="icon-bar-chart"></i>
-                    <span class="title">Danh sách bài viết</span>
+            <li class="nav-item start @yield('list_news_active') @yield('add_news_active')">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Bài viết</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
                 </a>
-            </li>
-            <li class="nav-item @yield('add_page_active')">
-                <a href="{{ route('adMgetAddStaticPage') }}" class="nav-link">
-                    <i class="icon-bar-chart"></i>
-                    <span class="title">Thêm page mới</span>
-                </a>
-            </li>
-            <li class="nav-item @yield('list_page_active')">
-                <a href="{{ route('adMgetListStaticPage') }}" class="nav-link">
-                    <i class="icon-bar-chart"></i>
-                    <span class="title">Danh sách page</span>
-                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item @yield('add_news_active')">
+                        <a href="{{ route('adMgetAddNews') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Thêm bài viết mới</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @yield('list_news_active')">
+                        <a href="{{ route('adMgetListNews') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Danh sách bài viết</span>
+                        </a>
+                    </li>
+
+                </ul>
             </li>
         </ul>
         <!-- END SIDEBAR MENU -->
