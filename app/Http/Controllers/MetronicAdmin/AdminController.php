@@ -4,17 +4,15 @@ namespace App\Http\Controllers\MetronicAdmin;
 
 use App\Cate;
 use App\Config;
+use App\Http\Controllers\Controller;
 use App\Mail;
 use App\News;
-use App\Product;
-use App\Store;
-use App\User;
 use App\Order;
-use App\StaticPage;
+use App\Product;
+use App\User;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
@@ -159,7 +157,7 @@ class AdminController extends Controller
             $msg = 'Image uploaded successfully';
             $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
 
-@header('Content-type: text/html; charset=utf-8');
+            @header('Content-type: text/html; charset=utf-8');
             echo $response;
         }
     }
@@ -653,7 +651,8 @@ class AdminController extends Controller
         return view('metronic_admin.contact_list', $this->data);
     }
 
-    public function getContact($id) {
+    public function getContact($id)
+    {
 
         $m = new Mail();
         $store = $m->getById($id);
@@ -842,7 +841,8 @@ class AdminController extends Controller
         return view('metronic_admin.order_list', $this->data);
     }
 
-    public function getOrder($id) {
+    public function getOrder($id)
+    {
 
         $m = new Order();
         $store = $m->getById($id);
@@ -855,69 +855,11 @@ class AdminController extends Controller
         }
     }
 
-    public function getConfimOrder($id) {
+    public function getConfimOrder($id)
+    {
         DB::table('orders')
-        ->where('id', $id)
-        ->update(['status' => 1]);
+            ->where('id', $id)
+            ->update(['status' => 1]);
         return redirect()->back();
-    }
-
-    /**
-     * Get edit static page
-     */
-    public function getEditStaticPages($id)
-    {
-        $data = StaticPage::findOrFail($id);
-
-        if ($data) {
-            $this->data['data'] = $data;
-            return view('metronic_admin.static-edit', $this->data);
-        } else {
-            return redirect()->route('adMgetHome');
-        }
-    }
-
-    /**
-     * News edit news page
-     */
-    public function postEditStaticPages($id, Request $request)
-    {
-
-        // title
-        $title = $request->input('name');
-        if (!$title) {
-            $title = "News " . time();
-        }
-        // title
-        $icon = $request->input('icon');
-        if (!$icon) {
-            $icon = 'icon-layers';
-        }
-        // slug
-        $slug = $request->input('slug');
-        if (!$slug) {
-            $slug = str_slug($title, '-');
-        } else {
-            $slug = str_slug($slug, '-');
-        }
-        // content
-        $content = $request->input('content');
-        if (!$content) {
-            $content = "";
-        }
-
-        $model = StaticPage::findOrFail($id);
-        $model->name=$title;
-        $model->url = $slug;
-        $model->content = $content;
-        $model->icon=$icon;
-        $model->created_at = date('Y-m-d');
-        $model->save();
-
-        if ($model) {
-            return redirect()->route('adMgetEditStaticPages', ['id' => $id])->with('success', 'Cập nhật thành công!');
-        } else {
-            return redirect()->route('adMgetEditStaticPages', ['id' => $id])->with('error', 'Cập nhật thất bại!');
-        }
     }
 }

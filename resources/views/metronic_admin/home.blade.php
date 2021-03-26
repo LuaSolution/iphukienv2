@@ -12,15 +12,15 @@
       <div class="portlet-title">
         <div class="caption font-red-sunglo">
           <i class="icon-settings font-red-sunglo"></i>
-          <span class="caption-subject bold uppercase"> Line Inputs</span>
+          <span class="caption-subject bold uppercase"> Cấu hình title web</span>
         </div>
-        <div class="actions">
+        <!-- <div class="actions">
           <div class="btn-group">
             <a class="btn btn-sm green dropdown-toggle" href="javascript:;" data-toggle="dropdown"> Actions
               <i class="fa fa-angle-down"></i>
             </a>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="portlet-body form">
         <form action="#seo">

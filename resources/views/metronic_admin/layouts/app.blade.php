@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 
+<!--
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.7
 Version: 4.7.5
 Author: KeenThemes
@@ -21,11 +21,10 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <head>
     <meta charset="utf-8" />
-    <title>{{config('config.title')}} | @yield('page_title')</title>
+    <title>{{ config('config.title') }} | @yield('page_title')</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="{{config('config.description')}}"
-        name="description" />
+    <meta content="{{ config('config.description') }}" name="description" />
     <meta content="" name="author" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -204,8 +203,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END FOOTER -->
     <!--[if lt IE 9]>
 <script src="./assets/global/plugins/respond.min.js"></script>
-<script src="./assets/global/plugins/excanvas.min.js"></script> 
-<script src="./assets/global/plugins/ie8.fix.min.js"></script> 
+<script src="./assets/global/plugins/excanvas.min.js"></script>
+<script src="./assets/global/plugins/ie8.fix.min.js"></script>
 <![endif]-->
     <script>
         function notify(mess, success) {
@@ -291,11 +290,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END PAGE LEVEL SCRIPTS -->
 
     <!-- BEGIN THEME LAYOUT SCRIPTS -->
-    <script
-        src="{{ asset('public/admin/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js')}}">
-    </script>
-    <script src="{{ asset('public/admin/js/front.js')}}"></script>
-    <script src="{{ asset('public/admin/js/main.js')}}"></script>
+    <script src="{{ asset('public/admin/js/main.js') }}"></script>
     <script
         src="{{ asset('public/metronic_assets/layouts/layout4/scripts/layout.min.js') }}"
         type="text/javascript"></script>
