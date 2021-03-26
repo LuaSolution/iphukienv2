@@ -17,22 +17,22 @@ Route::middleware(['runall', 'locale'])->group(function () {
             Route::post('/config', 'AdminController@updateConfig')->name('adMupdateConfig');
 
             // News
-            Route::get('/news-add', 'AdminController@getAddNews')->name('adMgetAddNews');
-            Route::post('/news-add', 'AdminController@postAddNews')->name('adMpostAddNews');
-            Route::get('/news-edit/{id}', 'AdminController@getEditNews')->name('adMgetEditNews');
-            Route::post('/news-edit/{id}', 'AdminController@postEditNews')->name('adMpostEditNews');
-            Route::get('/news', 'AdminController@getListNews')->name('adMgetListNews');
-            Route::get('/news-del/{id}', 'AdminController@getDelNews')->name('adMgetDelNews');
-            
+            Route::get('/news-add', 'NewsController@getAddNews')->name('adMgetAddNews');
+            Route::post('/news-add', 'NewsController@postAddNews')->name('adMpostAddNews');
+            Route::get('/news-edit/{id}', 'NewsController@getEditNews')->name('adMgetEditNews');
+            Route::post('/news-edit/{id}', 'NewsController@postEditNews')->name('adMpostEditNews');
+            Route::get('/news', 'NewsController@getListNews')->name('adMgetListNews');
+            Route::get('/news-del/{id}', 'NewsController@getDelNews')->name('adMgetDelNews');
+
             //contact
             Route::get('/contact-list', 'AdminController@getListContact')->name('adMgetListContact');
             Route::get('/contact-edit/{id}', 'AdminController@getContact')->name('adMgetEditContact');
-            
+
             //order
             Route::get('/order-list', 'AdminController@getListOrder')->name('adMgetListOrder');
             Route::get('/order-edit/{id}', 'AdminController@getOrder')->name('adMgetEditOrder');
             Route::get('/order-confirm/{id}', 'AdminController@getConfimOrder')->name('adMgetConfimOrder');
-            
+
             // User
             Route::post('/user-add', 'AdminController@postAddUser')->name('adMpostAddUser');
             Route::get('/user', 'AdminController@getListUser')->name('adMgetListUser');
@@ -84,7 +84,7 @@ Route::middleware(['runall', 'locale'])->group(function () {
     // Route::get('/gop-y', function () {
     //     return view('user.blank');
     // });
-    
+
     //============================================================================
     Route::get('/', 'User\HomeController@index')->name('getHome');
     Route::get('/login', 'User\UserController@login')->name('login');
