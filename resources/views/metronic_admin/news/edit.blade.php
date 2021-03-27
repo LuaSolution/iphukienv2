@@ -1,6 +1,7 @@
 @extends('metronic_admin.layouts.app')
 
 @section('edit_news_active', 'active')
+@section('page_title', 'Sửa bài viết')
 
 @section('content')
 

@@ -17,45 +17,46 @@ Route::middleware(['runall', 'locale'])->group(function () {
             Route::post('/config', 'AdminController@updateConfig')->name('adMupdateConfig');
 
             // News
-            Route::get('/news-add', 'AdminController@getAddNews')->name('adMgetAddNews');
-            Route::post('/news-add', 'AdminController@postAddNews')->name('adMpostAddNews');
-            Route::get('/news-edit/{id}', 'AdminController@getEditNews')->name('adMgetEditNews');
-            Route::post('/news-edit/{id}', 'AdminController@postEditNews')->name('adMpostEditNews');
-            Route::get('/news', 'AdminController@getListNews')->name('adMgetListNews');
-            Route::get('/news-del/{id}', 'AdminController@getDelNews')->name('adMgetDelNews');
+
+            Route::get('/news-add', 'NewsController@getAddNews')->name('adMgetAddNews');
+            Route::post('/news-add', 'NewsController@postAddNews')->name('adMpostAddNews');
+            Route::get('/news-edit/{id}', 'NewsController@getEditNews')->name('adMgetEditNews');
+            Route::post('/news-edit/{id}', 'NewsController@postEditNews')->name('adMpostEditNews');
+            Route::get('/news', 'NewsController@getListNews')->name('adMgetListNews');
+            Route::get('/news-del/{id}', 'NewsController@getDelNews')->name('adMgetDelNews');
 
             // Categories
-            Route::get('/category-add', 'AdminController@getAddCate')->name('adMgetAddCategory');
-            Route::post('/category-add', 'AdminController@postAddCate')->name('adMpostAddCategory');
-            Route::get('/category-edit/{id}', 'AdminController@getEditCate')->name('adMgetEditCategory');
-            Route::post('/category-edit/{id}', 'AdminController@postEditCate')->name('adMpostEditCategory');
-            Route::get('/category', 'AdminController@getListCate')->name('adMgetListCategory');
-            Route::get('/category-del/{id}', 'AdminController@getDelCate')->name('adMgetDelCategory');
+            Route::get('/category-add', 'CategoryController@getAddCate')->name('adMgetAddCategory');
+            Route::post('/category-add', 'CategoryController@postAddCate')->name('adMpostAddCategory');
+            Route::get('/category-edit/{id}', 'CategoryController@getEditCate')->name('adMgetEditCategory');
+            Route::post('/category-edit/{id}', 'CategoryController@postEditCate')->name('adMpostEditCategory');
+            Route::get('/category', 'CategoryController@getListCate')->name('adMgetListCategory');
+            Route::get('/category-del/{id}', 'CategoryController@getDelCate')->name('adMgetDelCategory');
 
             // Colors
-            Route::get('/color-add', 'AdminController@getAddColor')->name('adMgetAddColor');
-            Route::post('/color-add', 'AdminController@postAddColor')->name('adMpostAddColor');
-            Route::get('/color-edit/{id}', 'AdminController@getEditColor')->name('adMgetEditColor');
-            Route::post('/color-edit/{id}', 'AdminController@postEditColor')->name('adMpostEditColor');
-            Route::get('/color', 'AdminController@getListColor')->name('adMgetListColor');
-            Route::get('/color-del/{id}', 'AdminController@getDelColor')->name('adMgetDelColor');
-            
+            Route::get('/colors-add', 'ColorController@getAddColor')->name('adMgetAddColor');
+            Route::post('/colors-add', 'ColorController@postAddColor')->name('adMpostAddColor');
+            Route::get('/colors-edit/{id}', 'ColorController@getEditColor')->name('adMgetEditColor');
+            Route::post('/colors-edit/{id}', 'ColorController@postEditColor')->name('adMpostEditColor');
+            Route::get('/colors', 'ColorController@getListColor')->name('adMgetListColor');
+            Route::get('/colors-del/{id}', 'ColorController@getDelColor')->name('adMgetDelColor');
+
             //contact
             Route::get('/contact-list', 'AdminController@getListContact')->name('adMgetListContact');
             Route::get('/contact-edit/{id}', 'AdminController@getContact')->name('adMgetEditContact');
-            
+
             //order
             Route::get('/order-list', 'AdminController@getListOrder')->name('adMgetListOrder');
             Route::get('/order-edit/{id}', 'AdminController@getOrder')->name('adMgetEditOrder');
             Route::get('/order-confirm/{id}', 'AdminController@getConfimOrder')->name('adMgetConfimOrder');
-            
+
             // User
-            Route::get('/user-add', 'AdminController@getAddUser')->name('adMgetAddUser');
-            Route::post('/user-add', 'AdminController@postAddUser')->name('adMpostAddUser');
-            Route::get('/user', 'AdminController@getListUser')->name('adMgetListUser');
-            Route::get('/user-del/{id}', 'AdminController@getDelUser')->name('adMgetDelUser');
-            Route::post('/update-password', 'AdminController@postUpdatePassword')->name('adMpostUpdatePassword');
-            Route::post('/upload-img', 'AdminController@uploadImage')->name('uploadImage');
+            Route::get('/user-add', 'UserController@getAddUser')->name('adMgetAddUser');
+            Route::post('/user-add', 'UserController@postAddUser')->name('adMpostAddUser');
+            Route::get('/user', 'UserController@getListUser')->name('adMgetListUser');
+            Route::get('/user-del/{id}', 'UserController@getDelUser')->name('adMgetDelUser');
+            Route::post('/update-password', 'UserController@postUpdatePassword')->name('adMpostUpdatePassword');
+            Route::post('/upload-img', 'UserController@uploadImage')->name('uploadImage');
 
             //Static page
             Route::get('/static-add', 'StaticPagesController@getAddStaticPages')->name('adMgetAddStaticPage');
@@ -101,7 +102,7 @@ Route::middleware(['runall', 'locale'])->group(function () {
     // Route::get('/gop-y', function () {
     //     return view('user.blank');
     // });
-    
+
     //============================================================================
     Route::get('/', 'User\HomeController@index')->name('getHome');
     Route::get('/login', 'User\UserController@login')->name('login');

@@ -2,21 +2,14 @@
 
 namespace App\Http\Controllers\MetronicAdmin;
 
-use App\Cate;
 use App\Config;
+use App\Http\Controllers\Controller;
 use App\Mail;
-use App\News;
-use App\Product;
-use App\Store;
-use App\User;
 use App\Order;
-use App\StaticPage;
-use App\Role;
-use App\Color;
+use App\Product;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
@@ -45,135 +38,20 @@ class AdminController extends Controller
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             // Authentication passed...
             if (Auth::user()->role_id == 1) {
+                toast()->success('Đăng nhập thành công');
                 return redirect()->route('adMgetHome');
             } else {
                 return redirect()->route('getHome');
             }
         } else {
-            return redirect()->route('adMgetLogin')->with('error', 'Mật khẩu hoặc tài khoản không đúng');
+            toast()->error('Mật khẩu hoặc tài khoản không đúng');
+            return redirect()->route('adMgetLogin');
         }
     }
 
-    /**
-     * Add user
-     */
-    public function postAddUser(Request $request)
-    {
-        $name = $request->input('name');
-        if (!$name) {
-            $name = "Người dùng " . time();
-        }
-        $email = $request->input('email');
-        if (!$email) {
-            return redirect()->route('adMgetListUser')->with('error', 'Chưa nhập Email');
-        }
-        $password = $request->input('password');
-        if (!$password) {
-            return redirect()->route('adMgetListUser')->with('error', 'Chưa nhập Password');
-        }
-        if (strlen($password) < 6) {
-            return redirect()->route('adMgetListUser')->with('error', 'Password ít nhất 6 kí tự');
-        }
-        $phone_number = $request->input('phone');
-        if (!$phone_number) {
-            $phone_number = "";
-        }
-        $role = $request->input('role');
+    
 
-        $userModal = new User();
-        $userCheck = $userModal->getUserByEmail($email);
-
-        if ($userCheck) {
-            return redirect()->route('adMgetListUser')->with('error', 'Email đã tồn tại');
-        }
-
-        User::create([
-            'name' => $name,
-            'email' => $email,
-            'password' => bcrypt($password),
-            'phone' => $phone_number,
-            'role_id' => $role,
-        ]);
-
-        return redirect()->route('adMgetListUser')->with('success', 'Thêm người dùng thành công');
-    }
-
-    /**
-     * Get list user
-     */
-    public function getListUser()
-    {
-
-        $userModel = new User();
-        $users = $userModel->getListUser();
-        $this->data['users'] = $users;
-
-        return view('metronic_admin.users.list', $this->data);
-    }
-
-    /**
-     * Get add user page
-     */
-    public function getAddUser()
-    {
-        $this->data['roles'] = (new Role())->getListRole();
-
-        return view('metronic_admin.users.add', $this->data);
-    }
-
-    /**
-     * Delete user
-     */
-    public function getDelUser($id)
-    {
-
-        $userModel = new User();
-        $result = $userModel->deleteUser($id);
-
-        if ($result > 0) {
-            return redirect()->route('adMgetListUser')->with('success', 'Xóa thành công!');
-        } else {
-            return redirect()->route('adMgetListUser')->with('error', 'Xóa thất bại!');
-        }
-    }
-
-    /**
-     * update password
-     */
-    public function postUpdatePassword(Request $request)
-    {
-
-        $id = $request->input('id');
-        $pw = $request->input('pw');
-        if (strlen($pw) < 6) {
-            return 0;
-        }
-
-        $userModel = new User();
-        $result = $userModel->updateUser($id, ['password' => bcrypt($pw)]);
-
-        return $result;
-    }
-
-    public function uploadImage(Request $request)
-    {
-        if ($request->hasFile('upload')) {
-            $originName = $request->file('upload')->getClientOriginalName();
-            $fileName = pathinfo($originName, PATHINFO_FILENAME);
-            $extension = $request->file('upload')->getClientOriginalExtension();
-            $fileName = $fileName . '_' . time() . '.' . $extension;
-
-            $request->file('upload')->move(public_path('images'), $fileName);
-
-            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-            $url = asset('/public/images/' . $fileName);
-            $msg = 'Image uploaded successfully';
-            $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
-
-@header('Content-type: text/html; charset=utf-8');
-            echo $response;
-        }
-    }
+    
 
     /**
      * Get home page
@@ -485,175 +363,6 @@ class AdminController extends Controller
         }
     }
 
-    /**
-     * Get add news page
-     */
-    public function getAddNews()
-    {
-
-        return view('metronic_admin.news.add', $this->data);
-    }
-
-    /**
-     * Post add news page
-     */
-    public function postAddNews(Request $request)
-    {
-
-        // title
-        $title = $request->input('title');
-        if (!$title) {
-            $title = "News " . time();
-        }
-        // slug
-        $slug = $request->input('slug');
-        if (!$slug) {
-            $slug = str_slug($title, '-');
-        } else {
-            $slug = str_slug($slug, '-');
-        }
-        // coverFile
-        $coverFile = $request->file('cover');
-        $cover = "";
-        if ($request->hasFile('cover')) {
-            $cover = $slug . '.' . $request->cover->extension();
-            $request->cover->storeAs('img/post/', $cover);
-            $cover .= '?n=' . time();
-        }
-        // pos
-        $pos = $request->input('pos');
-        if (!$pos) {
-            $pos = 999;
-        }
-        // description
-        $description = $request->input('description');
-        if (!$description) {
-            $description = "";
-        }
-        // content
-        $content = $request->input('content');
-        if (!$content) {
-            $content = "";
-        }
-
-        $dataInsert = [
-            'title' => $title,
-            'slug' => $slug,
-            'cover' => $cover,
-            'pos' => $pos,
-            'description' => $description,
-            'content' => $content,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ];
-
-        $newsModel = new News();
-        $result = $newsModel->insertNews($dataInsert);
-        if ($result > 0) {
-            return redirect()->route('adMgetListNews')->with('success', 'Thêm thành công!');
-        } else {
-            return redirect()->route('adMgetListNews')->with('error', 'Thêm thất bại!');
-        }
-
-    }
-
-    /**
-     * Get edit news page
-     */
-    public function getEditNews($id)
-    {
-
-        $newsModel = new News();
-        $news = $newsModel->getNewsById($id);
-
-        if ($news) {
-            $this->data['news'] = $news;
-            return view('metronic_admin.news.edit', $this->data);
-        } else {
-            return redirect()->route('adMgetListNews');
-        }
-
-    }
-
-    /**
-     * News edit news page
-     */
-    public function postEditNews($id, Request $request)
-    {
-
-        // title
-        $title = $request->input('title');
-        if (!$title) {
-            $title = "News " . time();
-        }
-        // slug
-        $slug = $request->input('slug');
-        if (!$slug) {
-            $slug = str_slug($title, '-');
-        } else {
-            $slug = str_slug($slug, '-');
-        }
-        // coverFile
-        $coverFile = $request->file('cover');
-        $cover = "";
-        if ($request->hasFile('cover')) {
-            $cover = $slug . '.' . $request->cover->extension();
-            $request->cover->storeAs('img/post/', $cover);
-            $cover .= '?n=' . time();
-        }
-        // pos
-        $pos = $request->input('pos');
-        if (!$pos) {
-            $pos = 999;
-        }
-        $status = $request->input('status');
-        // description
-        $description = $request->input('description');
-        if (!$description) {
-            $description = "";
-        }
-        // content
-        $content = $request->input('content');
-        if (!$content) {
-            $content = "";
-        }
-
-        $dataUpdate = [
-            'title' => $title,
-            'slug' => $slug,
-            'pos' => $pos,
-            'description' => $description,
-            'content' => $content,
-            'updated_at' => date('Y-m-d H:i:s'),
-        ];
-
-        if ($cover != "") {
-            $dataUpdate['cover'] = $cover;
-        }
-
-        $newsModel = new News();
-        $result = $newsModel->updateNews($id, $dataUpdate);
-        if ($result > 0) {
-            return redirect()->route('adMgetEditNews', ['id' => $id])->with('success', 'Cập nhật thành công!');
-        } else {
-            return redirect()->route('adMgetEditNews', ['id' => $id])->with('error', 'Cập nhật thất bại!');
-        }
-
-    }
-
-    /**
-     * Get list news page
-     */
-    public function getListNews()
-    {
-
-        $newsModel = new News();
-        $newss = $newsModel->getListNews();
-        $this->data['newss'] = $newss;
-
-        return view('metronic_admin.news.list', $this->data);
-    }
-
     public function getListContact()
     {
 
@@ -664,7 +373,8 @@ class AdminController extends Controller
         return view('metronic_admin.contact_list', $this->data);
     }
 
-    public function getContact($id) {
+    public function getContact($id)
+    {
 
         $m = new Mail();
         $store = $m->getById($id);
@@ -677,280 +387,9 @@ class AdminController extends Controller
         }
     }
 
-    /**
-     * Delete news
-     */
-    public function getDelNews($id)
-    {
+    
 
-        $newsModel = new News();
-        $result = $newsModel->deleteNews($id);
-
-        if ($result > 0) {
-            return redirect()->route('adMgetListNews')->with('success', 'Xóa thành công!');
-        } else {
-            return redirect()->route('adMgetListNews')->with('error', 'Xóa thất bại!');
-        }
-    }
-
-    /**
-     * Get add cate page
-     */
-    public function getAddCate()
-    {
-        $this->data['parentCate'] = (new Cate())->getListParentCate();
-
-        return view('metronic_admin.categories.add', $this->data);
-    }
-
-    /**
-     * Post add cate page
-     */
-    public function postAddCate(Request $request)
-    {
-
-        // title
-        $title = $request->input('title');
-        if (!$title) {
-            $title = "Cate " . time();
-        }
-        // slug
-        $slug = $request->input('slug');
-        if (!$slug) {
-            $slug = str_slug($title, '-');
-        } else {
-            $slug = str_slug($slug, '-');
-        }
-        // pos
-        $pos = $request->input('pos');
-        if (!$pos) {
-            $pos = 999;
-        }
-        $parentId = $request->input('parentId') != '' ? $request->input('parentId') : NULL;
-        $dataInsert = [
-            'title' => $title,
-            'slug' => $slug,
-            'pos' => $pos,
-            'parent_id' => $parentId,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ];
-        $cateModel = new Cate();
-        $result = $cateModel->insertCate($dataInsert);
-
-        if ($result instanceof Cate) {
-            return redirect()->route('adMgetListCategory')->with('success', 'Thêm thành công!');
-        } else {
-            return redirect()->route('adMgetListCategory')->with('error', 'Thêm thất bại!');
-        }
-
-    }
-
-    /**
-     * Get edit cate page
-     */
-    public function getEditCate($id)
-    {
-
-        $cateModel = new Cate();
-        $cate = $cateModel->getCateById($id);
-
-        if ($cate) {
-            $this->data['cate'] = $cate;
-            $this->data['parentCate'] = (new Cate())->getListParentCate();
-            return view('metronic_admin.categories.edit', $this->data);
-        } else {
-            return redirect()->route('adMgetListCategory');
-        }
-
-    }
-
-    /**
-     * Cate edit cate page
-     */
-    public function postEditCate($id, Request $request)
-    {
-
-        // title
-        $title = $request->input('title');
-        if (!$title) {
-            $title = "Cate " . time();
-        }
-        // slug
-        $slug = $request->input('slug');
-        if (!$slug) {
-            $slug = str_slug($title, '-');
-        } else {
-            $slug = str_slug($slug, '-');
-        }
-        // pos
-        $pos = $request->input('pos');
-        if (!$pos) {
-            $pos = 999;
-        }
-        $parentId = $request->input('parentId') != '' ? $request->input('parentId') : NULL;
-
-        $dataUpdate = [
-            'title' => $title,
-            'slug' => $slug,
-            'pos' => $pos,
-            'parent_id' => $parentId,
-            'updated_at' => date('Y-m-d H:i:s'),
-        ];
-        $cateModel = new Cate();
-        $result = $cateModel->updateCate($id, $dataUpdate);
-        if ($result > 0) {
-            return redirect()->route('adMgetEditCategory', ['id' => $id])->with('success', 'Cập nhật thành công!');
-        } else {
-            return redirect()->route('adMgetEditCategory', ['id' => $id])->with('error', 'Cập nhật thất bại!');
-        }
-
-    }
-
-    /**
-     * Get list cate page
-     */
-    public function getListCate()
-    {
-
-        $cateModel = new Cate();
-        $cates = $cateModel->getListCate();
-        $this->data['cates'] = $cates;
-
-        return view('metronic_admin.categories.list', $this->data);
-    }
-
-    /**
-     * Delete cate
-     */
-    public function getDelCate($id)
-    {
-
-        $storeModel = new Cate();
-        $result = $storeModel->deleteCate($id);
-
-        if ($result > 0) {
-            return redirect()->route('adMgetListCategory')->with('success', 'Xóa thành công!');
-        } else {
-            return redirect()->route('adMgetListCategory')->with('error', 'Xóa thất bại!');
-        }
-    }
-
-    /**
-     * Get add color page
-     */
-    public function getAddColor()
-    {
-        return view('metronic_admin.colors.add', $this->data);
-    }
-
-    /**
-     * Post add color page
-     */
-    public function postAddColor(Request $request)
-    {
-        // name
-        $name = $request->input('name');
-        if (!$name) {
-            return redirect()->route('adMgetListColor')->with('error', 'Thêm thất bại!');
-        }
-        // code
-        $code = $request->input('code');
-        if (!$code) {
-            return redirect()->route('adMgetListColor')->with('error', 'Thêm thất bại!');
-        }
-        
-        $dataInsert = [
-            'name' => $name,
-            'code' => $code,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ];
-        $colorModel = new Color();
-        $result = $colorModel->insertColor($dataInsert);
-
-        if ($result instanceof Color) {
-            return redirect()->route('adMgetListColor')->with('success', 'Thêm thành công!');
-        } else {
-            return redirect()->route('adMgetListColor')->with('error', 'Thêm thất bại!');
-        }
-
-    }
-
-    /**
-     * Get edit color page
-     */
-    public function getEditColor($id)
-    {
-
-        $colorModel = new Color();
-        $color = $colorModel->getColorById($id);
-
-        if ($color) {
-            $this->data['color'] = $color;
-
-            return view('metronic_admin.colors.edit', $this->data);
-        } else {
-            return redirect()->route('adMgetListColor');
-        }
-
-    }
-
-    /**
-     * Cate edit color page
-     */
-    public function postEditColor($id, Request $request)
-    {
-
-        // name
-        $name = $request->input('name');
-        if (!$name) {
-            return redirect()->route('adMgetListColor')->with('error', 'Thêm thất bại!');
-        }
-        // code
-        $code = $request->input('code');
-        if (!$code) {
-            return redirect()->route('adMgetListColor')->with('error', 'Thêm thất bại!');
-        }
-
-        $dataUpdate = [
-            'name' => $name,
-            'code' => $code,
-            'updated_at' => date('Y-m-d H:i:s'),
-        ];
-        $colorModel = new Color();
-        $result = $colorModel->updateColor($id, $dataUpdate);
-        if ($result > 0) {
-            return redirect()->route('adMgetEditColor', ['id' => $id])->with('success', 'Cập nhật thành công!');
-        } else {
-            return redirect()->route('adMgetEditColor', ['id' => $id])->with('error', 'Cập nhật thất bại!');
-        }
-
-    }
-
-    /**
-     * Get list color page
-     */
-    public function getListColor()
-    {
-        $this->data['colors'] = (new Color())->getListColor();
-
-        return view('metronic_admin.colors.list', $this->data);
-    }
-
-    /**
-     * Delete color
-     */
-    public function getDelColor($id)
-    {
-        $result = (new Color())->deleteColor($id);
-
-        if ($result > 0) {
-            return redirect()->route('adMgetListColor')->with('success', 'Xóa thành công!');
-        } else {
-            return redirect()->route('adMgetListColor')->with('error', 'Xóa thất bại!');
-        }
-    }
+    
 
     public function getListOrder()
     {
@@ -962,7 +401,8 @@ class AdminController extends Controller
         return view('metronic_admin.order_list', $this->data);
     }
 
-    public function getOrder($id) {
+    public function getOrder($id)
+    {
 
         $m = new Order();
         $store = $m->getById($id);
@@ -975,69 +415,11 @@ class AdminController extends Controller
         }
     }
 
-    public function getConfimOrder($id) {
+    public function getConfimOrder($id)
+    {
         DB::table('orders')
-        ->where('id', $id)
-        ->update(['status' => 1]);
+            ->where('id', $id)
+            ->update(['status' => 1]);
         return redirect()->back();
-    }
-
-    /**
-     * Get edit static page
-     */
-    public function getEditStaticPages($id)
-    {
-        $data = StaticPage::findOrFail($id);
-
-        if ($data) {
-            $this->data['data'] = $data;
-            return view('metronic_admin.static-edit', $this->data);
-        } else {
-            return redirect()->route('adMgetHome');
-        }
-    }
-
-    /**
-     * News edit news page
-     */
-    public function postEditStaticPages($id, Request $request)
-    {
-
-        // title
-        $title = $request->input('name');
-        if (!$title) {
-            $title = "News " . time();
-        }
-        // title
-        $icon = $request->input('icon');
-        if (!$icon) {
-            $icon = 'icon-layers';
-        }
-        // slug
-        $slug = $request->input('slug');
-        if (!$slug) {
-            $slug = str_slug($title, '-');
-        } else {
-            $slug = str_slug($slug, '-');
-        }
-        // content
-        $content = $request->input('content');
-        if (!$content) {
-            $content = "";
-        }
-
-        $model = StaticPage::findOrFail($id);
-        $model->name=$title;
-        $model->url = $slug;
-        $model->content = $content;
-        $model->icon=$icon;
-        $model->created_at = date('Y-m-d');
-        $model->save();
-
-        if ($model) {
-            return redirect()->route('adMgetEditStaticPages', ['id' => $id])->with('success', 'Cập nhật thành công!');
-        } else {
-            return redirect()->route('adMgetEditStaticPages', ['id' => $id])->with('error', 'Cập nhật thất bại!');
-        }
     }
 }

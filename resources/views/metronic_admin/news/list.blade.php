@@ -12,7 +12,8 @@
                     <i class="fa fa-cogs"></i>Danh sách bài viết</div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-                    <a href="{{ route('adMgetAddNews') }}" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                    <a href="{{ route('adMgetAddNews') }}" data-toggle="modal" class="config"
+                        data-original-title="" title=""> </a>
                 </div>
             </div>
             <div class="portlet-body">
@@ -44,6 +45,15 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="row">
+                    <div class="col-md-7 col-sm-7">
+                        <div class="dataTables_paginate paging_bootstrap_full_number" id="sample_1_2_paginate">
+                            <ul class="pagination" style="visibility: visible;">
+                            {{ $newss->links() }}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

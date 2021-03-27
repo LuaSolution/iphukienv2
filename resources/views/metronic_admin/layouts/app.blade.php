@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 
+<!--
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.7
 Version: 4.7.5
 Author: KeenThemes
@@ -21,11 +21,10 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <head>
     <meta charset="utf-8" />
-    <title>{{config('config.title')}} | @yield('page_title')</title>
+    <title>{{ config('config.title') }} | @yield('page_title')</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="{{config('config.description')}}"
-        name="description" />
+    <meta content="{{ config('config.description') }}" name="description" />
     <meta content="" name="author" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -46,6 +45,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link
         href="{{ asset('public/metronic_assets/global/plugins/bootstrap-select/css/bootstrap-select.css') }}"
         rel="stylesheet" type="text/css" />
+    
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <link
@@ -63,6 +63,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="{{ asset('public/metronic_assets/global/css/plugins-md.min.css') }}"
         rel="stylesheet" type="text/css" />
     <!-- END THEME GLOBAL STYLES -->
+    <link href="{{ asset('public/metronic_assets/global/plugins/bootstrap-colorpicker/css/colorpicker.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/metronic_assets/global/plugins/jquery-minicolors/jquery.minicolors.css') }}" rel="stylesheet" type="text/css" />
     <!-- BEGIN THEME LAYOUT STYLES -->
     <link href="{{ asset('public/metronic_assets/layouts/layout4/css/layout.min.css') }}"
         rel="stylesheet" type="text/css" />
@@ -78,7 +80,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END HEAD -->
 
 <body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo page-md">
-    <!-- BEGIN HEADER -->
+<!-- BEGIN HEADER -->
     @include('metronic_admin.layouts.top-nav')
     <!-- END HEADER -->
     <!-- BEGIN HEADER & CONTENT DIVIDER -->
@@ -207,8 +209,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END FOOTER -->
     <!--[if lt IE 9]>
 <script src="./assets/global/plugins/respond.min.js"></script>
-<script src="./assets/global/plugins/excanvas.min.js"></script> 
-<script src="./assets/global/plugins/ie8.fix.min.js"></script> 
+<script src="./assets/global/plugins/excanvas.min.js"></script>
+<script src="./assets/global/plugins/ie8.fix.min.js"></script>
 <![endif]-->
     <script>
         function notify(mess, success) {
@@ -291,6 +293,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     @section('admin_js')
     @show
+    @include('toast::messages-jquery')
     <!-- END PAGE LEVEL SCRIPTS -->
 
     <!-- BEGIN THEME LAYOUT SCRIPTS -->
@@ -305,5 +308,4 @@ License: You must have a valid license purchased only from themeforest(the above
         type="text/javascript"></script>
     <!-- END THEME LAYOUT SCRIPTS -->
 </body>
-
 </html>
