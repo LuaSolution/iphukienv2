@@ -41,7 +41,10 @@ License: You must have a valid license purchased only from themeforest(the above
         href="{{ asset('public/metronic_assets/global/plugins/bootstrap/css/bootstrap.min.css') }}"
         rel="stylesheet" type="text/css" />
     <link
-        href="{{ asset('public/metronic_assets//global/plugins/bootstrap-switch/css/bootstrap-switch.min.css') }}"
+        href="{{ asset('public/metronic_assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css') }}"
+        rel="stylesheet" type="text/css" />
+    <link
+        href="{{ asset('public/metronic_assets/global/plugins/bootstrap-select/css/bootstrap-select.css') }}"
         rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
@@ -291,10 +294,6 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END PAGE LEVEL SCRIPTS -->
 
     <!-- BEGIN THEME LAYOUT SCRIPTS -->
-    <script
-        src="{{ asset('public/admin/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js')}}">
-    </script>
-    <script src="{{ asset('public/admin/js/front.js')}}"></script>
     <script src="{{ asset('public/admin/js/main.js')}}"></script>
     <script
         src="{{ asset('public/metronic_assets/layouts/layout4/scripts/layout.min.js') }}"

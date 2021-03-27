@@ -11,6 +11,8 @@ use App\Store;
 use App\User;
 use App\Order;
 use App\StaticPage;
+use App\Role;
+use App\Color;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,44 +59,43 @@ class AdminController extends Controller
      */
     public function postAddUser(Request $request)
     {
-
         $name = $request->input('name');
         if (!$name) {
             $name = "Người dùng " . time();
         }
         $email = $request->input('email');
         if (!$email) {
-            return redirect()->route('adMgetHome')->with('error', 'Chưa nhập Email');
+            return redirect()->route('adMgetListUser')->with('error', 'Chưa nhập Email');
         }
         $password = $request->input('password');
         if (!$password) {
-            return redirect()->route('adMgetHome')->with('error', 'Chưa nhập Password');
+            return redirect()->route('adMgetListUser')->with('error', 'Chưa nhập Password');
         }
         if (strlen($password) < 6) {
-            return redirect()->route('adMgetHome')->with('error', 'Password ít nhất 6 kí tự');
+            return redirect()->route('adMgetListUser')->with('error', 'Password ít nhất 6 kí tự');
         }
-        $phone_number = $request->input('phone_number');
+        $phone_number = $request->input('phone');
         if (!$phone_number) {
             $phone_number = "";
         }
+        $role = $request->input('role');
 
         $userModal = new User();
         $userCheck = $userModal->getUserByEmail($email);
 
         if ($userCheck) {
-            return redirect()->route('adMgetHome')->with('error', 'Email đã tồn tại');
+            return redirect()->route('adMgetListUser')->with('error', 'Email đã tồn tại');
         }
 
         User::create([
             'name' => $name,
             'email' => $email,
             'password' => bcrypt($password),
-            'phone_number' => $phone_number,
-            'level' => 1,
-            'admin' => 1,
+            'phone' => $phone_number,
+            'role_id' => $role,
         ]);
 
-        return redirect()->route('adMMgetListUser')->with('success', 'Thêm người dùng thành công');
+        return redirect()->route('adMgetListUser')->with('success', 'Thêm người dùng thành công');
     }
 
     /**
@@ -107,7 +108,17 @@ class AdminController extends Controller
         $users = $userModel->getListUser();
         $this->data['users'] = $users;
 
-        return view('metronic_admin.user_list', $this->data);
+        return view('metronic_admin.users.list', $this->data);
+    }
+
+    /**
+     * Get add user page
+     */
+    public function getAddUser()
+    {
+        $this->data['roles'] = (new Role())->getListRole();
+
+        return view('metronic_admin.users.add', $this->data);
     }
 
     /**
@@ -687,8 +698,9 @@ class AdminController extends Controller
      */
     public function getAddCate()
     {
+        $this->data['parentCate'] = (new Cate())->getListParentCate();
 
-        return view('metronic_admin.cate_add', $this->data);
+        return view('metronic_admin.categories.add', $this->data);
     }
 
     /**
@@ -714,27 +726,22 @@ class AdminController extends Controller
         if (!$pos) {
             $pos = 999;
         }
-        // description
-        $description = $request->input('description');
-        if (!$description) {
-            $description = "";
-        }
-
+        $parentId = $request->input('parentId') != '' ? $request->input('parentId') : NULL;
         $dataInsert = [
             'title' => $title,
             'slug' => $slug,
             'pos' => $pos,
-            'description' => $description,
+            'parent_id' => $parentId,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
-
         $cateModel = new Cate();
         $result = $cateModel->insertCate($dataInsert);
-        if ($result > 0) {
-            return redirect()->route('adMgetListCate')->with('success', 'Thêm thành công!');
+
+        if ($result instanceof Cate) {
+            return redirect()->route('adMgetListCategory')->with('success', 'Thêm thành công!');
         } else {
-            return redirect()->route('adMgetListCate')->with('error', 'Thêm thất bại!');
+            return redirect()->route('adMgetListCategory')->with('error', 'Thêm thất bại!');
         }
 
     }
@@ -750,9 +757,10 @@ class AdminController extends Controller
 
         if ($cate) {
             $this->data['cate'] = $cate;
-            return view('metronic_admin.cate_edit', $this->data);
+            $this->data['parentCate'] = (new Cate())->getListParentCate();
+            return view('metronic_admin.categories.edit', $this->data);
         } else {
-            return redirect()->route('adMgetListCate');
+            return redirect()->route('adMgetListCategory');
         }
 
     }
@@ -780,25 +788,21 @@ class AdminController extends Controller
         if (!$pos) {
             $pos = 999;
         }
-        // description
-        $description = $request->input('description');
-        if (!$description) {
-            $description = "";
-        }
+        $parentId = $request->input('parentId') != '' ? $request->input('parentId') : NULL;
 
         $dataUpdate = [
             'title' => $title,
             'slug' => $slug,
             'pos' => $pos,
-            'description' => $description,
+            'parent_id' => $parentId,
             'updated_at' => date('Y-m-d H:i:s'),
         ];
         $cateModel = new Cate();
         $result = $cateModel->updateCate($id, $dataUpdate);
         if ($result > 0) {
-            return redirect()->route('adMgetEditCate', ['id' => $id])->with('success', 'Cập nhật thành công!');
+            return redirect()->route('adMgetEditCategory', ['id' => $id])->with('success', 'Cập nhật thành công!');
         } else {
-            return redirect()->route('adMgetEditCate', ['id' => $id])->with('error', 'Cập nhật thất bại!');
+            return redirect()->route('adMgetEditCategory', ['id' => $id])->with('error', 'Cập nhật thất bại!');
         }
 
     }
@@ -813,7 +817,7 @@ class AdminController extends Controller
         $cates = $cateModel->getListCate();
         $this->data['cates'] = $cates;
 
-        return view('metronic_admin.cate_list', $this->data);
+        return view('metronic_admin.categories.list', $this->data);
     }
 
     /**
@@ -826,9 +830,125 @@ class AdminController extends Controller
         $result = $storeModel->deleteCate($id);
 
         if ($result > 0) {
-            return redirect()->route('adMgetListCate')->with('success', 'Xóa thành công!');
+            return redirect()->route('adMgetListCategory')->with('success', 'Xóa thành công!');
         } else {
-            return redirect()->route('adMgetListCate')->with('error', 'Xóa thất bại!');
+            return redirect()->route('adMgetListCategory')->with('error', 'Xóa thất bại!');
+        }
+    }
+
+    /**
+     * Get add color page
+     */
+    public function getAddColor()
+    {
+        return view('metronic_admin.colors.add', $this->data);
+    }
+
+    /**
+     * Post add color page
+     */
+    public function postAddColor(Request $request)
+    {
+        // name
+        $name = $request->input('name');
+        if (!$name) {
+            return redirect()->route('adMgetListColor')->with('error', 'Thêm thất bại!');
+        }
+        // code
+        $code = $request->input('code');
+        if (!$code) {
+            return redirect()->route('adMgetListColor')->with('error', 'Thêm thất bại!');
+        }
+        
+        $dataInsert = [
+            'name' => $name,
+            'code' => $code,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+        $colorModel = new Color();
+        $result = $colorModel->insertColor($dataInsert);
+
+        if ($result instanceof Color) {
+            return redirect()->route('adMgetListColor')->with('success', 'Thêm thành công!');
+        } else {
+            return redirect()->route('adMgetListColor')->with('error', 'Thêm thất bại!');
+        }
+
+    }
+
+    /**
+     * Get edit color page
+     */
+    public function getEditColor($id)
+    {
+
+        $colorModel = new Color();
+        $color = $colorModel->getColorById($id);
+
+        if ($color) {
+            $this->data['color'] = $color;
+
+            return view('metronic_admin.colors.edit', $this->data);
+        } else {
+            return redirect()->route('adMgetListColor');
+        }
+
+    }
+
+    /**
+     * Cate edit color page
+     */
+    public function postEditColor($id, Request $request)
+    {
+
+        // name
+        $name = $request->input('name');
+        if (!$name) {
+            return redirect()->route('adMgetListColor')->with('error', 'Thêm thất bại!');
+        }
+        // code
+        $code = $request->input('code');
+        if (!$code) {
+            return redirect()->route('adMgetListColor')->with('error', 'Thêm thất bại!');
+        }
+
+        $dataUpdate = [
+            'name' => $name,
+            'code' => $code,
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+        $colorModel = new Color();
+        $result = $colorModel->updateColor($id, $dataUpdate);
+        if ($result > 0) {
+            return redirect()->route('adMgetEditColor', ['id' => $id])->with('success', 'Cập nhật thành công!');
+        } else {
+            return redirect()->route('adMgetEditColor', ['id' => $id])->with('error', 'Cập nhật thất bại!');
+        }
+
+    }
+
+    /**
+     * Get list color page
+     */
+    public function getListColor()
+    {
+        $this->data['colors'] = (new Color())->getListColor();
+
+        return view('metronic_admin.colors.list', $this->data);
+    }
+
+    /**
+     * Delete color
+     */
+    public function getDelColor($id)
+    {
+        $result = (new Color())->deleteColor($id);
+
+        if ($result > 0) {
+            return redirect()->route('adMgetListColor')->with('success', 'Xóa thành công!');
+        } else {
+            return redirect()->route('adMgetListColor')->with('error', 'Xóa thất bại!');
         }
     }
 

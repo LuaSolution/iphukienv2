@@ -65,6 +65,75 @@
 
                 </ul>
             </li>
+            <li class="nav-item start @yield('list_users_active') @yield('add_users_active')">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Người dùng</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item @yield('add_users_active')">
+                        <a href="{{ route('adMgetAddUser') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Thêm người dùng</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @yield('list_users_active')">
+                        <a href="{{ route('adMgetListUser') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Danh sách người dùng</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="nav-item start @yield('list_categories_active') @yield('add_categories_active')">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Danh mục</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item @yield('add_categories_active')">
+                        <a href="{{ route('adMgetAddCategory') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Thêm danh mục</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @yield('list_categories_active')">
+                        <a href="{{ route('adMgetListCategory') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Danh sách danh mục</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="nav-item start @yield('list_colors_active') @yield('add_colors_active')">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Màu sắc</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item @yield('add_colors_active')">
+                        <a href="{{ route('adMgetAddColor') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Thêm màu sắc</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @yield('list_colors_active')">
+                        <a href="{{ route('adMgetListColor') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Danh sách màu sắc</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
         </ul>
         <!-- END SIDEBAR MENU -->
     </div>

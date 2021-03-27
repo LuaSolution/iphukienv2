@@ -23,6 +23,22 @@ Route::middleware(['runall', 'locale'])->group(function () {
             Route::post('/news-edit/{id}', 'AdminController@postEditNews')->name('adMpostEditNews');
             Route::get('/news', 'AdminController@getListNews')->name('adMgetListNews');
             Route::get('/news-del/{id}', 'AdminController@getDelNews')->name('adMgetDelNews');
+
+            // Categories
+            Route::get('/category-add', 'AdminController@getAddCate')->name('adMgetAddCategory');
+            Route::post('/category-add', 'AdminController@postAddCate')->name('adMpostAddCategory');
+            Route::get('/category-edit/{id}', 'AdminController@getEditCate')->name('adMgetEditCategory');
+            Route::post('/category-edit/{id}', 'AdminController@postEditCate')->name('adMpostEditCategory');
+            Route::get('/category', 'AdminController@getListCate')->name('adMgetListCategory');
+            Route::get('/category-del/{id}', 'AdminController@getDelCate')->name('adMgetDelCategory');
+
+            // Colors
+            Route::get('/color-add', 'AdminController@getAddColor')->name('adMgetAddColor');
+            Route::post('/color-add', 'AdminController@postAddColor')->name('adMpostAddColor');
+            Route::get('/color-edit/{id}', 'AdminController@getEditColor')->name('adMgetEditColor');
+            Route::post('/color-edit/{id}', 'AdminController@postEditColor')->name('adMpostEditColor');
+            Route::get('/color', 'AdminController@getListColor')->name('adMgetListColor');
+            Route::get('/color-del/{id}', 'AdminController@getDelColor')->name('adMgetDelColor');
             
             //contact
             Route::get('/contact-list', 'AdminController@getListContact')->name('adMgetListContact');
@@ -34,6 +50,7 @@ Route::middleware(['runall', 'locale'])->group(function () {
             Route::get('/order-confirm/{id}', 'AdminController@getConfimOrder')->name('adMgetConfimOrder');
             
             // User
+            Route::get('/user-add', 'AdminController@getAddUser')->name('adMgetAddUser');
             Route::post('/user-add', 'AdminController@postAddUser')->name('adMpostAddUser');
             Route::get('/user', 'AdminController@getListUser')->name('adMgetListUser');
             Route::get('/user-del/{id}', 'AdminController@getDelUser')->name('adMgetDelUser');

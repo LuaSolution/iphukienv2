@@ -1,7 +1,7 @@
 @extends('metronic_admin.layouts.app')
 
-@section('list_page_active', 'active')
-@section('page_title', 'Danh sách page')
+@section('list_users_active', 'active')
+@section('page_title', 'Danh sách người dùng')
 @section('content')
 <div class="row">
     <div class="col-md-12">
@@ -9,46 +9,49 @@
         <div class="portlet box yellow">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-cogs"></i>Danh sách page</div>
+                    <i class="fa fa-cogs"></i>Danh sách người dùng</div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-                    <a href="{{ route('adMgetAddStaticPage') }}" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                    <a href="{{ route('adMgetAddUser') }}" data-toggle="modal" class="config" data-original-title="" title=""> </a>
                 </div>
             </div>
             <div class="portlet-body">
-                @if($errors->any())
-                <h4>{{$errors->first()}}</h4>
-                @endif
-                @if(session()->has('message'))
-                    <div class="alert alert-success">
-                        {{ session()->get('message') }}
-                    </div>
-                @endif
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th> # </th>
-                                <th> Tiêu đề page </th>
-                                <th> Url </th>
-                                <th> Icon </th>
+                                <th> Tên </th>
+                                <th> Email </th>
+                                <th> Ngày sinh </th>
+                                <th> Điện thoại </th>
+                                <th> Role </th>
                                 <th> Xóa </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($data as $key=>$item)
+                            @foreach($users as $key=>$item)
                                 <tr>
                                     <td> {{ $key + 1 }} </td>
                                     <td>
-                                        <a
-                                            href="{{ route('adMgetEditStaticPages', ['id' => $item->id]) }}">{{ $item->name }}</a>
+                                        {{ $item->name }}
                                     </td>
-                                    <td> {{ $item->url }} </td>
-                                    <td> <i class="{{$item->icon}}"></i> </td>
+                                    <td>
+                                        {{ $item->email }}
+                                    </td>
+                                    <td>
+                                        {{ $item->birthday }}
+                                    </td>
+                                    <td>
+                                        {{ $item->phone }}
+                                    </td>
+                                    <td>
+                                        {{ $item->role_id }}
+                                    </td>
                                     <td>
                                         <a class="btn delete-btn"
-                                            href="{{ route('adMgetDelStaticPages', ['id' => $item->id]) }}"
-                                            onclick="return confirm('Bạn có chắc chắn xóa page này?');">
+                                            href="{{ route('adMgetDelUser', ['id' => $item->id]) }}"
+                                            onclick="return confirm('Bạn có chắc chắn xóa người dùng này?');">
                                             <i class="icon icon-close"></i>
                                         </a>
                                     </td>

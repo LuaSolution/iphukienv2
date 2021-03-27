@@ -8,8 +8,17 @@ class Cate extends Model
 {
   protected $table = 'categories';
 
+  /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+      'title', 'slug', 'pos', 'parent_id'
+  ];
+
   public function insertCate($data){
-  	return Cate::insert($data);
+  	return Cate::create($data);
   }
 
   public function updateCate($id,$data){
@@ -30,5 +39,8 @@ class Cate extends Model
   }
   public function getListCateRelate($slug){
     return Cate::where('slug', '!=', $slug)->orderBy('created_at','desc')->limit(8)->get();
+  }
+  public function getListParentCate(){
+  	return Cate::whereNull('parent_id')->get();
   }
 }
