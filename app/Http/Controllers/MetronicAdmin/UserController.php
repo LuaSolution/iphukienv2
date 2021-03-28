@@ -58,7 +58,6 @@ class UserController extends Controller
      */
     public function getListUser()
     {
-
         $userModel = new User();
         $users = $userModel->getListUser();
         $this->data['users'] = $users;

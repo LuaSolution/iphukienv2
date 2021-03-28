@@ -8,8 +8,17 @@ class Product extends Model
 {
   protected $table = 'products';
 
+  /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+   */
+  protected $fillable = [
+    'category_id', 'created_at', 'full_description', 'id', 'name', 'price', 'sale_price', 'short_description', 'sold', 'status_id', 'tag_id', 'updated_at'
+  ];
+
   public function insertProduct($data){
-  	return Product::insert($data);
+  	return Product::create($data);
   }
 
   public function updateProduct($id,$data){
@@ -27,7 +36,12 @@ class Product extends Model
   }
 
   public function getListProduct(){
-  	return Product::orderBy('pos', 'asc')->orderBy('created_at','desc')->get();
+  	return Product::leftJoin('categories', 'categories.id', '=', 'products.category_id')
+          ->leftJoin('statuses', 'statuses.id', '=', 'products.status_id')
+          ->leftJoin('tags', 'tags.id', '=', 'products.tag_id')
+          ->select('products.*', 'tags.name as tag_name', 'categories.title as category_name', 'statuses.name as status_name')
+          ->orderBy('pos', 'asc')->orderBy('created_at','desc')
+          ->get();
   }
   
   public function getListProductByQuery($query){

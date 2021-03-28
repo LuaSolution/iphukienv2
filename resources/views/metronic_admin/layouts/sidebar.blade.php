@@ -134,6 +134,166 @@
 
                 </ul>
             </li>
+            <li class="nav-item start @yield('list_sizes_active') @yield('add_sizes_active')">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Kích thước</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item @yield('add_sizes_active')">
+                        <a href="{{ route('adMgetAddSize') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Thêm kích thước</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @yield('list_sizes_active')">
+                        <a href="{{ route('adMgetListSize') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Danh sách kích thước</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="nav-item start @yield('list_roles_active') @yield('add_roles_active')">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Vai trò</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item @yield('add_roles_active')">
+                        <a href="{{ route('adMgetAddRole') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Thêm vai trò</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @yield('list_roles_active')">
+                        <a href="{{ route('adMgetListRole') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Danh sách vai trò</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="nav-item start @yield('list_statuses_active') @yield('add_statuses_active')">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Trạng thái</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item @yield('add_statuses_active')">
+                        <a href="{{ route('adMgetAddStatus') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Thêm trạng thái</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @yield('list_statuses_active')">
+                        <a href="{{ route('adMgetListStatus') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Danh sách trạng thái</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="nav-item start @yield('list_tags_active') @yield('add_tags_active')">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Tag</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item @yield('add_tags_active')">
+                        <a href="{{ route('adMgetAddTag') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Thêm tag</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @yield('list_tags_active')">
+                        <a href="{{ route('adMgetListTag') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Danh sách tag</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="nav-item start @yield('list_payment_methods_active') @yield('add_payment_methods_active')">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Phương thức thanh toán</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item @yield('add_payment_methods_active')">
+                        <a href="{{ route('adMgetAddPaymentMethod') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Thêm phương thức thanh toán</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @yield('list_payment_methods_active')">
+                        <a href="{{ route('adMgetListPaymentMethod') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Danh sách phương thức thanh toán</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="nav-item start @yield('list_deliveries_active') @yield('add_deliveries_active')">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Hình thức vận chuyển</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item @yield('add_deliveries_active')">
+                        <a href="{{ route('adMgetAddDelivery') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Thêm hình thức vận chuyển</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @yield('list_payment_methods_active')">
+                        <a href="{{ route('adMgetListDelivery') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Danh sách hình thức vận chuyển</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="nav-item start @yield('list_products_active') @yield('add_products_active')">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Sản phẩm</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item @yield('add_products_active')">
+                        <a href="{{ route('adMgetAddProduct') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Thêm sản phẩm</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @yield('list_products_active')">
+                        <a href="{{ route('adMgetListProduct') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Danh sách sản phẩm</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <!-- END SIDEBAR MENU -->
     </div>

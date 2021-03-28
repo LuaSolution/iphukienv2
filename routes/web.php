@@ -41,6 +41,63 @@ Route::middleware(['runall', 'locale'])->group(function () {
             Route::get('/colors', 'ColorController@getListColor')->name('adMgetListColor');
             Route::get('/colors-del/{id}', 'ColorController@getDelColor')->name('adMgetDelColor');
 
+            // Sizes
+            Route::get('/sizes-add', 'SizeController@getAddSize')->name('adMgetAddSize');
+            Route::post('/sizes-add', 'SizeController@postAddSize')->name('adMpostAddSize');
+            Route::get('/sizes-edit/{id}', 'SizeController@getEditSize')->name('adMgetEditSize');
+            Route::post('/sizes-edit/{id}', 'SizeController@postEditSize')->name('adMpostEditSize');
+            Route::get('/sizes', 'SizeController@getListSize')->name('adMgetListSize');
+            Route::get('/sizes-del/{id}', 'SizeController@getDelSize')->name('adMgetDelSize');
+
+            // Role
+            Route::get('/roles-add', 'RoleController@getAddRole')->name('adMgetAddRole');
+            Route::post('/roles-add', 'RoleController@postAddRole')->name('adMpostAddRole');
+            Route::get('/roles-edit/{id}', 'RoleController@getEditRole')->name('adMgetEditRole');
+            Route::post('/roles-edit/{id}', 'RoleController@postEditRole')->name('adMpostEditRole');
+            Route::get('/roles', 'RoleController@getListRole')->name('adMgetListRole');
+            Route::get('/roles-del/{id}', 'RoleController@getDelRole')->name('adMgetDelRole');
+
+            // Status
+            Route::get('/statuses-add', 'StatusController@getAddStatus')->name('adMgetAddStatus');
+            Route::post('/statuses-add', 'StatusController@postAddStatus')->name('adMpostAddStatus');
+            Route::get('/statuses-edit/{id}', 'StatusController@getEditStatus')->name('adMgetEditStatus');
+            Route::post('/statuses-edit/{id}', 'StatusController@postEditStatus')->name('adMpostEditStatus');
+            Route::get('/statuses', 'StatusController@getListStatus')->name('adMgetListStatus');
+            Route::get('/statuses-del/{id}', 'StatusController@getDelStatus')->name('adMgetDelStatus');
+
+            // Tags
+            Route::get('/tags-add', 'TagController@getAddTag')->name('adMgetAddTag');
+            Route::post('/tags-add', 'TagController@postAddTag')->name('adMpostAddTag');
+            Route::get('/tags-edit/{id}', 'TagController@getEditTag')->name('adMgetEditTag');
+            Route::post('/tags-edit/{id}', 'TagController@postEditTag')->name('adMpostEditTag');
+            Route::get('/tags', 'TagController@getListTag')->name('adMgetListTag');
+            Route::get('/tags-del/{id}', 'TagController@getDelTag')->name('adMgetDelTag');
+
+            // Payments
+            Route::get('/payment-methods-add', 'PaymentMethodController@getAddPaymentMethod')->name('adMgetAddPaymentMethod');
+            Route::post('/payment-methods-add', 'PaymentMethodController@postAddPaymentMethod')->name('adMpostAddPaymentMethod');
+            Route::get('/payment-methods-edit/{id}', 'PaymentMethodController@getEditPaymentMethod')->name('adMgetEditPaymentMethod');
+            Route::post('/payment-methods-edit/{id}', 'PaymentMethodController@postEditPaymentMethod')->name('adMpostEditPaymentMethod');
+            Route::get('/payment-methods', 'PaymentMethodController@getListPaymentMethod')->name('adMgetListPaymentMethod');
+            Route::get('/payment-methods-del/{id}', 'PaymentMethodController@getDelPaymentMethod')->name('adMgetDelPaymentMethod');
+
+            // Deliveries
+            Route::get('/deliveries-add', 'DeliveryController@getAddDelivery')->name('adMgetAddDelivery');
+            Route::post('/deliveries-add', 'DeliveryController@postAddDelivery')->name('adMpostAddDelivery');
+            Route::get('/deliveries-edit/{id}', 'DeliveryController@getEditDelivery')->name('adMgetEditDelivery');
+            Route::post('/deliveries-edit/{id}', 'DeliveryController@postEditDelivery')->name('adMpostEditDelivery');
+            Route::get('/deliveries', 'DeliveryController@getListDelivery')->name('adMgetListDelivery');
+            Route::get('/deliveries-del/{id}', 'DeliveryController@getDelDelivery')->name('adMgetDelDelivery');
+
+            // Products
+            Route::get('/products-add', 'ProductController@getAddProduct')->name('adMgetAddProduct');
+            Route::post('/products-add', 'ProductController@postAddProduct')->name('adMpostAddProduct');
+            Route::get('/products-edit/{id}', 'ProductController@getEditProduct')->name('adMgetEditProduct');
+            Route::post('/products-edit/{id}', 'ProductController@postEditProduct')->name('adMpostEditProduct');
+            Route::get('/products', 'ProductController@getListProduct')->name('adMgetListProduct');
+            Route::get('/products-del/{id}', 'ProductController@getDelProduct')->name('adMgetDelProduct');
+            Route::post('/upload-product-image', 'ProductController@uploadProductImage')->name('adMpostUploadProductImage');
+
             //contact
             Route::get('/contact-list', 'AdminController@getListContact')->name('adMgetListContact');
             Route::get('/contact-edit/{id}', 'AdminController@getContact')->name('adMgetEditContact');
