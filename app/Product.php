@@ -69,4 +69,14 @@ class Product extends Model
   public function getListProductById($arrId){
     return Product::whereIn('id', $arrId)->orderBy('pos', 'asc')->orderBy('created_at','desc')->get();
   }
+  public function getListProductNotInFlashSale(){
+  	return Product::whereNotIn(function ($query) {
+      $query->select('product_id')
+            ->from('sale_products')
+            ->where('now()', '>=', 'from_date')
+            ->where('now()', '<=', 'to_date');
+    })->orderBy('pos', 'asc')
+      ->orderBy('created_at','desc')
+      ->get();
+  }
 }

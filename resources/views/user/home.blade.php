@@ -23,7 +23,7 @@
                 <div class="col m5ths m4 cat-item remove-line-height">
                     <a href="{{ route('categories.show', ['id' => $item->id]) }}">
                         <div class="img-wrapper"
-                            style="background-image: url({{ asset('/public/cates/' .$item->id. '.png') }})"></div>
+                            style="background-image: url({{ asset('/public/' . $item->image) }})"></div>
                         <p>{{ $item->title }}</p>
                     </a>
                 </div>

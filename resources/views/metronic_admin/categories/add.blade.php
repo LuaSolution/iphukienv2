@@ -23,7 +23,8 @@
         </div>
       </div>
       <div class="portlet-body form">
-        <form action="{{ route('adMpostAddCategory') }}" method="POST" id="create-new" class="form-create">
+        <form action="{{ route('adMpostAddCategory') }}" method="POST" id="create-new" class="form-create"
+            enctype='multipart/form-data'>
           {{ csrf_field() }}
           <div class="form-body">
             <div class="form-group form-md-line-input has-success">
@@ -72,4 +73,29 @@
 @section('admin_js')
 <script src="{{ asset('public/metronic_assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('public/metronic_assets/pages/scripts/components-bootstrap-select.min.js') }}" type="text/javascript"></script>
+<script>
+$(document).on('change', "#form-image", function (evt) {
+  var file = evt.target.files[0]
+
+  //Get tmp path
+  var tmp = URL.createObjectURL(event.target.files[0])
+  //Get name extension
+  var nameExtension = file.type
+
+  //Check image file
+  if (nameExtension.search('image') > -1 && file.size < (5 * 1024 * 1024)) {
+    $(this).next('label').text(file.name)
+    $("#file-show").attr('src', tmp)
+    $("#file-show").removeClass('hidden')
+
+
+  } else {
+    alert("Vui lòng chọn hình có dung lượng nhỏ hơn 5MB", 0)
+    $(this).next('label').text("Choose file")
+    $("#file-show").addClass('hidden')
+    $(this).val('')
+  }
+
+})
+</script>
 @endsection

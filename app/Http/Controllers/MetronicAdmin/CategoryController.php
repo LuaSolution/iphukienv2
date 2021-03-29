@@ -42,12 +42,20 @@ class CategoryController extends Controller
         if (!$pos) {
             $pos = 999;
         }
+        // imageFile
+        $imageFile = $request->file('image');
+        $path = "";
+        if ($request->hasFile('image')) {
+            $image = $slug . '.' . $request->image->extension();
+            $path = $request->image->storeAs('img/cate', $image);
+        }
         $parentId = $request->input('parentId') != '' ? $request->input('parentId') : NULL;
         $dataInsert = [
             'title' => $title,
             'slug' => $slug,
             'pos' => $pos,
             'parent_id' => $parentId,
+            'image' => $path,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
@@ -104,12 +112,20 @@ class CategoryController extends Controller
         if (!$pos) {
             $pos = 999;
         }
+        // imageFile
+        $imageFile = $request->file('image');
+        $path = "";
+        if ($request->hasFile('image')) {
+            $image = $slug . '.' . $request->image->extension();
+            $path = $request->image->storeAs('img/cate', $image);
+        }
         $parentId = $request->input('parentId') != '' ? $request->input('parentId') : NULL;
 
         $dataUpdate = [
             'title' => $title,
             'slug' => $slug,
             'pos' => $pos,
+            'image' => $path,
             'parent_id' => $parentId,
             'updated_at' => date('Y-m-d H:i:s'),
         ];

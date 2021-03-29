@@ -14,7 +14,7 @@ class Cate extends Model
      * @var array
      */
     protected $fillable = [
-      'title', 'slug', 'pos', 'parent_id'
+      'title', 'slug', 'pos', 'parent_id', 'image'
   ];
 
   public function insertCate($data){

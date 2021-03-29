@@ -89,6 +89,14 @@ Route::middleware(['runall', 'locale'])->group(function () {
             Route::get('/deliveries', 'DeliveryController@getListDelivery')->name('adMgetListDelivery');
             Route::get('/deliveries-del/{id}', 'DeliveryController@getDelDelivery')->name('adMgetDelDelivery');
 
+            // Flash sale
+            Route::get('/sale-products-add', 'SaleProductController@getAddSaleProduct')->name('adMgetAddSaleProduct');
+            Route::post('/sale-products-add', 'SaleProductController@postAddSaleProduct')->name('adMpostAddSaleProduct');
+            Route::get('/sale-products-edit/{id}', 'SaleProductController@getEditSaleProduct')->name('adMgetEditSaleProduct');
+            Route::post('/sale-products-edit/{id}', 'SaleProductController@postEditSaleProduct')->name('adMpostEditSaleProduct');
+            Route::get('/sale-products', 'SaleProductController@getListSaleProduct')->name('adMgetListSaleProduct');
+            Route::get('/sale-products-del/{id}', 'SaleProductController@getDelSaleProduct')->name('adMgetDelSaleProduct');
+
             // Products
             Route::get('/products-add', 'ProductController@getAddProduct')->name('adMgetAddProduct');
             Route::post('/products-add', 'ProductController@postAddProduct')->name('adMpostAddProduct');
