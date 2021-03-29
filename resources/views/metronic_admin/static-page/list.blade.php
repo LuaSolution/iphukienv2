@@ -1,7 +1,7 @@
 @extends('metronic_admin.layouts.app')
 
 @section('list_page_active', 'active')
-@section('page_title', 'Danh sách page')
+@section('page_title', 'Danh sách page tĩnh')
 @section('content')
 <div class="row">
     <div class="col-md-12">
@@ -9,7 +9,7 @@
         <div class="portlet box yellow">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-cogs"></i>Danh sách page</div>
+                    <i class="fa fa-cogs"></i>Danh sách page tĩnh</div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
                     <a href="{{ route('adMgetAddStaticPage') }}" data-toggle="modal" class="config" data-original-title="" title=""> </a>
@@ -32,7 +32,7 @@
                                 <th> Tiêu đề page </th>
                                 <th> Url </th>
                                 <th> Icon </th>
-                                <th> Xóa </th>
+                                <!-- <th> Xóa </th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -45,13 +45,13 @@
                                     </td>
                                     <td> {{ $item->url }} </td>
                                     <td> <i class="{{$item->icon}}"></i> </td>
-                                    <td>
+                                    <!-- <td>
                                         <a class="btn delete-btn"
                                             href="{{ route('adMgetDelStaticPages', ['id' => $item->id]) }}"
                                             onclick="return confirm('Bạn có chắc chắn xóa page này?');">
                                             <i class="icon icon-close"></i>
                                         </a>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             @endforeach
                         </tbody>

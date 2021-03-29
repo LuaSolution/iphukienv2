@@ -11,6 +11,13 @@ use App\StaticPage;
 
 class HomeController extends Controller
 {
+    public function changeLanguage($language)
+    {
+        \Session::put('website_language', $language);
+
+        return redirect()->back();
+    }
+    
     public function index(Request $request)
     {
         $data = [];
@@ -30,8 +37,9 @@ class HomeController extends Controller
         $m = new Mail;
         $m->email = $req->email;
         $m->created_at=date('Y-m-d');
-        $m->updated_at=date('Y-m-d');
         $m->save();
+
+        toast()->success('Đăng ký email thành công');
         return redirect()->back();
     }
 
