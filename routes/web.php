@@ -134,42 +134,7 @@ Route::middleware(['runall', 'locale'])->group(function () {
         });
 
     });
-    // FRONDEND ***********
-    // Route::get('/phuong-thuc-thanh-toan', function () {
-    //     return view('user.blank');
-    // });
-    // Route::get('/chinh-sach-doi-tra', function () {
-    //     return view('user.blank');
-    // });
 
-    // Route::get('/cach-thuc-thanh-toan', function () {
-    //     return view('user.blank');
-    // });
-
-    // Route::get('/thong-tin-ngan-hang', function () {
-    //     return view('user.blank');
-    // });
-
-    // Route::get('/hoa-don-dien-tu', function () {
-    //     return view('user.blank');
-    // });
-
-    // Route::get('/chinh-sach-bao-mat', function () {
-    //     return view('user.blank');
-    // });
-
-    // Route::get('/gioi-thieu', function () {
-    //     return view('user.blank');
-    // });
-
-    // Route::get('/tuyen-dung', function () {
-    //     return view('user.blank');
-    // });
-    // Route::get('/gop-y', function () {
-    //     return view('user.blank');
-    // });
-
-    //============================================================================
     Route::get('/', 'User\HomeController@index')->name('getHome');
     Route::get('/login', 'User\UserController@login')->name('login');
     Route::get('/forgot-password', 'User\UserController@forgotPassword')->name('forgot-password');
@@ -189,7 +154,7 @@ Route::middleware(['runall', 'locale'])->group(function () {
     Route::get('/user-change-password', 'User\UserController@changePassword')->name('user.change-password');
     Route::get('/user-wishlist', 'User\UserController@getUserWishlist')->name('user.wishlist');
     Route::get('/news', 'User\NewsController@index')->name('news.index');
-    Route::get('/news/{id}', 'User\NewsController@show')->name('news.show');
+    Route::get('/news/{news}', 'User\NewsController@show')->name('news.show');
 
     Route::get('/{url}', 'User\HomeController@getStaticPage')->name('getStaticPage');
 });

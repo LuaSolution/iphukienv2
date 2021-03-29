@@ -43,6 +43,7 @@
         <script src="{{ asset('public/assets/scripts/iphukien/user/header.js') }}"></script>
         @section('scripts')
         @show
+        @include('toast::messages-jquery')
     </footer>
 </body>
 </html>
