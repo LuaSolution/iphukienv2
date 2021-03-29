@@ -177,10 +177,9 @@ $(document).on("submit","#create-new",function(e) {
             contentType: false,
             processData: false,
             success: function(response){
-                console.log(response)
                 res2 = JSON.parse(response);
                 if(res2.code == 1) {
-                  window.location = '{{ route("adMgetListProduct") }}'
+                  alert("Thêm thành công màu " + $(".color-image-block")[i].querySelector('.color-input').value);
                 }
             },
             error: function(response){

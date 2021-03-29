@@ -39,6 +39,13 @@
               <label for="form-title">Thứ tự hiển thị</label>
             </div>
             <div class="form-group form-md-line-input has-success">
+              <label class="col-sm-2 form-control-label">Hình đại diện</label>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="form-image" name="image">
+              </div>
+              <img id="file-show" class="hidden" style="margin-top: 10px;max-width: 100%;max-height: 300px;">
+            </div>
+            <div class="form-group form-md-line-input has-success">
                 <label class="control-label">Danh mục cha</label>
                 
                     <select class="bs-select form-control" name="parentId" id="parentId">

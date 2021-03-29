@@ -28,4 +28,18 @@ class ProductColor extends Model
   public function deleteProductColorByProduct($id){
   	return ProductColor::where('product_id', '=', $id)->delete();
   }
+  public function getListProductColorByProductAndColor($productId, $colorId){
+  	return ProductColor::where('product_id', '=', $productId)
+      ->where('color_id', '=', $colorId)->get();
+  }
+  public function updateImageByProductAndColor($productId, $colorId, $newPath) {
+    return ProductColor::where('product_id', '=', $productId)
+      ->where('color_id', '=', $colorId)
+      ->update(['image' => $newPath]);
+  }
+  public function removeProductColorByProduct($id, $colors) {
+    return ProductColor::where('product_id', '=', $id)
+      ->whereNotIn('color_id', $colors)
+      ->delete();
+  }
 }

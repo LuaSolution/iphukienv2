@@ -154,8 +154,8 @@ $('#color').on('change', function(){
 $(document).on("submit","#create-new",function(e) {
   e.preventDefault();
   let count = $(".color-image-block").length;
+
   let fd = new FormData();
-  
   fd.append('name', $("#form-name").val());
   fd.append('category_id', $("#category").val());
   fd.append('short_description', $("#form-short-description-txt").val());
@@ -165,17 +165,18 @@ $(document).on("submit","#create-new",function(e) {
   fd.append('status_id', $("#status").val());
   fd.append('tag_id', $("#tag").val());
   fd.append('sizes', $("#size").val());
+  fd.append('colors', $("#color").val());
   fd.append('_token', '{{ csrf_token() }}');
 
   $.ajax({
-    url: "{{ route('adMpostAddProduct') }}",
+    url: "{{ route('adMpostEditProduct', ['id' => $product->id]) }}",
     type: 'post',
     data: fd,
     contentType: false,
     processData: false,
     success: function(response){
-      console.log(response)
       let res = JSON.parse(response);
+      console.log(res)
         if(res.code == 0) {
           alert(response.message);
           return;
@@ -185,19 +186,19 @@ $(document).on("submit","#create-new",function(e) {
           fd2 = new FormData();
           fd2.append('_token', '{{ csrf_token() }}');
           fd2.append('img', $(".color-image-block")[i].querySelector('.img-input').files[0]);
-          fd2.append('product_id', res.product_id);
+          fd2.append('product_id', {{$product->id}});
           fd2.append('color_id', $(".color-image-block")[i].querySelector('.color-input').value);
+          
           $.ajax({
-            url: "{{ route('adMpostUploadProductImage') }}",
+            url: "{{ route('adMpostUpdateProductImage') }}",
             type: 'post',
             data: fd2,
             contentType: false,
             processData: false,
             success: function(response){
-                console.log(response)
                 res2 = JSON.parse(response);
                 if(res2.code == 1) {
-                  window.location = '{{ route("adMgetListProduct") }}'
+                    alert("Update success");
                 }
             },
             error: function(response){

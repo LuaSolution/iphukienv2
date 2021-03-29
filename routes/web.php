@@ -97,6 +97,7 @@ Route::middleware(['runall', 'locale'])->group(function () {
             Route::get('/products', 'ProductController@getListProduct')->name('adMgetListProduct');
             Route::get('/products-del/{id}', 'ProductController@getDelProduct')->name('adMgetDelProduct');
             Route::post('/upload-product-image', 'ProductController@uploadProductImage')->name('adMpostUploadProductImage');
+            Route::post('/update-product-image', 'ProductController@updateProductImage')->name('adMpostUpdateProductImage');
 
             //contact
             Route::get('/contact-list', 'AdminController@getListContact')->name('adMgetListContact');
