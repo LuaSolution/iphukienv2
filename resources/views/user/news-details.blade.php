@@ -7,9 +7,7 @@
 @endsection
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/header.css') }}">
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/news-details.css') }}">
-<link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/footer.css') }}">
 @endsection
 
 @section('content')
@@ -160,7 +158,6 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('public/assets/scripts/iphukien/user/header.js') }}"></script>
 <script>
 $(document).ready(function () {
     $('.carousel.carousel-slider').carousel({ fullWidth: true });

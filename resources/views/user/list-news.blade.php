@@ -7,9 +7,7 @@
 @endsection
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/header.css') }}">
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/list-news.css') }}">
-<link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/footer.css') }}">
 @endsection
 
 @section('content')
@@ -20,14 +18,16 @@
 
             <ul class="row tiles-wrap animated" id="wookmark1">
                 <!-- These are our grid blocks -->
+                @foreach($newss as $item)
                 <li class="col m4 s6 news-item">
-                    <a href="{{ route('news.show', 1) }}">
-                        <img src="{{ asset('public/assets/images/demo/list-news/2.png') }}">
-                        <div class="news-title">PHỤ KIỆN APPLE WATCH</div>
-                        <div class="news-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra cras in aliquam viverra consequat facilisis facilisi viverra vulputate.</div>
+                    <a href="{{route('news.show', ['news' => $item->slug])}}">
+                        <img src="{{asset('public/img/post/'.$item->cover)}}">
+                        <div class="news-title">{{$item->title}}</div>
+                        <div class="news-content">{{$item->description}}</div>
                     </a>
                 </li>
-                <li class="col m4 s6 news-item">
+                @endforeach
+                <!-- <li class="col m4 s6 news-item">
                     <img src="{{ asset('public/assets/images/demo/list-news/3.png') }}">
                     <div class="news-title">PHỤ KIỆN APPLE WATCH</div>
                     <div class="news-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra cras in aliquam viverra consequat facilisis facilisi viverra vulputate.</div>
@@ -96,7 +96,7 @@
                     <img src="{{ asset('public/assets/images/demo/list-news/15.png') }}">
                     <div class="news-title">PHỤ KIỆN APPLE WATCH</div>
                     <div class="news-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra cras in aliquam viverra consequat facilisis facilisi viverra vulputate.</div>
-                </li>
+                </li> -->
             </ul>
 
         </div>
@@ -109,7 +109,6 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('public/assets/scripts/iphukien/user/header.js') }}"></script>
 <script src="{{ asset('public/assets/scripts/iphukien/user/wookmark.min.js') }}"></script>
 <script>
 window.onload = function() {

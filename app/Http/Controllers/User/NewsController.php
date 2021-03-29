@@ -10,9 +10,8 @@ class NewsController extends Controller
 {
     public function index(Request $request)
     {
-        $newsModel = new News();
-        $newss = $newsModel->getListNews();
-        $this->data['newss'] = $newss;
+        $news = News::paginate(10);
+        $this->data['newss'] = $news;
 
         return view('user/list-news', $this->data);
     }
