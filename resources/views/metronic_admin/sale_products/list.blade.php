@@ -1,7 +1,7 @@
 @extends('metronic_admin.layouts.app')
 
-@section('list_deliveries_active', 'active')
-@section('page_title', 'Danh sách hình thức vận chuyển')
+@section('list_sale_products_active', 'active')
+@section('page_title', 'Danh sách flash sale')
 
 @section('content')
 <div class="row">
@@ -10,10 +10,10 @@
         <div class="portlet box yellow">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-cogs"></i>Danh sách hình thức vận chuyển</div>
+                    <i class="fa fa-cogs"></i>Danh sách flash sale</div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-                    <a href="{{ route('adMgetAddDelivery') }}" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                    <a href="{{ route('adMgetAddSaleProduct') }}" data-toggle="modal" class="config" data-original-title="" title=""> </a>
                 </div>
             </div>
             <div class="portlet-body">
@@ -22,22 +22,34 @@
                         <thead>
                             <tr>
                                 <th> # </th>
-                                <th> Tên hình thức vận chuyển </th>
+                                <th> Tên sản phẩm </th>
+                                <th> Từ ngày </th>
+                                <th> Đến ngày </th>
+                                <th> Giá đã giảm </th>
                                 <th> Xóa </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($deliveries as $key=>$item)
+                            @foreach($sale_products as $key=>$item)
                                 <tr>
                                     <td> {{ $key + 1 }} </td>
                                     <td>
                                         <a
-                                            href="{{ route('adMgetEditDelivery', ['id' => $item->id]) }}">{{ $item->name }}</a>
+                                            href="{{ route('adMgetEditSaleProduct', ['id' => $item->id]) }}">{{ $item->product_name }}</a>
+                                    </td>
+                                    <td>
+                                        {{ $item->from_date }}
+                                    </td>
+                                    <td>
+                                        {{ $item->to_date }}
+                                    </td>
+                                    <td>
+                                        {{ $item->sale_price }}
                                     </td>
                                     <td>
                                         <a class="btn delete-btn"
-                                            href="{{ route('adMgetDelDelivery', ['id' => $item->id]) }}"
-                                            onclick="return confirm('Bạn có chắc chắn xóa hình thức vận chuyển này?');">
+                                            href="{{ route('adMgetDelSaleProduct', ['id' => $item->id]) }}"
+                                            onclick="return confirm('Bạn có chắc chắn xóa flash sale này?');">
                                             <i class="icon icon-close"></i>
                                         </a>
                                     </td>

@@ -294,6 +294,28 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item start @yield('list_sale_products_active') @yield('add_sale_products_active')">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Flash sale</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item @yield('add_sale_products_active')">
+                        <a href="{{ route('adMgetAddSaleProduct') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Thêm flash sale</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @yield('list_sale_products_active')">
+                        <a href="{{ route('adMgetListSaleProduct') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Danh sách flash sale</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <!-- END SIDEBAR MENU -->
     </div>

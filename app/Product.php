@@ -70,7 +70,7 @@ class Product extends Model
     return Product::whereIn('id', $arrId)->orderBy('pos', 'asc')->orderBy('created_at','desc')->get();
   }
   public function getListProductNotInFlashSale(){
-  	return Product::whereNotIn(function ($query) {
+  	return Product::whereNotIn('id', function ($query) {
       $query->select('product_id')
             ->from('sale_products')
             ->where('now()', '>=', 'from_date')

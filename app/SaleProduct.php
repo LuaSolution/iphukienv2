@@ -28,7 +28,9 @@ class SaleProduct extends Model
   	return SaleProduct::where('id', '=', $id)->first();
   }
   public function getListSaleProduct(){
-  	return SaleProduct::orderBy('created_at','desc')->get();
+  	return SaleProduct::leftJoin('products', 'products.id', '=', 'sale_products.product_id')
+          ->select('sale_products.*', 'products.name as product_name')
+          ->orderBy('created_at','desc')->get();
   }
   public function deleteSaleProduct($id){
   	return SaleProduct::where('id', '=', $id)->delete();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MetronicAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Product;
 use App\SaleProduct;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class SaleProductController extends Controller
     public function getAddSaleProduct()
     {
         $this->data['list_product'] = (new Product())->getListProductNotInFlashSale();
-
+dd($this->data['list_product']);
         return view('metronic_admin.sale_products.add', $this->data);
     }
 
