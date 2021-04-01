@@ -30,28 +30,22 @@
 @endforeach
             </div>
         </div>
+        @if(count($flashSale) > 0)
         <div class="sale-products">
             <div class="carousel carousel-slider sale-product-slider">
+                @foreach($flashSale as $item)
                 <div class="carousel-item">
                     <div class="flash-deal-icon">Flash deal</div>
                     <div class="carousel-item-wrapper">
                         <div class="item-image remove-line-height"
-                            style="background-image: url({{ asset('public/assets/images/demo/headphone.png') }})">
+                            style="background-image: url({{ $item->img }})">
                         </div>
                         <div class="item-infos">
-                            <div class="name">Tên Sản phẩm 1 dòng</div>
-                            <div class="description">Món quà tuyệt vời dành cho người sành cà phê. Hạt cà phê được Revo
-                                cẩn
-                                trọng chọn lựa, rang xay theo công nghệ và bí quyết học hỏi từ những nghệ nhân nổi
-                                tiếng,
-                                cùng
-                                với tình yêu, sự đam mê của người làm cà phê… tạo ra những tách cà phê tinh khiết chỉ
-                                dành
-                                riêng
-                                cho bạn. tối đa 4 dòng</div>
+                            <div class="name">{{ $item->product->product_name }}</div>
+                            <div class="description">{{ $item->product->product_des }}</div>
                             <div class="price">
-                                <span class="sale">18.200.000 đ</span>
-                                <span class="origin">23.200.000 đ</span>
+                                <span class="sale">{{ $item->product->sale_price }} đ</span>
+                                <span class="origin">{{ $item->product->origin_price }} đ</span>
                             </div>
                             <div class="time">
                                 <div class="day">03</div>
@@ -63,114 +57,14 @@
                         </div>
                     </div>
                     <div class="button-detail">
-                        <a href="#!">Xem chi tiết</a>
+                        <a href="{{ route('products.show', $item->product->product_id) }}">Xem chi tiết</a>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="flash-deal-icon">Flash deal</div>
-                    <div class="carousel-item-wrapper">
-                        <div class="item-image remove-line-height"
-                            style="background-image: url({{ asset('public/assets/images/demo/headphone.png') }})">
-                        </div>
-                        <div class="item-infos">
-                            <div class="name">Tên Sản phẩm 5 dòng</div>
-                            <div class="description">Món quà tuyệt vời dành cho người sành cà phê. Hạt cà phê được Revo
-                                cẩn
-                                trọng chọn lựa, rang xay theo công nghệ và bí quyết học hỏi từ những nghệ nhân nổi
-                                tiếng,
-                                cùng
-                                với tình yêu, sự đam mê của người làm cà phê… tạo ra những tách cà phê tinh khiết chỉ
-                                dành
-                                riêng
-                                cho bạn. tối đa 4 dòng</div>
-                            <div class="price">
-                                <span class="sale">18.200.000 đ</span>
-                                <span class="origin">23.200.000 đ</span>
-                            </div>
-                            <div class="time">
-                                <div class="day">03</div>
-                                <div class="hour">23</div>
-                                <div class="minute">59</div>
-                                <div class="second">55</div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="button-detail">
-                        <a href="#!">Xem chi tiết</a>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="flash-deal-icon">Flash deal</div>
-                    <div class="carousel-item-wrapper">
-                        <div class="item-image remove-line-height"
-                            style="background-image: url({{ asset('public/assets/images/demo/headphone.png') }})">
-                        </div>
-                        <div class="item-infos">
-                            <div class="name">Tên Sản phẩm 2 dòng</div>
-                            <div class="description">Món quà tuyệt vời dành cho người sành cà phê. Hạt cà phê được Revo
-                                cẩn
-                                trọng chọn lựa, rang xay theo công nghệ và bí quyết học hỏi từ những nghệ nhân nổi
-                                tiếng,
-                                cùng
-                                với tình yêu, sự đam mê của người làm cà phê… tạo ra những tách cà phê tinh khiết chỉ
-                                dành
-                                riêng
-                                cho bạn. tối đa 4 dòng</div>
-                            <div class="price">
-                                <span class="sale">18.200.000 đ</span>
-                                <span class="origin">23.200.000 đ</span>
-                            </div>
-                            <div class="time">
-                                <div class="day">03</div>
-                                <div class="hour">23</div>
-                                <div class="minute">59</div>
-                                <div class="second">55</div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="button-detail">
-                        <a href="#!">Xem chi tiết</a>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="flash-deal-icon">Flash deal</div>
-                    <div class="carousel-item-wrapper">
-                        <div class="item-image remove-line-height"
-                            style="background-image: url({{ asset('public/assets/images/demo/headphone.png') }})">
-                        </div>
-                        <div class="item-infos">
-                            <div class="name">Tên Sản phẩm 3 dòng</div>
-                            <div class="description">Món quà tuyệt vời dành cho người sành cà phê. Hạt cà phê được Revo
-                                cẩn
-                                trọng chọn lựa, rang xay theo công nghệ và bí quyết học hỏi từ những nghệ nhân nổi
-                                tiếng,
-                                cùng
-                                với tình yêu, sự đam mê của người làm cà phê… tạo ra những tách cà phê tinh khiết chỉ
-                                dành
-                                riêng
-                                cho bạn. tối đa 4 dòng</div>
-                            <div class="price">
-                                <span class="sale">18.200.000 đ</span>
-                                <span class="origin">23.200.000 đ</span>
-                            </div>
-                            <div class="time">
-                                <div class="day">03</div>
-                                <div class="hour">23</div>
-                                <div class="minute">59</div>
-                                <div class="second">55</div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="button-detail">
-                        <a href="#!">Xem chi tiết</a>
-                    </div>
-                </div>
+                @endforeach
                 <div class="ipk-next-slide"></div>
             </div>
         </div>
+        @endif
         <div class="products-block">
             <p class="block-title">Sản phẩm mới</p>
             <div class="products-wrapper">

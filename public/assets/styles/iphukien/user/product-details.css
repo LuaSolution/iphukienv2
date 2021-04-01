@@ -478,38 +478,3 @@
     color: #000;
     text-transform: uppercase;
 }
-.add-cart-success {
-    width: 500px;
-    height: 70px;
-    padding: 0;
-    padding-left: 90px;
-    position: relative;
-    background-color: #fff;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    margin-top: 0;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 70px;
-    color: #523535;
-}
-.add-cart-success::before {
-    content: '';
-    background-image: url(/assets/images/product-details/done.svg);
-    background-position: center;
-    background-size: 34px 34px;
-    background-repeat: no-repeat;
-    top: 0;
-    left: 0;
-    width: 70px;
-    height: 70px;
-    background-color: #EDF5E6;
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-bottomleft: 5px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    position: absolute;
-}

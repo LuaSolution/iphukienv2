@@ -73,6 +73,7 @@ License: You must have a valid license purchased only from themeforest(the above
         rel="stylesheet" type="text/css" id="style_color" />
     <link href="{{ asset('public/metronic_assets/layouts/layout4/css/custom.min.css') }}"
         rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/metronic_assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
     <script src="{{ asset('public/ckeditor/ckeditor.js') }}"></script>
     <!-- END THEME LAYOUT STYLES -->
     <link rel="shortcut icon" href="favicon.ico" />

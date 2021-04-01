@@ -30,12 +30,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($sale_products as $key=>$item)
+                            @foreach($saleProducts as $key=>$item)
                                 <tr>
                                     <td> {{ $key + 1 }} </td>
                                     <td>
-                                        <a
-                                            href="{{ route('adMgetEditSaleProduct', ['id' => $item->id]) }}">{{ $item->product_name }}</a>
+                                        {{ $item->product_name }}
                                     </td>
                                     <td>
                                         {{ $item->from_date }}

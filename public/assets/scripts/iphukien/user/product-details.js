@@ -69,9 +69,3 @@ $(document).on("click", ".thumbs span", function () {
 $(document).on("click", ".custom-fb-share-button", function () {
     $('.fb-share-button').trigger( "click" );
 });
-$(document).on("click", ".add-to-card-btn", function () {
-    M.toast({
-        html: 'Thêm vào giỏ hàng thành công',
-        classes: 'add-cart-success'
-    })
-});

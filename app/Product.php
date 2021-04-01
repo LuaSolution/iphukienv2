@@ -43,7 +43,7 @@ class Product extends Model
           ->orderBy('pos', 'asc')->orderBy('created_at','desc')
           ->get();
   }
-  
+
   public function getListProductByQuery($query){
   	return Product::where('title', 'like', '%'.$query.'%')->orderBy('pos', 'asc')->orderBy('created_at','desc')->get();
   }
@@ -70,13 +70,16 @@ class Product extends Model
     return Product::whereIn('id', $arrId)->orderBy('pos', 'asc')->orderBy('created_at','desc')->get();
   }
   public function getListProductNotInFlashSale(){
-  	return Product::whereNotIn('id', function ($query) {
-      $query->select('product_id')
+    return Product::whereNotIn('id', function ($query) {
+            $query->select('product_id')
             ->from('sale_products')
-            ->where('now()', '>=', 'from_date')
-            ->where('now()', '<=', 'to_date');
-    })->orderBy('pos', 'asc')
-      ->orderBy('created_at','desc')
-      ->get();
+            ->whereRaw('? >= from_date', [date("Y-m-d")])
+            ->whereRaw('? <= to_date', [date("Y-m-d")]);
+        })->orderBy('created_at','desc')->get();
+  }
+  public function getListSameProduct($cateId, $productId) {
+    return Product::where('category_id', '=', $cateId)
+        ->where('id', '<>', $productId)
+        ->orderBy('created_at','desc')->get();
   }
 }

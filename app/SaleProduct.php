@@ -25,7 +25,9 @@ class SaleProduct extends Model
   }
 
   public function getSaleProductById($id){
-  	return SaleProduct::where('id', '=', $id)->first();
+  	return SaleProduct::leftJoin('products', 'products.id', '=', 'sale_products.product_id')
+          ->select('sale_products.*', 'products.name as product_name')
+          ->where('sale_products.id', '=', $id)->first();
   }
   public function getListSaleProduct(){
   	return SaleProduct::leftJoin('products', 'products.id', '=', 'sale_products.product_id')
@@ -35,4 +37,12 @@ class SaleProduct extends Model
   public function deleteSaleProduct($id){
   	return SaleProduct::where('id', '=', $id)->delete();
   }
+  public function getListValidSaleProduct(){
+        return SaleProduct::leftJoin('products', 'products.id', '=', 'sale_products.product_id')
+        ->select('sale_products.*', 'products.name as product_name', 'products.short_description as product_des', 'products.price as origin_price')
+        ->whereRaw('? >= from_date', [date("Y-m-d")])
+        ->whereRaw('? <= to_date', [date("Y-m-d")])
+        ->orderBy('created_at','desc')->get();
+  
+}
 }

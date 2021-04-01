@@ -49,10 +49,6 @@ class AdminController extends Controller
         }
     }
 
-    
-
-    
-
     /**
      * Get home page
      */

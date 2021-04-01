@@ -33,8 +33,16 @@ $(document).on("click", ".quickview-slider .next", function () {
 });
 $(document).on("click", ".decrease", function () {
     if($('.quantity').val() == 0) return;
-    $('.quantity').val(parseInt($('.quantity').val()) - 1)
+    let newQuantity = parseInt($('.quantity').val()) - 1;
+    $('.quantity').val(newQuantity);
+    let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
+    cart[productId].quantity = newQuantity;
+    localStorage.setItem('ipk_cart',  JSON.stringify(cart));
 });
 $(document).on("click", ".increase", function () {
-    $('.quantity').val(parseInt($('.quantity').val()) + 1)
+    let newQuantity = parseInt($('.quantity').val()) + 1;
+    $('.quantity').val(newQuantity);
+    let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
+    cart[productId].quantity = newQuantity;
+    localStorage.setItem('ipk_cart',  JSON.stringify(cart));
 });

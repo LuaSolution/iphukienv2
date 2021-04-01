@@ -1,144 +1,24 @@
 <div class="products-wrapper">
     <div class="row products">
-        <div class="product col l3 added-wishlist">
-            <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
+        @foreach($listProduct as $product)
+        <div class="product col l3 {{$product->wishlist ? 'added-wishlist' : ''}}">
+            <div class="img" style="background-image: url({{ $product->image }})"></div>
             <div class="name">
-                <a href="{{ route('products.show', 1) }}">
-                    Tên của Sản Phẩm này dài tối đa là hai dòng như...
+                <a href="{{ route('products.show', $product->id) }}">
+                    {{$product->name}}
                 </a>
             </div>
             <div class="price">
-                <span class="sale">18.200.000đ</span>
-                <span class="origin">18.200.000đ</span>
+                <span class="sale">{{ number_format($product->sale_price , 0, ',', '.') }}đ</span>
+                <span class="origin">{{ number_format($product->price, 0, ',', '.') }}đ</span>
             </div>
             <div class="button-wrapper">
                 <a class="modal-trigger" href="#quickview">Xem nhanh</a>
             </div>
         </div>
-        <div class="product col l3">
-            <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
-            <div class="name">
-                <a href="{{ route('products.show', 1) }}">
-                    Tên của Sản Phẩm này dài tối đa là hai dòng như...
-                </a>
-            </div>
-            <div class="price">
-                <span class="sale">18.200.000đ</span>
-                <span class="origin">18.200.000đ</span>
-            </div>
-            <div class="button-wrapper">
-                <a class="modal-trigger" href="#quickview">Xem nhanh</a>
-            </div>
-        </div>
-        <div class="product col l3">
-            <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
-            <div class="name">
-                <a href="{{ route('products.show', 1) }}">
-                    Tên của Sản Phẩm này dài tối đa là hai dòng như...
-                </a>
-            </div>
-            <div class="price">
-                <span class="sale">18.200.000đ</span>
-                <span class="origin">18.200.000đ</span>
-            </div>
-            <div class="button-wrapper">
-                <a class="modal-trigger" href="#quickview">Xem nhanh</a>
-            </div>
-        </div>
-        <div class="product col l3">
-            <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
-            <div class="name">
-                <a href="{{ route('products.show', 1) }}">
-                    Tên của Sản Phẩm này dài tối đa là hai dòng như...
-                </a>
-            </div>
-            <div class="price">
-                <span class="sale">18.200.000đ</span>
-                <span class="origin">18.200.000đ</span>
-            </div>
-            <div class="button-wrapper">
-                <a class="modal-trigger" href="#quickview">Xem nhanh</a>
-            </div>
-        </div>
-        @if(@fromPage == 'getHome')
-        <div class="product col l3">
-            <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
-            <div class="name">
-                <a href="{{ route('products.show', 1) }}">
-                    Tên của Sản Phẩm này dài tối đa là hai dòng như...
-                </a>
-            </div>
-            <div class="price">
-                <span class="sale">18.200.000đ</span>
-                <span class="origin">18.200.000đ</span>
-            </div>
-            <div class="button-wrapper">
-                <a class="modal-trigger" href="#quickview">Xem nhanh</a>
-            </div>
-        </div>
-        <div class="product col l3">
-            <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
-            <div class="name">
-                <a href="{{ route('products.show', 1) }}">
-                    Tên của Sản Phẩm này dài tối đa là hai dòng như...
-                </a>
-            </div>
-            <div class="price">
-                <span class="sale">18.200.000đ</span>
-                <span class="origin">18.200.000đ</span>
-            </div>
-            <div class="button-wrapper">
-                <a class="modal-trigger" href="#quickview">Xem nhanh</a>
-            </div>
-        </div>
-        <div class="product col l3">
-            <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
-            <div class="name">
-                <a href="{{ route('products.show', 1) }}">
-                    Tên của Sản Phẩm này dài tối đa là hai dòng như...
-                </a>
-            </div>
-            <div class="price">
-                <span class="sale">18.200.000đ</span>
-                <span class="origin">18.200.000đ</span>
-            </div>
-            <div class="button-wrapper">
-                <a class="modal-trigger" href="#quickview">Xem nhanh</a>
-            </div>
-        </div>
-        <div class="product col l3">
-            <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
-            <div class="name">
-                <a href="{{ route('products.show', 1) }}">
-                    Tên của Sản Phẩm này dài tối đa là hai dòng như...
-                </a>
-            </div>
-            <div class="price">
-                <span class="sale">18.200.000đ</span>
-                <span class="origin">18.200.000đ</span>
-            </div>
-            <div class="button-wrapper">
-                <a class="modal-trigger" href="#quickview">Xem nhanh</a>
-            </div>
-        </div>
-        <div class="product col l3">
-            <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
-            <div class="name">
-                <a href="{{ route('products.show', 1) }}">
-                    Tên của Sản Phẩm này dài tối đa là hai dòng như...
-                </a>
-            </div>
-            <div class="price">
-                <span class="sale">18.200.000đ</span>
-                <span class="origin">18.200.000đ</span>
-            </div>
-            <div class="button-wrapper">
-                <a class="modal-trigger" href="#quickview">Xem nhanh</a>
-            </div>
-        </div>
-        @endif
+        @endforeach
     </div>
-    @if(@fromPage == 'getHome')
+    @if(@hasReadMore)
     <a href="#!" class="view-more">Xem thêm</a>
     @endif
 </div>
@@ -149,7 +29,7 @@
         <div class="carousel carousel-slider quickview-slider">
             <a href="#!" class="previous"></a>
             <div class="carousel-item product-img added-wishlist">
-                <span class="sale-percent">-50%</span>
+                <span class="sale-percent" id="sale-percent">-50%</span>
                 <img src="{{ asset('public/assets/images/demo/watch.png') }}" />
             </div>
             <div class="carousel-item product-img">
@@ -219,3 +99,4 @@
         </div>
     </div>
 </div>
+

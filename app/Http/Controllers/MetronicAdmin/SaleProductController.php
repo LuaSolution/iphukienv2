@@ -15,8 +15,8 @@ class SaleProductController extends Controller
      */
     public function getAddSaleProduct()
     {
-        $this->data['list_product'] = (new Product())->getListProductNotInFlashSale();
-dd($this->data['list_product']);
+        $this->data['products'] = (new Product())->getListProductNotInFlashSale();
+
         return view('metronic_admin.sale_products.add', $this->data);
     }
 
@@ -25,17 +25,32 @@ dd($this->data['list_product']);
      */
     public function postAddSaleProduct(Request $request)
     {
-        // name
-        $name = $request->input('name');
-        if (!$name) {
+        $productId = $request->input('product');
+        if (!$productId) {
             return redirect()->route('adMgetListSaleProduct')->with('error', 'Thêm thất bại!');
         }
-        
+        $fromDate = $request->input('from_date');
+        if (!$fromDate) {
+            return redirect()->route('adMgetListSaleProduct')->with('error', 'Thêm thất bại!');
+        }
+        $toDate = $request->input('to_date');
+        if (!$toDate) {
+            return redirect()->route('adMgetListSaleProduct')->with('error', 'Thêm thất bại!');
+        }
+        $salePrice = $request->input('sale_price');
+        if (!$salePrice) {
+            return redirect()->route('adMgetListSaleProduct')->with('error', 'Thêm thất bại!');
+        }
+
         $dataInsert = [
-            'name' => $name,
+            'product_id' => $productId,
+            'from_date' => date("Y-m-d", strtotime($fromDate)),
+            'to_date' => date("Y-m-d", strtotime($toDate)),
+            'sale_price' => $salePrice,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
+
         $result = (new SaleProduct())->insertSaleProduct($dataInsert);
 
         if ($result instanceof SaleProduct) {
@@ -47,54 +62,11 @@ dd($this->data['list_product']);
     }
 
     /**
-     * Get edit SaleProduct page
-     */
-    public function getEditSaleProduct($id)
-    {
-
-        $saleProduct = (new SaleProduct())->getSaleProductById($id);
-
-        if ($saleProduct) {
-            $this->data['saleProduct'] = $saleProduct;
-
-            return view('metronic_admin.sale_products.edit', $this->data);
-        } else {
-            return redirect()->route('adMgetListSaleProduct');
-        }
-
-    }
-
-    /**
-     * SaleProduct edit page
-     */
-    public function postEditSaleProduct($id, Request $request)
-    {
-
-        // name
-        $name = $request->input('name');
-        if (!$name) {
-            return redirect()->route('adMgetListSaleProduct')->with('error', 'Thêm thất bại!');
-        }
-
-        $dataUpdate = [
-            'name' => $name,
-            'updated_at' => date('Y-m-d H:i:s'),
-        ];
-        $result = (new SaleProduct())->updateSaleProduct($id, $dataUpdate);
-        if ($result > 0) {
-            return redirect()->route('adMgetEditSaleProduct', ['id' => $id])->with('success', 'Cập nhật thành công!');
-        } else {
-            return redirect()->route('adMgetEditSaleProduct', ['id' => $id])->with('error', 'Cập nhật thất bại!');
-        }
-
-    }
-
-    /**
      * Get list SaleProduct page
      */
     public function getListSaleProduct()
     {
-        $this->data['sale_products'] = (new SaleProduct())->getListSaleProduct();
+        $this->data['saleProducts'] = (new SaleProduct())->getListSaleProduct();
 
         return view('metronic_admin.sale_products.list', $this->data);
     }

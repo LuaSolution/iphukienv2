@@ -17,8 +17,9 @@
             <div class="col l8 s12">
                 <div class="title">Tôi đã có tài khoản</div>
                 <div class="sub-title">Nhập địa chỉ EMAIL/ SĐT và mật khẩu để đăng nhập</div>
-                <form method="post">
-                    <input type="text" name="email_phone" placeholder="EMAIL/ SĐT" class="ipk-form-input" />
+                <form class="login-form" method="POST" action="{{ route('doLogin') }}">
+                    {{ csrf_field() }}
+                    <input type="text" name="email" placeholder="EMAIL/ SĐT" class="ipk-form-input" />
                     <input type="password" name="password" placeholder="Mật khẩu" class="ipk-form-input" />
                     <a href="{{ route('forgot-password') }}" class="forgot-pass-btn">Quên mật khẩu?</a>
                     <input type="submit" value="Đăng nhập" class="btn-dang-nhap" />

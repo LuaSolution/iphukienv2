@@ -22,24 +22,14 @@
                 <div class="title">địa chỉ đã lưu</div>
                 <div class="sub-title">Chọn địa chỉ để giao hàng tới</div>
                 <div class="list-address">
-                    <div class="address selected">
-                        <div class="address-content">123 tên đường, tên phường, tỉnh thành</div>
-                        <div class="customer-name">Tên khách hàng</div>
-                        <div class="customer-phone">+84 000</div>
-                        <div class="customer-email">email</div>
+                    @foreach($addresses as $key => $item)
+                    <div class="address {{$item->is_default == 1 ? 'selected' : ''}}" data-addressid="{{item->id}}">
+                        <div class="address-content">{{$item->address}}</div>
+                        <div class="customer-name">{{$item->name}}</div>
+                        <div class="customer-phone">{{$item->phone}}</div>
+                        <div class="customer-email">{{$item->email}}</div>
                     </div>
-                    <div class="address">
-                        <div class="address-content">123 tên đường, tên phường, tỉnh thành</div>
-                        <div class="customer-name">Tên khách hàng</div>
-                        <div class="customer-phone">+84 000</div>
-                        <div class="customer-email">email</div>
-                    </div>
-                    <div class="address">
-                        <div class="address-content">123 tên đường, tên phường, tỉnh thành</div>
-                        <div class="customer-name">Tên khách hàng</div>
-                        <div class="customer-phone">+84 000</div>
-                        <div class="customer-email">email</div>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="add-new-address modal-trigger" data-target="new-address-popup" href="#new-address-popup">
                     + Thêm địa chỉ khác
@@ -49,14 +39,17 @@
                 <div class="methods">
                     <div class="methods-title">Chọn hình thức thanh toán</div>
                     <div class="list-method">
-                        <div class="method-item payment-method-item selected">Thanh toán tiền mặt khi nhận hàng</div>
+                        @foreach($paymentMethods as $key => $item)
+                        <div class="method-item payment-method-item  {{$key == 0 ? 'selected' : ''}}" data-paymentmethod="{{$item->id}]">{{$item->name}}</div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="methods">
                     <div class="methods-title">Chọn hình thức vận chuyển</div>
                     <div class="list-method">
-                        <div class="method-item delivery-method-item">Giao nội tỉnh - Qua ngày</div>
-                        <div class="method-item delivery-method-item">Giao nhanh Nội tỉnh VIP - 1 ngày</div>
+                        @foreach($deliveries as $key => $item)
+                        <div class="method-item delivery-method-item {{$key == 0 ? 'selected' : ''}}" data-deliveryid="{{$item->id}]">{{$item->name }}</div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -120,9 +113,11 @@
                 <div class="input-field">
                     <select name="city" id="city">
                         <option value="" disabled selected>Chọn tỉnh/ thành phố</option>
-                        @foreach ($list_city as $city)
+                        {{--  @foreach ($list_city as $city)
                             <option value="{{ $city->id }}">{{ $city->name }}</option>
-                        @endforeach
+                        @endforeach --}}
+                        <option value="1">Hà Nội</option>
+                        <option value="2">TP.HCM</option>
                     </select>
                 </div>
             </div>
@@ -130,6 +125,7 @@
                 <div class="input-field">
                     <select name="district" id="district">
                         <option value="" disabled selected>Chọn quận/ huyện</option>
+                        <option value="1">Quận 1</option>
                     </select>
                 </div>
             </div>
@@ -171,12 +167,12 @@
 <script>
 $(document).on("change", "#city", function () {
     let cityId = $(this).val();
-    $.get(
-        "{{ URL::to('/') }}/location/DISTRICT/" + cityId,
-        function (data) {
-            console.log(data)
-        }
-    );
+    // $.get(
+    //     "{{ URL::to('/') }}/location/DISTRICT/" + cityId,
+    //     function (data) {
+    //         console.log(data)
+    //     }
+    // );
 });
 </script>
 @endsection

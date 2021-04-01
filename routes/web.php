@@ -11,7 +11,6 @@ Route::middleware(['runall', 'locale'])->group(function () {
         Route::post('/login', 'AdminController@postLogin')->name('adMpostLogin');
 
         Route::middleware(['check_admin'])->group(function () {
-
             // Home
             Route::get('/', 'AdminController@getHome')->name('adMgetHome');
             Route::post('/config', 'AdminController@updateConfig')->name('adMupdateConfig');
@@ -92,8 +91,6 @@ Route::middleware(['runall', 'locale'])->group(function () {
             // Flash sale
             Route::get('/sale-products-add', 'SaleProductController@getAddSaleProduct')->name('adMgetAddSaleProduct');
             Route::post('/sale-products-add', 'SaleProductController@postAddSaleProduct')->name('adMpostAddSaleProduct');
-            Route::get('/sale-products-edit/{id}', 'SaleProductController@getEditSaleProduct')->name('adMgetEditSaleProduct');
-            Route::post('/sale-products-edit/{id}', 'SaleProductController@postEditSaleProduct')->name('adMpostEditSaleProduct');
             Route::get('/sale-products', 'SaleProductController@getListSaleProduct')->name('adMgetListSaleProduct');
             Route::get('/sale-products-del/{id}', 'SaleProductController@getDelSaleProduct')->name('adMgetDelSaleProduct');
 
@@ -137,8 +134,11 @@ Route::middleware(['runall', 'locale'])->group(function () {
 
     Route::get('/', 'User\HomeController@index')->name('getHome');
     Route::get('/login', 'User\UserController@login')->name('login');
+    Route::get('/logout', 'User\UserController@doLogout')->name('doLogout');
+    Route::post('/login', 'User\UserController@doLogin')->name('doLogin');
     Route::get('/forgot-password', 'User\UserController@forgotPassword')->name('forgot-password');
     Route::get('/signup', 'User\UserController@signup')->name('signup');
+    Route::post('/signup', 'User\UserController@doSignup')->name('doSignup');
     Route::get('/products/{id}', 'User\ProductController@show')->name('products.show');
     Route::get('/categories/{id}', 'User\CategoryController@show')->name('categories.show');
     Route::get('/cart', 'User\UserController@cart')->name('user.cart');
@@ -157,4 +157,5 @@ Route::middleware(['runall', 'locale'])->group(function () {
     Route::get('/news/{news}', 'User\NewsController@show')->name('news.show');
 
     Route::get('/{url}', 'User\HomeController@getStaticPage')->name('getStaticPage');
+    Route::post('/login-google', 'User\UserAjaxController@loginWithGoogle')->name('ajax.login-with-google');
 });

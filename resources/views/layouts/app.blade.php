@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{ asset('public/iphukien/user/header.css') }}">
     <link rel="stylesheet" href="{{ asset('public/iphukien/user/footer.css') }}">
     @yield('fb-meta-tags')
+    @yield('meta-tags')
     @section('styles')
     @show
 </head>

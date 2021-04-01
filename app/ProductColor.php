@@ -23,7 +23,7 @@ class ProductColor extends Model
   public function getListProductColorByProduct($productId){
   	return ProductColor::where('product_id', '=', $productId)
       ->leftJoin('colors', 'colors.id', '=', 'product_color.color_id')
-      ->select('product_color.product_id', 'product_color.color_id', 'product_color.image', 'colors.code')->get();
+      ->select('product_color.product_id', 'product_color.color_id', 'product_color.image', 'colors.name as color_name', 'colors.code', 'product_color.image')->get();
   }
   public function deleteProductColorByProduct($id){
   	return ProductColor::where('product_id', '=', $id)->delete();
@@ -41,5 +41,8 @@ class ProductColor extends Model
     return ProductColor::where('product_id', '=', $id)
       ->whereNotIn('color_id', $colors)
       ->delete();
+  }
+  public function getFirstImage($productId) {
+    return ProductColor::where('product_id', '=', $productId)->first();
   }
 }

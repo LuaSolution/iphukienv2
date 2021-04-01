@@ -11,13 +11,16 @@
                 placeholder="Tìm sản phẩm, thương hiệu bạn mong muốn..." />
             <button type="submit" class="btn-search-header"></button>
         </form>
+        @if (Auth::check() && Auth::user()->role_id == 2)
+        <div class="header-right-btn">
+            <a href="" class="ipk-header-right-icon user-icon" data-target='user-dropdown'></a>
+        </div>
+        @else
         <div class="header-group-btn">
             <a href="{{ route('login') }}" class="ipk-btn btn-dang-nhap">Đăng nhập</a>
             <a href="{{ route('signup') }}" class="ipk-btn btn-dang-ky">Đăng ký ngay</a>
         </div>
-        <!-- <div class="header-right-btn">
-            <a href="" class="ipk-header-right-icon user-icon" data-target='user-dropdown'></a>
-        </div> -->
+        @endif
         <div class="header-right-btn">
             <a href="{{ route('user.wishlist') }}" class="ipk-header-right-icon wishlist-icon"></a>
         </div>
@@ -92,9 +95,9 @@
             <div class="avatar" style="background-image: url({{ asset('public/assets/images/demo/avatar.jpg') }})"></div>
             <span>Lê Nguyễn Kiều Trâm</span>
         </li>
-        <li><a href="#!">Đơn hàng của tôi</a></li>
+        <li><a href="{{ route('user.orders') }}">Đơn hàng của tôi</a></li>
         <li><a href="#!">Cài đặt tài khoản</a></li>
-        <li><a href="#!">Đăng xuất</a></li>
+        <li><a href="{{ route('doLogout') }}">Đăng xuất</a></li>
     </ul>
 
 </header>
