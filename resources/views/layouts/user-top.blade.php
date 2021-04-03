@@ -3,10 +3,10 @@
     <a href="javascript:void(0)" class="user-top-dropdown dropdown-trigger" data-target='user-top-dropdown'></a>
     <div class="avatar" style="background-image: url({{ asset('public/assets/images/demo/avatar.jpg') }})"></div>
     <div class="info">
-        <div class="name">FlatCloud Company</div>
-        <div class="email">dinhbao@flatcloud.company</div>
+        <div class="name">{{Auth::user()->name}}</div>
+        <div class="email">{{Auth::user()->email}}</div>
     </div>
-    <a class="logout-link" href="#!">
+    <a class="logout-link" href="{{ route('doLogout') }}">
         Đăng xuất
     </a>
 </div>
