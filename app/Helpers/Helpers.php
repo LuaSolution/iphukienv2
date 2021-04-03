@@ -20,7 +20,7 @@ class Helpers {
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $curlResult = curl_exec($curl);
         curl_close($curl);
-dd($curlResult);
+
         return json_decode($curlResult)->data;
     }
 }

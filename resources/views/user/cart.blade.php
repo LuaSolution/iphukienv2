@@ -115,8 +115,5 @@ $(document).ready(function () {
     $("#sum-price").html(`TỔNG ${numberWithCommas(sum)} VNĐ`);
     $("#count-products").html(`Có ${count} sản phẩm`);
 });
-function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
 </script>
 @endsection

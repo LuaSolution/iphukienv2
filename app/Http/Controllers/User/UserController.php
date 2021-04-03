@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Address;
+use App\PaymentMethod;
+use App\Delivery;
+use App\Order;
+use App\OrderDetail;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\Helpers;
 
@@ -96,16 +100,12 @@ class UserController extends Controller
     }
 
     public function payment(Request $request) {
-        // $listCity = Helpers::callNhanhApi([
-        //     "type" => "CITY",
-        //     "parentId" => 0
-        // ], "/shipping/location");
-        // $data = [
-        //     "list_city" => $listCity
-        // ];
-
-        // return view('user/payment', $data);
         if (!Auth::check() || Auth::user()->role_id != 2) return redirect()->route('login');
+        $listCity = Helpers::callNhanhApi([
+            "type" => "CITY",
+            "parentId" => 0
+        ], "/shipping/location");
+        $data['listCity'] = $listCity;
         $data['addresses'] = (new Address())->getAddressByUser(Auth::user()->id);
         $data['paymentMethods'] = (new PaymentMethod())->getListPaymentMethod();
         $data['deliveries'] = (new Delivery())->getListDelivery();
@@ -113,8 +113,71 @@ class UserController extends Controller
         return view('user/payment', $data);
     }
 
-    public function paymentComplete(Request $request) {
-        return view('user/payment-complete');
+    public function addNewAddress(Request $request) {
+        if (!Auth::check() || Auth::user()->role_id != 2) return redirect()->route('login');
+        $name = $request->input('name');
+        if (!$name) {
+            return redirect()->route('user.payment')->with('error', 'Chưa nhập tên người nhận ');
+        }
+        $email = $request->input('email');
+        if (!$email) {
+            return redirect()->route('user.payment')->with('error', 'Chưa nhập Email');
+        }
+        $phone = $request->input('phone');
+        if (!$phone) {
+            return redirect()->route('user.payment')->with('error', 'Chưa nhập số điện thoại');
+        }
+        $address = $request->input('address');
+        if (!$address) {
+            return redirect()->route('user.payment')->with('error', 'Chưa nhập địa chỉ');
+        }
+        $city = $request->input('city');
+        if (!$city) {
+            return redirect()->route('user.payment')->with('error', 'Chưa chọn thành phố');
+        }
+        $district = $request->input('district');
+        if (!$district) {
+            return redirect()->route('user.payment')->with('error', 'Chưa chọn quận');
+        }
+        $ward = $request->input('ward');
+        if (!$ward) {
+            return redirect()->route('user.payment')->with('error', 'Chưa chọn phường');
+        }
+        $defaultAddress = $request->input('default-address') == 'on' ? 1 : 0;
+
+        $dataInsert = [
+            'name' => $name,
+            'email' => $email,
+            'phone' => $phone,
+            'address' => $address,
+            'user_id' => Auth::user()->id,
+            'is_default' => $defaultAddress,
+            'city' => $city,
+            'district' => $district,
+            'ward' => $ward,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+        $result = (new Address())->insertAddress($dataInsert);
+
+        if($result) {
+            return redirect()->route('user.payment');
+        }
+    }
+
+    public function paymentComplete(Request $request, $orderId) {
+        $data['order'] = (new Order())->getById($orderId);
+        $orderDetail = (new OrderDetail())->getListOrderDetailByOrder($orderId);
+        $data['productName'] = '';
+        $data['totalCost'] = 0;
+        foreach($orderDetail as $key => $detail) {
+            $data['productName'] .= $key == 0 ? '' : ', ';
+            $data['productName'] .= $detail->product_name;
+            $data['totalCost'] += $detail->total_price;
+        }
+        $data['totalCost'] += $data['order']->ship_fee;
+
+        return view('user/payment-complete', $data);
     }
 
     public function orderDetails(Request $request, $orderId) {

@@ -17,13 +17,16 @@
             <div class="complete-avatar"></div>
             <div class="complete-title">Đặt hàng thành công</div>
             <div class="complete-info-txt">Thông tin đơn hàng của quý khách</div>
-            <div class="order-code">Mã đơn hàng: HDHDHDHD7897878</div>
-            <div class="order-name">Tên của cái sản phẩm này có độ dài tối đa 2 hàngvà thêm 3 dấu ... ở cuối</div>
-            <div class="order-cost">Tổng tiền: 32.000.000 đ</div>
+            <div class="order-code">Mã đơn hàng: {{ $order->nhanh_order_id }}</div>
+            <div class="order-name">
+                Tên sản phẩm: {{ $productName }}
+            </div>
+            <div class="order-cost">
+                Tổng tiền: {{ number_format($totalCost , 0, ',', '.') }} đ</div>
             <div class="welcome-txt">Rất hân hạnh được phục vụ bạn</div>
             <div class="list-btn">
                 <a href="{{ route('getHome') }}">Tiếp tục mua sản phẩm</a>
-                <a href="{{ route('user.order-details', 1) }}">Chi tiết đơn hàng</a>
+                <a href="{{ route('user.order-details', $order->id) }}">Chi tiết đơn hàng</a>
             </div>
         </div>
     </div>

@@ -143,11 +143,10 @@ Route::middleware(['runall', 'locale'])->group(function () {
     Route::get('/categories/{id}', 'User\CategoryController@show')->name('categories.show');
     Route::get('/cart', 'User\UserController@cart')->name('user.cart');
     Route::get('/payment', 'User\UserController@payment')->name('user.payment');
-    Route::get('/payment-complete', 'User\UserController@paymentComplete')->name('user.payment-complete');
+    Route::get('/payment-complete/{orderId}', 'User\UserController@paymentComplete')->name('user.payment-complete');
     Route::get('/orders/{orderId}', 'User\UserController@orderDetails')->name('user.order-details');
-    Route::get('/location/{type}/{parentId?}', 'User\UserAjaxController@getLocation')->name('ajax.location');
+    Route::get('/location/{type}/{parentId?}', 'User\AjaxController@getLocation')->name('ajax.location');
     Route::post('/post-contact', 'User\HomeController@postContact')->name('postContact');
-
     Route::get('/orders', 'User\UserController@getListOrders')->name('user.orders');
     Route::get('/user-information', 'User\UserController@getUserInformation')->name('user.information');
     Route::get('/user-addresses', 'User\UserController@getUserAddresses')->name('user.addresses');
@@ -155,7 +154,9 @@ Route::middleware(['runall', 'locale'])->group(function () {
     Route::get('/user-wishlist', 'User\UserController@getUserWishlist')->name('user.wishlist');
     Route::get('/news', 'User\NewsController@index')->name('news.index');
     Route::get('/news/{news}', 'User\NewsController@show')->name('news.show');
-
     Route::get('/{url}', 'User\HomeController@getStaticPage')->name('getStaticPage');
-    Route::post('/login-google', 'User\UserAjaxController@loginWithGoogle')->name('ajax.login-with-google');
+    Route::post('/add-new-address', 'User\UserController@addNewAddress')->name('user.add-new-address');
+    Route::post('/login-google', 'User\AjaxController@loginWithGoogle')->name('ajax.login-with-google');
+    Route::post('/calc-shipping-fee', 'User\AjaxController@calcShippingFee')->name('ajax.calc-shipping-fee');
+    Route::post('/create-order', 'User\AjaxController@createOrder')->name('ajax.create-order');
 });

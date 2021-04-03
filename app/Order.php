@@ -8,9 +8,13 @@ class Order extends Model
 {
     protected $table = 'orders';
 
+    protected $fillable = [
+        'id', 'address_id', 'payment_method_id', 'delivery_id', 'ship_fee', 'delivery_date', 'status', 'created_at', 'updated_at', 'nhanh_order_id'
+    ];
+
     public function insertOrder($data)
     {
-        return Order::insert($data);
+        return Order::create($data);
     }
 
     public function getListContact()
@@ -20,5 +24,9 @@ class Order extends Model
 
     public function getById($id){
         return Order::where('id', '=', $id)->first();
+    }
+
+    public function updateOrder($id,$data){
+        return Order::where('id', '=', $id)->update($data);
     }
 }

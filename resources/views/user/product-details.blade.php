@@ -205,7 +205,8 @@ function updateCart() {
             salePrice: "{{ $product->sale_price }}",
             name: "{{ $product->name }}",
             sizeName: choosenSizeName,
-            colorName: choosenColorName
+            colorName: choosenColorName,
+            nhanhPorductId: "{{ $product->product_id_nhanh }}"
         };
     }
     localStorage.setItem('ipk_cart',  JSON.stringify(cart));

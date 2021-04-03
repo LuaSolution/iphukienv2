@@ -14,7 +14,7 @@ class Product extends Model
      * @var array
    */
   protected $fillable = [
-    'category_id', 'created_at', 'full_description', 'id', 'name', 'price', 'sale_price', 'short_description', 'sold', 'status_id', 'tag_id', 'updated_at'
+    'category_id', 'created_at', 'full_description', 'id', 'name', 'price', 'sale_price', 'short_description', 'sold', 'status_id', 'tag_id', 'product_id_nhanh', 'updated_at'
   ];
 
   public function insertProduct($data){

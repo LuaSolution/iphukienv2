@@ -133,15 +133,20 @@ class ProductController extends Controller
                 );
             }
             //sync to nhanh
-            Helpers::callNhanhApi([
+            $addProductId = $result->id;
+            $resNhanh = Helpers::callNhanhApi([
                 [
-                    'id' => $result->id,
+                    'id' => $addProductId,
                     'name' => $result->name,
                     'price' => $result->sale_price,
                 ]
             ], "/product/add");
+            $dataUpdate = [
+                'product_id_nhanh' => $resNhanh->ids->$addProductId,
+            ];
+            (new Product())->updateProduct($addProductId, $dataUpdate);
 
-            return json_encode(['code' => 1, 'product_id' => $result->id]);
+            return json_encode(['code' => 1, 'product_id' => $addProductId]);
         } else {
             return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
         }
