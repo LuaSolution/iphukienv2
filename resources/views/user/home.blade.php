@@ -73,7 +73,7 @@
         <div class="product col l3 added-wishlist">
             <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
             <div class="name">
-                <a href="{{ route('products.show', 1) }}">
+                <a href="{{ route('products.show', $item->id) }}">
                     {{ $item->name }}
                 </a>
             </div>
@@ -177,7 +177,7 @@
                         style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})">
                     </div>
                     <div class="name">
-                        <a href="{{ route('products.show', 1) }}">
+                        <a href="{{ route('products.show', $item->id) }}">
                             {{ $item->name }}
                         </a>
                     </div>

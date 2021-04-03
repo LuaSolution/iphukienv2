@@ -22,7 +22,7 @@ class OrderDetail extends Model
         return OrderDetail::leftJoin('products', 'products.id', '=', 'order_details.product_id')
             ->leftJoin('colors', 'colors.id', '=', 'order_details.color_id')
             ->leftJoin('sizes', 'sizes.id', '=', 'order_details.size_id')
-            ->select('order_details.*', 'colors.name as color_name', 'sizes.name as size_name', 'colors.image as product_image', 'products.name as product_name')
+            ->select('order_details.*', 'colors.name as color_name', 'sizes.name as size_name', 'products.name as product_name')
             ->where('order_id', '=', $orderId)->orderBy('created_at', 'desc')->get();
     }
 }

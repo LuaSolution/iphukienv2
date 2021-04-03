@@ -204,16 +204,17 @@ $(document).ready(function () {
     })
     .done(function( data ) {
         let shipService = JSON.parse(data);
-        let totalShipFee = shipService.shipFee + shipService.codFee + shipService.declaredFee;
+        let totalShipFee = parseInt(shipService.shipFee) + parseInt(shipService.codFee) + parseInt(shipService.declaredFee);
         $("#total-ship-fee").html(`${numberWithCommas(totalShipFee)} VNĐ`);
         let today = new Date();
         today.setHours(today.getHours() + shipService.estimatedDeliveryTime);
         let cYear = today.getFullYear();
         let cMonth = today.getMonth() <= 8 ? `0${today.getMonth()+1}` : today.getMonth()+1;
         let cDate = today.getDate() <= 9 ? `0${today.getDate()}` : today.getDate();
+        let orderPrice = sum+totalShipFee;
         $("#receive-date").html(`${cYear}-${cMonth}-${cDate}`);
-        $("#total-order").html(`${numberWithCommas(sum+totalShipFee)} VNĐ`);
-        $("#sum-price").html(`TỔNG ${numberWithCommas(sum+totalShipFee)} VNĐ`);
+        $("#total-order").html(`${numberWithCommas(orderPrice)} VNĐ`);
+        $("#sum-price").html(`TỔNG ${numberWithCommas(orderPrice)} VNĐ`);
         $("#carrier-id").val(shipService.carrierId);
         $("#total-ship-fee-input").val(totalShipFee);
         $("#delivery-date").val(`${cYear}-${cMonth}-${cDate}`);
@@ -285,6 +286,7 @@ $(document).on("click", ".complete", function () {
         obj['color'] = cart[i].color;
         obj['size'] = cart[i].size;
         obj['id'] = i;
+        obj['image'] = cart[i].image;
         productList.push(obj);
     }
     $.post( "{{ route('ajax.create-order') }}", { 

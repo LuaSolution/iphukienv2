@@ -94,6 +94,7 @@ class AjaxController extends Controller
                 'total_count' => $product->quantity,
                 'color_id' => $product->color,
                 'size_id' => $product->size,
+                'image' => $product->image,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ];
