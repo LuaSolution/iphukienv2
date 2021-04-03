@@ -1,3 +1,4 @@
+@if (Auth::check())
 <div class="notify-text">Miễn phí giao hàng cho đơn hàng tối thiểu 1 tỉ đồng</div>
 <div class="user-infos">
     <a href="javascript:void(0)" class="user-top-dropdown dropdown-trigger" data-target='user-top-dropdown'></a>
@@ -17,3 +18,4 @@
     <li><a href="{{ route('user.orders') }}">LỊCH SỬ MUA HÀNG</a></li>
     <li><a href="{{ route('user.wishlist') }}">DANH SÁCH YÊU THÍCH</a></li>
 </ul>
+@endif

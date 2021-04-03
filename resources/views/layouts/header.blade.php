@@ -90,6 +90,7 @@
             </div>
         </li>
     </ul>
+    @if (Auth::check())
     <ul id='user-dropdown' class='dropdown-content'>
         <li class="first-line">
             <div class="avatar" style="background-image: url({{ asset('public/assets/images/demo/avatar.jpg') }})"></div>
@@ -99,5 +100,5 @@
         <li><a href="#!">Cài đặt tài khoản</a></li>
         <li><a href="{{ route('doLogout') }}">Đăng xuất</a></li>
     </ul>
-
+    @endif
 </header>
