@@ -166,6 +166,7 @@ class UserController extends Controller
     }
 
     public function paymentComplete(Request $request, $orderId) {
+        if (!Auth::check() || Auth::user()->role_id != 2) return redirect()->route('login');
         $data['order'] = (new Order())->getById($orderId);
         $orderDetail = (new OrderDetail())->getListOrderDetailByOrder($orderId);
         $data['productName'] = '';
@@ -181,7 +182,14 @@ class UserController extends Controller
     }
 
     public function orderDetails(Request $request, $orderId) {
-        return view('user/order-details');
+        if (!Auth::check() || Auth::user()->role_id != 2) return redirect()->route('login');
+        $data['order'] = (new Order())->getById($orderId);
+        $data['orderDetail'] = (new OrderDetail())->getListOrderDetailByOrder($orderId);
+        $checkSumData = config('app.nhanh_api_user_name') . $orderId;
+        $checksum = md5(md5(config('app.nhanh_api_secret_key') . $checkSumData) . $checkSumData);
+        $data['orderDetailUrl'] = config('app.nhanh_api_host') . "/shipping/trackingframe?apiUsername=" . config('app.nhanh_api_user_name') . "&orderId=" . $orderId . "&checksum=" . $checksum;
+
+        return view('user/order-details', $data);
     }
 
     public function getListOrders(Request $request) {

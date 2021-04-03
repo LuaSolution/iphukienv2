@@ -250,3 +250,6 @@
     text-transform: uppercase;
     color: #000000;
 }
+.order-detail-iframe {
+    margin-top: 20px;
+}

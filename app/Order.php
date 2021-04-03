@@ -23,7 +23,10 @@ class Order extends Model
     }
 
     public function getById($id){
-        return Order::where('id', '=', $id)->first();
+        return Order::leftJoin('payment_methods', 'payment_methods.id', '=', 'orders.payment_method_id')
+            ->leftJoin('addresses', 'addresses.id', '=', 'orders.address_id')
+            ->select('orders.*', 'addresses.name as receiver_name', 'addresses.address as receiver_address', 'addresses.phone as receiver_phone', 'addresses.email as receiver_email', 'addresses.phone as receiver_phone', 'payment_methods.name as payment_method_name')
+            ->where('orders.id', '=', $id)->first();
     }
 
     public function updateOrder($id,$data){

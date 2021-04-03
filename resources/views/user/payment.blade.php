@@ -282,6 +282,8 @@ $(document).on("click", ".complete", function () {
         obj['name'] = cart[i].name;
         obj['type'] = 'Product';
         obj['price'] = cart[i].salePrice;
+        obj['color'] = cart[i].color;
+        obj['size'] = cart[i].size;
         obj['id'] = i;
         productList.push(obj);
     }

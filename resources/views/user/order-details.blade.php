@@ -7,24 +7,17 @@
 @endsection
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('public/iphukien/user/order-details.css') }}">
+<link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/header.css') }}">
+<link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/user-top.css') }}">
+<link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/order-details.css') }}">
+<link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/footer.css') }}">
 @endsection
 
 @section('content')
 <div class="ipk-container">
     <div class="ipk-content-container order-details-container">
-        <div class="notify-text">Miễn phí giao hàng cho đơn hàng tối thiểu 1 tỉ đồng</div>
-        <div class="user-infos">
-            <div class="avatar" style="background-image: url({{ asset('public/assets/images/demo/avatar.jpg') }})"></div>
-            <div class="info">
-                <div class="name">FlatCloud Company</div>
-                <div class="email">dinhbao@flatcloud.company</div>
-            </div>
-            <a class="logout-link" href="#!">
-                Đăng xuất
-            </a>
-        </div>
-        <div class="order-code">ĐƠN HÀNG #26v734285</div>
+        @include('layouts.user-top', ['status' => 1])
+        <div class="order-code">ĐƠN HÀNG #{{$order->nhanh_order_id}}</div>
         <div class="list-status">
             <div class="status finish"><span>Chưa xác nhận</span></div>
             <div class="status current"><span>Khách hủy</span></div>
@@ -33,69 +26,12 @@
             <div class="status"><span>Đang giao hàng</span></div>
             <div class="status"><span>Thành công</span></div>
         </div>
-        <?php $data = config('app.nhanh_api_user_name') . '14742630';
-            $checksum = md5(md5(config('app.nhanh_api_secret_key') . $data) . $data);
-            $src = "https://dev.nhanh.vn/api/shipping/trackingframe?apiUsername=" . config('app.nhanh_api_user_name') . "&orderId=14742630&checksum=" . $checksum;
-            ?>
-        <iframe src="{{$src}}"  width="100%" height="600"></iframe>
-        <!-- <div class="detail-table">
-            <table class="responsive-table">
-                <thead>
-                    <tr>
-                        <th>Log ID</th>
-                        <th>Ngày tạo</th>
-                        <th>Người tạo</th>
-                        <th>Hành động</th>
-                        <th>Trạng thái</th>
-                        <th>Ghi chú</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>12345</td>
-                        <td>2021-11-03 12:45:15</td>
-                        <td><a href="">Nguyễn văn A</a></td>
-                        <td>Hãng vận chuyển cập nhật trạng thái đơn hàng sang thành công</td>
-                        <td>Đang chuyển -> Thành công</td>
-                        <td>Hãng vận chuyển cập nhật trạng thái đơn hàng sang thành công. Hãng vận chuyển cập nhật trạng
-                            thái đơn hàng sang thành công. Hãng vận chuyển cập nhật trạng thái đơn hàng sang thành công.
-                            Hãng vận chuyển cập nhật trạng thái đơn hàng sang thành công.</td>
-                    </tr>
-                    <tr>
-                        <td>12345</td>
-                        <td>2021-11-03 12:45:15</td>
-                        <td><a href="">Nguyễn văn A</a></td>
-                        <td>Hãng vận chuyển cập nhật trạng thái đơn hàng sang thành công</td>
-                        <td>Đang chuyển -> Thành công</td>
-                        <td>Hãng vận chuyển cập nhật trạng thái đơn hàng sang thành công. Hãng vận chuyển cập nhật trạng
-                            thái đơn hàng sang thành công. Hãng vận chuyển cập nhật trạng thái đơn hàng sang thành công.
-                            Hãng vận chuyển cập nhật trạng thái đơn hàng sang thành công.</td>
-                    </tr>
-                    <tr>
-                        <td>12345</td>
-                        <td>2021-11-03 12:45:15</td>
-                        <td><a href="">Nguyễn văn A</a></td>
-                        <td>Hãng vận chuyển cập nhật trạng thái đơn hàng sang thành công</td>
-                        <td>Đang chuyển -> Thành công</td>
-                        <td>Hãng vận chuyển cập nhật trạng thái đơn hàng sang thành công. Hãng vận chuyển cập nhật trạng
-                            thái đơn hàng sang thành công. Hãng vận chuyển cập nhật trạng thái đơn hàng sang thành công.
-                            Hãng vận chuyển cập nhật trạng thái đơn hàng sang thành công.</td>
-                    </tr>
-                    <tr>
-                        <td>12345</td>
-                        <td>2021-11-03 12:45:15</td>
-                        <td><a href="">Nguyễn văn A</a></td>
-                        <td>Hãng vận chuyển cập nhật trạng thái đơn hàng sang thành công</td>
-                        <td>Đang chuyển -> Thành công</td>
-                        <td>Hãng vận chuyển cập nhật trạng thái đơn hàng sang thành công. Hãng vận chuyển cập nhật trạng
-                            thái đơn hàng sang thành công. Hãng vận chuyển cập nhật trạng thái đơn hàng sang thành công.
-                            Hãng vận chuyển cập nhật trạng thái đơn hàng sang thành công.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div> -->
+        
+        <iframe class="order-detail-iframe" src="{{$orderDetailUrl}}"  width="100%" height="600"></iframe>
+        
         <div class="list-products">
             <div class="row products">
+                @foreach($orderDetail as $detail)
                 <div class="product col l3">
                     <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
                     <div class="name">Tên của Sản Phẩm này có độ dài là hai dòng như...</div>
@@ -108,42 +44,7 @@
                         01
                     </div>
                 </div>
-                <div class="product col l3">
-                    <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
-                    <div class="name">Tên của Sản Phẩm này có độ dài là hai dòng như...</div>
-                    <div class="price-color">
-                        <span class="price">18.200.000đ</span>
-                        <span class="color">XS, Xanh lá</span>
-                    </div>
-                    <div class="quantity">
-                        Số lượng<br />
-                        01
-                    </div>
-                </div>
-                <div class="product col l3">
-                    <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
-                    <div class="name">Tên của Sản Phẩm này có độ dài là hai dòng như...</div>
-                    <div class="price-color">
-                        <span class="price">18.200.000đ</span>
-                        <span class="color">XS, Xanh lá</span>
-                    </div>
-                    <div class="quantity">
-                        Số lượng<br />
-                        01
-                    </div>
-                </div>
-                <div class="product col l3">
-                    <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
-                    <div class="name">Tên của Sản Phẩm này có độ dài là hai dòng như...</div>
-                    <div class="price-color">
-                        <span class="price">18.200.000đ</span>
-                        <span class="color">XS, Xanh lá</span>
-                    </div>
-                    <div class="quantity">
-                        Số lượng<br />
-                        01
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
         <div class="row order-details">
@@ -185,4 +86,13 @@
 
 @section('footer')
 @include('layouts.footer', ['status' => 'complete'])
+@endsection
+
+@section('scripts')
+<script src="{{ asset('public/assets/scripts/iphukien/user/header.js') }}"></script>
+<script>
+$(document).ready(function () {
+    $('.user-top-dropdown').dropdown();
+});
+</script>
 @endsection
