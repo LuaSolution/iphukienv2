@@ -82,10 +82,10 @@
                     </div>
                 </div>
                 <div id="list-chuyen-muc" class="menu-item">
-                    <a href="#!" class="single-item">Giới thiệu</a>
-                    <a href="#!" class="single-item">Tin tức</a>
-                    <a href="#!" class="single-item">Tuyển dụng</a>
-                    <a href="#!" class="single-item">Liên hệ</a>
+                    <a href="{{ url('gioi-thieu') }}" class="single-item">Giới thiệu</a>
+                    <a href="{{ url('tin-tuc') }}" class="single-item">Tin tức</a>
+                    <a href="{{ url('tuyen-dung') }}" class="single-item">Tuyển dụng</a>
+                    <a href="{{ url('gop-y') }}" class="single-item">Liên hệ</a>
                 </div>
             </div>
         </li>

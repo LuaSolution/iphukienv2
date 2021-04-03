@@ -71,7 +71,7 @@
     <div class="row products">
 @foreach($proNew as $item)
         <div class="product col l3 added-wishlist">
-            <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
+            <div class="img" style="background-image: url({{ $item->img }})"></div>
             <div class="name">
                 <a href="{{ route('products.show', $item->id) }}">
                     {{ $item->name }}

@@ -110,7 +110,7 @@
             <div class="pre-order-block">
                 <div class="quantity-input">
                     <span class="decrease">-</span>
-                    <input type="number" class="quantity" value="0" id="quantity" />
+                    <input type="number" class="quantity" value="1" id="quantity" />
                     <span class="increase">+</span>
                 </div>
                 <a href="#!" class="add-to-card-btn">Thêm vào giỏ hàng</a>
@@ -189,7 +189,7 @@ function updateCart() {
     }
     let choosenSize = listSizeElement[0].dataset.sizeid;
     let choosenSizeName = listSizeElement[0].dataset.sizename;
-    
+
     let quantity = $("#quantity").val() == 0 ? 1 : $("#quantity").val();
 
     let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
@@ -198,8 +198,8 @@ function updateCart() {
         cart["{{ $product->id }}"].quantity = quantity;
     } else {
         cart["{{ $product->id }}"] = {
-            color: choosenColor, 
-            size: choosenSize, 
+            color: choosenColor,
+            size: choosenSize,
             quantity: quantity,
             image: "{{asset('public/' . $productColor[0]->image)}}",
             salePrice: "{{ $product->sale_price }}",
@@ -214,7 +214,7 @@ function updateCart() {
 }
 $(document).on("click","#buy-now-btn",function() {
     if(!updateCart()) return;
-    
+
     window.location.href = "{{ route('user.cart') }}";
 });
 $(document).on("click",".add-to-card-btn",function() {
@@ -225,7 +225,7 @@ $(document).on("click",".add-to-card-btn",function() {
             classes: 'add-cart-success'
         });
     }
-    
+
 });
 </script>
 @endsection
