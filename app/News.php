@@ -32,6 +32,6 @@ class News extends Model
     }
     public function getListNewsRelate($slug)
     {
-        return News::where('slug', '!=', $slug)->orderBy('pos', 'asc')->orderBy('created_at', 'desc')->limit(8)->get();
+        return News::where('slug', '!=', $slug)->orderBy('pos', 'asc')->orderBy('created_at', 'desc')->limit(4)->get();
     }
 }
