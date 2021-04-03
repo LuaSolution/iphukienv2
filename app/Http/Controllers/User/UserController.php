@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\User;
 use App\Address;
-use App\PaymentMethod;
 use App\Delivery;
+use App\Helpers\Helpers;
+use App\Http\Controllers\Controller;
 use App\Order;
 use App\OrderDetail;
+use App\PaymentMethod;
+use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Helpers\Helpers;
 
 class UserController extends Controller
 {
@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         if (Auth::check()) {
             if (Auth::user()->role_id == 1) {
-                return redirect()->route('adgetHome');
+                return redirect()->route('adMgetHome');
             } else {
                 return redirect()->route('getHome');
             }
@@ -28,35 +28,40 @@ class UserController extends Controller
         }
     }
 
-    public function doLogin(Request $request) {
+    public function doLogin(Request $request)
+    {
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             // Authentication passed...
             if (Auth::user()->role_id == 2) {
                 toast()->success('Đăng nhập thành công');
                 return redirect()->route('getHome');
-            } 
+            }
         } else {
             toast()->error('Mật khẩu hoặc tài khoản không đúng');
             return redirect()->route('login');
         }
     }
 
-    public function doLogout(Request $request) {
+    public function doLogout(Request $request)
+    {
         Auth::logout();
         toast()->success('Đăng xuất thành công');
-        
+
         return redirect()->route('getHome');
     }
-    
-    public function forgotPassword(Request $request) {
+
+    public function forgotPassword(Request $request)
+    {
         return view('user/forgot-password');
     }
 
-    public function signup(Request $request) {
+    public function signup(Request $request)
+    {
         return view('user/signup');
     }
 
-    public function doSignup(Request $request) {
+    public function doSignup(Request $request)
+    {
         $name = $request->input('name');
         if (!$name) {
             $name = "Người dùng " . time();
@@ -95,15 +100,20 @@ class UserController extends Controller
         return redirect()->route('getHome');
     }
 
-    public function cart(Request $request) {
+    public function cart(Request $request)
+    {
         return view('user/cart');
     }
 
-    public function payment(Request $request) {
-        if (!Auth::check() || Auth::user()->role_id != 2) return redirect()->route('login');
+    public function payment(Request $request)
+    {
+        if (!Auth::check() || Auth::user()->role_id != 2) {
+            return redirect()->route('login');
+        }
+
         $listCity = Helpers::callNhanhApi([
             "type" => "CITY",
-            "parentId" => 0
+            "parentId" => 0,
         ], "/shipping/location");
         $data['listCity'] = $listCity;
         $data['addresses'] = (new Address())->getAddressByUser(Auth::user()->id);
@@ -113,8 +123,12 @@ class UserController extends Controller
         return view('user/payment', $data);
     }
 
-    public function addNewAddress(Request $request) {
-        if (!Auth::check() || Auth::user()->role_id != 2) return redirect()->route('login');
+    public function addNewAddress(Request $request)
+    {
+        if (!Auth::check() || Auth::user()->role_id != 2) {
+            return redirect()->route('login');
+        }
+
         $name = $request->input('name');
         if (!$name) {
             return redirect()->route('user.payment')->with('error', 'Chưa nhập tên người nhận ');
@@ -160,18 +174,22 @@ class UserController extends Controller
         ];
         $result = (new Address())->insertAddress($dataInsert);
 
-        if($result) {
+        if ($result) {
             return redirect()->route('user.payment');
         }
     }
 
-    public function paymentComplete(Request $request, $orderId) {
-        if (!Auth::check() || Auth::user()->role_id != 2) return redirect()->route('login');
+    public function paymentComplete(Request $request, $orderId)
+    {
+        if (!Auth::check() || Auth::user()->role_id != 2) {
+            return redirect()->route('login');
+        }
+
         $data['order'] = (new Order())->getById($orderId);
         $orderDetail = (new OrderDetail())->getListOrderDetailByOrder($orderId);
         $data['productName'] = '';
         $data['totalCost'] = 0;
-        foreach($orderDetail as $key => $detail) {
+        foreach ($orderDetail as $key => $detail) {
             $data['productName'] .= $key == 0 ? '' : ', ';
             $data['productName'] .= $detail->product_name;
             $data['totalCost'] += $detail->total_price;
@@ -181,8 +199,12 @@ class UserController extends Controller
         return view('user/payment-complete', $data);
     }
 
-    public function orderDetails(Request $request, $orderId) {
-        if (!Auth::check() || Auth::user()->role_id != 2) return redirect()->route('login');
+    public function orderDetails(Request $request, $orderId)
+    {
+        if (!Auth::check() || Auth::user()->role_id != 2) {
+            return redirect()->route('login');
+        }
+
         $data['order'] = (new Order())->getById($orderId);
         $data['orderDetail'] = (new OrderDetail())->getListOrderDetailByOrder($orderId);
         $checkSumData = config('app.nhanh_api_user_name') . $orderId;
@@ -192,31 +214,36 @@ class UserController extends Controller
         return view('user/order-details', $data);
     }
 
-    public function getListOrders(Request $request) {
+    public function getListOrders(Request $request)
+    {
         return view('user/orders');
     }
 
-    public function getUserInformation(Request $request) {
+    public function getUserInformation(Request $request)
+    {
         return view('user/user-information');
     }
 
-    public function getUserAddresses(Request $request) {
+    public function getUserAddresses(Request $request)
+    {
         $listCity = callNhanhApi([
             "type" => "CITY",
-            "parentId" => 0
+            "parentId" => 0,
         ], "/shipping/location");
         $data = [
-            "list_city" => $listCity
+            "list_city" => $listCity,
         ];
 
         return view('user/user-addresses', $data);
     }
 
-    public function changePassword(Request $request) {
+    public function changePassword(Request $request)
+    {
         return view('user/user-change-password');
     }
 
-    public function getUserWishlist(Request $request) {
+    public function getUserWishlist(Request $request)
+    {
         return view('user/user-wishlist');
     }
 }

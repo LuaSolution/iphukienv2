@@ -6,10 +6,9 @@ use App\Cate;
 use App\Config;
 use App\Mail;
 use App\News;
-use App\Product;
-use App\Store;
-use App\User;
 use App\Order;
+use App\Product;
+use App\User;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +23,7 @@ class AdminController extends Controller
     {
         if (Auth::check()) {
             if (Auth::user()->role_id == 1) {
-                return redirect()->route('adgetHome');
+                return redirect()->route('adMgetHome');
             } else {
                 return redirect()->route('getHome');
             }
@@ -41,7 +40,7 @@ class AdminController extends Controller
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             // Authentication passed...
             if (Auth::user()->role_id == 1) {
-                return redirect()->route('adgetHome');
+                return redirect()->route('adMgetHome');
             } else {
                 return redirect()->route('getHome');
             }
@@ -62,14 +61,14 @@ class AdminController extends Controller
         }
         $email = $request->input('email');
         if (!$email) {
-            return redirect()->route('adgetHome')->with('error', 'Chưa nhập Email');
+            return redirect()->route('adMgetHome')->with('error', 'Chưa nhập Email');
         }
         $password = $request->input('password');
         if (!$password) {
-            return redirect()->route('adgetHome')->with('error', 'Chưa nhập Password');
+            return redirect()->route('adMgetHome')->with('error', 'Chưa nhập Password');
         }
         if (strlen($password) < 6) {
-            return redirect()->route('adgetHome')->with('error', 'Password ít nhất 6 kí tự');
+            return redirect()->route('adMgetHome')->with('error', 'Password ít nhất 6 kí tự');
         }
         $phone_number = $request->input('phone_number');
         if (!$phone_number) {
@@ -80,7 +79,7 @@ class AdminController extends Controller
         $userCheck = $userModal->getUserByEmail($email);
 
         if ($userCheck) {
-            return redirect()->route('adgetHome')->with('error', 'Email đã tồn tại');
+            return redirect()->route('adMgetHome')->with('error', 'Email đã tồn tại');
         }
 
         User::create([
@@ -157,7 +156,7 @@ class AdminController extends Controller
             $msg = 'Image uploaded successfully';
             $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
 
-@header('Content-type: text/html; charset=utf-8');
+            @header('Content-type: text/html; charset=utf-8');
             echo $response;
         }
     }
@@ -651,7 +650,8 @@ class AdminController extends Controller
         return view('admin.contact_list', $this->data);
     }
 
-    public function getContact($id) {
+    public function getContact($id)
+    {
 
         $m = new Mail();
         $store = $m->getById($id);
@@ -840,7 +840,8 @@ class AdminController extends Controller
         return view('admin.order_list', $this->data);
     }
 
-    public function getOrder($id) {
+    public function getOrder($id)
+    {
 
         $m = new Order();
         $store = $m->getById($id);
@@ -853,10 +854,11 @@ class AdminController extends Controller
         }
     }
 
-    public function getConfimOrder($id) {
+    public function getConfimOrder($id)
+    {
         DB::table('orders')
-        ->where('id', $id)
-        ->update(['status' => 1]);
+            ->where('id', $id)
+            ->update(['status' => 1]);
         return redirect()->back();
     }
 }
