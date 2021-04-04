@@ -35,6 +35,7 @@
     @yield('content')
     <footer>
         @yield('footer')
+        @include('layouts.footer', ['status' => 'complete'])
         <!-- jQuery -->
         <script src="{{ asset('public/js/jquery-3.6.0.min.js') }}"></script>
         <!-- Materialize -->

@@ -85,9 +85,7 @@
 </div>
 @endsection
 
-@section('footer')
-@include('layouts.footer', ['status' => 'complete'])
-@endsection
+
 
 @section('scripts')
 <script src="{{ asset('public/assets/scripts/iphukien/user/user-top.js') }}"></script>
@@ -99,7 +97,7 @@ $(document).on("change", "#avatar",function(){
     if (this.files && this.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            $('#current-avatar').attr('style','background-image:url("'+e.target.result+'") !important'); 
+            $('#current-avatar').attr('style','background-image:url("'+e.target.result+'") !important');
         }
         reader.readAsDataURL(this.files[0]);
     }

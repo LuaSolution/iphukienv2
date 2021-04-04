@@ -19,7 +19,11 @@
                 <div class="news-title">{{ $news->title }}</div>
                 <div class="share-block">
                     <span>Chia sẻ:</span>
-                    <a href="" class="fb-share"></a>
+                    <script>
+                        var loc = "https://www.facebook.com/sharer/sharer.php?u=" + window.location.href;
+                        document.write('<a href="' + loc +
+                            '" target="_blank" class="fb-share"><span class="fa fa-facebook"></span></a>');
+                    </script>
                 </div>
             </div>
             <div class="news-details-line-2">
@@ -45,7 +49,9 @@
                                 <div class="news-content">{{ $item->description }}</div>
                                 <div class="news-last-line">
                                     <span>{{ $item->created_at }}</span>
-                                    <a href="{{route('news.show', ['news' => $item->slug])}}">Chi tiết</a>
+                                    <a
+                                        href="{{ route('news.show', ['news' => $item->slug]) }}">Chi
+                                        tiết</a>
                                 </div>
                             </div>
                         @endforeach
@@ -59,10 +65,7 @@
 </div>
 @endsection
 
-@section('footer')
-<blade
-    include|(%26%2339%3Blayouts.footer%26%2339%3B%2C%20%5B%26%2339%3Bstatus%26%2339%3B%20%3D%3E%20%26%2339%3Bcomplete%26%2339%3B%5D)%0D />
-@endsection
+
 
 @section('scripts')
 <script>

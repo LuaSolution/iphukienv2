@@ -146,7 +146,7 @@
                         </div>
                     </div>
                     <div class="sizes-wrapper">
-                        <div class="size-label">Kích thước<a href="#!" target="_blank">(Hướng dẫn chọn size)</a></div>
+                        <div class="size-label">Kích thước<a href="{{ url('huong-dan-chon-size') }}" target="_blank">(Hướng dẫn chọn size)</a></div>
                         <div class="sizes">
                             <span class="size">XS</span>
                             <span class="size">S</span>
@@ -252,7 +252,7 @@
                             </div>
                         </div>
                         <div class="sizes-wrapper">
-                            <div class="size-label">Kích thước<a href="#!" target="_blank">(Hướng dẫn chọn size)</a>
+                            <div class="size-label">Kích thước<a href="{{ url('huong-dan-chon-size') }}" target="_blank">(Hướng dẫn chọn size)</a>
                             </div>
                             <div class="sizes">
                                 <span class="size">XS</span>
@@ -302,9 +302,7 @@
 </div>
 @endsection
 
-@section('footer')
-@include('layouts.footer', ['status' => 'complete'])
-@endsection
+
 
 @section('scripts')
 <script src="{{ asset('public/assets/scripts/iphukien/user/home.js') }}"></script>
