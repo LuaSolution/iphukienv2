@@ -100,9 +100,21 @@
 </div>
 @endsection
 
-
-
 @section('scripts')
-<script src="{{ asset('public/assets/scripts/iphukien/user/home.js') }}"></script>
 <script src="{{ asset('public/assets/scripts/iphukien/user/list-product.js') }}"></script>
+<script>
+$(document).ready(function () {
+    $.each($(".item-image"), function (index, value) {
+        value.style.height = value.offsetWidth + "px";
+    });
+    $('.sale-product-slider').carousel({ fullWidth: true });
+    $.each($(".partners img"), function (index, value) {
+        let top = 55 - value.offsetWidth / 2;
+        value.style.marginTop = top + "px";
+    });
+});
+$(document).on("click", ".ipk-next-slide", function () {
+    $('.sale-product-slider').carousel('next');
+});
+</script>
 @endsection

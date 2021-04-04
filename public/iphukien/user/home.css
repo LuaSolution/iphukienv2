@@ -12,6 +12,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
+    padding-top: 100%;
 }
 .list-category .cat-item p {
     font-weight: 500;

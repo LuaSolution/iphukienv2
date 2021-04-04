@@ -180,46 +180,48 @@ $(document).ready(function () {
     M.Modal.init(elems, {"endingTop": '5%'});
     var elems = document.querySelectorAll('select');
     M.FormSelect.init(elems);
-    //init address
-    if($('.list-address .address.selected').length == 0) $('.list-address .address').addClass('selected');
-    //get init info
-    let sum=0, count=0;
-    let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
-    let productIds = {};
-    for (const i in cart) {
-        sum += cart[i].salePrice * cart[i].quantity;
-        count++;
-        productIds[`${cart[i].nhanhPorductId}`] = cart[i].quantity;
+    if($('.list-address .address').length > 0) {
+        //init address
+        if($('.list-address .address.selected').length == 0) $('.list-address .address').addClass('selected');
+        //get init info
+        let sum=0, count=0;
+        let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
+        let productIds = {};
+        for (const i in cart) {
+            sum += cart[i].salePrice * cart[i].quantity;
+            count++;
+            productIds[`${cart[i].nhanhPorductId}`] = cart[i].quantity;
+        }
+        $("#total-goods-price").html(`${numberWithCommas(sum)} VNĐ`);
+        $("#total-product").html(`${count}`);
+        $("#total-product-footer").html(`Có ${count} sản phẩm`);
+        //free ship
+        $.post( "{{ route('ajax.calc-shipping-fee') }}", { 
+            toCityName: $('.list-address .address.selected').data('city'), 
+            toDistrictName: $('.list-address .address.selected').data('district'), 
+            codMoney: sum,
+            productIds: productIds,
+            _token: `{{ csrf_token() }}`
+        })
+        .done(function( data ) {
+            let shipService = JSON.parse(data);
+            let totalShipFee = parseInt(shipService.shipFee) + parseInt(shipService.codFee) + parseInt(shipService.declaredFee);
+            $("#total-ship-fee").html(`${numberWithCommas(totalShipFee)} VNĐ`);
+            let today = new Date();
+            today.setHours(today.getHours() + shipService.estimatedDeliveryTime);
+            let cYear = today.getFullYear();
+            let cMonth = today.getMonth() <= 8 ? `0${today.getMonth()+1}` : today.getMonth()+1;
+            let cDate = today.getDate() <= 9 ? `0${today.getDate()}` : today.getDate();
+            let orderPrice = sum+totalShipFee;
+            $("#receive-date").html(`${cYear}-${cMonth}-${cDate}`);
+            $("#total-order").html(`${numberWithCommas(orderPrice)} VNĐ`);
+            $("#sum-price").html(`TỔNG ${numberWithCommas(orderPrice)} VNĐ`);
+            $("#carrier-id").val(shipService.carrierId);
+            $("#total-ship-fee-input").val(totalShipFee);
+            $("#delivery-date").val(`${cYear}-${cMonth}-${cDate}`);
+        });
     }
-    $("#total-goods-price").html(`${numberWithCommas(sum)} VNĐ`);
-    $("#total-product").html(`${count}`);
-    $("#total-product-footer").html(`Có ${count} sản phẩm`);
-    //free ship
-    $.post( "{{ route('ajax.calc-shipping-fee') }}", { 
-        toCityName: $('.list-address .address.selected').data('city'), 
-        toDistrictName: $('.list-address .address.selected').data('district'), 
-        codMoney: sum,
-        productIds: productIds,
-        _token: `{{ csrf_token() }}`
-    })
-    .done(function( data ) {
-        let shipService = JSON.parse(data);
-        let totalShipFee = parseInt(shipService.shipFee) + parseInt(shipService.codFee) + parseInt(shipService.declaredFee);
-        $("#total-ship-fee").html(`${numberWithCommas(totalShipFee)} VNĐ`);
-        let today = new Date();
-        today.setHours(today.getHours() + shipService.estimatedDeliveryTime);
-        let cYear = today.getFullYear();
-        let cMonth = today.getMonth() <= 8 ? `0${today.getMonth()+1}` : today.getMonth()+1;
-        let cDate = today.getDate() <= 9 ? `0${today.getDate()}` : today.getDate();
-        let orderPrice = sum+totalShipFee;
-        $("#receive-date").html(`${cYear}-${cMonth}-${cDate}`);
-        $("#total-order").html(`${numberWithCommas(orderPrice)} VNĐ`);
-        $("#sum-price").html(`TỔNG ${numberWithCommas(orderPrice)} VNĐ`);
-        $("#carrier-id").val(shipService.carrierId);
-        $("#total-ship-fee-input").val(totalShipFee);
-        $("#delivery-date").val(`${cYear}-${cMonth}-${cDate}`);
-        $(".ipk-preloader").addClass('hide');
-    });
+    $(".ipk-preloader").addClass('hide');
 });
 $(document).on("click", ".address", function () {
     $('.address').removeClass('selected');
