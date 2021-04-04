@@ -18,6 +18,10 @@ $(document).on('focusout', '#form-title', function () {
   }
 })
 
+$(document).on('focusout', '#form-name', function () {
+  $("#form-slug").val(changeToSlug($(this).val()))
+})
+
 $(document).on('change', "#form-avatar", function (evt) {
   var file = evt.target.files[0]
 
