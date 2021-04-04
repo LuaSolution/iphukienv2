@@ -32,11 +32,6 @@
                             <label for="form-name">Tên trang tĩnh</label>
                         </div>
                         <div class="form-group form-md-line-input has-success">
-                            <input type="text" class="form-control" id="form-slug" name="slug" required=""
-                                value="{{ $data->url }}">
-                            <label for="form-slug">Link</label>
-                        </div>
-                        <div class="form-group form-md-line-input has-success">
                             <input type="text" class="form-control" id="form-icon" name="icon" required=""
                                 value="{{ $data->icon }}">
                             <label for="form-icon">Icon</label>
