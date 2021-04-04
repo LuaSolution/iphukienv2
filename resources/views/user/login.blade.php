@@ -1,0 +1,38 @@
+@extends('layouts.app')
+
+@section('title', 'Đăng nhập')
+
+@section('header')
+@include('layouts.header', ['status' => 'complete'])
+@endsection
+
+@section('styles')
+<link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/login.css') }}">
+@endsection
+
+@section('content')
+<div class="ipk-container login-container">
+    <div class="ipk-content-container">
+        <div class="row">
+            <div class="col l8 s12">
+                <div class="title">Tôi đã có tài khoản</div>
+                <div class="sub-title">Nhập địa chỉ EMAIL/ SĐT và mật khẩu để đăng nhập</div>
+                <form class="login-form" method="POST" action="{{ route('doLogin') }}">
+                    {{ csrf_field() }}
+                    <input type="text" name="email" placeholder="EMAIL/ SĐT" class="ipk-form-input" />
+                    <input type="password" name="password" placeholder="Mật khẩu" class="ipk-form-input" />
+                    <a href="{{ route('forgot-password') }}" class="forgot-pass-btn">Quên mật khẩu?</a>
+                    <input type="submit" value="Đăng nhập" class="btn-dang-nhap" />
+                </form>
+            </div>
+            <div class="col l4 s12">
+                <div class="title">Người đùng mới</div>
+                <div class="sub-title">Bạn chưa có tài khoản? Vui lòng đăng ký mới</div>
+                <div class="create-account-btn">
+                    <a href="{{ route('signup') }}">Tạo tài khoản</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
