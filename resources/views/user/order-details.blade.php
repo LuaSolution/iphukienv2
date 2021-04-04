@@ -33,15 +33,15 @@
             <div class="row products">
                 @foreach($orderDetail as $detail)
                 <div class="product col l3">
-                    <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
-                    <div class="name">Tên của Sản Phẩm này có độ dài là hai dòng như...</div>
+                    <div class="img" style="background-image: url({{ $detail->image }})"></div>
+                    <div class="name">{{$detail->product_name}}</div>
                     <div class="price-color">
-                        <span class="price">18.200.000đ</span>
-                        <span class="color">XS, Xanh lá</span>
+                        <span class="price">{{number_format($detail->total_price , 0, ',', '.')}}đ</span>
+                        <span class="color">{{$detail->size_name}}, {{$detail->color_name}}</span>
                     </div>
                     <div class="quantity">
                         Số lượng<br />
-                        01
+                        {{$detail->total_count}}
                     </div>
                 </div>
                 @endforeach
@@ -50,32 +50,32 @@
         <div class="row order-details">
             <div class="col l6 s12 order-detail-left">
                 <div class="order-detail-title">Chi tiết đơn hàng</div>
-                <div class="left-info receiver-info">Mã đơn hàng: #26v734285</div>
-                <div class="left-info">Trạng thái: Đã xác nhận</div>
-                <div class="left-info">Ngày đặt hàng: 15-02-2020</div>
-                <div class="left-info">Hình thức thanh toán: Momo</div>
-                <div class="left-info">Dự kiến nhận hàng: 20-02-2020</div>
-                <div class="left-info receiver-info">Người nhận: Rose Charlie</div>
-                <div class="left-info">Địa chỉ: 87 đường 17 Linh Trung Thủ Đức</div>
-                <div class="left-info">Số điện thoại: 0839 056 021</div>
-                <div class="left-info">Email: rosecharlie171297@gmail.com</div>
+                <div class="left-info receiver-info">Mã đơn hàng: #{{$order->nhanh_order_id}}</div>
+                <div class="left-info">Trạng thái: {{$order->status}}</div>
+                <div class="left-info">Ngày đặt hàng: {{date("Y-m-d", strtotime($order->created_at))}}</div>
+                <div class="left-info">Hình thức thanh toán: {{$order->payment_method_name}}</div>
+                <div class="left-info">Dự kiến nhận hàng: {{date("Y-m-d", strtotime($order->delivery_date))}}</div>
+                <div class="left-info receiver-info">Người nhận: {{$order->receiver_name}}</div>
+                <div class="left-info">Địa chỉ: {{$order->receiver_address}}</div>
+                <div class="left-info">Số điện thoại: {{$order->receiver_phone}}</div>
+                <div class="left-info">Email: {{$order->receiver_email}}</div>
             </div>
             <div class="col l6 s12 order-detail-right">
                 <div class="right-info">
                     <span>Số lượng sản phẩm</span>
-                    <span>5</span>
+                    <span>{{$countAllOrderProduct}}</span>
                 </div>
                 <div class="right-info">
                     <span>Tiền hàng</span>
-                    <span>548.000 VNĐ</span>
+                    <span>{{number_format($countAllOrderPrice , 0, ',', '.')}} VNĐ</span>
                 </div>
                 <div class="right-info">
                     <span>Phí giao hàng</span>
-                    <span>50.000 VNĐ</span>
+                    <span>{{number_format($order->ship_fee , 0, ',', '.')}} VNĐ</span>
                 </div>
                 <div class="right-info sum">
                     <span>Tổng cộng</span>
-                    <span>598.000 VNĐ</span>
+                    <span>{{ number_format($order->ship_fee+$countAllOrderPrice , 0, ',', '.') }} VNĐ</span>
                 </div>
             </div>
         </div>
@@ -90,9 +90,5 @@
 
 @section('scripts')
 <script src="{{ asset('public/assets/scripts/iphukien/user/header.js') }}"></script>
-<script>
-$(document).ready(function () {
-    $('.user-top-dropdown').dropdown();
-});
-</script>
+<script src="{{ asset('public/assets/scripts/iphukien/user/user-top.js') }}"></script>
 @endsection

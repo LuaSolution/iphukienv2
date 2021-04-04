@@ -159,4 +159,5 @@ Route::middleware(['runall', 'locale'])->group(function () {
     Route::post('/login-google', 'User\AjaxController@loginWithGoogle')->name('ajax.login-with-google');
     Route::post('/calc-shipping-fee', 'User\AjaxController@calcShippingFee')->name('ajax.calc-shipping-fee');
     Route::post('/create-order', 'User\AjaxController@createOrder')->name('ajax.create-order');
+    Route::post('/quickview-product/{productId}', 'User\AjaxController@getQuickViewProduct')->name('ajax.quickview-product');
 });

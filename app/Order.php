@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
@@ -17,9 +18,14 @@ class Order extends Model
         return Order::create($data);
     }
 
-    public function getListContact()
+    public function getListOrderByUser($userId)
     {
-        return Order::orderBy('created_at', 'desc')->get();
+        return Order::join('order_details', 'orders.id', '=', 'order_details.order_id')
+        ->leftJoin('addresses', 'addresses.id', '=', 'orders.address_id')
+        ->select('orders.*', DB::raw('sum(order_details.total_price) + ship_fee as total_order_price'))
+        ->where('addresses.user_id', '=', $userId)
+        ->groupBy('orders.id')
+        ->orderBy('created_at', 'desc')->get();
     }
 
     public function getById($id){

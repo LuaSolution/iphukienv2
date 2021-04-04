@@ -17,30 +17,15 @@
         @include('layouts.user-top', ['status' => 1])
         <div class="orders-txt">Lịch sử mua hàng</div>
         <div class="list-order">
+            @foreach($listOrder as $order)
             <div class="order">
-                <div class="order-code">Đơn hàng: #79788965 - <i>Đã giao hàng thành công</i></div>
-                <div class="receive-date">Ngày nhận hàng: 20-02-2020</div>
-                <div class="sum">500.000 VND</div>
+                <div class="order-code">Đơn hàng: <a href="{{ route('user.order-details', $order->id) }}">#{{$order->nhanh_order_id}}</a> - <i>{{$order->status}}</i></div>
+                <div class="receive-date">Ngày nhận hàng: {{date('Y-m-d', strtotime($order->delivery_date))}}</div>
+                <div class="sum">{{number_format($order->total_order_price , 0, ',', '.')}} VND</div>
             </div>
-            <div class="order">
-                <div class="order-code">Đơn hàng: #79788965 - <i>Đã giao hàng thành công</i></div>
-                <div class="receive-date">Ngày nhận hàng: 20-02-2020</div>
-                <div class="sum">500.000 VND</div>
-            </div>
-            <div class="order">
-                <div class="order-code">Đơn hàng: #79788965 - <i>Đã giao hàng thành công</i></div>
-                <div class="receive-date">Ngày nhận hàng: 20-02-2020</div>
-                <div class="sum">500.000 VND</div>
-            </div>
-            <div class="order">
-                <div class="order-code">Đơn hàng: #79788965 - <i>Đã giao hàng thành công</i></div>
-                <div class="receive-date">Ngày nhận hàng: 20-02-2020</div>
-                <div class="sum">500.000 VND</div>
-            </div>
+            @endforeach
         </div>
-        <div class="load-more">
-            <a href="javascript:void(0)">Xem thêm</a>
-        </div>
+        
     </div>
 </div>
 </div>
@@ -52,4 +37,5 @@
 
 @section('scripts')
 <script src="{{ asset('public/assets/scripts/iphukien/user/user-top.js') }}"></script>
+
 @endsection

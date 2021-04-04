@@ -8,6 +8,11 @@ use App\Helpers\Helpers;
 use App\User;
 use App\Order;
 use App\OrderDetail;
+use App\Product;
+use App\ProductColor;
+use App\ProductSize;
+use App\Wishlist;
+use Illuminate\Support\Facades\Auth;
 
 class AjaxController extends Controller
 {
@@ -117,7 +122,21 @@ class AjaxController extends Controller
         ], '/order/add');
         //update nhanh order id
         (new Order())->updateOrder($addedOrderId, ['nhanh_order_id' => $nhanhRes->$addedOrderId]);
+        //send mail
 
         return json_encode(['code' => 1, 'orderId' => $addedOrderId]);
     }
+
+    public function getQuickViewProduct(Request $request, $productId) {
+        $data = [];
+        $data['product'] = (new Product())->getProductById($productId);
+        $data['productColor'] = (new ProductColor())->getListProductColorByProduct($productId);
+        $data['productSize'] = (new ProductSize())->getListProductSizeByProduct($productId);
+        if (Auth::check() && Auth::user()->role_id == 2) {
+            $data['wishlist'] = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $productId);
+        }
+
+        return json_encode($data);
+    }
+
 }
