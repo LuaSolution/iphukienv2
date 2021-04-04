@@ -23,8 +23,8 @@
                 <div class="sub-title">Chọn địa chỉ để giao hàng tới</div>
                 <div class="list-address">
                     @foreach($addresses as $key => $item)
-                    <div class="address {{$item->is_default == 1 ? 'selected' : ''}}" 
-                        data-addressid="{{$item->id}}" 
+                    <div class="address {{$item->is_default == 1 ? 'selected' : ''}}"
+                        data-addressid="{{$item->id}}"
                         data-city="{{$item->city}}"
                         data-district="{{$item->district}}"
                         data-ward="{{$item->ward}}"
@@ -161,15 +161,11 @@
                 </div>
             </div>
             <div class="col s12 form-input center-align">
-                <button type="button" value="Cập nhật">Cập nhật</button>
+                <button type="submit" value="Cập nhật">Cập nhật</button>
             </div>
         </form>
     </div>
 </div>
-@endsection
-
-@section('footer')
-@include('layouts.footer')
 @endsection
 
 @section('scripts')
@@ -196,9 +192,9 @@ $(document).ready(function () {
         $("#total-product").html(`${count}`);
         $("#total-product-footer").html(`Có ${count} sản phẩm`);
         //free ship
-        $.post( "{{ route('ajax.calc-shipping-fee') }}", { 
-            toCityName: $('.list-address .address.selected').data('city'), 
-            toDistrictName: $('.list-address .address.selected').data('district'), 
+        $.post( "{{ route('ajax.calc-shipping-fee') }}", {
+            toCityName: $('.list-address .address.selected').data('city'),
+            toDistrictName: $('.list-address .address.selected').data('district'),
             codMoney: sum,
             productIds: productIds,
             _token: `{{ csrf_token() }}`
@@ -253,7 +249,7 @@ $(document).on("change", "#city", function () {
             $(".ipk-preloader").addClass('hide');
         }
     );
-    
+
 });
 $(document).on("change", "#district", function () {
     $(".ipk-preloader").removeClass('hide');
@@ -291,11 +287,11 @@ $(document).on("click", ".complete", function () {
         obj['image'] = cart[i].image;
         productList.push(obj);
     }
-    $.post( "{{ route('ajax.create-order') }}", { 
-        customerCityName: $('.list-address .address.selected').data('city'), 
-        customerDistrictName: $('.list-address .address.selected').data('district'), 
+    $.post( "{{ route('ajax.create-order') }}", {
+        customerCityName: $('.list-address .address.selected').data('city'),
+        customerDistrictName: $('.list-address .address.selected').data('district'),
         customerAddress: $('.list-address .address.selected').data('address'),
-        addressId: $('.list-address .address.selected').data('addressid'), 
+        addressId: $('.list-address .address.selected').data('addressid'),
         customerName: $('.list-address .address.selected').data('name'),
         customerMobile: $('.list-address .address.selected').data('phone'),
         customerEmail: $('.list-address .address.selected').data('email'),

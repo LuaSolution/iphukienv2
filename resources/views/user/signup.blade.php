@@ -73,23 +73,22 @@
 @endsection
 
 @section('footer')
-@include('layouts.footer', ['status' => 'complete'])
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script>
 function onSignIn(googleUser) {
   var profile = googleUser.getBasicProfile();
-  console.log('ID: ' + profile.getId()); 
+  console.log('ID: ' + profile.getId());
   console.log('Name: ' + profile.getName());
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail());
-  
+
   addUser(profile.getName(), profile.getEmail(), `google_${profile.getId()}`)
 }
 
 function addUser(name, email, pass) {
-    $.post( "{{route('ajax.login-with-google')}}", { 
-        name: name, 
-        email: email, 
+    $.post( "{{route('ajax.login-with-google')}}", {
+        name: name,
+        email: email,
         password: pass,
         _token: `{{ csrf_token() }}`
     })
@@ -113,7 +112,7 @@ window.fbAsyncInit = function() {
     });
 
 };
- 
+
 function loginFb() {
     FB.login(function(response) {
         if (response.status === 'connected') {
@@ -121,7 +120,7 @@ function loginFb() {
             FB.api('/me?fields=id,email,name', function(response) {
                 addUser(response.name, response.email, `facebook_${response.id}`)
             });
-        } 
+        }
     }, {scope: 'public_profile,email'});
 }
 </script>
