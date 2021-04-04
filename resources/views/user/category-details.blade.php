@@ -19,7 +19,7 @@
             <div class="nav-wrapper">
                 <div class="col s12">
                     <a href="{{ route('getHome') }}" class="breadcrumb">Trang chủ</a>
-                    <a href="javascript:void(0)" class="breadcrumb">Danh mục sản phẩm</a>
+                    <a href="javascript:void(0)" class="breadcrumb">{{ $category->title }}</a>
                 </div>
             </div>
         </nav>
@@ -27,7 +27,7 @@
 </div>
 <div class="ipk-container categories-container">
     <div class="ipk-content-container">
-        <div class="category-title">Tên danh mục sản phẩm</div>
+        <div class="category-title">{{ $category->title }}</div>
         <div class="filter-block">
             <a href="#" data-target="filter-slide-out" class="sidenav-trigger category-filter">Bộ lọc</a>
             <select>
@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="ipk-content-container">
-        @include('layouts.list-product', ['fromPage' => 'getHome'])
+        @include('layouts.list-product', ['listProduct' => $listProduct])
 
         <div class="paging">
         {{ $listProduct->links() }}
