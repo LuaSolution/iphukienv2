@@ -11,9 +11,9 @@
                 placeholder="Tìm sản phẩm, thương hiệu bạn mong muốn..." />
             <button type="submit" class="btn-search-header"></button>
         </form>
-        @if (Auth::check() && Auth::user()->role_id == 2)
-        <div class="header-right-btn">
-            <a href="" class="ipk-header-right-icon user-icon" data-target='user-dropdown'></a>
+        @if (Auth::check())
+        <div class="header-group-btn">
+            <a href="" class="ipk-header-right-icon user-icon" data-target='user-dropdown'>{{Auth::user()->name}}</a>
         </div>
         @else
         <div class="header-group-btn">
@@ -82,22 +82,23 @@
                     </div>
                 </div>
                 <div id="list-chuyen-muc" class="menu-item">
-                    <a href="#!" class="single-item">Giới thiệu</a>
-                    <a href="#!" class="single-item">Tin tức</a>
-                    <a href="#!" class="single-item">Tuyển dụng</a>
-                    <a href="#!" class="single-item">Liên hệ</a>
+                    <a href="{{ url('gioi-thieu') }}" class="single-item">Giới thiệu</a>
+                    <a href="{{ url('news') }}" class="single-item">Tin tức</a>
+                    <a href="{{ url('tuyen-dung') }}" class="single-item">Tuyển dụng</a>
+                    <a href="{{ url('gop-y') }}" class="single-item">Liên hệ</a>
                 </div>
             </div>
         </li>
     </ul>
+    @if (Auth::check())
     <ul id='user-dropdown' class='dropdown-content'>
         <li class="first-line">
             <div class="avatar" style="background-image: url({{ asset('public/assets/images/demo/avatar.jpg') }})"></div>
-            <span>Lê Nguyễn Kiều Trâm</span>
+            <span>{{Auth::user()->name}}</span>
         </li>
         <li><a href="{{ route('user.orders') }}">Đơn hàng của tôi</a></li>
         <li><a href="#!">Cài đặt tài khoản</a></li>
         <li><a href="{{ route('doLogout') }}">Đăng xuất</a></li>
     </ul>
-
+    @endif
 </header>

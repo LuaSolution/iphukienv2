@@ -41,14 +41,16 @@
     </div>
     <div class="ipk-content-container">
         @include('layouts.list-product', ['fromPage' => 'getHome'])
+
         <div class="paging">
-            <a href="#!" class="previous"><</a>
+        {{ $listProduct->links() }}
+            <!-- <a href="#!" class="previous"><</a>
             <a href="#!" class="page-item">1</a>
             <a href="#!" class="page-item">2</a>
             <a href="#!" class="page-item current">3</a>
             <a href="#!" class="page-item">4</a>
             <a href="#!" class="page-item">5</a>
-            <a href="#!" class="next">></a>
+            <a href="#!" class="next">></a> -->
         </div>
     </div>
     <ul id="filter-slide-out" class="sidenav filter-slide-out">

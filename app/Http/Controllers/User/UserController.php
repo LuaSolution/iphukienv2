@@ -10,6 +10,7 @@ use App\Order;
 use App\OrderDetail;
 use App\PaymentMethod;
 use App\User;
+use App\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -255,6 +256,7 @@ class UserController extends Controller
 
     public function getUserWishlist(Request $request)
     {
-        return view('user/user-wishlist');
+        $this->data['listProduct'] = (new Wishlist)->getWishlistByUser(Auth::user()->id);
+        return view('user/user-wishlist', $this->data);
     }
 }

@@ -15,7 +15,7 @@
                 <div class="name">IPHUKIEN</div>
                 <div class="footer-link">
                     <a href="{{ url('gioi-thieu') }}">Giới thiệu về iPhuKien</a>
-                    <a href="{{ url('tin-tuc') }}">Tin tức</a>
+                    <a href="{{ url('news') }}">Tin tức</a>
                     <a href="{{ url('tuyen-dung') }}">Tuyển dụng</a>
                     <a href="{{ url('gop-y') }}">Góp ý</a>
                 </div>

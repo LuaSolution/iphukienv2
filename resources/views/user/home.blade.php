@@ -71,7 +71,8 @@
     <div class="row products">
 @foreach($proNew as $item)
         <div class="product col l3 added-wishlist">
-            <div class="img" style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})"></div>
+        <?php $img = \App\ProductColor::where('product_id', $item->id)->first();?>
+            <div class="img"  style="background-image: url({{ asset($img ? 'public/' . $img->image : 'public/assets/images/demo/watch.png') }})"></div>
             <div class="name">
                 <a href="{{ route('products.show', $item->id) }}">
                     {{ $item->name }}
@@ -173,8 +174,9 @@
         <div class="row products">
             @foreach($proTopSold as $item)
                 <div class="product col l3 added-wishlist">
+                <?php $img = \App\ProductColor::where('product_id', $item->id)->first();?>
                     <div class="img"
-                        style="background-image: url({{ asset('public/assets/images/demo/ipod.png') }})">
+                    style="background-image: url({{ asset($img ? 'public/' . $img->image : 'public/assets/images/demo/watch.png') }})">
                     </div>
                     <div class="name">
                         <a href="{{ route('products.show', $item->id) }}">
