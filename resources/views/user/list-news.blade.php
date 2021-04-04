@@ -34,9 +34,7 @@
 </div>
 @endsection
 
-@section('footer')
-@include('layouts.footer', ['status' => 'complete'])
-@endsection
+
 
 @section('scripts')
 <script src="{{ asset('public/assets/scripts/iphukien/user/wookmark.min.js') }}"></script>

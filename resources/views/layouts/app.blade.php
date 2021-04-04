@@ -18,7 +18,7 @@
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="{{ asset('public/css/materialize.min.css') }}">
     <!-- iPhuKien css -->
     <link rel="stylesheet" href="{{ asset('public/iphukien/user/common.css') }}">
     <link rel="stylesheet" href="{{ asset('public/iphukien/user/header.css') }}">
@@ -35,10 +35,11 @@
     @yield('content')
     <footer>
         @yield('footer')
+        @include('layouts.footer', ['status' => 'complete'])
         <!-- jQuery -->
         <script src="{{ asset('public/js/jquery-3.6.0.min.js') }}"></script>
         <!-- Materialize -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="{{ asset('public/js/materialize.min.js') }}"></script>
         <!-- header js -->
         <script src="{{ asset('public/assets/scripts/iphukien/user/header.js') }}"></script>
         @section('scripts')

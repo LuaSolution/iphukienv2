@@ -19,8 +19,8 @@
                         class="origin">{{ number_format($product->price, 0, ',', '.') }}đ</span>
                 </div>
                 <div class="button-wrapper">
-                    <a class="modal-trigger quickview-btn" href="#quickview" 
-                        data-url="{{ route('ajax.quickview-product', $product->id) }}" 
+                    <a class="modal-trigger quickview-btn" href="#quickview"
+                        data-url="{{ route('ajax.quickview-product', $product->id) }}"
                         data-token="{{ csrf_token() }}"
                         data-imagepath="{{ asset('public/') }}"
                         data-productid="{{ $product->id }}"
@@ -36,7 +36,7 @@
     <div class="modal-content">
         <a href="#!" class="modal-close close-quickview"><a>
                 <div class="carousel carousel-slider quickview-slider" id="slider-image">
-                    
+
                 </div>
                 <div class="product-infos">
                     <div class="name" id="quickview-name"></div>
@@ -56,7 +56,7 @@
                         <div class="colors" id="quickview-colors"></div>
                     </div>
                     <div class="sizes-wrapper">
-                        <div class="size-label">Kích thước<a href="#!" target="_blank">(Hướng dẫn chọn size)</a></div>
+                        <div class="size-label">Kích thước<a href="{{ url('huong-dan-chon-size') }}" target="_blank">(Hướng dẫn chọn size)</a></div>
                         <div class="sizes" id="quickview-sizes"></div>
                     </div>
                     <div class="pre-order-block">

@@ -26,9 +26,9 @@
             <div class="status"><span>Đang giao hàng</span></div>
             <div class="status"><span>Thành công</span></div>
         </div>
-        
+
         <iframe class="order-detail-iframe" src="{{$orderDetailUrl}}"  width="100%" height="600"></iframe>
-        
+
         <div class="list-products">
             <div class="row products">
                 @foreach($orderDetail as $detail)
@@ -84,9 +84,7 @@
 </div>
 @endsection
 
-@section('footer')
-@include('layouts.footer', ['status' => 'complete'])
-@endsection
+
 
 @section('scripts')
 <script src="{{ asset('public/assets/scripts/iphukien/user/header.js') }}"></script>
