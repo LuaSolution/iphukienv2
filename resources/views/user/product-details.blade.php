@@ -74,11 +74,13 @@
         <div class="col l5 product-infos">
             <div class="name">{{$product->name}}</div>
             <div class="description">{{$product->short_description}}</div>
+            @if($product->tag_id != 0)
             <div class="list-tags">
                 <span class="tag {{ $product->tag_id == 11 ? 'hang-moi' : '' }}"></span>
                 <span class="tag {{ $product->tag_id == 12 ? 'ban-chay' : '' }}"></span>
                 <span class="tag {{ $product->tag_id == 13 ? 'giam-gia' : '' }}"></span>
             </div>
+            @endif
             <div class="price">
                 <div class="origin">{{ $product->price }}đ</div>
                 <div class="sale">{{ $product->sale_price }}đ <span>Giảm {{ round(($product->price-$product->sale_price) / $product->price * 100) }}%</span></div>
