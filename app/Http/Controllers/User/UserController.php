@@ -210,12 +210,23 @@ class UserController extends Controller
         $checkSumData = config('app.nhanh_api_user_name') . $orderId;
         $checksum = md5(md5(config('app.nhanh_api_secret_key') . $checkSumData) . $checkSumData);
         $data['orderDetailUrl'] = config('app.nhanh_api_host') . "/shipping/trackingframe?apiUsername=" . config('app.nhanh_api_user_name') . "&orderId=" . $orderId . "&checksum=" . $checksum;
+        $data['countAllOrderProduct'] = 0;
+        $data['countAllOrderPrice'] = 0;
+        foreach($data['orderDetail'] as $oD) {
+            $data['countAllOrderProduct'] += $oD->total_count;
+            $data['countAllOrderPrice'] += $oD->total_count * $oD->total_price;
+        }
 
         return view('user/order-details', $data);
     }
 
     public function getListOrders(Request $request)
     {
+        // dd(Auth::user());
+        if (!Auth::check() || Auth::user()->role_id != 2) {
+            return redirect()->route('login');
+        }
+        
         return view('user/orders');
     }
 
