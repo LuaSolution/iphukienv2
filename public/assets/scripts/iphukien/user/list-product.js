@@ -77,6 +77,11 @@ $(document).ready(function () {
                 }
                 $("#quickview-sizes").html(str);
 
+                // set for card
+                localStorage.setItem('quickview_sale_price', productInfo['product']['sale_price']);
+                localStorage.setItem('quickview_product_name', productInfo['product']['name']);
+                localStorage.setItem('quickview_nhanh_product_id', productInfo['product']['product_id_nhanh']);
+
                 $(".ipk-preloader").addClass('hide');
             });
     }
@@ -100,14 +105,14 @@ $(document).on("click", ".decrease", function () {
     let newQuantity = parseInt($('.quantity').val()) - 1;
     $('.quantity').val(newQuantity);
     let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
-    cart[productId].quantity = newQuantity;
+    cart[localStorage.getItem('quickview_product_id')].quantity = newQuantity;
     localStorage.setItem('ipk_cart', JSON.stringify(cart));
 });
 $(document).on("click", ".increase", function () {
     let newQuantity = parseInt($('.quantity').val()) + 1;
     $('.quantity').val(newQuantity);
     let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
-    cart[productId].quantity = newQuantity;
+    cart[localStorage.getItem('quickview_product_id')].quantity = newQuantity;
     localStorage.setItem('ipk_cart', JSON.stringify(cart));
 });
 $(document).on("click", ".quickview-btn", function () {
@@ -150,12 +155,12 @@ function updateCart() {
             color: choosenColor,
             size: choosenSize,
             quantity: quantity,
-            image:$(".colors .color.active").data('img'),
-            salePrice: "",
-            name: "",
+            image: $(".colors .color.active").data('img'),
+            salePrice: localStorage.getItem('quickview_sale_price'),
+            name: localStorage.getItem('quickview_product_name'),
             sizeName: choosenSizeName,
             colorName: choosenColorName,
-            nhanhPorductId: ""
+            nhanhPorductId: localStorage.getItem('quickview_nhanh_product_id')
         };
     }
     localStorage.setItem('ipk_cart',  JSON.stringify(cart));
