@@ -17,6 +17,7 @@ class ProductController extends Controller
         $data = [];
         $data['product'] = (new Product())->getProductById($id);
         $data['productColor'] = (new ProductColor())->getListProductColorByProduct($data['product']->id);
+        $data['productColorDistinct'] = (new ProductColor())->getListProductColorByProductDistinct($data['product']->id);
         $data['productSize'] = (new ProductSize())->getListProductSizeByProduct($data['product']->id);
         $data['listSameProduct'] = (new Product())->getListSameProduct($data['product']->category_id, $data['product']->id);
         foreach ($data['listSameProduct'] as &$i) {

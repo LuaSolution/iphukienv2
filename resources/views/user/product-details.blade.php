@@ -96,8 +96,8 @@
             <div class="colors-wrapper">
                 <div class="color-label">Màu sắc</div>
                 <div class="colors">
-                    @foreach($productColor as $item)
-                    <span class="color" data-colorid="{{$item->color_id}}" data-colorname="{{$item->color_name}}" data-img="{{ asset('public/' . $item->image) }}">{{$item->color_name}}</span>
+                    @foreach($productColorDistinct as $key=>$item)
+                    <span class="color" data-colorid="{{$item->color_id}}" data-colorname="{{$item->color_name}}" data-img="{{ asset('public/' . $productColor[$key]->image) }}">{{$item->color_name}}</span>
                     @endforeach
                 </div>
             </div>
