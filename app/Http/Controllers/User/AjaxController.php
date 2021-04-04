@@ -117,7 +117,19 @@ class AjaxController extends Controller
         ], '/order/add');
         //update nhanh order id
         (new Order())->updateOrder($addedOrderId, ['nhanh_order_id' => $nhanhRes->$addedOrderId]);
+        //send mail
+
 
         return json_encode(['code' => 1, 'orderId' => $addedOrderId]);
+    }
+
+    public function getListOrders(Request $request)
+    {
+        if (!Auth::check() || Auth::user()->role_id != 2) {
+            return redirect()->route('login');
+        }
+        $data['listOrder'] = (new Order())->getListOrderByUser(Auth::user()->id);
+        
+        return view('user/orders', $data);
     }
 }

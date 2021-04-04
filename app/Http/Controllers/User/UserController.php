@@ -223,12 +223,12 @@ class UserController extends Controller
 
     public function getListOrders(Request $request)
     {
-        // dd(Auth::user());
         if (!Auth::check() || Auth::user()->role_id != 2) {
             return redirect()->route('login');
         }
+        $data['listOrder'] = (new Order())->getListOrderByUser(Auth::user()->id, 0, 3);
         
-        return view('user/orders');
+        return view('user/orders', $data);
     }
 
     public function getUserInformation(Request $request)

@@ -90,9 +90,5 @@
 
 @section('scripts')
 <script src="{{ asset('public/assets/scripts/iphukien/user/header.js') }}"></script>
-<script>
-$(document).ready(function () {
-    $('.user-top-dropdown').dropdown();
-});
-</script>
+<script src="{{ asset('public/assets/scripts/iphukien/user/user-top.js') }}"></script>
 @endsection
