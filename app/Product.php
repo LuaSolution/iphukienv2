@@ -101,6 +101,7 @@ class Product extends Model
     {
         return Product::where('category_id', '=', $cateId)
             ->where('id', '<>', $productId)
+            ->take(4)
             ->orderBy('created_at', 'desc')->get();
     }
 }

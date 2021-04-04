@@ -8,6 +8,11 @@
     <title>{{config('config.title')}} | @yield('title')</title>
     <meta content="{{config('config.description')}}"
         name="description" />
+        <meta name="url" content="{{config('config.url')}}">
+        <meta property="og:url" content="{{config('config.url')}}"/>
+        <meta content="{{config('config.keywords')}}"
+        name="keywords" />
+        <link rel="canonical" href="{{config('config.canonical')}}"/>
     <link rel="icon" href="{{ asset('public/assets/images/header/favicon.svg') }}"
         type="image/gif" sizes="16x16">
 

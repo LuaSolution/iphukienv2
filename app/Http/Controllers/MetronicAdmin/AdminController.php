@@ -64,14 +64,22 @@ class AdminController extends Controller
     {
         $title = $request->input('title');
         $description = $request->input('description');
-
+        $url = $request->input('url');
+        $keywords = $request->input('keywords');
+        $canonical = $request->input('canonical');
         if ($title && $description) {
             $configModel = new Config();
 
-            $result = $configModel->updateConfig(['title' => $title, 'description' => $description]);
-            return $result;
+            $result = $configModel->updateConfig(['title' => $title,
+                'description' => $description,
+                'url' => $url,
+                'keywords' => $keywords,
+                'canonical' => $canonical]);
+            toast()->success('Cấu hình thành công');
+            return redirect()->back();
         }
-        return 0;
+        toast()->error('Cấu hình thất bại');
+        return redirect()->back();
     }
 
     /**
@@ -382,10 +390,6 @@ class AdminController extends Controller
             return redirect()->route('adMgetListContact');
         }
     }
-
-    
-
-    
 
     public function getListOrder()
     {

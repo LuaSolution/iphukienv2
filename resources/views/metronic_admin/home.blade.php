@@ -23,22 +23,37 @@
         </div> -->
       </div>
       <div class="portlet-body form">
-        <form action="#seo">
+        <form action="{{ route('adMupdateConfig') }}" method="post">
+          {{ csrf_field() }}
           <div class="form-body">
             <div class="form-group form-md-line-input has-success">
-              <input type="text" class="form-control" id="form_control_1" placeholder="Success state" name="title"
-                form="seo" value="{{ config('config.title') }}">
+              <input type="text" class="form-control" placeholder="Success state" name="title"
+                value="{{ config('config.title') }}">
               <label for="form_control_1">Title</label>
             </div>
+            <div class="form-group form-md-line-input has-success">
+              <input type="text" class="form-control" placeholder="Success state" name="url"
+                value="{{ config('config.url') }}">
+              <label for="form_control_1">URL</label>
+            </div>
+            <div class="form-group form-md-line-input has-success">
+              <input type="text" class="form-control" placeholder="Success state" name="canonical"
+                value="{{ config('config.canonical') }}">
+              <label for="form_control_1">Canonical</label>
+            </div>
             <div class="form-group form-md-line-input">
-              <textarea class="form-control" rows="3" name="description" form="seo"
+              <textarea class="form-control" rows="3" name="description"
                 placeholder="Enter more text">{{ config('config.description') }}</textarea>
               <label for="form_control_1">Description</label>
             </div>
+            <div class="form-group form-md-line-input">
+              <textarea class="form-control" rows="3" name="keywords"
+                placeholder="Enter more text">{{ config('config.keywords') }}</textarea>
+              <label for="form_control_1">Keywords</label>
+            </div>
           </div>
           <div class="form-actions noborder">
-            <button type="button" class="btn blue" name="submit" id="update-config"
-              link="{{ route('adMupdateConfig') }}">Submit</button>
+            <button type="submit" class="btn blue" name="submit" id="update-config">Submit</button>
           </div>
         </form>
       </div>
@@ -49,5 +64,6 @@
 
 @endsection
 @section('admin_js')
-<script src="{{ asset('public/admin/js/home.js') }}"></script>
+<script src="{{ asset('public/admin/js/
+') }}"></script>
 @endsection

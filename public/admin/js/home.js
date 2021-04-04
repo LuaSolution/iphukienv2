@@ -6,6 +6,9 @@ $(document).on('click', '#update-config', function () {
 
     var title = $("input[name='title']").val()
     var description = $("textarea[name='description']").val()
+    var keywords = $("textarea[name='keywords']").val()
+    var url = $("input[name='url']").val()
+    var canonical = $("input[name='canonical']").val()
     var link = $(this).attr('link')
     $.ajaxSetup({
       headers: {
@@ -15,7 +18,7 @@ $(document).on('click', '#update-config', function () {
     $.ajax({
       url: link,
       type: 'post',
-      data: { 'title': title, 'description': description }
+      data: { 'title': title, 'description': description, 'keywords': keywords, 'canonical': canonical, 'url': url }
     })
       .done(function (data) {
         if (data == 1) {

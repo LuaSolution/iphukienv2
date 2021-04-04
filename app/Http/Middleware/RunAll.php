@@ -2,10 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
-use Illuminate\Support\Facades\Auth;
-use App\Config;
 use App\Cate;
+use App\Config;
+use Closure;
 
 class RunAll
 {
@@ -21,20 +20,20 @@ class RunAll
     {
         $configModel = new Config();
         $config = $configModel->getConfig();
-        config(['config.title' => $config->title, 'config.description' => $config->description]);
+        config(['config.title' => $config->title, 'config.description' => $config->description,
+            'config.url' => $config->url, 'config.keywords' => $config->keywords, 'config.canonical' => $config->canonical]);
 
         $cateModel = new Cate();
         $cates = $cateModel->getListCate();
-        if(count($cates) > 0) {
+        if (count($cates) > 0) {
             $cate = [];
             $cate_name = [];
-            foreach($cates as $item){
+            foreach ($cates as $item) {
                 $cate[$item->id] = $item->slug;
                 $cate_name[$item->id] = [$item->title, $item->description];
             }
             config(['config.cate' => $cate, 'config.cate_name' => $cate_name]);
         }
-        
 
         return $next($request);
     }
