@@ -11,15 +11,16 @@
                 placeholder="Tìm sản phẩm, thương hiệu bạn mong muốn..." />
             <button type="submit" class="btn-search-header"></button>
         </form>
-        @if (Auth::check())
-        <div class="header-group-btn">
-            <a href="" class="ipk-header-right-icon user-icon" data-target='user-dropdown'>{{Auth::user()->name}}</a>
-        </div>
+        @if(Auth::check())
+            <div class="header-group-btn">
+                <a href="" class="ipk-header-right-icon user-icon"
+                    data-target='user-dropdown'>{{ Auth::user()->name }}</a>
+            </div>
         @else
-        <div class="header-group-btn">
-            <a href="{{ route('login') }}" class="ipk-btn btn-dang-nhap">Đăng nhập</a>
-            <a href="{{ route('signup') }}" class="ipk-btn btn-dang-ky">Đăng ký ngay</a>
-        </div>
+            <div class="header-group-btn">
+                <a href="{{ route('login') }}" class="ipk-btn btn-dang-nhap">Đăng nhập</a>
+                <a href="{{ route('signup') }}" class="ipk-btn btn-dang-ky">Đăng ký ngay</a>
+            </div>
         @endif
         <div class="header-right-btn">
             <a href="{{ route('user.wishlist') }}" class="ipk-header-right-icon wishlist-icon"></a>
@@ -44,42 +45,18 @@
             </div>
             <div class="header-list">
                 <div id="list-san-pham" class="menu-item">
+                <?php $c = \App\Cate::get();?>
+                            @foreach($c as $cate)
                     <div class="item-group">
-                        <a href="#!" class="parent-item">Phụ kiện điện thoại</a>
-                        <div class="list-sub-item">
+                        <a href="{{ route('categories.show', ['id' => $cate->id]) }}" class="parent-item">{{ $cate->title }}</a>
+                        <!-- <div class="list-sub-item">
                             <a href="#!" class="sub-item">Ốp lưng</a>
                             <a href="#!" class="sub-item">Ốp Lưng 1</a>
                             <a href="#!" class="sub-item">Ốp Lưng 2</a>
                             <a href="#!" class="sub-item">Ốp Lưng 3</a>
-                        </div>
+                        </div> -->
                     </div>
-                    <div class="item-group">
-                        <a href="#!" class="parent-item">Phụ kiện điện thoại</a>
-                        <div class="list-sub-item">
-                            <a href="#!" class="sub-item">Ốp lưng</a>
-                            <a href="#!" class="sub-item">Ốp Lưng 1</a>
-                            <a href="#!" class="sub-item">Ốp Lưng 2</a>
-                            <a href="#!" class="sub-item">Ốp Lưng 3</a>
-                        </div>
-                    </div>
-                    <div class="item-group">
-                        <a href="#!" class="parent-item">Phụ kiện điện thoại</a>
-                        <div class="list-sub-item">
-                            <a href="#!" class="sub-item">Ốp lưng</a>
-                            <a href="#!" class="sub-item">Ốp Lưng 1</a>
-                            <a href="#!" class="sub-item">Ốp Lưng 2</a>
-                            <a href="#!" class="sub-item">Ốp Lưng 3</a>
-                        </div>
-                    </div>
-                    <div class="item-group">
-                        <a href="#!" class="parent-item">Phụ kiện điện thoại</a>
-                        <div class="list-sub-item">
-                            <a href="#!" class="sub-item">Ốp lưng</a>
-                            <a href="#!" class="sub-item">Ốp Lưng 1</a>
-                            <a href="#!" class="sub-item">Ốp Lưng 2</a>
-                            <a href="#!" class="sub-item">Ốp Lưng 3</a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
                 <div id="list-chuyen-muc" class="menu-item">
                     <a href="{{ url('gioi-thieu') }}" class="single-item">Giới thiệu</a>
@@ -90,15 +67,17 @@
             </div>
         </li>
     </ul>
-    @if (Auth::check())
-    <ul id='user-dropdown' class='dropdown-content'>
-        <li class="first-line">
-            <div class="avatar" style="background-image: url({{ asset('public/assets/images/demo/avatar.jpg') }})"></div>
-            <span>{{Auth::user()->name}}</span>
-        </li>
-        <li><a href="{{ route('user.orders') }}">Đơn hàng của tôi</a></li>
-        <li><a href="#!">Cài đặt tài khoản</a></li>
-        <li><a href="{{ route('doLogout') }}">Đăng xuất</a></li>
-    </ul>
+    @if(Auth::check())
+        <ul id='user-dropdown' class='dropdown-content'>
+            <li class="first-line">
+                <div class="avatar"
+                    style="background-image: url({{ asset('public/assets/images/demo/avatar.jpg') }})">
+                </div>
+                <span>{{ Auth::user()->name }}</span>
+            </li>
+            <li><a href="{{ route('user.orders') }}">Đơn hàng của tôi</a></li>
+            <li><a href="#!">Cài đặt tài khoản</a></li>
+            <li><a href="{{ route('doLogout') }}">Đăng xuất</a></li>
+        </ul>
     @endif
 </header>
