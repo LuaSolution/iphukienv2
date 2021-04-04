@@ -26,7 +26,7 @@
                 </form>
             </div>
             <div class="col l4 s12">
-                <div class="title">Người đùng mới</div>
+                <div class="title">Người dùng mới</div>
                 <div class="sub-title">Bạn chưa có tài khoản? Vui lòng đăng ký mới</div>
                 <div class="create-account-btn">
                     <a href="{{ route('signup') }}">Tạo tài khoản</a>

@@ -27,7 +27,7 @@ class SizeController extends Controller
         if (!$name) {
             return redirect()->route('adMgetListSize')->with('error', 'Thêm thất bại!');
         }
-        
+
         $dataInsert = [
             'name' => $name,
             'created_at' => date('Y-m-d H:i:s'),
@@ -36,8 +36,10 @@ class SizeController extends Controller
         $result = (new Size())->insertSize($dataInsert);
 
         if ($result instanceof Size) {
+            toast()->success('Thêm thành công');
             return redirect()->route('adMgetListSize')->with('success', 'Thêm thành công!');
         } else {
+            toast()->error('Thêm thất bại');
             return redirect()->route('adMgetListSize')->with('error', 'Thêm thất bại!');
         }
 
@@ -79,8 +81,10 @@ class SizeController extends Controller
         ];
         $result = (new Size())->updateSize($id, $dataUpdate);
         if ($result > 0) {
+            toast()->success('Sửa thành công');
             return redirect()->route('adMgetEditSize', ['id' => $id])->with('success', 'Cập nhật thành công!');
         } else {
+            toast()->error('Sửa thất bại');
             return redirect()->route('adMgetEditSize', ['id' => $id])->with('error', 'Cập nhật thất bại!');
         }
 

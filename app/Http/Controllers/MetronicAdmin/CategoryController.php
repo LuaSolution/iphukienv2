@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\MetronicAdmin;
 
-use App\Http\Controllers\Controller;
 use App\Cate;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -49,7 +49,7 @@ class CategoryController extends Controller
             $image = $slug . '.' . $request->image->extension();
             $path = $request->image->storeAs('img/cate', $image);
         }
-        $parentId = $request->input('parentId') != '' ? $request->input('parentId') : NULL;
+        $parentId = $request->input('parentId') != '' ? $request->input('parentId') : null;
         $dataInsert = [
             'title' => $title,
             'slug' => $slug,
@@ -63,8 +63,10 @@ class CategoryController extends Controller
         $result = $cateModel->insertCate($dataInsert);
 
         if ($result instanceof Cate) {
+            toast()->success('Thêm thành công');
             return redirect()->route('adMgetListCategory')->with('success', 'Thêm thành công!');
         } else {
+            toast()->error('Thêm thất bại');
             return redirect()->route('adMgetListCategory')->with('error', 'Thêm thất bại!');
         }
 
@@ -119,7 +121,7 @@ class CategoryController extends Controller
             $image = $slug . '.' . $request->image->extension();
             $path = $request->image->storeAs('img/cate', $image);
         }
-        $parentId = $request->input('parentId') != '' ? $request->input('parentId') : NULL;
+        $parentId = $request->input('parentId') != '' ? $request->input('parentId') : null;
 
         $dataUpdate = [
             'title' => $title,
@@ -132,8 +134,10 @@ class CategoryController extends Controller
         $cateModel = new Cate();
         $result = $cateModel->updateCate($id, $dataUpdate);
         if ($result > 0) {
+            toast()->success('Sửa thành công');
             return redirect()->route('adMgetEditCategory', ['id' => $id])->with('success', 'Cập nhật thành công!');
         } else {
+            toast()->error('Sửa thất bại');
             return redirect()->route('adMgetEditCategory', ['id' => $id])->with('error', 'Cập nhật thất bại!');
         }
 

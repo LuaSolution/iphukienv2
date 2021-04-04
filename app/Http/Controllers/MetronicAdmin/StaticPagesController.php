@@ -91,8 +91,10 @@ class StaticPagesController extends Controller
         $model->save();
 
         if ($model) {
+            toast()->success('Sửa thành công');
             return redirect()->route('adMgetEditStaticPages', ['id' => $id])->with('success', 'Cập nhật thành công!');
         } else {
+            toast()->error('Sửa thất bại');
             return redirect()->route('adMgetEditStaticPages', ['id' => $id])->with('error', 'Cập nhật thất bại!');
         }
     }
@@ -127,8 +129,10 @@ class StaticPagesController extends Controller
         $model->save();
 
         if ($model) {
+            toast()->success('Thêm thành công');
             return redirect()->route('adMgetAddStaticPage')->with('success', 'Cập nhật thành công!');
         } else {
+            toast()->error('Thêm thất bại');
             return redirect()->route('adMgetAddStaticPage')->with('error', 'Cập nhật thất bại!');
         }
     }

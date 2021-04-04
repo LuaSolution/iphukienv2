@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\MetronicAdmin;
 
-use App\Http\Controllers\Controller;
 use App\Color;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class ColorController extends Controller
@@ -32,7 +32,7 @@ class ColorController extends Controller
         if (!$code) {
             return redirect()->route('adMgetListColor')->with('error', 'Thêm thất bại!');
         }
-        
+
         $dataInsert = [
             'name' => $name,
             'code' => $code,
@@ -43,8 +43,10 @@ class ColorController extends Controller
         $result = $colorModel->insertColor($dataInsert);
 
         if ($result instanceof Color) {
+            toast()->success('Thêm thành công');
             return redirect()->route('adMgetListColor')->with('success', 'Thêm thành công!');
         } else {
+            toast()->error('Thêm thất bại');
             return redirect()->route('adMgetListColor')->with('error', 'Thêm thất bại!');
         }
 
@@ -94,8 +96,10 @@ class ColorController extends Controller
         $colorModel = new Color();
         $result = $colorModel->updateColor($id, $dataUpdate);
         if ($result > 0) {
+            toast()->success('Sửa thành công');
             return redirect()->route('adMgetEditColor', ['id' => $id])->with('success', 'Cập nhật thành công!');
         } else {
+            toast()->error('Sửa thất bại');
             return redirect()->route('adMgetEditColor', ['id' => $id])->with('error', 'Cập nhật thất bại!');
         }
 

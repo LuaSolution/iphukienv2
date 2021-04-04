@@ -54,8 +54,10 @@ class SaleProductController extends Controller
         $result = (new SaleProduct())->insertSaleProduct($dataInsert);
 
         if ($result instanceof SaleProduct) {
+            toast()->success('Thêm thành công');
             return redirect()->route('adMgetListSaleProduct')->with('success', 'Thêm thành công!');
         } else {
+            toast()->error('Thêm thất bại');
             return redirect()->route('adMgetListSaleProduct')->with('error', 'Thêm thất bại!');
         }
 
