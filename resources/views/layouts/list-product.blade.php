@@ -8,7 +8,7 @@
                     style="background-image: url({{ asset($img ? 'public/' . $img->image : 'public/assets/images/demo/watch.png') }})">
                 </div>
                 <div class="name">
-                    <a href="{{ route('products.show', $product->id) }}">
+                    <a href="{{ route('products.show', $product->slug ? $product->slug : $product->id) }}">
                         {{ $product->name }}
                     </a>
                 </div>

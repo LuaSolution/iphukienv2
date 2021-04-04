@@ -31,6 +31,10 @@
               <label for="form-name">Tên sản phẩm</label>
             </div>
             <div class="form-group form-md-line-input has-success">
+              <input type="text" class="form-control" id="form-slug" name="slug" required="">
+              <label for="form-slug">Link thân thiện</label>
+            </div>
+            <div class="form-group form-md-line-input has-success">
               <textarea id="form-short-description-txt" class="text-content form-control" name="short-description"></textarea>
               <label for="form-title">Mô tả ngắn</label>
             </div>
@@ -111,7 +115,7 @@ $('#color').on('change', function(){
   if(selected.length == 0) return;
   let str = "";
   let count = $(".color-image-block").length;
-  
+
   for (let i = 0; i < selected.length; i++) {
     if($("#color-image-" + selected[i]).length == 0) {
       str = "<div class='color-image-block' id='color-image-" + selected[i] + "' data-id='" + selected[i] + "'>"
@@ -131,15 +135,16 @@ $('#color').on('change', function(){
       $("#color-image-" +  $(".color-image-block")[i].dataset.id).remove()
       break;
     }
-    
+
   }
 });
 $(document).on("submit","#create-new",function(e) {
   e.preventDefault();
   let count = $(".color-image-block").length;
   let fd = new FormData();
-  
+
   fd.append('name', $("#form-name").val());
+  fd.append('slug', $("#form-slug").val());
   fd.append('category_id', $("#category").val());
   fd.append('short_description', $("#form-short-description-txt").val());
   fd.append('full_description', $("#form-description-txt").val());
@@ -192,8 +197,9 @@ $(document).on("submit","#create-new",function(e) {
       console.log(response.responseText)
     }
   });
-  
+
 });
 
 </script>
+<script src="{{ asset('public/admin/js/post.js') }}" type="text/javascript"></script>
 @endsection

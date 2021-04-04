@@ -91,6 +91,7 @@ class ProductController extends Controller
         if (!$name) {
             return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
         }
+        $slug = $request->input('slug');
         $categoryId = $request->input('category_id');
         $shortDescription = $request->input('short_description');
         if (!$shortDescription) {
@@ -114,6 +115,7 @@ class ProductController extends Controller
 
         $dataInsert = [
             'name' => $name,
+            'slug' => $slug,
             'category_id' => $categoryId,
             'short_description' => $shortDescription,
             'full_description' => $fullDescription,
@@ -203,6 +205,7 @@ class ProductController extends Controller
         if (!$name) {
             return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
         }
+        $slug = $request->input('slug');
         $categoryId = $request->input('category_id');
         $shortDescription = $request->input('short_description');
         if (!$shortDescription) {
@@ -241,6 +244,7 @@ class ProductController extends Controller
 
         $dataUpdate = [
             'name' => $name,
+            'slug' => $slug,
             'category_id' => $categoryId,
             'short_description' => $shortDescription,
             'full_description' => $fullDescription,
