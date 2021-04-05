@@ -69,7 +69,7 @@
         </div>
         <div class="col l6 main-image-wrapper">
             <span class="full-screen-btn modal-trigger" href="#list-image-popup"></span>
-            <div class="main-image" style="background-image: url({{ asset('public/' . $productColor[0]->image) }})"></div>
+            <div class="main-image is-image" style="background-image: url({{ asset('public/' . $productColor[0]->image) }})"></div>
         </div>
         <div class="col l5 product-infos">
             <div class="name">{{$product->name}}</div>
@@ -237,23 +237,21 @@ $(document).on("click", ".thumbs-popup span", function () {
     $('.main-image-popup')[0].style.backgroundImage = "url(" + $(this).data('img') + ")";
 });
 $(document).on("click", ".thumbs span", function () {
+    $('.main-image').addClass('is-image');
+    $('.main-image').html('');
     $('.main-image')[0].style.backgroundImage = "url(" + $(this).data('img') + ")";
 });
 $(document).on("click", ".custom-fb-share-button", function () {
     $('.fb-share-button').trigger( "click" );
 });
 $(document).on("click", ".video-icon", function () {
-    // let str = `<video autoplay muted loop id="myVideo">`
-    //         + `<source src="${$(this).data('video')}" type="video/mp4">`
-    //         + `</video>`;
+    $(".ipk-preloader").removeClass('hide');
+    let str = `<iframe class="yt-player" src="${$(this).data('video')}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     $('.main-image')[0].style.backgroundImage = 'unset';
-    // $('.main-image').html(str)
-    var video = $('<video />', {
-        id: 'video',
-        src: `${$(this).data('video')}`,
-        controls: true
-    });
-    video.appendTo($('#main-image'));
+    $('.main-image').removeClass('is-image');
+    $('.main-image').html(str);
+    $('.yt-player').height($('.yt-player').width());
+    $(".ipk-preloader").addClass('hide');
 });
 
 function updateCart() {

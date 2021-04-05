@@ -63,8 +63,13 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
-    padding-top: 100%;
     margin-left: 10px;
+}
+.product-container .main-image.is-image {
+    padding-top: 100%;
+}
+.product-container .main-image .yt-player {
+    width: 100%;
 }
 .product-container .full-screen-btn {
     background-image: url(/public/assets/images/product-details/btn-zoom.svg);
