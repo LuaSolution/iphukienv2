@@ -121,6 +121,7 @@
     text-align: center;
     color: #fff;
     display: block;
+    text-transform: uppercase;
 }
 .product-infos .list-tags .tag.hang-moi::before {
     content: 'Hàng mới';

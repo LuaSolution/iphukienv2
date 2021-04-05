@@ -33,6 +33,7 @@
         @if(count($flashSale) > 0)
         <div class="sale-products">
             <div class="carousel carousel-slider sale-product-slider">
+                <div class="ipk-pre-slide"></div>
                 @foreach($flashSale as $item)
                 <div class="carousel-item">
                     <div class="flash-deal-icon">Flash deal</div>
@@ -115,6 +116,9 @@ $(document).ready(function () {
 });
 $(document).on("click", ".ipk-next-slide", function () {
     $('.sale-product-slider').carousel('next');
+});
+$(document).on("click", ".ipk-pre-slide", function () {
+    $('.sale-product-slider').carousel('prev');;
 });
 </script>
 @endsection
