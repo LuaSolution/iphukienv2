@@ -30,12 +30,12 @@
         <div class="category-title">{{ $category->title }}</div>
         <div class="filter-block">
             <a href="#" data-target="filter-slide-out" class="sidenav-trigger category-filter">Bộ lọc</a>
-            <select>
+            <select   id="mySelect" onchange="sorting()">
                 <option value="" disabled selected>Sắp xếp</option>
-                <option value="name-a-to-z">Tên: A-Z</option>
-                <option value="name-z-to-a">Tên: Z-A</option>
-                <option value="price-low-to-high">Giá: Thấp - Cao</option>
-                <option value="price-high-to-low">Giá: Cao - Thấp</option>
+                <option value="az">Tên: A-Z</a></option>
+                <option value="za">Tên: Z-A</option>
+                <option value="pasc">Giá: Thấp - Cao</option>
+                <option value="pdesc">Giá: Cao - Thấp</option>
             </select>
         </div>
     </div>
@@ -71,5 +71,10 @@ $(document).ready(function () {
     var elems = document.querySelectorAll('select');
     M.FormSelect.init(elems);
 });
+function sorting() {
+    var x = document.getElementById("mySelect").value;
+    console.log(x)
+    location.href = "?sort=" + x
+}
 </script>
 @endsection
