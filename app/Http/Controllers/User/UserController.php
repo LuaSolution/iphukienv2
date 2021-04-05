@@ -213,7 +213,7 @@ class UserController extends Controller
         $data['orderDetailUrl'] = config('app.nhanh_api_host') . "/shipping/trackingframe?apiUsername=" . config('app.nhanh_api_user_name') . "&orderId=" . $orderId . "&checksum=" . $checksum;
         $data['countAllOrderProduct'] = 0;
         $data['countAllOrderPrice'] = 0;
-        foreach($data['orderDetail'] as $oD) {
+        foreach ($data['orderDetail'] as $oD) {
             $data['countAllOrderProduct'] += $oD->total_count;
             $data['countAllOrderPrice'] += $oD->total_count * $oD->total_price;
         }
@@ -227,7 +227,7 @@ class UserController extends Controller
             return redirect()->route('login');
         }
         $data['listOrder'] = (new Order())->getListOrderByUser(Auth::user()->id, 0, 3);
-        
+
         return view('user/orders', $data);
     }
 
@@ -256,7 +256,11 @@ class UserController extends Controller
 
     public function getUserWishlist(Request $request)
     {
-        $this->data['listProduct'] = (new Wishlist)->getWishlistByUser(Auth::user()->id);
-        return view('user/user-wishlist', $this->data);
+        if (Auth::check()) {
+            $this->data['listProduct'] = (new Wishlist)->getWishlistByUser(Auth::user()->id);
+            return view('user/user-wishlist', $this->data);
+        } else {
+            return redirect()->route('login');
+        }
     }
 }
