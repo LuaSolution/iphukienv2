@@ -184,6 +184,8 @@
     left: 0;
     position: absolute;
     cursor: pointer;
+    transform: rotate(180deg);
+    z-index: 1;
 }
 .products-block {
     margin-top: 50px;

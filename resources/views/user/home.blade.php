@@ -118,7 +118,7 @@ $(document).on("click", ".ipk-next-slide", function () {
     $('.sale-product-slider').carousel('next');
 });
 $(document).on("click", ".ipk-pre-slide", function () {
-    $('.sale-product-slider').carousel('prev');;
+    $('.sale-product-slider').carousel('prev');
 });
 </script>
 @endsection
