@@ -32,7 +32,7 @@
     </div>
     <ul id="slide-out" class="sidenav ipk-slide-out">
         <li>
-            <a href="#!" class="sidenav-close"></a>
+            <a href="{{ route('getHome') }}" class="sidenav-close"></a>
             <div class="ipk-logo-view">
                 <img src="{{ asset('public/assets/images/header/logo.svg') }}">
             </div>
