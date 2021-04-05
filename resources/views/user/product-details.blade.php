@@ -63,7 +63,7 @@
                 </div>
                 <a href="#!" class="down"></a>
             </div>
-            <div class="video-icon">
+            <div class="video-icon" data-video="{{ $item->video }}">
                 <a href="#!"></a>
             </div>
         </div>
@@ -76,14 +76,19 @@
             <div class="description">{{$product->short_description}}</div>
             @if($product->tag_id != 0)
             <div class="list-tags">
-                <span class="tag {{ $product->tag_id == 11 ? 'hang-moi' : '' }}"></span>
-                <span class="tag {{ $product->tag_id == 12 ? 'ban-chay' : '' }}"></span>
-                <span class="tag {{ $product->tag_id == 13 ? 'giam-gia' : '' }}"></span>
+                @if($product->tag_id == 11)
+                    <span class="tag hang-moi"></span>
+                @elseif($product->tag_id == 12)
+                    <span class="tag ban-chay"></span>
+                @elseif($product->tag_id == 13)
+                    <span class="tag giam-gia"></span>
+                @endif
             </div>
             @endif
+            
             <div class="price">
-                <div class="origin">{{ $product->price }}đ</div>
-                <div class="sale">{{ $product->sale_price }}đ <span>Giảm {{ round(($product->price-$product->sale_price) / $product->price * 100) }}%</span></div>
+                <div class="origin">{{ number_format($product->price, 0, ',', '.') }}đ</div>
+                <div class="sale">{{ number_format($product->sale_price, 0, ',', '.') }}đ <span>Giảm {{ round(($product->price-$product->sale_price) / $product->price * 100) }}%</span></div>
             </div>
             <div class="status-wrapper">
                 <div class="status-label">Tình trạng</div>
@@ -236,6 +241,13 @@ $(document).on("click", ".thumbs span", function () {
 });
 $(document).on("click", ".custom-fb-share-button", function () {
     $('.fb-share-button').trigger( "click" );
+});
+$(document).on("click", ".video-icon", function () {
+    $('.fb-share-button').trigger( "click" );
+    let str = `<video autoplay muted loop id="myVideo">`
+            + `<source src="${$(this).data('video')}" type="video/mp4">`
+            + `</video>`;
+    $('.main-image').html(str)
 });
 
 function updateCart() {

@@ -36,6 +36,11 @@
                             <label for="form-slug">Link thân thiện</label>
                         </div>
                         <div class="form-group form-md-line-input has-success">
+                            <input type="text" class="form-control" id="form-video" name="video" required=""
+                                value="{{ $product->video }}">
+                            <label for="form-video">Video</label>
+                        </div>
+                        <div class="form-group form-md-line-input has-success">
                             <textarea id="form-short-description-txt" class="text-content form-control"
                                 name="short-description">{{ $product->short_description }}</textarea>
                             <label for="form-title">Mô tả ngắn</label>
@@ -171,6 +176,7 @@ $(document).on("submit","#create-new",function(e) {
   fd.append('status_id', $("#status").val());
   fd.append('tag_id', $("#tag").val());
   fd.append('sizes', $("#size").val());
+  fd.append('video', $("#form-video").val());
   fd.append('colors', $("#color").val());
   fd.append('_token', '{{ csrf_token() }}');
 

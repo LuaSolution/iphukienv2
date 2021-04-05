@@ -42,10 +42,10 @@
                                         {{ $item->category_name }}
                                     </td>
                                     <td>
-                                        {{ $item->price }}
+                                        {{ number_format($item->price, 0, ',', '.') }}VNĐ
                                     </td>
                                     <td>
-                                        {{ $item->sale_price }}
+                                        {{ number_format($item->sale_price, 0, ',', '.') }}VNĐ
                                     </td>
                                     <td>
                                         {{ $item->sold }}

@@ -35,6 +35,10 @@
               <label for="form-slug">Link thân thiện</label>
             </div>
             <div class="form-group form-md-line-input has-success">
+              <input type="text" class="form-control" id="form-video" name="video" required="">
+              <label for="form-video">Video</label>
+            </div>
+            <div class="form-group form-md-line-input has-success">
               <textarea id="form-short-description-txt" class="text-content form-control" name="short-description"></textarea>
               <label for="form-title">Mô tả ngắn</label>
             </div>
@@ -151,6 +155,7 @@ $(document).on("submit","#create-new",function(e) {
   fd.append('price', $("#form-price").val());
   fd.append('sale_price', $("#form-sale-price").val());
   fd.append('status_id', $("#status").val());
+  fd.append('video', $("#form-video").val());
   fd.append('tag_id', $("#tag").val());
   fd.append('sizes', $("#size").val());
   fd.append('_token', '{{ csrf_token() }}');

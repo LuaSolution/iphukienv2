@@ -106,7 +106,11 @@ class ProductController extends Controller
             return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
         }
         $salePrice = $request->input('sale_price');
-        if (!$price) {
+        if (!$salePrice) {
+            return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
+        }
+        $video = $request->input('video');
+        if (!$video) {
             return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
         }
         $status = $request->input('status_id');
@@ -121,6 +125,7 @@ class ProductController extends Controller
             'full_description' => $fullDescription,
             'price' => $price,
             'sale_price' => $salePrice,
+            'video' => $video,
             'status_id' => $status,
             'tag_id' => $tag,
             'sold' => 0,
@@ -220,7 +225,11 @@ class ProductController extends Controller
             return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
         }
         $salePrice = $request->input('sale_price');
-        if (!$price) {
+        if (!$salePrice) {
+            return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
+        }
+        $video = $request->input('video');
+        if (!$video) {
             return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
         }
         $status = $request->input('status_id');
@@ -253,6 +262,7 @@ class ProductController extends Controller
             'status_id' => $status,
             'tag_id' => $tag,
             'sold' => 0,
+            'video' => $video,
             'updated_at' => date('Y-m-d H:i:s'),
         ];
         $result = (new Product())->updateProduct($id, $dataUpdate);
