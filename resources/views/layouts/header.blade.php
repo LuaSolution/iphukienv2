@@ -26,13 +26,13 @@
         </div>
         <div class="header-right-btn">
             <a href="{{ route('user.cart') }}" class="ipk-header-right-icon cart-icon">
-                <span>10</span>
+                <span></span>
             </a>
         </div>
     </div>
     <ul id="slide-out" class="sidenav ipk-slide-out">
         <li>
-            <a href="#!" class="sidenav-close"></a>
+            <a href="{{ route('getHome') }}" class="sidenav-close"></a>
             <div class="ipk-logo-view">
                 <img src="{{ asset('public/assets/images/header/logo.svg') }}">
             </div>
