@@ -27,7 +27,7 @@ class ProductController extends Controller
                 $i->wishlist = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $id);
             }
         }
-        
+
         return view('user/product-details', $data);
     }
 }

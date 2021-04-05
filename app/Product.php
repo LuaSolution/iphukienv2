@@ -30,7 +30,9 @@ class Product extends Model
     public function getProductById($id)
     {
         if (is_numeric($id)) {
-            $res = Product::where('id', $id)->first();
+            $res = Product::leftJoin('categories', 'categories.id', '=', 'products.category_id')
+                ->select('products.*', 'categories.title as category_name')
+                ->where('products.id', $id)->first();
         } else {
             $res = Product::where('slug', $id)->first();
         }

@@ -41,8 +41,8 @@
             <div class="nav-wrapper">
                 <div class="col s12">
                     <a href="{{ route('getHome') }}" class="breadcrumb">Trang chủ</a>
-                    <a href="{{ route('categories.show', ['id' => $product->cateogory_id]) }}" class="breadcrumb">Danh mục sản phẩm</a>
-                    <a href="javascript:void(0)" class="breadcrumb">Trang chi tiết hiện tại</a>
+                    <a href="{{ route('categories.show', ['id' => $product->cateogory_id]) }}" class="breadcrumb">{{ $product->category_name }}</a>
+                    <a href="javascript:void(0)" class="breadcrumb">{{$product->name}}</a>
                 </div>
             </div>
         </nav>
@@ -63,7 +63,7 @@
                 </div>
                 <a href="#!" class="down"></a>
             </div>
-            <div class="video-icon" data-video="{{ $item->video }}">
+            <div class="video-icon" data-video="{{ $product->video }}">
                 <a href="#!"></a>
             </div>
         </div>
@@ -243,11 +243,17 @@ $(document).on("click", ".custom-fb-share-button", function () {
     $('.fb-share-button').trigger( "click" );
 });
 $(document).on("click", ".video-icon", function () {
-    $('.fb-share-button').trigger( "click" );
-    let str = `<video autoplay muted loop id="myVideo">`
-            + `<source src="${$(this).data('video')}" type="video/mp4">`
-            + `</video>`;
-    $('.main-image').html(str)
+    // let str = `<video autoplay muted loop id="myVideo">`
+    //         + `<source src="${$(this).data('video')}" type="video/mp4">`
+    //         + `</video>`;
+    $('.main-image')[0].style.backgroundImage = 'unset';
+    // $('.main-image').html(str)
+    var video = $('<video />', {
+        id: 'video',
+        src: `${$(this).data('video')}`,
+        controls: true
+    });
+    video.appendTo($('#main-image'));
 });
 
 function updateCart() {
