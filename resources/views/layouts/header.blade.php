@@ -12,9 +12,8 @@
             <button type="submit" class="btn-search-header"></button>
         </form>
         @if(Auth::check())
-            <div class="header-group-btn">
-                <a href="" class="ipk-header-right-icon user-icon"
-                    data-target='user-dropdown'>{{ Auth::user()->name }}</a>
+            <div class="header-right-btn">
+                <a href="" class="ipk-header-right-icon user-icon" data-target='user-dropdown'></a>
             </div>
         @else
             <div class="header-group-btn">

@@ -44,8 +44,8 @@
                             <div class="name">{{ $item->product->product_name }}</div>
                             <div class="description">{{ $item->product->product_des }}</div>
                             <div class="price">
-                                <span class="sale">{{ $item->product->sale_price }} đ</span>
-                                <span class="origin">{{ $item->product->origin_price }} đ</span>
+                                <span class="sale">{{ number_format($item->product->sale_price , 0, ',', '.') }}đ</span>
+                                <span class="origin">{{ number_format($item->product->origin_price, 0, ',', '.') }}đ</span>
                             </div>
                             <div class="time">
                                 <div class="day">03</div>
