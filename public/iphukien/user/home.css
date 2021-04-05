@@ -175,6 +175,18 @@
     position: absolute;
     cursor: pointer;
 }
+.sale-products .ipk-pre-slide {
+    background-image: url(/public/assets/images/home/next.svg);
+    background-repeat: no-repeat;
+    width: 47px;
+    height: 52px;
+    top: calc(50% - 26px);
+    left: 0;
+    position: absolute;
+    cursor: pointer;
+    transform: rotate(180deg);
+    z-index: 1;
+}
 .products-block {
     margin-top: 50px;
 }
