@@ -26,7 +26,7 @@
         </div>
         <div class="header-right-btn">
             <a href="{{ route('user.cart') }}" class="ipk-header-right-icon cart-icon">
-                <span>10</span>
+                <span></span>
             </a>
         </div>
     </div>
