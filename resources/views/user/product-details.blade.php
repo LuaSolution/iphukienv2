@@ -140,6 +140,7 @@
         @include('layouts.list-product', ['listProduct' => $listSameProduct, 'hasReadMore' => false])
     </div>
 </div>
+@include('layouts.quickview')
 <!-- Modal Structure -->
 <div id="list-image-popup" class="modal">
     <div class="modal-content">

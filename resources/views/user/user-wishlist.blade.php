@@ -20,7 +20,7 @@
         @include('layouts.list-product', ['fromPage' => 'getHome'])
     </div>
 </div>
-</div>
+@include('layouts.quickview')
 @endsection
 
 

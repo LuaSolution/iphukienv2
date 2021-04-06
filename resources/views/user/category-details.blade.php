@@ -58,6 +58,7 @@
 
         </li>
     </ul>
+    @include('layouts.quickview')
 </div>
 @endsection
 

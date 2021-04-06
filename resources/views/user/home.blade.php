@@ -99,6 +99,7 @@
         <input type="submit" value="Đồng ý" class="submit-new-feed" />
     </form>
 </div>
+@include('layouts.quickview')
 @endsection
 
 @section('scripts')

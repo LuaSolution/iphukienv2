@@ -25,6 +25,15 @@ class Order extends Model
         ->select('orders.*', DB::raw('sum(order_details.total_price) + ship_fee as total_order_price'))
         ->where('addresses.user_id', '=', $userId)
         ->groupBy('orders.id')
+        ->groupBy('orders.address_id')
+        ->groupBy('orders.payment_method_id')
+        ->groupBy('orders.delivery_id')
+        ->groupBy('orders.ship_fee')
+        ->groupBy('orders.delivery_date')
+        ->groupBy('orders.status')
+        ->groupBy('orders.created_at')
+        ->groupBy('orders.updated_at')
+        ->groupBy('orders.nhanh_order_id')
         ->orderBy('created_at', 'desc')->get();
     }
 
