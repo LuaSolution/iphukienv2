@@ -79,13 +79,21 @@
                 <label class="non-block">Giới tính</label>
                 <div class="gender-radio non-block">
                     <label>
+                    @if(Auth::user()->gender == 1)
                     <input class="with-gap" name="gender" type="radio" value="1" checked />
+                    @else
+                    <input class="with-gap" name="gender" type="radio" value="1"  />
+                    @endif
                     <span>Nam</span>
                     </label>
                 </div>
                 <div class="gender-radio non-block">
                     <label>
+                    @if(Auth::user()->gender == 0)
+                    <input class="with-gap" name="gender" type="radio" value="0" checked/>
+                    @else
                     <input class="with-gap" name="gender" type="radio" value="0" />
+                    @endif
                     <span>Nữ</span>
                     </label>
                 </div>
