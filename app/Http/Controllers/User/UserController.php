@@ -275,13 +275,31 @@ class UserController extends Controller
             $request->file('avatar')->storeAs('img/avatar/', $request->file('avatar')->getClientOriginalName());
             $cover = $request->file('avatar')->getClientOriginalName() . '?n=' . time();
         }
+        if ($request->year) {
+            $year = $request->year;
+        } else {
+            $year = 2020;
+        }
+
+        if ($request->month) {
+            $month = $request->month;
+        } else {
+            $month = 1;
+        }
+
+        if ($request->day) {
+            $day = $request->day;
+        } else {
+            $day = 1;
+        }
+
         $model = User::where('id', Auth::user()->id)->first();
         $model->avatar = $cover;
         $model->name = $request->name;
         $model->phone = $request->phone;
         $model->email = $request->email;
         $model->gender = $request->gender;
-        $model->birthday = $request->year . '-' . $request->month . '-' . $request->day;
+        $model->birthday = $year . '-' . $month . '-' . $day;
         $model->save();
         return redirect()->back();
     }
