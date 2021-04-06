@@ -16,12 +16,13 @@
     <div class="ipk-content-container user-information-container">
         @include('layouts.user-top', ['status' => 1])
         <div class="update-infos-txt">CẬP NHẬT TÀI KHOẢN</div>
-        <form method="post" id="user-information-form" enctype="multipart/form-data">
+        <form method="post" action="{{ route('update.information') }}" id="user-information-form" enctype="multipart/form-data">
+        {{ csrf_field() }}
             <div class="user-avatar">
                 <div class="caption">Ảnh đại diện</div>
                 <div class="upload-group">
                     <input type="file" name="avatar" id="avatar" class="hide" />
-                    <div class="current-avatar" id="current-avatar" style="background-image: url({{ isset(Auth::user()->avatar) ? asset('public/' . Auth::user()->avatar) : asset('public/assets/images/header/logo.svg') }})"></div>
+                    <div class="current-avatar" id="current-avatar" style="background-image: url({{ isset(Auth::user()->avatar) ? asset('public/img/avatar/' . Auth::user()->avatar) : asset('public/assets/images/header/logo.svg') }})"></div>
                 </div>
             </div>
             <div class="info-input-group">
@@ -38,7 +39,7 @@
             </div>
             <div class="info-input-group">
                 <label>Tên đăng nhập</label>
-                <input type="text" name="username" placeholder="Tên đăng nhập" value="{{Auth::user()->username}}" />
+                <input type="text" disabled placeholder="Tên đăng nhập" value="{{Auth::user()->email}}" />
             </div>
             <?php $timestamp = strtotime(Auth::user()->birthday);
 ?>

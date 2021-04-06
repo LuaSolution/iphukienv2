@@ -266,4 +266,23 @@ class UserController extends Controller
             return redirect()->route('login');
         }
     }
+
+    public function postUserInformation(Request $request)
+    {
+        $coverFile = $request->file('avatar');
+        $cover = "";
+        if ($request->hasFile('avatar')) {
+            $request->file('avatar')->storeAs('img/avatar/', $request->file('avatar')->getClientOriginalName());
+            $cover = $request->file('avatar')->getClientOriginalName() . '?n=' . time();
+        }
+        $model = User::where('id', Auth::user()->id)->first();
+        $model->avatar = $cover;
+        $model->name = $request->name;
+        $model->phone = $request->phone;
+        $model->email = $request->email;
+        $model->gender = $request->gender;
+        $model->birthday = $request->year . '-' . $request->month . '-' . $request->day;
+        $model->save();
+        return redirect()->back();
+    }
 }

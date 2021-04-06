@@ -2,7 +2,7 @@
 <div class="notify-text">Miễn phí giao hàng cho đơn hàng tối thiểu 1 tỉ đồng</div>
 <div class="user-infos">
     <a href="{{ route('user.information') }}" class="user-top-dropdown dropdown-trigger" data-target='user-top-dropdown'></a>
-    <div class="avatar" style="background-image: url({{ isset(Auth::user()->avatar) ? asset('public/' . Auth::user()->avatar) : asset('public/assets/images/header/logo.svg') }})"></div>
+    <div class="avatar" style="background-image: url({{ isset(Auth::user()->avatar) ? asset('public/img/avatar/' . Auth::user()->avatar) : asset('public/assets/images/header/logo.svg') }})"></div>
     <div class="info">
         <div class="name">{{Auth::user()->name}}</div>
         <div class="email">{{Auth::user()->email}}</div>

@@ -70,7 +70,7 @@
         <ul id='user-dropdown' class='dropdown-content'>
             <li class="first-line">
                 <div class="avatar"
-                    style="background-image: url({{ isset(Auth::user()->avatar) ? asset('public/' . Auth::user()->avatar) : asset('public/assets/images/header/logo.svg') }})">
+                    style="background-image: url({{ isset(Auth::user()->avatar) ? asset('public/img/avatar/' . Auth::user()->avatar) : asset('public/assets/images/header/logo.svg') }})">
                 </div>
                 <span><a href="{{ route('user.information') }}">{{ Auth::user()->name }}</a></span>
             </li>
