@@ -233,7 +233,10 @@ class UserController extends Controller
 
     public function getUserInformation(Request $request)
     {
-        return view('user/user-information');
+        if (Auth::check()) {
+            return view('user/user-information');
+        }
+        return redirect()->route('login');
     }
 
     public function getUserAddresses(Request $request)

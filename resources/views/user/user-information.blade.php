@@ -21,43 +21,56 @@
                 <div class="caption">Ảnh đại diện</div>
                 <div class="upload-group">
                     <input type="file" name="avatar" id="avatar" class="hide" />
-                    <div class="current-avatar" id="current-avatar" style="background-image: url({{ asset('public/assets/images/demo/avatar.jpg') }})"></div>
+                    <div class="current-avatar" id="current-avatar" style="background-image: url({{ isset(Auth::user()->avatar) ? asset('public/' . Auth::user()->avatar) : asset('public/assets/images/header/logo.svg') }})"></div>
                 </div>
             </div>
             <div class="info-input-group">
                 <label>Họ và tên</label>
-                <input type="text" name="name" placeholder="Họ và tên" />
+                <input type="text" name="name" placeholder="Họ và tên" value="{{Auth::user()->name}}"/>
             </div>
             <div class="info-input-group">
                 <label>Số điện thoại</label>
-                <input type="text" name="phone" placeholder="Số điện thoại" />
+                <input type="text" name="phone" placeholder="Số điện thoại"  value="{{Auth::user()->phone}}"/>
             </div>
             <div class="info-input-group">
                 <label>Email</label>
-                <input type="text" name="email" placeholder="Email" />
+                <input type="text" name="email" placeholder="Email" value="{{Auth::user()->email}}" />
             </div>
             <div class="info-input-group">
                 <label>Tên đăng nhập</label>
-                <input type="text" name="username" placeholder="Tên đăng nhập" />
+                <input type="text" name="username" placeholder="Tên đăng nhập" value="{{Auth::user()->username}}" />
             </div>
+            <?php $timestamp = strtotime(Auth::user()->birthday);
+?>
             <div class="info-input-group">
                 <label>Sinh nhật</label>
-                <select id="day" name="day">
+                <select id="day" name="day" value="3">
                     <option value="" disabled selected>Chọn ngày</option>
                     @for ($i = 1; $i <= 31; $i++)
+                    @if($i == date('w', $timestamp))
+                    <option value="{{$i}}" selected>{{ $i < 10 ? sprintf("%02d", $i) : $i }}</option>
+                    @else
                     <option value="{{$i}}">{{ $i < 10 ? sprintf("%02d", $i) : $i }}</option>
+                    @endif
                     @endfor
                 </select>
-                <select id="month" name="month">
+                <select id="month" name="month" >
                     <option value="" disabled selected>Chọn tháng</option>
                     @for ($i = 1; $i <= 12; $i++)
-                    <option value="{{$i}}">{{ $i < 10 ? sprintf("%02d", $i) : $i }}</option>
+                    @if($i == date('n', $timestamp))
+                    <option value="{{$i}}" selected>{{ $i < 10 ? sprintf("%02d", $i) : $i }}</option>
+                    @else <option value="{{$i}}" >{{ $i < 10 ? sprintf("%02d", $i) : $i }}</option>
+                    @endif
                     @endfor
                 </select>
                 <select id="year" name="year">
                     <option value="" disabled selected>Chọn năm</option>
                     @for ($i = 1940; $i <= date("Y"); $i++)
+                    @if($i == date('Y', $timestamp))
+                    <option value="{{$i}}" selected>{{ $i }}</option>
+                    @else
                     <option value="{{$i}}">{{ $i }}</option>
+                    @endif
                     @endfor
                 </select>
             </div>
@@ -65,7 +78,7 @@
                 <label class="non-block">Giới tính</label>
                 <div class="gender-radio non-block">
                     <label>
-                    <input class="with-gap" name="gender" type="radio" value="1" />
+                    <input class="with-gap" name="gender" type="radio" value="1" checked />
                     <span>Nam</span>
                     </label>
                 </div>
