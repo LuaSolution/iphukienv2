@@ -269,12 +269,15 @@ class UserController extends Controller
 
     public function postUserInformation(Request $request)
     {
+        $model = User::where('id', Auth::user()->id)->first();
         $coverFile = $request->file('avatar');
         $cover = "";
         if ($request->hasFile('avatar')) {
             $request->file('avatar')->storeAs('img/avatar/', $request->file('avatar')->getClientOriginalName());
             $cover = $request->file('avatar')->getClientOriginalName() . '?n=' . time();
+            $model->avatar = $cover;
         }
+
         if ($request->year) {
             $year = $request->year;
         } else {
@@ -293,8 +296,6 @@ class UserController extends Controller
             $day = 1;
         }
 
-        $model = User::where('id', Auth::user()->id)->first();
-        $model->avatar = $cover;
         $model->name = $request->name;
         $model->phone = $request->phone;
         $model->email = $request->email;
