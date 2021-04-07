@@ -316,6 +316,28 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item start @yield('list_trademarks_active') @yield('add_trademarks_active')">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Thương hiệu</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item @yield('add_trademarks_active')">
+                        <a href="{{ route('adMgetAddTrademark') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Thêm thương hiệu</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @yield('list_trademarks_active')">
+                        <a href="{{ route('adMgetListTrademark') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Danh sách thương hiệu</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <!-- END SIDEBAR MENU -->
     </div>

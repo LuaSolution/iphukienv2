@@ -5,6 +5,9 @@ namespace App\Http\Controllers\User;
 use App\Cate;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Color;
+use App\Size;
+use App\Trademark;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -33,6 +36,10 @@ class CategoryController extends Controller
             $this->data['listProduct'] = Product::where('category_id', $id)->orderBy('id', 'DESC')->paginate(5);
         }
         $this->data['category'] = (new Cate())->getCateById($id);
+        $this->data['colors'] = (new Color())->getListColor();
+        $this->data['sizes'] = (new Size())->getListSize();
+        $this->data['trademarks'] = (new Trademark())->getListTrademark();
+
         return view('user/category-details', $this->data);
     }
 }

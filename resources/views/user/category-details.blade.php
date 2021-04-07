@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/ipk-breadcrumb.css') }}">
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/category-details.css') }}">
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/list-product.css') }}">
+<link rel="stylesheet" href="https://materializecss.com/extras/noUiSlider/nouislider.css">
 @endsection
 
 @section('content')
@@ -30,7 +31,7 @@
         <div class="category-title">{{ $category->title }}</div>
         <div class="filter-block">
             <a href="#" data-target="filter-slide-out" class="sidenav-trigger category-filter">Bộ lọc</a>
-            <select   id="mySelect" onchange="sorting()">
+            <select id="mySelect" onchange="sorting()">
                 <option value="" disabled selected>Sắp xếp</option>
                 <option value="az">Tên: A-Z</a></option>
                 <option value="za">Tên: Z-A</option>
@@ -43,7 +44,7 @@
         @include('layouts.list-product', ['listProduct' => $listProduct])
 
         <div class="paging">
-        {{ $listProduct->links() }}
+            {{ $listProduct->links() }}
             <!-- <a href="#!" class="previous"><</a>
             <a href="#!" class="page-item">1</a>
             <a href="#!" class="page-item">2</a>
@@ -54,8 +55,51 @@
         </div>
     </div>
     <ul id="filter-slide-out" class="sidenav filter-slide-out">
-        <li>
-
+        <li class="filter-header">Trạng thái</li>
+        <li class="filter-checkbox">
+            <div class="filter-checkbox-block">
+                <input type="checkbox" class="filled-in" />
+                <span>Hàng mới</span>
+            </div>
+            <div class="filter-checkbox-block">
+                <input type="checkbox" class="filled-in" />
+                <span>Bán chạy</span>
+            </div>
+            <div class="filter-checkbox-block">
+                <input type="checkbox" class="filled-in" />
+                <span>Giảm giá</span>
+            </div>
+        </li>
+        <li class="filter-header">Màu sắc</li>
+        <li class="filter-checkbox">
+            @foreach($colors as $c)
+            <div class="filter-checkbox-block">
+                <input type="checkbox" class="filled-in" />
+                <span>{{$c->name}}</span>
+            </div>
+            @endforeach
+        </li>
+        <li class="filter-header">Kích cỡ</li>
+        <li class="filter-checkbox">
+            @foreach($sizes as $c)
+            <div class="filter-checkbox-block">
+                <input type="checkbox" class="filled-in" />
+                <span>{{$c->name}}</span>
+            </div>
+            @endforeach
+        </li>
+        <li class="filter-header">Thương hiệu</li>
+        <li class="filter-checkbox">
+            @foreach($trademarks as $c)
+            <div class="filter-checkbox-block">
+                <input type="checkbox" class="filled-in" />
+                <span>{{$c->name}}</span>
+            </div>
+            @endforeach
+        </li>
+        <li class="filter-header">Mức giá</li>
+        <li class="filter-checkbox">
+            <div id="price-range"></div>
         </li>
     </ul>
     @include('layouts.quickview')
@@ -66,12 +110,29 @@
 
 @section('scripts')
 <script src="{{ asset('public/assets/scripts/iphukien/user/list-product.js') }}"></script>
+<script src="https://materializecss.com/extras/noUiSlider/nouislider.js"></script>
 <script>
-$(document).ready(function () {
+$(document).ready(function() {
     $('.filter-slide-out').sidenav();
     var elems = document.querySelectorAll('select');
     M.FormSelect.init(elems);
+
+    var slider = document.getElementById('price-range');
+    noUiSlider.create(slider, {
+        start: [200000, 10000000],
+        connect: true,
+        step: 1,
+        orientation: 'horizontal', // 'horizontal' or 'vertical'
+        range: {
+            'min': 200000,
+            'max': 10000000
+        },
+        format: wNumb({
+            decimals: 0
+        })
+    });
 });
+
 function sorting() {
     var x = document.getElementById("mySelect").value;
     console.log(x)

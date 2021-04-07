@@ -12,6 +12,7 @@ use App\ProductSize;
 use App\Size;
 use App\Status;
 use App\Tag;
+use App\Trademark;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -27,6 +28,7 @@ class ProductController extends Controller
         $this->data['tags'] = (new Tag())->getListTag();
         $this->data['sizes'] = (new Size())->getListSize();
         $this->data['colors'] = (new Color())->getListColor();
+        $this->data['trademarks'] = (new Trademark())->getListTrademark();
 
         return view('metronic_admin.products.add', $this->data);
     }
@@ -115,6 +117,7 @@ class ProductController extends Controller
         }
         $status = $request->input('status_id');
         $tag = $request->input('tag_id');
+        $trademark = $request->input('trademark_id');
         $sizes = explode(",", $request->input('sizes'));
 
         $dataInsert = [
@@ -128,6 +131,7 @@ class ProductController extends Controller
             'video' => $video,
             'status_id' => $status,
             'tag_id' => $tag,
+            'trademark_id' => $trademark,
             'sold' => 0,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
@@ -188,10 +192,10 @@ class ProductController extends Controller
             $obj->img = asset('public/' . $i->image);
             return $obj;
         })->all();
-
         $this->data['productColorId'] = $productColor->map(function ($i) {
             return $i->color_id;
         })->all();
+        $this->data['trademarks'] = (new Trademark())->getListTrademark();
 
         if ($this->data['product']) {
             return view('metronic_admin.products.edit', $this->data);
@@ -234,6 +238,7 @@ class ProductController extends Controller
         }
         $status = $request->input('status_id');
         $tag = $request->input('tag_id');
+        $trademark = $request->input('trademark_id');
 
         //update size
         $sizes = explode(",", $request->input('sizes'));
@@ -263,6 +268,7 @@ class ProductController extends Controller
             'tag_id' => $tag,
             'sold' => 0,
             'video' => $video,
+            'trademark_id' => $trademark,
             'updated_at' => date('Y-m-d H:i:s'),
         ];
         $result = (new Product())->updateProduct($id, $dataUpdate);

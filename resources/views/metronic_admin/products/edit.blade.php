@@ -68,6 +68,14 @@
                             </select>
                         </div>
                         <div class="form-group form-md-line-input has-success">
+                            <label class="control-label">Thương hiệu</label>
+                            <select class="bs-select form-control" name="trademark" id="trademark">
+                                @foreach($trademarks as $key=>$item)
+                                <option value="{{ $item->id }}" {{ $item->id == $product->trademark_id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group form-md-line-input has-success">
                             <label class="control-label">Trạng thái</label>
                             <select class="bs-select form-control" name="status" id="status">
                                 @foreach($statuses as $key=>$item)
@@ -178,6 +186,7 @@ $(document).on("submit","#create-new",function(e) {
   fd.append('sizes', $("#size").val());
   fd.append('video', $("#form-video").val());
   fd.append('colors', $("#color").val());
+  fd.append('trademark_id', $("#trademark").val());
   fd.append('_token', '{{ csrf_token() }}');
 
   $.ajax({

@@ -67,3 +67,24 @@
     background: #021732;
     color: #fff;
 }
+#filter-slide-out {
+    padding: 40px 15px;
+}
+#filter-slide-out .filter-header {
+    margin-top: 20px;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+    color: #131313;
+}
+#filter-slide-out .filter-header:first-child {
+    margin-top: 0;
+}
+#filter-slide-out[type="checkbox"].filled-in:checked+span:not(.lever):after {
+    border: 2px solid #073552;
+    background-color: #073552;
+}
+#price-range {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
