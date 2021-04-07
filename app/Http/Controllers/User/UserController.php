@@ -233,7 +233,10 @@ class UserController extends Controller
 
     public function getUserInformation(Request $request)
     {
-        return view('user/user-information');
+        if (Auth::check()) {
+            return view('user/user-information');
+        }
+        return redirect()->route('login');
     }
 
     public function getUserAddresses(Request $request)
@@ -262,5 +265,43 @@ class UserController extends Controller
         } else {
             return redirect()->route('login');
         }
+    }
+
+    public function postUserInformation(Request $request)
+    {
+        $model = User::where('id', Auth::user()->id)->first();
+        $coverFile = $request->file('avatar');
+        $cover = "";
+        if ($request->hasFile('avatar')) {
+            $request->file('avatar')->storeAs('img/avatar/', $request->file('avatar')->getClientOriginalName());
+            $cover = $request->file('avatar')->getClientOriginalName() . '?n=' . time();
+            $model->avatar = $cover;
+        }
+
+        if ($request->year) {
+            $year = $request->year;
+        } else {
+            $year = 2020;
+        }
+
+        if ($request->month) {
+            $month = $request->month;
+        } else {
+            $month = 1;
+        }
+
+        if ($request->day) {
+            $day = $request->day;
+        } else {
+            $day = 1;
+        }
+
+        $model->name = $request->name;
+        $model->phone = $request->phone;
+        $model->email = $request->email;
+        $model->gender = $request->gender;
+        $model->birthday = $year . '-' . $month . '-' . $day;
+        $model->save();
+        return redirect()->back();
     }
 }
