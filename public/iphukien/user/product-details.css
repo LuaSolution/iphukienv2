@@ -74,12 +74,15 @@
     background-size: 100%;
     margin-left: 10px;
 }
+
 .product-container .main-image.is-image {
     padding-top: 100%;
 }
+
 .product-container .main-image .yt-player {
     width: 100%;
 }
+
 .product-container .full-screen-btn {
     background-image: url(/public/assets/images/product-details/btn-zoom.svg);
     background-repeat: no-repeat;
@@ -103,7 +106,7 @@
 .product-infos .description {
     margin-top: 10px;
     font-weight: normal;
-    font-size: 13px;
+    font-size: 16px;
     line-height: 18px;
     color: #2E2E2E;
 }
@@ -171,15 +174,15 @@
 
 .product-infos .name {
     font-weight: 500;
-    font-size: 23px;
-    line-height: 29px;
+    font-size: 22px;
+    line-height: 28px;
     color: #000;
 }
 
 .product-infos .price .origin {
     font-weight: normal;
     font-size: 16px;
-    line-height: 22px;
+    line-height: 18px;
     text-decoration-line: line-through;
     color: #7B7B7B;
     float: left;
@@ -213,9 +216,9 @@
 .product-infos .list-status .status,
 .product-infos .list-status {
     display: inline-block;
-    font-weight: 500;
-    font-size: 15px;
-    line-height: 21px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 18px;
 }
 
 .product-infos .list-status .status {
@@ -371,12 +374,12 @@
 .pre-order-block .buy-now-btn,
 .pre-order-block .add-to-card-btn-detail {
     font-weight: normal;
-    font-size: 13.351px;
+    font-size: 16px;
     line-height: 18px;
     text-align: center;
     color: #FFFFFF;
     float: left;
-    margin-left: 10px;
+    margin-left: 2px;
     padding: 10px;
 }
 
