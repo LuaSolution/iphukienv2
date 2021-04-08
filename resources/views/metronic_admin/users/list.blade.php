@@ -60,6 +60,15 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="row">
+                    <div class="col-md-7 col-sm-7">
+                        <div class="dataTables_paginate paging_bootstrap_full_number" id="sample_1_2_paginate">
+                            <ul class="pagination" style="visibility: visible;">
+                            {{ $users->links() }}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- END SAMPLE TABLE PORTLET-->
