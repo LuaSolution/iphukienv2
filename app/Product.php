@@ -106,4 +106,15 @@ class Product extends Model
             ->take(4)
             ->orderBy('created_at', 'desc')->get();
     }
+    public function searchByKeyword($keyword)
+    {
+        return Product::leftJoin('categories', 'categories.id', '=', 'products.category_id')
+            ->leftJoin('trademarks', 'trademarks.id', '=', 'products.trademark_id')
+            ->select('products.*')
+            ->where('products.name', 'like', '%'.$keyword.'%')
+            ->where('categories.title', 'like', '%'.$keyword.'%')
+            ->where('trademarks.name', 'like', '%'.$keyword.'%')
+            ->orderBy('pos', 'asc')->orderBy('created_at', 'desc')
+            ->get();
+    }   
 }
