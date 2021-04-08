@@ -100,14 +100,14 @@
             </div>
             <div class="colors-wrapper">
                 <div class="color-label">Màu sắc</div>
-                <div class="sizes">
+                <div class="colors">
                     @foreach($productColorDistinct as $key=>$item)
-                    <span class="size" data-colorid="{{$item->color_id}}" style="font-size:16px" data-colorname="{{$item->color_name}}" data-img="{{ asset('public/' . $productColor[$key]->image) }}">{{$item->color_name}}</span>
+                    <span class="color" data-colorid="{{$item->color_id}}" style="font-size:16px" data-colorname="{{$item->color_name}}" data-img="{{ asset('public/' . $productColor[$key]->image) }}">{{$item->color_name}}</span>
                     @endforeach
                 </div>
             </div>
             <div class="sizes-wrapper">
-                <div class="color-label">Kích thước<a href="{{ url('huong-dan-chon-size') }}" target="_blank"  style="text-transform:none;font-weight:400">(Hướng dẫn chọn size)</a></div>
+                <div class="color-label">Kích thước <a href="{{ url('huong-dan-chon-size') }}" target="_blank"  style="text-transform:none;font-weight:400"> (Hướng dẫn chọn size)</a></div>
                 <div class="sizes">
                     @foreach($productSize as $item)
                     <span class="size" data-sizeid="{{$item->size_id}}" data-sizename="{{$item->name}}" style="font-size:16px">{{ $item->name }}</span>

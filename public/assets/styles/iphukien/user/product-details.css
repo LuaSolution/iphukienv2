@@ -264,27 +264,30 @@
     line-height: 18px;
     text-transform: uppercase;
     color: #000000;
-    text-align: center;
     margin-top: 10px;
 }
 
 .product-infos .colors .color {
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 18px;
-    align-items: center;
-    text-align: center;
-    color: #6C6C6C;
-    background-color: #EFEFEF;
     display: inline-block;
-    margin-left: 15px;
-    padding: 10px 15px;
+    margin-left: 10px;
+    background-color: #EFEFEF;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 32px;
+    color: #6C6C6C;
     cursor: pointer;
+    width: 75px;
+    height: 32px;
+    text-align: center;
 }
 
 .product-infos .colors .color.active {
     background-color: #131313;
     color: #fff;
+}
+
+.product-infos .colors .color:first-child {
+    margin-left: 0;
 }
 
 .product-infos .sizes-wrapper {

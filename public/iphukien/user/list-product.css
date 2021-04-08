@@ -315,7 +315,6 @@
     line-height: 18px;
     text-transform: uppercase;
     color: #000000;
-    text-align: center;
     margin-top: 10px;
 }
 
@@ -332,6 +331,11 @@
     padding: 10px 15px;
     cursor: pointer;
 }
+
+#quickview .product-infos .colors .color:first-child {
+    margin-left: 0;
+}
+
 
 #quickview .product-infos .colors .color.active {
     background-color: #131313;

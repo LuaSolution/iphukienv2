@@ -28,7 +28,7 @@ $(document).ready(function () {
                         + `<span class="sale-percent">-${Math.round((productInfo['product']['price'] - productInfo['product']['sale_price']) / productInfo['product']['price'] * 100)}%</span>`
                         + `<img src="${localStorage.getItem('quickview_image_base_path')}/${productInfo['productColor'][i].image}" />`
                         + `</div>`
-                    strColor += `<span class="size" data-img="${localStorage.getItem('quickview_image_base_path')}/${productInfo['productColor'][i].image}">${productInfo['productColor'][i].color_name}</span>`
+                    strColor += `<span class="color" data-img="${localStorage.getItem('quickview_image_base_path')}/${productInfo['productColor'][i].image}">${productInfo['productColor'][i].color_name}</span>`
                 }
                 str += '<a href="#!" class="next"></a>'
                 $("#slider-image").html(str)
