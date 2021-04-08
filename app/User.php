@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'avatar', 'birthday', 'created_at', 'email', 'gender', 'id', 'name', 'password', 'phone', 'remember_token', 'role_id'
+        'avatar', 'birthday', 'created_at', 'email', 'gender', 'id', 'name', 'password', 'phone', 'remember_token', 'role_id',
     ];
 
     /**
@@ -27,18 +27,22 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function getUserByEmail($email){
+    public function getUserByEmail($email)
+    {
         return User::where('email', '=', $email)->first();
     }
 
-    public function getListUser(){
-        return User::all();
+    public function getListUser()
+    {
+        return User::paginate(5);
     }
 
-    public function deleteUser($id){
+    public function deleteUser($id)
+    {
         return User::where('id', '=', $id)->delete();
     }
-    public function updateUser($id, $data){
+    public function updateUser($id, $data)
+    {
         return User::where('id', '=', $id)->update($data);
     }
 }

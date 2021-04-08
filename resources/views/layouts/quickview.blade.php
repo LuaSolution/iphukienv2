@@ -23,8 +23,7 @@
                 <div class="colors" id="quickview-colors"></div>
             </div>
             <div class="sizes-wrapper">
-                <div class="size-label">Kích thước<a href="{{ url('huong-dan-chon-size') }}" target="_blank">(Hướng dẫn
-                        chọn size)</a></div>
+            <div class="color-label">Kích thước<a href="{{ url('huong-dan-chon-size') }}" target="_blank"  style="text-transform:none;font-weight:400">(Hướng dẫn chọn size)</a></div>
                 <div class="sizes" id="quickview-sizes"></div>
             </div>
             <div class="pre-order-block">
@@ -34,7 +33,7 @@
                     <span class="increase">+</span>
                 </div>
                 <a href="#!" class="add-to-card-btn">Thêm vào giỏ hàng</a>
-                <a href="{{ route('user.cart') }}" class="buy-now-btn" data-url="{{ route('user.cart') }}">Mua ngay</a>
+                <a href="{{ route('user.cart') }}" class="buy-now-btn" style="width:180px" data-url="{{ route('user.cart') }}">Mua ngay</a>
             </div>
         </div>
     </div>

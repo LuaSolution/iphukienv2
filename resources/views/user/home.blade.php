@@ -9,6 +9,26 @@
 @section('styles')
 <link rel="stylesheet" href="{{ asset('public/iphukien/user/home.css') }}">
 <link rel="stylesheet" href="{{ asset('public/iphukien/user/list-product.css') }}">
+<style>
+.container{
+    margin-top:30px;
+text-align: center;
+width: 100%;
+height: 200px;
+}
+.btn-xem-them {
+    height:51px;
+    padding: 15px 40px;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 23px;
+    text-transform: uppercase;
+    color: #000;
+    border: 1px solid #000000;
+    background-color: transparent;
+    cursor: pointer;
+}
+</style>
 @endsection
 
 @section('content')
@@ -67,12 +87,18 @@
         </div>
         @endif
         <div class="products-block">
-            <p class="block-title">Sản phẩm mới</p>
+            <p class="block-title">SẢN PHẨM MỚI</p>
             @include('layouts.list-product', ['listProduct' => $proNew, 'hasReadMore' => false])
+            <div class="container">
+                <a href="{{ url('/categories/none?sort=newest') }}" class="btn-xem-them" >XEM THÊM</a>
+            </div>
         </div>
-        <div class="products-block">
-            <p class="block-title">Sản phẩm bán chạy</p>
+        <div class="products-block" style="margin-top:0">
+            <p class="block-title">SẢN PHẨM BÁN CHẠY</p>
             @include('layouts.list-product', ['listProduct' => $proTopSold, 'hasReadMore' => false])
+            <div class="container">
+                <a href="{{ url('/categories/none?sort=mostbuy') }}" class="btn-xem-them" >XEM THÊM</a>
+            </div>
         </div>
     </div>
 </div>

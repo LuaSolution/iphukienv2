@@ -85,7 +85,7 @@
                 @endif
             </div>
             @endif
-            
+
             <div class="price">
                 <div class="origin">{{ number_format($product->price, 0, ',', '.') }}đ</div>
                 <div class="sale">{{ number_format($product->sale_price, 0, ',', '.') }}đ <span>Giảm {{ round(($product->price-$product->sale_price) / $product->price * 100) }}%</span></div>
@@ -102,15 +102,15 @@
                 <div class="color-label">Màu sắc</div>
                 <div class="colors">
                     @foreach($productColorDistinct as $key=>$item)
-                    <span class="color" data-colorid="{{$item->color_id}}" data-colorname="{{$item->color_name}}" data-img="{{ asset('public/' . $productColor[$key]->image) }}">{{$item->color_name}}</span>
+                    <span class="color" data-colorid="{{$item->color_id}}" style="font-size:16px" data-colorname="{{$item->color_name}}" data-img="{{ asset('public/' . $productColor[$key]->image) }}">{{$item->color_name}}</span>
                     @endforeach
                 </div>
             </div>
             <div class="sizes-wrapper">
-                <div class="size-label">Kích thước<a href="{{ url('huong-dan-chon-size') }}" target="_blank">(Hướng dẫn chọn size)</a></div>
+                <div class="color-label">Kích thước <a href="{{ url('huong-dan-chon-size') }}" target="_blank"  style="text-transform:none;font-weight:400"> (Hướng dẫn chọn size)</a></div>
                 <div class="sizes">
                     @foreach($productSize as $item)
-                    <span class="size" data-sizeid="{{$item->size_id}}" data-sizename="{{$item->name}}">{{ $item->name }}</span>
+                    <span class="size" data-sizeid="{{$item->size_id}}" data-sizename="{{$item->name}}" style="font-size:16px">{{ $item->name }}</span>
                     @endforeach
                 </div>
             </div>
@@ -120,8 +120,8 @@
                     <input type="number" class="quantity" value="1" id="quantity-detail" />
                     <span class="increase-detail">+</span>
                 </div>
-                <a href="#!" class="add-to-card-btn-detail">Thêm vào giỏ hàng</a>
-                <a href="#!" class="buy-now-btn" id="buy-now-btn-detail">Mua ngay</a>
+                <a href="#!" class="add-to-card-btn-detail" >Thêm vào giỏ hàng</a>
+                <a href="#!" class="buy-now-btn" id="buy-now-btn-detail" style="width:180px">Mua ngay</a>
             </div>
         </div>
     </div>

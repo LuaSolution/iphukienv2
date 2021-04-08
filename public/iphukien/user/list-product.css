@@ -1,15 +1,18 @@
 .products {
     margin-top: 20px;
 }
+
 .row .col.product {
     padding: 30px;
 }
+
 .row .col.product .img {
     width: 100%;
     background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
 }
+
 .row .col.product .name a {
     margin-top: 5px;
     font-weight: 500;
@@ -17,9 +20,11 @@
     line-height: 20px;
     color: #232C38;
 }
+
 .row .col.product .price {
     margin-top: 10px;
 }
+
 .row .col.product .price .sale {
     font-weight: normal;
     font-size: 16px;
@@ -29,6 +34,7 @@
     text-align: left;
     display: inline-block;
 }
+
 .row .col.product .price .origin {
     font-weight: normal;
     font-size: 14px;
@@ -39,12 +45,14 @@
     text-align: right;
     display: inline-block;
 }
+
 .row .col.product .button-wrapper {
     margin-top: 15px;
     padding-top: 15px;
     border-top: 1px solid #DDDDDD;
     display: none;
 }
+
 .row .col.product:hover {
     background-color: #fff;
     box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.1);
@@ -52,9 +60,11 @@
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
+
 .row .col.product:hover .button-wrapper {
     display: block;
 }
+
 .col.product .button-wrapper a {
     display: block;
     text-align: center;
@@ -69,9 +79,11 @@
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
+
 .col.product.added-wishlist {
     position: relative;
 }
+
 .col.product.added-wishlist::before,
 #quickview .product-img.added-wishlist::after {
     content: '';
@@ -90,32 +102,39 @@
     left: 10px;
     background-color: #fff;
 }
+
 #quickview .product-img.added-wishlist::after {
     top: 15px;
     right: 15px;
     left: unset;
 }
+
 #quickview {
     padding: 10px;
     width: 90%;
     max-height: 90%;
 }
+
 #quickview .modal-content {
     overflow: hidden;
 }
+
 #quickview .modal-content::after {
     content: '';
     clear: both;
 }
+
 .quickview-slider {
     width: 40%;
     float: left;
 }
+
 #quickview .product-infos {
     padding: 0 30px;
     float: left;
     width: 60%;
 }
+
 #quickview .product-img .sale-percent {
     position: absolute;
     top: 15px;
@@ -132,22 +151,26 @@
     -moz-border-radius: 50%;
     border-radius: 50%;
 }
+
 #quickview .product-infos .name {
     font-weight: 500;
     font-size: 23px;
     line-height: 29px;
     color: #000;
 }
+
 #quickview .product-infos .description {
     margin-top: 10px;
     font-weight: normal;
-    font-size: 13px;
+    font-size: 16px;
     line-height: 18px;
     color: #2E2E2E;
 }
+
 #quickview .product-infos .list-tags {
     margin-top: 17px;
 }
+
 #quickview .product-infos .list-tags .tag {
     width: 66px;
     height: 20px;
@@ -157,18 +180,24 @@
     -moz-border-radius: 10px;
     border-radius: 10px;
 }
+
 #quickview .product-infos .list-tags .tag:first-child {
     margin-left: 0;
 }
+
 #quickview .product-infos .list-tags .tag.hang-moi {
     background-color: #E24C4C;
 }
+
 #quickview .product-infos .list-tags .tag.ban-chay {
-    background-color: #219653;;
+    background-color: #219653;
+    ;
 }
+
 #quickview .product-infos .list-tags .tag.giam-gia {
     background-color: #2F80ED;
 }
+
 #quickview .product-infos .list-tags .tag::before {
     font-weight: 500;
     font-size: 10px;
@@ -177,15 +206,19 @@
     color: #fff;
     display: block;
 }
+
 #quickview .product-infos .list-tags .tag.hang-moi::before {
     content: 'Hàng mới';
 }
+
 #quickview .product-infos .list-tags .tag.ban-chay::before {
     content: 'Bán chạy';
 }
+
 #quickview .product-infos .list-tags .tag.giam-gia::before {
     content: 'Giảm giá';
 }
+
 #quickview .product-infos .price {
     background-color: #F4F4F4;
     border: 1.08511px solid #DDDDDD;
@@ -193,25 +226,29 @@
     padding: 10px 15px;
     overflow: hidden;
 }
+
 #quickview .product-infos .price::after {
     content: '';
     clear: both;
 }
+
 #quickview .product-infos .price .origin {
     font-weight: normal;
-    font-size: 11.297px;
-    line-height: 22px;
+    font-size: 16px;
+    line-height: 18px;
     text-decoration-line: line-through;
     color: #7B7B7B;
     float: left;
 }
+
 #quickview .product-infos .price .sale {
     font-weight: 500;
     font-size: 16px;
-    line-height: 22px;
+    line-height: 18px;
     color: #FE3834;
     float: right;
 }
+
 #quickview .product-infos .price .sale span {
     font-weight: normal;
     font-size: 11px;
@@ -221,40 +258,49 @@
     background: #EB5757;
     display: inline-block;
 }
+
 #quickview .product-infos .status-wrapper {
     margin-top: 10px;
     padding-bottom: 20px;
     border-bottom: 1px solid #BDBDBD;
 }
+
 #quickview .product-infos .status-label,
 #quickview .product-infos .list-status .status,
 #quickview .product-infos .list-status {
     display: inline-block;
     font-weight: 500;
-    font-size: 15px;
-    line-height: 21px;
+    font-size: 16px;
+    line-height: 18px;
 }
+
 #quickview .product-infos .list-status .status {
     margin-left: 12px;
 }
+
 #quickview .product-infos .status-label {
     color: #000;
 }
+
 #quickview .product-infos .list-status .status.het-hang::before {
     content: 'Hết hàng';
     color: #EB5757;
 }
+
 #quickview .product-infos .list-status .status.dat-truoc::before {
     content: 'Đặt trước';
     color: #2F80ED;
 }
+
 #quickview .product-infos .list-status .status.con-hang::before {
     content: 'Còn hàng';
     color: #219653;
 }
+
 #quickview .product-infos .colors-wrapper {
     margin-top: 12px;
 }
+
 #quickview .product-infos .color-label {
     font-weight: 500;
     font-size: 16px;
@@ -262,15 +308,16 @@
     text-transform: uppercase;
     color: #000;
 }
+
 #quickview .product-infos .colors {
     font-weight: 500;
     font-size: 16px;
     line-height: 18px;
     text-transform: uppercase;
     color: #000000;
-    text-align: center;
     margin-top: 10px;
 }
+
 #quickview .product-infos .colors .color {
     font-weight: normal;
     font-size: 16px;
@@ -284,20 +331,29 @@
     padding: 10px 15px;
     cursor: pointer;
 }
+
+#quickview .product-infos .colors .color:first-child {
+    margin-left: 0;
+}
+
+
 #quickview .product-infos .colors .color.active {
     background-color: #131313;
     color: #fff;
 }
+
 #quickview .product-infos .sizes-wrapper {
     margin-top: 17px;
 }
+
 #quickview .product-infos .size-label {
     font-weight: 300;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 16px;
+    line-height: 18px;
     color: #000;
     display: inline-block;
 }
+
 #quickview .product-infos .size-label a {
     font-weight: 500;
     font-size: 11.297px;
@@ -306,15 +362,17 @@
     display: inline-block;
     margin-left: 5px;
 }
+
 #quickview .product-infos .sizes {
     margin-top: 15px;
 }
+
 #quickview .product-infos .sizes .size {
     display: inline-block;
     margin-left: 15px;
     background-color: #EFEFEF;
     font-weight: normal;
-    font-size: 11px;
+    font-size: 16px;
     line-height: 32px;
     color: #6C6C6C;
     cursor: pointer;
@@ -322,20 +380,25 @@
     height: 32px;
     text-align: center;
 }
+
 #quickview .product-infos .sizes .size.active {
     background-color: #131313;
     color: #fff;
 }
+
 #quickview .product-infos .sizes .size:first-child {
     margin-left: 0;
 }
+
 #quickview .product-infos .pre-order-block {
     margin-top: 20px;
 }
+
 #quickview .product-infos .pre-order-block::after {
     content: '';
     clear: both;
 }
+
 #quickview .pre-order-block .quantity-input {
     width: 90px;
     height: 39px;
@@ -344,10 +407,12 @@
     float: left;
     background-color: #fff;
 }
+
 #quickview .pre-order-block .quantity-input::after {
     content: '';
     clear: both;
 }
+
 #quickview .quantity-input input,
 #quickview .quantity-input span {
     float: left;
@@ -358,26 +423,30 @@
     text-align: center;
     color: #000;
 }
+
 #quickview .quantity-input input {
     width: 80%;
     text-align: center;
     border: none;
 }
+
 #quickview .quantity-input span {
     width: 10%;
     cursor: pointer;
 }
+
 #quickview .pre-order-block .add-to-card-btn,
 #quickview .pre-order-block .buy-now-btn {
     font-weight: normal;
-    font-size: 13.351px;
-    line-height: 18px;
+    font-size: 16px;
+    line-height: 36px;
     text-align: center;
     color: #FFFFFF;
     float: left;
     margin-left: 10px;
-    padding: 10px;
+    padding: 2px;
 }
+
 #quickview .pre-order-block .add-to-card-btn {
     background-image: url(/public/assets/images/product/cart.svg);
     background-repeat: no-repeat;
@@ -385,9 +454,11 @@
     background-color: #131313;
     padding-left: 20px;
 }
+
 #quickview .pre-order-block .buy-now-btn {
     background-color: #E24C4C;
 }
+
 #quickview .quickview-slider .previous,
 #quickview .quickview-slider .next {
     background-repeat: no-repeat;
@@ -398,14 +469,17 @@
     background-position: center;
     top: calc(50% - 15px);
 }
+
 #quickview .quickview-slider .previous {
     left: 15px;
     background-image: url(/public/assets/images/product/left.svg);
 }
+
 #quickview .quickview-slider .next {
     right: 15px;
     background-image: url(/public/assets/images/product/right.svg);
 }
+
 #quickview .close-quickview {
     background-image: url(/public/assets/images/product/close-button.svg);
     background-position: center;
@@ -417,12 +491,15 @@
     right: 0;
     display: block;
 }
+
 .quickview-slider .indicators .indicator-item {
     background-color: #C4C4C4;
 }
+
 .quickview-slider .indicators .indicator-item.active {
     background-color: #000;
 }
+
 .view-more {
     border: 1px solid #000000;
     width: 150px;
