@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Cate;
+use App\Color;
 use App\Http\Controllers\Controller;
 use App\Product;
-use App\Color;
 use App\Size;
 use App\Trademark;
 use Illuminate\Http\Request;
