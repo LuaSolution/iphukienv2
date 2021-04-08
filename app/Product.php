@@ -54,7 +54,7 @@ class Product extends Model
             ->leftJoin('tags', 'tags.id', '=', 'products.tag_id')
             ->select('products.*', 'tags.name as tag_name', 'categories.title as category_name', 'statuses.name as status_name')
             ->orderBy('pos', 'asc')->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(10);
     }
 
     public function getListProductByQuery($query)
