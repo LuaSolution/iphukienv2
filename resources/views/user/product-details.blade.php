@@ -127,7 +127,7 @@
     </div>
     <div class="product-rating ipk-content-container">
         <div class="fb-share-button" data-href="{{ url()->full() }}" data-layout="button_count"></div>
-        <div class="add-wishlist-button">Thêm vào yêu thích</div>
+        <div class="add-wishlist-button" data-type="{{ !isset($wishlist) ? 'add-wishlist' : 'cancel-wishlist' }}">{{ !isset($wishlist) ? 'Thêm vào yêu thích' : 'Hủy yêu thích' }}</div>
     </div>
     <div class="product-descriptions ipk-content-container">
         <div class="title">Mô tả sản phẩm</div>
@@ -237,6 +237,34 @@ $(document).on("click", ".list-thumbs-popup .arrow-right", function () {
 $(document).on("click", ".thumbs-popup span", function () {
     $('.main-image-popup')[0].style.backgroundImage = "url(" + $(this).data('img') + ")";
 });
+
+$(document).on("click", ".add-wishlist-button", function () {
+    $.ajax({
+        url: `{{route('ajax.add-to-wishlist')}}`,
+        type: 'post',
+        data: { 'productId': '{{$product->id}}', 'type': $(this).data('type'), '_token': `{{ csrf_token() }}` }
+    }).done(function (data) {
+        console.log(data)
+        if (JSON.parse(data).code == 1) {
+            M.toast({
+                html: 'Cập nhật thành công',
+                classes: 'add-cart-success'
+            })
+            location.reload();
+        } else {
+            M.toast({
+                html: 'Cập nhật không thành công',
+                classes: 'add-cart-fail'
+            })
+        }
+    })
+    .fail(function () {
+        alert('Cập nhật thất bại')
+    })
+    
+});
+
+
 $(document).on("click", ".thumbs span", function () {
     $('.main-image').addClass('is-image');
     $('.main-image').html('');

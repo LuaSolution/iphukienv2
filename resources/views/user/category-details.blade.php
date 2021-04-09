@@ -142,7 +142,7 @@ $(document).ready(function() {
         step: 1,
         orientation: 'horizontal', // 'horizontal' or 'vertical'
         range: {
-            'min': 200000,
+            'min': 0,
             'max': 10000000
         },
         format: wNumb({

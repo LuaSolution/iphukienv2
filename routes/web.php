@@ -169,4 +169,5 @@ Route::middleware(['runall', 'locale'])->group(function () {
     Route::post('/calc-shipping-fee', 'User\AjaxController@calcShippingFee')->name('ajax.calc-shipping-fee');
     Route::post('/create-order', 'User\AjaxController@createOrder')->name('ajax.create-order');
     Route::post('/quickview-product/{productId}', 'User\AjaxController@getQuickViewProduct')->name('ajax.quickview-product');
+    Route::post('/add-to-wishlist', 'User\AjaxController@addToWishlist')->name('ajax.add-to-wishlist');
 });

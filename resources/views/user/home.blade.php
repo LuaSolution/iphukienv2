@@ -32,6 +32,30 @@ height: 200px;
 @endsection
 
 @section('content')
+<script>
+function countDown(key, date) {
+    const countDownDate = new Date(date).getTime();
+
+const x = setInterval(function() {
+console.log(key)
+  var now = new Date().getTime();
+
+  var distance = countDownDate - now;
+
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("day" +key ).innerHTML = days
+  document.getElementById("hour" + key ).innerHTML =hours
+  document.getElementById("minute" + key ).innerHTML= minutes
+  document.getElementById("second"+ key ).innerHTML =seconds
+  if (distance < 0) {
+    clearInterval(x);
+  }
+}, 1000);}
+</script>
 <div class="ipk-container">
     <div class="ipk-content-container">
         <div class="remove-line-height banner">
@@ -54,7 +78,7 @@ height: 200px;
         <div class="sale-products">
             <div class="carousel carousel-slider sale-product-slider">
                 <div class="ipk-pre-slide"></div>
-                @foreach($flashSale as $item)
+                @foreach($flashSale as $key=>$item)
                 <div class="carousel-item">
                     <div class="flash-deal-icon">Flash deal</div>
                     <div class="carousel-item-wrapper">
@@ -69,10 +93,10 @@ height: 200px;
                                 <span class="origin">{{ number_format($item->product->origin_price, 0, ',', '.') }}đ</span>
                             </div>
                             <div class="time">
-                                <div class="day">03</div>
-                                <div class="hour">23</div>
-                                <div class="minute">59</div>
-                                <div class="second">55</div>
+                                <div id="day{{$key}}" class="day">03</div>
+                                <div id="hour{{$key}}" class="hour">23</div>
+                                <div id="minute{{$key}}" class="minute">59</div>
+                                <div id="second{{$key}}" class="second">55</div>
                             </div>
 
                         </div>
@@ -81,6 +105,11 @@ height: 200px;
                         <a href="{{ route('products.show', $item->product->product_id) }}">Xem chi tiết</a>
                     </div>
                 </div>
+            <?php
+echo ('<script type="text/javascript">
+                countDown(' . $key . ', "' . $item->product->to_date . '")
+            </script>')
+?>
                 @endforeach
                 <div class="ipk-next-slide"></div>
             </div>
