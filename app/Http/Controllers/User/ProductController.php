@@ -14,32 +14,33 @@ class ProductController extends Controller
 {
     public function show(Request $request, $id)
     {
-        if($id == 'search') {
-            $keyword = $request->input('keyword');
-            if($keyword == '' || !isset($keyword)) return;
-            $res = (new Product())->searchByKeyword($keyword);
-            dd($res);
-        } else {
-            $data = [];
-            $data['product'] = (new Product())->getProductById($id);
-            $data['productColor'] = (new ProductColor())->getListProductColorByProduct($data['product']->id);
-            $data['productColorDistinct'] = (new ProductColor())->getListProductColorByProductDistinct($data['product']->id);
-            $data['productSize'] = (new ProductSize())->getListProductSizeByProduct($data['product']->id);
-            $data['listSameProduct'] = (new Product())->getListSameProduct($data['product']->category_id, $data['product']->id);
-            if (Auth::check() && Auth::user()->role_id == 2) {
-                $data['wishlist'] = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $id);
-            }
-            foreach ($data['listSameProduct'] as $i) {
-                // $i->image = asset('public/'.(new ProductColor())->getListProductColorByProduct($i->id)[0]->image);
-                $i->wishlist = null;
-                if (Auth::check() && Auth::user()->role_id == 2) {
-                    $i->wishlist = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $i->id);
-                }
-            }
-             
-            return view('user/product-details', $data);
+        $data = [];
+        $data['product'] = (new Product())->getProductById($id);
+        $data['productColor'] = (new ProductColor())->getListProductColorByProduct($data['product']->id);
+        $data['productColorDistinct'] = (new ProductColor())->getListProductColorByProductDistinct($data['product']->id);
+        $data['productSize'] = (new ProductSize())->getListProductSizeByProduct($data['product']->id);
+        $data['listSameProduct'] = (new Product())->getListSameProduct($data['product']->category_id, $data['product']->id);
+        if (Auth::check() && Auth::user()->role_id == 2) {
+            $data['wishlist'] = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $id);
         }
-        
-        
+        foreach ($data['listSameProduct'] as $i) {
+            // $i->image = asset('public/'.(new ProductColor())->getListProductColorByProduct($i->id)[0]->image);
+            $i->wishlist = null;
+            if (Auth::check() && Auth::user()->role_id == 2) {
+                $i->wishlist = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $i->id);
+            }
+        }
+            
+        return view('user/product-details', $data);
+    }
+
+    public function searchByKeyword() {
+        dd("a");
+        $keyword = $request->input('keyword');
+        if($keyword == '' || !isset($keyword)) return;
+        $data['keyword'] = $keyword;
+        $data['listProduct'] = (new Product())->searchByKeyword($keyword);
+        dd("a");
+        return view('user/search-result', $data);
     }
 }

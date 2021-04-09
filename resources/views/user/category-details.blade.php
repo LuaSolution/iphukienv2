@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tên danh mục sản phẩm')
+@section('title', '{{ $category->title }}')
 
 @section('header')
 @include('layouts.header', ['status' => 'complete'])
@@ -105,8 +105,6 @@
     @include('layouts.quickview')
 </div>
 @endsection
-
-
 
 @section('scripts')
 <script src="{{ asset('public/assets/scripts/iphukien/user/list-product.js') }}"></script>
