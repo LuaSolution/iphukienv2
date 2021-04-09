@@ -58,24 +58,33 @@
         <li class="filter-header">Trạng thái</li>
         <li class="filter-checkbox">
             <div class="filter-checkbox-block">
-                <input type="checkbox" class="filled-in" />
-                <span>Hàng mới</span>
+                <label>
+                    <input type="checkbox" class="filled-in" />
+                    <span>Hàng mới</span>
+                </label>
             </div>
             <div class="filter-checkbox-block">
-                <input type="checkbox" class="filled-in" />
-                <span>Bán chạy</span>
+                <label>
+                    <input type="checkbox" class="filled-in" />
+                    <span>Bán chạy</span>
+                </label>
+
             </div>
             <div class="filter-checkbox-block">
-                <input type="checkbox" class="filled-in" />
-                <span>Giảm giá</span>
+                <label>
+                    <input type="checkbox" class="filled-in" />
+                    <span>Giảm giá</span>
+                </label>
             </div>
         </li>
         <li class="filter-header">Màu sắc</li>
         <li class="filter-checkbox">
             @foreach($colors as $c)
             <div class="filter-checkbox-block">
-                <input type="checkbox" class="filled-in" />
-                <span>{{$c->name}}</span>
+                <label>
+                    <input type="checkbox" class="filled-in" />
+                    <span>{{$c->name}}</span>
+                </label>
             </div>
             @endforeach
         </li>
@@ -83,8 +92,10 @@
         <li class="filter-checkbox">
             @foreach($sizes as $c)
             <div class="filter-checkbox-block">
-                <input type="checkbox" class="filled-in" />
-                <span>{{$c->name}}</span>
+                <label>
+                    <input type="checkbox" class="filled-in" />
+                    <span>{{$c->name}}</span>
+                </label>
             </div>
             @endforeach
         </li>
@@ -92,13 +103,20 @@
         <li class="filter-checkbox">
             @foreach($trademarks as $c)
             <div class="filter-checkbox-block">
-                <input type="checkbox" class="filled-in" />
-                <span>{{$c->name}}</span>
+                <label>
+                    <input type="checkbox" class="filled-in" />
+                    <span>{{$c->name}}</span>
+                </label>
             </div>
             @endforeach
         </li>
         <li class="filter-header">Mức giá</li>
         <li class="filter-checkbox">
+
+            <div class="price-range"> 
+                <label for="min_price" id="min_price"></label>
+                <label for="max_price" id="max_price"></label>
+            </div>
             <div id="price-range"></div>
         </li>
     </ul>
@@ -130,6 +148,11 @@ $(document).ready(function() {
         format: wNumb({
             decimals: 0
         })
+    });
+
+    slider.noUiSlider.on('update', function( values, handle ) {
+        document.getElementById("min_price").innerHTML = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(values[0]);
+        document.getElementById("max_price").innerHTML = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(values[1]);
     });
 });
 
