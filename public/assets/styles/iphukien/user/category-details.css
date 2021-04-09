@@ -88,3 +88,21 @@
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
+
+.price-range {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.price-range label {
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 20px;
+    line-height: 1;
+}
+
+.filter-checkbox-block label {
+    color: #000000;
+}
