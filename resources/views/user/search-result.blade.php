@@ -14,7 +14,7 @@
 @section('content')
 <div class="ipk-container categories-container">
     <div class="ipk-content-container">
-        <div class="category-title">Tìm kiếm theo từ khóa {{$keyword}}</div>
+        <div class="category-title">Tìm kiếm theo từ khóa "{{$keyword}}"</div>
     </div>
     <div class="ipk-content-container">
         @include('layouts.list-product', ['listProduct' => $listProduct])

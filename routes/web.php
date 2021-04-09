@@ -163,12 +163,12 @@ Route::middleware(['runall', 'locale'])->group(function () {
     Route::get('/user-wishlist', 'User\UserController@getUserWishlist')->name('user.wishlist');
     Route::get('/news', 'User\NewsController@index')->name('news.index');
     Route::get('/news/{news}', 'User\NewsController@show')->name('news.show');
-    Route::get('/{url}', 'User\HomeController@getStaticPage')->name('getStaticPage');
     Route::post('/add-new-address', 'User\UserController@addNewAddress')->name('user.add-new-address');
     Route::post('/login-google', 'User\AjaxController@loginWithGoogle')->name('ajax.login-with-google');
     Route::post('/calc-shipping-fee', 'User\AjaxController@calcShippingFee')->name('ajax.calc-shipping-fee');
     Route::post('/create-order', 'User\AjaxController@createOrder')->name('ajax.create-order');
     Route::post('/quickview-product/{productId}', 'User\AjaxController@getQuickViewProduct')->name('ajax.quickview-product');
     Route::post('/add-to-wishlist', 'User\AjaxController@addToWishlist')->name('ajax.add-to-wishlist');
-    Route::get('/search-products', 'User\ProductController@searchByKeyword')->name('product.search-product');
+    Route::get('/search-products', 'User\ProductController@searchByKeyword')->name('product.search');
+    Route::get('/{url}', 'User\HomeController@getStaticPage')->name('getStaticPage');
 });

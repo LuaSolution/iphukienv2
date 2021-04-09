@@ -34,13 +34,12 @@ class ProductController extends Controller
         return view('user/product-details', $data);
     }
 
-    public function searchByKeyword() {
-        dd("a");
+    public function searchByKeyword(Request $request) {
         $keyword = $request->input('keyword');
         if($keyword == '' || !isset($keyword)) return;
         $data['keyword'] = $keyword;
         $data['listProduct'] = (new Product())->searchByKeyword($keyword);
-        dd("a");
+
         return view('user/search-result', $data);
     }
 }
