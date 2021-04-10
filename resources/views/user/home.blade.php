@@ -51,6 +51,11 @@ const x = setInterval(function() {
   document.getElementById("hour" + key ).innerHTML =hours
   document.getElementById("minute" + key ).innerHTML= minutes
   document.getElementById("second"+ key ).innerHTML =seconds
+
+  document.getElementById("day" +key+"-mobile").innerHTML = days
+  document.getElementById("hour" + key+"-mobile" ).innerHTML =hours
+  document.getElementById("minute" + key+"-mobile" ).innerHTML= minutes
+  document.getElementById("second"+ key+"-mobile" ).innerHTML =seconds
   if (distance < 0) {
     clearInterval(x);
   }
@@ -64,7 +69,7 @@ const x = setInterval(function() {
         <div class="list-category">
             <div class="row">
                 @foreach($cates as $item)
-                <div class="col m5ths m4 cat-item remove-line-height">
+                <div class="col m5ths m4 s6 cat-item remove-line-height">
                     <a href="{{ route('categories.show', ['id' => $item->id]) }}">
                         <div class="img-wrapper"
                             style="background-image: url({{ asset('/public/' . $item->image) }})"></div>
@@ -92,13 +97,20 @@ const x = setInterval(function() {
                                 <span class="sale">{{ number_format($item->product->sale_price , 0, ',', '.') }}đ</span>
                                 <span class="origin">{{ number_format($item->product->origin_price, 0, ',', '.') }}đ</span>
                             </div>
-                            <div class="time">
+                            <div class="time hide-on-small-only">
                                 <div id="day{{$key}}" class="day">03</div>
                                 <div id="hour{{$key}}" class="hour">23</div>
                                 <div id="minute{{$key}}" class="minute">59</div>
                                 <div id="second{{$key}}" class="second">55</div>
                             </div>
-
+                        </div>
+                        <div class="item-infos hide-on-med-and-up item-infos-mobile">
+                            <div class="time">
+                                <div id="day{{$key}}-mobile" class="day">03</div>
+                                <div id="hour{{$key}}-mobile" class="hour">23</div>
+                                <div id="minute{{$key}}-mobile" class="minute">59</div>
+                                <div id="second{{$key}}-mobile" class="second">55</div>
+                            </div>
                         </div>
                     </div>
                     <div class="button-detail">
@@ -132,18 +144,18 @@ echo ('<script type="text/javascript">
     </div>
 </div>
 <div class="ipk-container partners-container">
-    <div class="partners">
-        <img src="{{ asset('public/assets/images/header/logo.svg') }}" />
-        <img src="{{ asset('public/assets/images/header/logo.svg') }}" />
-        <img src="{{ asset('public/assets/images/header/logo.svg') }}" />
-        <img src="{{ asset('public/assets/images/header/logo.svg') }}" />
-        <img src="{{ asset('public/assets/images/header/logo.svg') }}" />
-        <img src="{{ asset('public/assets/images/header/logo.svg') }}" />
-        <img src="{{ asset('public/assets/images/header/logo.svg') }}" />
-        <img src="{{ asset('public/assets/images/header/logo.svg') }}" />
-        <img src="{{ asset('public/assets/images/header/logo.svg') }}" />
-        <img src="{{ asset('public/assets/images/header/logo.svg') }}" />
-        <img src="{{ asset('public/assets/images/header/logo.svg') }}" />
+    <div class="partners carousel">
+        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
+        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
+        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
+        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
+        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
+        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
+        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
+        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
+        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
+        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
+        
     </div>
 </div>
 <div class="ipk-container news-feed-container">
@@ -169,6 +181,7 @@ $(document).ready(function () {
         let top = 55 - value.offsetWidth / 2;
         value.style.marginTop = top + "px";
     });
+    $('.partners').carousel({ fullWidth: true });
 });
 $(document).on("click", ".ipk-next-slide", function () {
     $('.sale-product-slider').carousel('next');

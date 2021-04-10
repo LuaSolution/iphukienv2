@@ -50,7 +50,7 @@
 </div>
 <div class="ipk-container product-container">
     <div class="row ipk-content-container">
-        <div class="col l1 list-thumb-wrapper">
+        <div class="col l1 s3 list-thumb-wrapper">
             <div class="img-block">
                 <a href="#!" class="up"></a>
                 <div class="thumbs-wrapper">
@@ -67,7 +67,7 @@
                 <a href="#!"></a>
             </div>
         </div>
-        <div class="col l6 main-image-wrapper">
+        <div class="col l6 s9 main-image-wrapper">
             <span class="full-screen-btn modal-trigger" href="#list-image-popup"></span>
             <div class="main-image is-image" style="background-image: url({{ asset('public/' . $productColor[0]->image) }})"></div>
         </div>

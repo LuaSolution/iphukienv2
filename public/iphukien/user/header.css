@@ -316,3 +316,13 @@ header .ipk-slide-out {
     height: 20px;
     padding: 0;
 }
+@media only screen and (max-width: 600px) {
+    header .ipk-left-header .ipk-menu-icon {
+        outline: none;
+        border: none;
+    }
+    header .header-search-form {
+        border: none;
+        float: right;
+    }
+}

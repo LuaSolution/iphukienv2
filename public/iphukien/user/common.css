@@ -50,12 +50,7 @@ img {
 .row {
     margin-bottom: 0;
 }
-.row .col {
-    padding: 0;
-}
-.row .col:first-child {
-    margin-left: 0!important;
-}
+
 .s5ths,
 .m5ths,
 .l5ths,
@@ -156,6 +151,12 @@ img {
   .row .col.m5ths {
     width: calc(20% - 16px);
     margin-left: 20px;
+  }
+  .row .col {
+    padding: 0;
+  }
+  .row .col:first-child {
+      margin-left: 0!important;
   }
 }
 @media only screen and (min-width: 993px) {

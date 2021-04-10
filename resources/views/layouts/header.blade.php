@@ -1,9 +1,9 @@
 <header class="ipk-container">
     <div class="ipk-left-header">
         <a href="#" data-target="slide-out" class="sidenav-trigger ipk-menu-icon"></a>
-        <a href="https://www.facebook.com/" class="ipk-header-icon facebook-icon"></a>
-        <a href="https://www.instagram.com/" class="ipk-header-icon instagram-icon"></a>
-        <a href="https://www.youtube.com/" class="ipk-header-icon youtube-icon"></a>
+        <a href="https://www.facebook.com/" class="ipk-header-icon facebook-icon hide-on-small-only"></a>
+        <a href="https://www.instagram.com/" class="ipk-header-icon instagram-icon hide-on-small-only"></a>
+        <a href="https://www.youtube.com/" class="ipk-header-icon youtube-icon hide-on-small-only"></a>
     </div>
     <div class="ipk-right-header">
         <form class="header-search-form" method="get" action="{{ route('product.search') }}">
@@ -12,19 +12,19 @@
             <button type="submit" class="btn-search-header"></button>
         </form>
         @if(Auth::check())
-            <div class="header-right-btn">
+            <div class="header-right-btn hide-on-small-only">
                 <a href="" class="ipk-header-right-icon user-icon" data-target='user-dropdown'></a>
             </div>
         @else
-            <div class="header-group-btn">
+            <div class="header-group-btn hide-on-small-only">
                 <a href="{{ route('login') }}" class="ipk-btn btn-dang-nhap">Đăng nhập</a>
                 <a href="{{ route('signup') }}" class="ipk-btn btn-dang-ky">Đăng ký ngay</a>
             </div>
         @endif
-        <div class="header-right-btn">
+        <div class="header-right-btn hide-on-small-only">
             <a href="{{ route('user.wishlist') }}" class="ipk-header-right-icon wishlist-icon"></a>
         </div>
-        <div class="header-right-btn">
+        <div class="header-right-btn hide-on-small-only">
             <a href="{{ route('user.cart') }}" class="ipk-header-right-icon cart-icon">
                 <span></span>
             </a>

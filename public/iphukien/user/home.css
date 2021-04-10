@@ -52,6 +52,12 @@
     float: left;
     padding-left: 25px;
 }
+.sale-products .item-infos-mobile {
+    width: 100%;
+    clear: both;
+    padding-left: 0;
+    text-align: center;
+}
 .sale-products .item-infos .name {
     font-weight: bold;
     font-size: 23.958px;
@@ -259,4 +265,19 @@
     text-align: center;
     color: #fff;
     border: none;
+}
+.partners .partner-item {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+    height: 110px;
+    width: 110px;
+}
+@media only screen and (max-width: 600px) {
+    .carousel-item .carousel-item-wrapper {
+        padding: 80px 20px 20px 20px;
+    }
+    .news-feed-container {
+        height: unset;
+    }
 }
