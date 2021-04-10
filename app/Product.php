@@ -112,8 +112,8 @@ class Product extends Model
             ->leftJoin('trademarks', 'trademarks.id', '=', 'products.trademark_id')
             ->select('products.*')
             ->where('products.name', 'like', '%'.$keyword.'%')
-            ->where('categories.title', 'like', '%'.$keyword.'%')
-            ->where('trademarks.name', 'like', '%'.$keyword.'%')
+            ->orWhere('categories.title', 'like', '%'.$keyword.'%')
+            ->orWhere('trademarks.name', 'like', '%'.$keyword.'%')
             ->orderBy('pos', 'asc')->orderBy('created_at', 'desc')
             ->get();
     }   

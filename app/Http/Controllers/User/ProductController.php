@@ -14,40 +14,48 @@ class ProductController extends Controller
 {
     public function show(Request $request, $id)
     {
-        if ($id == 'search') {
-            $keyword = $request->input('keyword');
-            if ($keyword == '' || !isset($keyword)) {
-                return;
-            }
+        $data = [];
+        $data['product'] = (new Product())->getProductById($id);
+        // $data['productColor'] = (new ProductColor())->getListProductColorByProduct($data['product']->id);
+        // $data['productColorDistinct'] = (new ProductColor())->getListProductColorByProductDistinct($data['product']->id);
 
-            $res = (new Product())->searchByKeyword($keyword);
-        } else {
-            $data = [];
-            $data['product'] = (new Product())->getProductById($id);
-            $tmp = (new ProductColor())->getListProductColorByProduct($data['product']->id);
-            if ($tmp->isNotEmpty()) {
-                $data['productColor'] = $tmp;
-            }
+        $tmp = (new ProductColor())->getListProductColorByProduct($data['product']->id);
+        if ($tmp->isNotEmpty()) {
+            $data['productColor'] = $tmp;
+        }
 
-            $tmp = (new ProductColor())->getListProductColorByProductDistinct($data['product']->id);
-            if ($tmp->isNotEmpty()) {
-                $data['productColorDistinct'] = $tmp;
-            }
+        $tmp = (new ProductColor())->getListProductColorByProductDistinct($data['product']->id);
+        if ($tmp->isNotEmpty()) {
+            $data['productColorDistinct'] = $tmp;
+        }
 
-            $data['productSize'] = (new ProductSize())->getListProductSizeByProduct($data['product']->id);
-            $data['listSameProduct'] = (new Product())->getListSameProduct($data['product']->category_id, $data['product']->id);
+        $data['productSize'] = (new ProductSize())->getListProductSizeByProduct($data['product']->id);
+        $data['listSameProduct'] = (new Product())->getListSameProduct($data['product']->category_id, $data['product']->id);
+        if (Auth::check() && Auth::user()->role_id == 2) {
+            $data['wishlist'] = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $id);
+        }
+        foreach ($data['listSameProduct'] as $i) {
+            // $i->image = asset('public/'.(new ProductColor())->getListProductColorByProduct($i->id)[0]->image);
+            $i->wishlist = null;
             if (Auth::check() && Auth::user()->role_id == 2) {
-                $data['wishlist'] = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $id);
-            }
-            foreach ($data['listSameProduct'] as $i) {
-                // $i->image = asset('public/'.(new ProductColor())->getListProductColorByProduct($i->id)[0]->image);
-                $i->wishlist = null;
-                if (Auth::check() && Auth::user()->role_id == 2) {
-                    $i->wishlist = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $i->id);
-                }
+                $i->wishlist = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $i->id);
             }
             return view('user/product-details', $data);
         }
 
+        return view('user/product-details', $data);
+    }
+
+    public function searchByKeyword(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        if ($keyword == '' || !isset($keyword)) {
+            return;
+        }
+
+        $data['keyword'] = $keyword;
+        $data['listProduct'] = (new Product())->searchByKeyword($keyword);
+
+        return view('user/search-result', $data);
     }
 }

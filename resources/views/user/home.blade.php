@@ -37,7 +37,7 @@ function countDown(key, date) {
     const countDownDate = new Date(date).getTime();
 
 const x = setInterval(function() {
-console.log(key)
+// console.log(key)
   var now = new Date().getTime();
 
   var distance = countDownDate - now;
