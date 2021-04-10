@@ -117,7 +117,7 @@
 
 .product-infos .list-tags .tag {
     width: 90px;
-    height: 25px;
+    height: 30px;
     display: inline-block;
     margin-left: 12px;
     -webkit-border-radius: 10px;
@@ -144,12 +144,13 @@
 
 .product-infos .list-tags .tag::before {
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 25px;
     text-align: center;
     color: #fff;
     display: block;
     text-transform: uppercase;
+    line-height: 30px;
 }
 
 .product-infos .list-tags .tag.hang-moi::before {
@@ -197,6 +198,7 @@
 }
 
 .product-infos .price .sale span {
+    padding: 2px 4px;
     font-weight: normal;
     font-size: 11px;
     line-height: 13px;
@@ -227,6 +229,7 @@
 
 .product-infos .status-label {
     color: #000;
+    text-transform: uppercase;
 }
 
 .product-infos .list-status .status.het-hang::before {

@@ -14,16 +14,26 @@ class ProductController extends Controller
 {
     public function show(Request $request, $id)
     {
-        if($id == 'search') {
+        if ($id == 'search') {
             $keyword = $request->input('keyword');
-            if($keyword == '' || !isset($keyword)) return;
+            if ($keyword == '' || !isset($keyword)) {
+                return;
+            }
+
             $res = (new Product())->searchByKeyword($keyword);
-            dd($res);
         } else {
             $data = [];
             $data['product'] = (new Product())->getProductById($id);
-            $data['productColor'] = (new ProductColor())->getListProductColorByProduct($data['product']->id);
-            $data['productColorDistinct'] = (new ProductColor())->getListProductColorByProductDistinct($data['product']->id);
+            $tmp = (new ProductColor())->getListProductColorByProduct($data['product']->id);
+            if ($tmp->isNotEmpty()) {
+                $data['productColor'] = $tmp;
+            }
+
+            $tmp = (new ProductColor())->getListProductColorByProductDistinct($data['product']->id);
+            if ($tmp->isNotEmpty()) {
+                $data['productColorDistinct'] = $tmp;
+            }
+
             $data['productSize'] = (new ProductSize())->getListProductSizeByProduct($data['product']->id);
             $data['listSameProduct'] = (new Product())->getListSameProduct($data['product']->category_id, $data['product']->id);
             if (Auth::check() && Auth::user()->role_id == 2) {
@@ -36,10 +46,8 @@ class ProductController extends Controller
                     $i->wishlist = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $i->id);
                 }
             }
-             
             return view('user/product-details', $data);
         }
-        
-        
+
     }
 }

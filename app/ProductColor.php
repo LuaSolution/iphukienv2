@@ -25,7 +25,8 @@ class ProductColor extends Model
     {
         return ProductColor::where('product_id', '=', $productId)
             ->leftJoin('colors', 'colors.id', '=', 'product_color.color_id')
-            ->select('product_color.product_id', 'product_color.color_id', 'product_color.image', 'colors.name as color_name', 'colors.code', 'product_color.image')->get();
+            ->select('product_color.product_id', 'product_color.color_id', 'product_color.image', 'colors.name as color_name', 'colors.code', 'product_color.image')
+            ->get();
     }
     public function getListProductColorByProductDistinct($productId)
     {
