@@ -149,6 +149,7 @@ Route::middleware(['runall', 'locale'])->group(function () {
     Route::post('/signup', 'User\UserController@doSignup')->name('doSignup');
     Route::get('/products/{id}', 'User\ProductController@show')->name('products.show');
     Route::get('/categories/{id}', 'User\CategoryController@show')->name('categories.show');
+    Route::get('/search/categories/{id}', 'User\CategoryController@searchAjax')->name('categories.search_ajax');
     Route::get('/cart', 'User\UserController@cart')->name('user.cart');
     Route::get('/payment', 'User\UserController@payment')->name('user.payment');
     Route::get('/payment-complete/{orderId}', 'User\UserController@paymentComplete')->name('user.payment-complete');
