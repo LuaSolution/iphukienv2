@@ -33,4 +33,7 @@ class Tag extends Model
   public function deleteTag($id){
   	return Tag::where('id', '=', $id)->delete();
   }
+  public function getListTags(){
+  	return Tag::orderBy('created_at','desc')->get();
+  }
 }

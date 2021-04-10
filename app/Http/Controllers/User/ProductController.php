@@ -16,8 +16,19 @@ class ProductController extends Controller
     {
         $data = [];
         $data['product'] = (new Product())->getProductById($id);
-        $data['productColor'] = (new ProductColor())->getListProductColorByProduct($data['product']->id);
-        $data['productColorDistinct'] = (new ProductColor())->getListProductColorByProductDistinct($data['product']->id);
+        // $data['productColor'] = (new ProductColor())->getListProductColorByProduct($data['product']->id);
+        // $data['productColorDistinct'] = (new ProductColor())->getListProductColorByProductDistinct($data['product']->id);
+
+        $tmp = (new ProductColor())->getListProductColorByProduct($data['product']->id);
+        if ($tmp->isNotEmpty()) {
+            $data['productColor'] = $tmp;
+        }
+
+        $tmp = (new ProductColor())->getListProductColorByProductDistinct($data['product']->id);
+        if ($tmp->isNotEmpty()) {
+            $data['productColorDistinct'] = $tmp;
+        }
+
         $data['productSize'] = (new ProductSize())->getListProductSizeByProduct($data['product']->id);
         $data['listSameProduct'] = (new Product())->getListSameProduct($data['product']->category_id, $data['product']->id);
         if (Auth::check() && Auth::user()->role_id == 2) {
@@ -29,14 +40,19 @@ class ProductController extends Controller
             if (Auth::check() && Auth::user()->role_id == 2) {
                 $i->wishlist = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $i->id);
             }
+            return view('user/product-details', $data);
         }
-            
+
         return view('user/product-details', $data);
     }
 
-    public function searchByKeyword(Request $request) {
+    public function searchByKeyword(Request $request)
+    {
         $keyword = $request->input('keyword');
-        if($keyword == '' || !isset($keyword)) return;
+        if ($keyword == '' || !isset($keyword)) {
+            return;
+        }
+
         $data['keyword'] = $keyword;
         $data['listProduct'] = (new Product())->searchByKeyword($keyword);
 

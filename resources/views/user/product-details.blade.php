@@ -20,20 +20,6 @@
 <meta property="og:image" content="{{ asset('public/assets/images/demo/watch.png') }}" />
 @endsection
 
-@section('fb-sdk')
-<div id="fb-root"></div>
-<script>
-(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
-@endsection
-
 @section('content')
 <div class="ipk-container product-breadcrumbs">
     <div class="ipk-content-container">
@@ -41,7 +27,7 @@
             <div class="nav-wrapper">
                 <div class="col s12">
                     <a href="{{ route('getHome') }}" class="breadcrumb">Trang chủ</a>
-                    <a href="{{ route('categories.show', ['id' => $product->cateogory_id]) }}" class="breadcrumb">{{ $product->category_name }}</a>
+                    <a href="{{ route('categories.show', ['id' => $product->category_id]) }}" class="breadcrumb">{{ $product->category_name }}</a>
                     <a href="javascript:void(0)" class="breadcrumb">{{$product->name}}</a>
                 </div>
             </div>
@@ -50,15 +36,19 @@
 </div>
 <div class="ipk-container product-container">
     <div class="row ipk-content-container">
+
+    @if(isset($productColor) && !empty($productColor))
         <div class="col l1 s3 list-thumb-wrapper">
             <div class="img-block">
                 <a href="#!" class="up"></a>
                 <div class="thumbs-wrapper">
                     <div class="thumbs">
+
                         @foreach($productColor as $item)
                         <span style="background-image: url({{ asset('public/' . $item->image) }})"
                             data-img="{{ asset('public/' . $item->image) }}"></span>
                         @endforeach
+
                     </div>
                 </div>
                 <a href="#!" class="down"></a>
@@ -67,9 +57,12 @@
                 <a href="#!"></a>
             </div>
         </div>
+        @endif
         <div class="col l6 s9 main-image-wrapper">
             <span class="full-screen-btn modal-trigger" href="#list-image-popup"></span>
+            @if(isset($productColor ) && !empty($productColor))
             <div class="main-image is-image" style="background-image: url({{ asset('public/' . $productColor[0]->image) }})"></div>
+            @endif
         </div>
         <div class="col l5 product-infos">
             <div class="name">{{$product->name}}</div>
@@ -101,15 +94,17 @@
             <div class="colors-wrapper">
                 <div class="color-label">Màu sắc</div>
                 <div class="colors">
+                    @if(isset($productColorDistinct ) &&!empty($productColorDistinct))
                     @foreach($productColorDistinct as $key=>$item)
                     <span class="color" data-colorid="{{$item->color_id}}" style="font-size:16px" data-colorname="{{$item->color_name}}" data-img="{{ asset('public/' . $productColor[$key]->image) }}">{{$item->color_name}}</span>
                     @endforeach
+                    @endif
                 </div>
             </div>
             <div class="sizes-wrapper">
                 <div class="color-label">Kích thước <a href="{{ url('huong-dan-chon-size') }}" target="_blank"  style="text-transform:none;font-weight:400"> (Hướng dẫn chọn size)</a></div>
                 <div class="sizes">
-                    @foreach($productSize as $item)
+                    @foreach( $productSize as $item)
                     <span class="size" data-sizeid="{{$item->size_id}}" data-sizename="{{$item->name}}" style="font-size:16px">{{ $item->name }}</span>
                     @endforeach
                 </div>
@@ -145,16 +140,20 @@
 <div id="list-image-popup" class="modal">
     <div class="modal-content">
         <a href="#!" class="modal-close close-list-image-popup"></a>
+        @if(isset($productColor ) && !empty($productColor))
         <div class="main-image-popup" style="background-image: url({{ asset('public/' . $productColor[0]->image) }})"></div>
+       @endif
         <div class="list-thumbs-popup">
             <div class="img-block-popup">
                 <a href="#!" class="arrow-left"></a>
                 <div class="thumbs-wrapper-popup">
                     <div class="thumbs-popup">
+                    @if(isset($productColor ) && !empty($productColor))
                         @foreach($productColor as $item)
                         <span style="background-image: url({{ asset('public/' . $item->image) }})"
                             data-img="{{ asset('public/' . $item->image) }}"></span>
                         @endforeach
+                        @endif
                     </div>
                 </div>
                 <a href="#!" class="arrow-right"></a>
@@ -166,8 +165,6 @@
     </div>
 </div>
 @endsection
-
-
 
 @section('scripts')
 <script src="{{ asset('public/assets/scripts/iphukien/user/list-product.js') }}"></script>
@@ -261,7 +258,7 @@ $(document).on("click", ".add-wishlist-button", function () {
     .fail(function () {
         alert('Cập nhật thất bại')
     })
-    
+
 });
 
 
@@ -317,8 +314,8 @@ function updateCart() {
             color: choosenColor,
             size: choosenSize,
             quantity: quantity,
-            image: "{{asset('public/' . $productColor[0]->image)}}",
             salePrice: "{{ $product->sale_price }}",
+            image: "{{asset(isset($productColor) && !empty($productColor) ? 'public/' . $productColor[0]->image : '')}}",
             name: "{{ $product->name }}",
             sizeName: choosenSizeName,
             colorName: choosenColorName,
