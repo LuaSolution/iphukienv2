@@ -30,8 +30,15 @@ class HomeController extends Controller
         $productColorModel = new ProductColor();
         $this->data['flashSale'] = [];
         foreach ($flashSale as $i) {
+            $r = $productColorModel->getFirstImage($i->product_id);
+
             $obj = new \stdClass();
-            $obj->img = asset('public/' . $productColorModel->getFirstImage($i->product_id)->image);
+            if ($r != null) {
+                $obj->img = asset('public/' . $r['image']);
+            } else {
+                $obj->img = asset('public/');
+            }
+
             $obj->product = $i;
             array_push($this->data['flashSale'], $obj);
         }
