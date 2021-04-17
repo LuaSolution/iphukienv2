@@ -65,3 +65,78 @@
     width: 220px;
     height: 50px;
 }
+.login-container .or-group {
+    width: 450px;
+    margin: auto;
+    margin-top: 75px;
+}
+.login-container .or-group .or-label {
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 36px;
+    text-align: center;
+    color: #000;
+}
+.login-container .or-group .options {
+    width: fit-content;
+    margin: auto;
+    margin-top: 30px;
+    overflow: hidden;
+}
+/* .login-container .options .fb,
+.login-container .options .gg {
+    height: 104px;
+    background-repeat: no-repeat;
+    background-size: 103px 103px;
+    float: left;
+}
+.login-container .options .fb {
+    background-image: url(/assets/images/signup/fb.svg);
+    width: 104px;
+}
+.login-container .options .gg {
+    background-image: url(/assets/images/signup/gg.svg);
+    width: 102px;
+} */
+.login-container .options .fb,
+.login-container .options .gg {
+    float: left;
+    height: 40px;
+}
+.login-container .options .fb {
+    width: 120px;
+    height: 36px;
+    line-height: 36px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 25%);
+    -webkit-box-sizing: border-box;
+    -webkit-transition: background-color .218s,border-color .218s,box-shadow .218s;
+    -webkit-user-select: none;
+    -webkit-appearance: none;
+    color: #262626;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    background-image: url(/public/assets/images/signup/fb.svg);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: left 10px center;
+    padding-left: 30px;
+}
+.login-container .options .or-txt {
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 36px;
+    text-align: center;
+    color: #000;
+    float: left;
+    margin: 0 20px;
+}
+.login-container .options::after {
+    content: '';
+    clear: both;
+}

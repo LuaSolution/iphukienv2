@@ -50,14 +50,14 @@
                 <input type="password" name="password" placeholder="Mật khẩu *" class="input-half" />
                 <input type="password" name="retype-password" placeholder="Nhập lại mật khẩu *" class="input-half" />
             </div>
-            <div class="or-group">
+            <!-- <div class="or-group">
                 <div class="or-label">Hoặc tạo tài khoản bằng</div>
                 <div class="options">
                     <span class="fb" onclick="loginFb()">Đăng nhập</span>
                     <span class="or-txt">Hoặc</span>
                     <span class="gg g-signin2" data-onsuccess="onSignIn"></span>
                 </div>
-            </div>
+            </div> -->
             <div class="policy">
                 <p>
                     <label>

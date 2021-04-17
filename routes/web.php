@@ -165,7 +165,7 @@ Route::middleware(['runall', 'locale'])->group(function () {
     Route::get('/news', 'User\NewsController@index')->name('news.index');
     Route::get('/news/{news}', 'User\NewsController@show')->name('news.show');
     Route::post('/add-new-address', 'User\UserController@addNewAddress')->name('user.add-new-address');
-    Route::post('/login-google', 'User\AjaxController@loginWithGoogle')->name('ajax.login-with-google');
+    Route::post('/login-social', 'User\AjaxController@loginWithSocial')->name('ajax.login-with-social');
     Route::post('/calc-shipping-fee', 'User\AjaxController@calcShippingFee')->name('ajax.calc-shipping-fee');
     Route::post('/create-order', 'User\AjaxController@createOrder')->name('ajax.create-order');
     Route::post('/quickview-product/{productId}', 'User\AjaxController@getQuickViewProduct')->name('ajax.quickview-product');

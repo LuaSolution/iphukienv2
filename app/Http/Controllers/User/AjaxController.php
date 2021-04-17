@@ -23,26 +23,37 @@ class AjaxController extends Controller
         ], "/shipping/location"));
     }
 
-    public function loginWithGoogle(Request $request) {
+    public function loginWithSocial(Request $request) {
         $name = $request->input('name');
         $email = $request->input('email');
         $password = $request->input('password');
-        
-        $userModal = new User();
-        $userCheck = $userModal->getUserByEmail($email);
 
-        if ($userCheck) {
-            return json_encode(['code' => 0, 'message' => "Email đã tồn tại"]);
+        $res = false;
+
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+            // Authentication passed...
+            if (Auth::user()->role_id == 2) {
+                return json_encode(['code' => 1]);
+            }
+        } else {
+            $userModal = new User();
+            $userCheck = $userModal->getUserByEmail($email);
+            if($userCheck != null) {
+                Auth::loginUsingId($userCheck->id);
+            } else {
+                User::create([
+                    'name' => $name,
+                    'email' => $email,
+                    'password' => bcrypt($password),
+                    'role_id' => 2,
+                ]);
+                Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]);
+            }
+            
+            return json_encode(['code' => 1]);
         }
 
-        User::create([
-            'name' => $name,
-            'email' => $email,
-            'password' => bcrypt($password),
-            'role_id' => 2,
-        ]);
-
-        return json_encode(['code' => 1]);
+        return json_encode(['code' => 0, 'mesmessages' => 'Đăng nhập không thành công']);
     }
 
     public function calcShippingFee(Request $request) {

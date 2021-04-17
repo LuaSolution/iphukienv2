@@ -61,7 +61,7 @@
 .signup-container .or-group .or-label {
     font-weight: normal;
     font-size: 22px;
-    line-height: 26px;
+    line-height: 36px;
     text-align: center;
     color: #000;
 }
@@ -71,7 +71,7 @@
     margin-top: 30px;
     overflow: hidden;
 }
-.signup-container .options .fb,
+/* .signup-container .options .fb,
 .signup-container .options .gg {
     height: 104px;
     background-repeat: no-repeat;
@@ -79,17 +79,46 @@
     float: left;
 }
 .signup-container .options .fb {
-    background-image: url(/public/assets/images/signup/fb.svg);
+    background-image: url(/assets/images/signup/fb.svg);
     width: 104px;
 }
 .signup-container .options .gg {
-    background-image: url(/public/assets/images/signup/gg.svg);
+    background-image: url(/assets/images/signup/gg.svg);
     width: 102px;
+} */
+.signup-container .options .fb,
+.signup-container .options .gg {
+    float: left;
+    height: 40px;
+}
+.signup-container .options .fb {
+    width: 120px;
+    height: 36px;
+    line-height: 36px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 25%);
+    -webkit-box-sizing: border-box;
+    -webkit-transition: background-color .218s,border-color .218s,box-shadow .218s;
+    -webkit-user-select: none;
+    -webkit-appearance: none;
+    color: #262626;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    background-image: url(/public/assets/images/signup/fb.svg);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: left 10px center;
+    padding-left: 30px;
 }
 .signup-container .options .or-txt {
     font-weight: normal;
     font-size: 22px;
-    line-height: 104px;
+    line-height: 36px;
     text-align: center;
     color: #000;
     float: left;
@@ -131,4 +160,39 @@
     display: block;
     margin-top: 40px;
     cursor: pointer;
+}
+.add-cart-fail {
+    width: 500px;
+    height: 70px;
+    padding: 0;
+    padding-left: 90px;
+    position: relative;
+    background-color: #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-top: 0;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 70px;
+    color: #523535;
+}
+.add-cart-fail::before {
+    content: '';
+    background-image: url(/assets/images/product-details/done.svg);
+    background-position: center;
+    background-size: 34px 34px;
+    background-repeat: no-repeat;
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: 70px;
+    background-color: red;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    position: absolute;
 }
