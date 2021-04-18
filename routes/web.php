@@ -136,6 +136,10 @@ Route::middleware(['runall', 'locale'])->group(function () {
             Route::get('/static-del/{id}', 'StaticPagesController@getDeStaticPages')->name('adMgetDelStaticPages');
             Route::get('/static-edit/{id}', 'StaticPagesController@getEditStaticPages')->name('adMgetEditStaticPages');
             Route::post('/static-edit/{id}', 'StaticPagesController@postEditStaticPages')->name('adMpostEditStaticPages');
+        
+            //Slider
+            Route::resource('sliders', SliderController::class);
+            Route::post('/sliders/{id}', 'SliderController@update')->name('sliders.update');
         });
 
     });

@@ -63,9 +63,11 @@ const x = setInterval(function() {
 </script>
 <div class="ipk-container">
     <div class="ipk-content-container">
+        @if($slider)
         <div class="remove-line-height banner">
-            <img src="{{ asset('public/assets/images/demo/slider.png') }}" />
+            <img src="{{ asset('/public/'. $slider->image) }}" />
         </div>
+        @endif
         <div class="list-category">
             <div class="row">
                 @foreach($cates as $item)

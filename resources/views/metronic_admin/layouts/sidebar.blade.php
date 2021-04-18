@@ -338,6 +338,29 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="nav-item start @yield('list_slider_active') @yield('add_slider_active')">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Slider</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item @yield('add_slider_active')">
+                        <a href="{{ route('sliders.create') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Thêm Slider</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @yield('list_slider_active')">
+                        <a href="{{ route('sliders.index') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Danh sách Slider</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <!-- END SIDEBAR MENU -->
     </div>
