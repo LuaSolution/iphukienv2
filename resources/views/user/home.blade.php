@@ -147,17 +147,9 @@ echo ('<script type="text/javascript">
 </div>
 <div class="ipk-container partners-container">
     <div class="partners carousel">
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        
+        @foreach ($partners as $key => $value) 
+        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/' . $value->image) }})"></div>
+        @endforeach
     </div>
 </div>
 <div class="ipk-container news-feed-container">

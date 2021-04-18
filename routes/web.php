@@ -140,6 +140,9 @@ Route::middleware(['runall', 'locale'])->group(function () {
             //Slider
             Route::resource('sliders', SliderController::class);
             Route::post('/sliders/{id}', 'SliderController@update')->name('sliders.update');
+
+            //Partner
+            Route::resource('partners', PartnerController::class);
         });
 
     });
