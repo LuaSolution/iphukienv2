@@ -86,18 +86,22 @@ const x = setInterval(function() {
             <div class="carousel carousel-slider sale-product-slider">
                 <div class="ipk-pre-slide"></div>
                 @foreach($flashSale as $key=>$item)
+                <?php 
+                $img = (new \App\Product())->getProductDefaultImage($item->product_id);
+                $saleP = (new \App\Product())->getProductById($item->product_id);
+                ?>
                 <div class="carousel-item">
                     <div class="flash-deal-icon">Flash deal</div>
                     <div class="carousel-item-wrapper">
                         <div class="item-image remove-line-height"
-                            style="background-image: url({{ $item->img }})">
+                            style="background-image: url({{  asset($img ? 'public/' . $img->image : 'public/assets/images/header/logo.svg') }})">
                         </div>
                         <div class="item-infos">
-                            <div class="name">{{ $item->product->product_name }}</div>
-                            <div class="description">{{ $item->product->product_des }}</div>
+                            <div class="name">{{ $saleP->name }}</div>
+                            <div class="description">{{ $saleP->short_description }}</div>
                             <div class="price">
-                                <span class="sale">{{ number_format($item->product->sale_price , 0, ',', '.') }}đ</span>
-                                <span class="origin">{{ number_format($item->product->origin_price, 0, ',', '.') }}đ</span>
+                                <span class="sale">{{ number_format($saleP->sale_price , 0, ',', '.') }}đ</span>
+                                <span class="origin">{{ number_format($saleP->price, 0, ',', '.') }}đ</span>
                             </div>
                             <div class="time hide-on-small-only">
                                 <div id="day{{$key}}" class="day">03</div>
@@ -116,12 +120,12 @@ const x = setInterval(function() {
                         </div>
                     </div>
                     <div class="button-detail">
-                        <a href="{{ route('products.show', $item->product->product_id) }}">Xem chi tiết</a>
+                        <a href="{{ route('products.show', $saleP->id) }}">Xem chi tiết</a>
                     </div>
                 </div>
             <?php
 echo ('<script type="text/javascript">
-                countDown(' . $key . ', "' . $item->product->to_date . '")
+                countDown(' . $key . ', "' . $item->to_date . '")
             </script>')
 ?>
                 @endforeach

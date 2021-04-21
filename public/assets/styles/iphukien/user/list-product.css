@@ -372,9 +372,10 @@
     line-height: 32px;
     color: #6C6C6C;
     cursor: pointer;
-    width: 75px;
+    width: fit-content;
     height: 32px;
     text-align: center;
+    padding: 0 10px;
 }
 
 #quickview .product-infos .sizes .size.active {

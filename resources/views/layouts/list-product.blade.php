@@ -2,8 +2,10 @@
     <div class="row products">
         @foreach($listProduct as $product)
         <div class="product col m3 s6 {{ $product->wishlist ? 'added-wishlist' : '' }}">
-            <?php $img = \App\ProductColor::where('product_id', $product->id)->first();?>
-            <div class="img img_product" style="background-image: url({{ asset($img ? 'public/' . $img->image : 'public/assets/images/demo/watch.png') }})">
+            <?php
+            $img = (new \App\Product())->getProductDefaultImage($product->id);
+            ?>
+            <div class="img img_product" style="background-image: url({{ asset($img != null && $img->image != null ? 'public/' . $img->image : 'public/assets/images/header/logo.svg') }})">
             </div>
             <div class="name">
                 <a href="{{ route('products.show', $product->slug ? $product->slug : $product->id) }}">

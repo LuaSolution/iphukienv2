@@ -12,6 +12,7 @@ use App\Product;
 use App\ProductColor;
 use App\ProductSize;
 use App\Wishlist;
+use App\ProductImage;
 use Illuminate\Support\Facades\Auth;
 
 class AjaxController extends Controller
@@ -141,8 +142,19 @@ class AjaxController extends Controller
     public function getQuickViewProduct(Request $request, $productId) {
         $data = [];
         $data['product'] = (new Product())->getProductById($productId);
-        $data['productColor'] = (new ProductColor())->getListProductColorByProduct($productId);
-        $data['productSize'] = (new ProductSize())->getListProductSizeByProduct($productId);
+        $listChildProduct = (new Product())->getListChildProduct($productId);
+        $productImageModel = new ProductImage();
+        $data['listChildProduct'] = [];
+        $data['listImage'] = [];
+        foreach($listChildProduct as $p) {
+            $obj = new \stdClass();
+            $obj->product = $p;
+            $obj->listImage = $productImageModel->getListProductImageByProduct($p->id);
+            foreach($obj->listImage as $i) {
+                array_push($data['listImage'], asset('public/'.$i->image));
+            }
+            array_push($data['listChildProduct'], $obj);
+        }
         if (Auth::check() && Auth::user()->role_id == 2) {
             $data['wishlist'] = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $productId);
         }

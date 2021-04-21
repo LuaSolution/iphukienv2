@@ -16,30 +16,28 @@ $(document).ready(function () {
         var url = localStorage.getItem('quickview_url')
         $.post(url, {
             _token: localStorage.getItem('quickview_token')
-        })
-            .done(function (data) {
+        }).done(function (data) {
                 let productInfo = JSON.parse(data)
                 console.log(productInfo)
                 let str = ''
                 let strColor = ''
                 str += '<a href="#!" class="previous"></a>'
-                for (i = 0; i < productInfo['productColor'].length; i++) {
+                for (i = 0; i < productInfo['listImage'].length; i++) {
                     str += `<div class="carousel-item product-img ${productInfo['wishlist'] ? 'added-wishlist' : ''}">`
                         + `<span class="sale-percent">-${Math.round((productInfo['product']['price'] - productInfo['product']['sale_price']) / productInfo['product']['price'] * 100)}%</span>`
-                        + `<img src="${localStorage.getItem('quickview_image_base_path')}/${productInfo['productColor'][i].image}" />`
+                        + `<img src="${productInfo['listImage'][i]}" />`
                         + `</div>`
-                    strColor += `<span class="color" data-img="${localStorage.getItem('quickview_image_base_path')}/${productInfo['productColor'][i].image}">${productInfo['productColor'][i].color_name}</span>`
                 }
                 str += '<a href="#!" class="next"></a>'
                 $("#slider-image").html(str)
                 var elems = document.querySelectorAll('.quickview-slider')
                 M.Carousel.init(elems, { 'fullWidth': true, indicators: true })
 
-                $("#quickview-name").html(productInfo['product'].name)
+                $("#quickview-name").html(productInfo['product']['name'])
 
-                $("#quickview-short-description").html(productInfo['product'].short_description)
+                $("#quickview-short-description").html(productInfo['product']['short_description'])
 
-                switch (productInfo['product'].tag_id) {
+                switch (productInfo['product']['tag_id']) {
                     case 11:
                         str = `<span class="tag hang-moi"></span>`
                         break
@@ -52,11 +50,11 @@ $(document).ready(function () {
                 }
                 $("#quickview-list-tag").html(str)
 
-                $("#quickview-origin").html(numberWithCommas(productInfo['product'].price))
+                $("#quickview-origin").html(numberWithCommas(productInfo['product']['price']))
 
-                $("#quickview-sale").html(`${numberWithCommas(productInfo['product'].sale_price)}đ <span>Giảm ${Math.round((productInfo['product']['price'] - productInfo['product']['sale_price']) / productInfo['product']['price'] * 100)}%</span>`)
+                $("#quickview-sale").html(`${numberWithCommas(productInfo['product']['sale_price'])}đ <span>Giảm ${Math.round((productInfo['product']['price'] - productInfo['product']['sale_price']) / productInfo['product']['price'] * 100)}%</span>`)
 
-                switch (productInfo['product'].status_id) {
+                switch (productInfo['product']['status_id']) {
                     case 11:
                         str = `<span class="status het-hang"></span>`
                         break
@@ -69,13 +67,11 @@ $(document).ready(function () {
                 }
                 $("#quickview-status").html(str)
 
-                $("#quickview-colors").html(strColor)
-
                 str = ""
-                for (i = 0; i < productInfo['productSize'].length; i++) {
-                    str += `<span class="size">${productInfo['productSize'][i].name}</span>`
+                for (i = 0; i < productInfo['listChildProduct'].length; i++) {
+                    str += `<span class="size">${productInfo['listChildProduct'][i]['product']['color_name']} - ${productInfo['listChildProduct'][i]['product']['size_name']}</span>`
                 }
-                $("#quickview-sizes").html(str)
+                $("#quickview-colors-sizes").html(str)
 
                 // set for card
                 localStorage.setItem('quickview_sale_price', productInfo['product']['sale_price'])

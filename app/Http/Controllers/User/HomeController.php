@@ -6,7 +6,7 @@ use App\Cate;
 use App\Http\Controllers\Controller;
 use App\Mail;
 use App\Product;
-use App\ProductColor;
+use App\ProductImage;
 use App\SaleProduct;
 use App\StaticPage;
 use App\Slider;
@@ -26,25 +26,9 @@ class HomeController extends Controller
     {
         $data = [];
         $this->data['cates'] = Cate::take(5)->get();
-        $this->data['proNew'] = Product::take(8)->orderBy('created_at', 'desc')->get();
-        $this->data['proTopSold'] = Product::take(8)->orderBy('sold', 'desc')->get();
-        $flashSale = (new SaleProduct())->getListValidSaleProduct();
-        $productColorModel = new ProductColor();
-        $this->data['flashSale'] = [];
-        foreach ($flashSale as $i) {
-            $r = $productColorModel->getFirstImage($i->product_id);
-
-            $obj = new \stdClass();
-            if ($r != null) {
-                $obj->img = asset('public/' . $r['image']);
-            } else {
-                $obj->img = asset('public/');
-            }
-
-            $obj->product = $i;
-            array_push($this->data['flashSale'], $obj);
-        }
-
+        $this->data['proNew'] = Product::take(8)->whereNull('parent_id')->orderBy('created_at', 'desc')->get();
+        $this->data['proTopSold'] = Product::take(8)->whereNull('parent_id')->orderBy('sold', 'desc')->get();
+        $this->data['flashSale'] = (new SaleProduct())->getListValidSaleProduct();
         $this->data['slider'] = Slider::OrderBy('id' , 'DESC')->first();
         $this->data['partners'] = Partner::take(8)->orderBy('created_at', 'desc')->get();
 

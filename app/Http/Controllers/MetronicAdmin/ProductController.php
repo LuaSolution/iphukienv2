@@ -162,7 +162,7 @@ class ProductController extends Controller
                 $parentProductObj = (new Product())->getProductById($result->parent_id);
 
                 for($i = 0; $i < $request->input('total_image'); $i++) {
-                    $imgName = date('YmdHis') . '_' . $request->input('size_id') . '_' . $request->input('color_id') . '.' . $request->file('list_image_'.$i)->extension();
+                    $imgName = date('YmdHis') . '_' . $i . '_' . $request->input('size_id') . '_' . $request->input('color_id') . '.' . $request->file('list_image_'.$i)->extension();
                     $path = $request->file('list_image_'.$i)->storeAs(
                         'img/product/' . $result->id, $imgName
                     );

@@ -116,7 +116,7 @@ class Product extends Model
                 ->from('sale_products')
                 ->whereRaw('? >= from_date', [date("Y-m-d")])
                 ->whereRaw('? <= to_date', [date("Y-m-d")]);
-        })->orderBy('created_at', 'desc')->get();
+        })->whereNull('parent_id')->orderBy('created_at', 'desc')->get();
     }
     public function getListSameProduct($cateId, $productId)
     {
@@ -140,6 +140,14 @@ class Product extends Model
         return Product::whereNull('parent_id')->get();
     }
     public function getListChildProduct($parentId) {
-        return Product::where('parent_id', '=', $parentId)->get();
+        return Product::leftJoin('sizes', 'products.size_id', '=', 'sizes.id')
+            ->leftJoin('colors', 'products.color_id', '=', 'colors.id')
+            ->select('products.*', 'colors.name as color_name', 'sizes.name as size_name')
+            ->where('parent_id', '=', $parentId)->get();
+    }
+    public function getProductDefaultImage($parentId) {
+        return Product::leftJoin('product_image', 'product_image.product_id', '=', 'products.id')
+            ->select('products.*', 'product_image.image')
+            ->where('products.parent_id', $parentId)->first();
     }
 }
