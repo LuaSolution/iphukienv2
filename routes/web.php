@@ -104,13 +104,14 @@ Route::middleware(['runall', 'locale'])->group(function () {
 
             // Products
             Route::get('/products-add', 'ProductController@getAddProduct')->name('adMgetAddProduct');
+            Route::get('/sync-products-from-nhanh', 'ProductController@syncProductFromNhanh')->name('syncProductFromNhanh');
             Route::post('/products-add', 'ProductController@postAddProduct')->name('adMpostAddProduct');
             Route::get('/products-edit/{id}', 'ProductController@getEditProduct')->name('adMgetEditProduct');
             Route::post('/products-edit/{id}', 'ProductController@postEditProduct')->name('adMpostEditProduct');
             Route::get('/products', 'ProductController@getListProduct')->name('adMgetListProduct');
             Route::get('/products-del/{id}', 'ProductController@getDelProduct')->name('adMgetDelProduct');
-            Route::post('/upload-product-image', 'ProductController@uploadProductImage')->name('adMpostUploadProductImage');
             Route::post('/update-product-image', 'ProductController@updateProductImage')->name('adMpostUpdateProductImage');
+            Route::post('/delete-product-image', 'ProductController@deleteProductImage')->name('adMpostdeleteProductImage');
 
             //contact
             Route::get('/contact-list', 'AdminController@getListContact')->name('adMgetListContact');

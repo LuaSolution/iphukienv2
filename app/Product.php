@@ -14,7 +14,26 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'category_id', 'created_at', 'full_description', 'id', 'name', 'slug', 'price', 'sale_price', 'short_description', 'sold', 'status_id', 'tag_id', 'video', 'product_id_nhanh', 'updated_at',
+        'id',
+        'name',
+        'short_description',
+        'full_description',
+        'price',
+        'category_id',
+        'status_id',
+        'tag_id',
+        'created_at',
+        'updated_at',
+        'sold',
+        'sale_price',
+        'product_id_nhanh',
+        'video',
+        'slug',
+        'trademark_id',
+        'parent_id',
+        'default_image',
+        'size_id',
+        'color_id',
     ];
 
     public function insertProduct($data)
@@ -117,4 +136,10 @@ class Product extends Model
             ->orderBy('pos', 'asc')->orderBy('created_at', 'desc')
             ->get();
     }   
+    public function getListParentProduct() {
+        return Product::whereNull('parent_id')->get();
+    }
+    public function getListChildProduct($parentId) {
+        return Product::where('parent_id', '=', $parentId)->get();
+    }
 }

@@ -17,3 +17,88 @@
     float: left;
     padding: 10px;
 }
+.sync-product,
+.sync-product:hover {
+    background: green;
+    height: 50px;
+    line-height: 50px;
+    display: block;
+    margin-bottom: 20px;
+    width: fit-content;
+    color: #fff;
+    padding: 0 20px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    text-decoration: unset;
+}
+.add-more-img {
+    width: fit-content;
+    padding: 10px 20px;
+    background: green;
+    color: #fff;
+    margin-bottom: 20px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: auto;
+    margin-bottom: 20px;
+}
+#upload-img-area {
+    width: 640px;
+    margin: auto;
+    overflow: hidden;
+}
+#upload-img-area::after {
+    content: '';
+    clear: both;
+}
+.upload-img-item {
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    background-color: #ccc;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    
+}
+.upload-img-wrapper:nth-child(3n+1) {
+    margin-left: 0;
+}
+.upload-img-item::after {
+    content: '+';
+    font-size: 50px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: block;
+    line-height: 200px;
+    color: #fff;
+}
+.upload-img-wrapper {
+    position: relative;
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.remove-img {
+    display: block;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background-color: red;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}

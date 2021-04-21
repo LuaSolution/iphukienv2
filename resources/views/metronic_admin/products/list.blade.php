@@ -18,11 +18,13 @@
             </div>
             <div class="portlet-body">
                 <div class="table-responsive">
+                    <a href="{{ route('syncProductFromNhanh') }}" class="sync-product">Đồng bộ sản phẩm từ nhanh</a>
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th> # </th>
                                 <th> Tên sản phẩm </th>
+                                <th> Sản phẩm cha </th>
                                 <th> Danh mục </th>
                                 <th> Giá gốc </th>
                                 <th> Giá giảm </th>
@@ -37,6 +39,10 @@
                                     <td>
                                         <a
                                             href="{{ route('adMgetEditProduct', ['id' => $item->id]) }}">{{ $item->name }}</a>
+                                    </td>
+                                    <td>
+                                        <a
+                                            href="{{ route('adMgetEditProduct', ['id' => $item->parent_id]) }}">{{ $item->parent_id }}</a>
                                     </td>
                                     <td>
                                         {{ $item->category_name }}

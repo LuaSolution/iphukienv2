@@ -7,13 +7,13 @@ use App\Color;
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Product;
-use App\ProductColor;
-use App\ProductSize;
+use App\ProductImage;
 use App\Size;
 use App\Status;
 use App\Tag;
 use App\Trademark;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -29,58 +29,72 @@ class ProductController extends Controller
         $this->data['sizes'] = (new Size())->getListSize();
         $this->data['colors'] = (new Color())->getListColor();
         $this->data['trademarks'] = (new Trademark())->getListTrademark();
+        $this->data['listParentProduct'] = (new Product())->getListParentProduct();
 
         return view('metronic_admin.products.add', $this->data);
     }
 
-    public function uploadProductImage(Request $request)
+    public function updateProductImage(Request $request)
     {
-        $imgName = $request->input('color_id') . '.' . $request->file('img')->extension();
-        $path = $request->file('img')->storeAs(
-            'img/product/' . $request->input('product_id'), $imgName
-        );
-
-        (new ProductColor())->insertProductColor(
-            [
-                'product_id' => $request->input('product_id'),
-                'color_id' => $request->input('color_id'),
-                'image' => $path,
-            ]
-        );
-
+        if($request->input('type') == 'add') {
+            $imgName = date('YmdHis') . '_' . $request->input('size_id') . '_' . $request->input('color_id') . '.' . $request->file('image')->extension();
+            $path = $request->file('image')->storeAs(
+                'img/product/' . $request->input('id'), $imgName
+            );
+            (new ProductImage())->insertProductImage(
+                [
+                    'product_id' => $request->input('id'),
+                    'image' => $path,
+                ]
+            );
+            $productObj = (new Product())->getProductById($request->input('id'));
+            $parentProductObj = (new Product())->getProductById($productObj->parent_id);
+            $dataUpdate = [
+                'default_image' => $path,
+            ];
+            (new Product())->updateProduct($parentProductObj->id, $dataUpdate);
+            (new Product())->updateProduct($productObj->id, $dataUpdate);
+        } else {
+            $productImageObj = (new ProductImage())->getListProductImageById($request->input('product_image_id'));
+            $imgName = date('YmdHis') . '_' . $request->input('size_id') . '_' . $request->input('color_id') . '.' . $request->file('image')->extension();
+            $path = $request->file('image')->storeAs(
+                'img/product/' . $request->input('id'), $imgName
+            );
+            (new ProductImage())->updateProductImage(
+                $request->input('product_image_id'),
+                [
+                    'image' => $path,
+                ]
+            );
+            $productObj = (new Product())->getProductById($request->input('id'));
+            $parentProductObj = (new Product())->getProductById($productObj->parent_id);
+            $dataUpdate = [
+                'default_image' => $path,
+            ];
+            (new Product())->updateProduct($parentProductObj->id, $dataUpdate);
+            (new Product())->updateProduct($productObj->id, $dataUpdate);
+        }
+        
         return json_encode(['code' => 1]);
     }
 
-    public function updateProductImage(Request $request)
+    public function deleteProductImage(Request $request)
     {
-        // check productImg
-        $productColorObj = (new ProductColor())->getListProductColorByProductAndColor($request->input('product_id'), $request->input('color_id'));
-        if ($productColorObj->isEmpty() && !$request->hasFile('img')) {
-            return json_encode(['code' => 0, 'message' => "Cập nhật ảnh thất bại"]);
+        $productImageObj = (new ProductImage())->getListProductImageById($request->input('product_image_id'));
+        $productObj = (new Product())->getProductById($productImageObj->product_id);
+        $parentProductObj = (new Product())->getProductById($productObj->parent_id);
+        if($productImageObj->image == $productObj->default_image) {
+            (new Product())->updateProduct($parentProductObj->id, [
+                'default_image' => null,
+            ]);
         }
-
-        if ($request->hasFile('img')) {
-            $imgName = $request->input('color_id') . '.' . $request->file('img')->extension();
-            $path = $request->file('img')->storeAs(
-                'img/product/' . $request->input('product_id'), $imgName
-            );
-            if (!$productColorObj->isEmpty()) {
-                (new ProductColor())->updateImageByProductAndColor(
-                    $request->input('product_id'),
-                    $request->input('color_id'),
-                    $path
-                );
-            } else {
-                (new ProductColor())->insertProductColor(
-                    [
-                        'product_id' => $request->input('product_id'),
-                        'color_id' => $request->input('color_id'),
-                        'image' => $path,
-                    ]
-                );
-            }
+        if($productImageObj->image == $parentProductObj->default_image) {
+            (new Product())->updateProduct($parentProductObj->id, [
+                'default_image' => null,
+            ]);
         }
-
+        (new ProductImage())->deleteProductImageById($request->input('product_image_id'));
+        
         return json_encode(['code' => 1]);
     }
 
@@ -118,7 +132,9 @@ class ProductController extends Controller
         $status = $request->input('status_id');
         $tag = $request->input('tag_id');
         $trademark = $request->input('trademark_id');
-        $sizes = explode(",", $request->input('sizes'));
+        $parent = $request->input('parent_id') == 'no-parent' ? null : $request->input('parent_id');
+        $size = $request->input('size_id') == 'no-size' ? null : $request->input('size_id');
+        $color = $request->input('color_id') == 'no-color' ? null : $request->input('color_id');
 
         $dataInsert = [
             'name' => $name,
@@ -132,21 +148,44 @@ class ProductController extends Controller
             'status_id' => $status,
             'tag_id' => $tag,
             'trademark_id' => $trademark,
+            'parent_id' => $parent,
+            'size_id' => $size,
+            'color_id' => $color,
             'sold' => 0,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
         $result = (new Product())->insertProduct($dataInsert);
 
-        if ($result instanceof Product) {
-            foreach ($sizes as $s) {
-                (new ProductSize())->insertProductSize(
-                    [
-                        'product_id' => $result->id,
-                        'size_id' => $s,
-                    ]
-                );
-            }
+        if ($result != null) {
+            if($result->parent_id !== null) {
+                $parentProductObj = (new Product())->getProductById($result->parent_id);
+
+                for($i = 0; $i < $request->input('total_image'); $i++) {
+                    $imgName = date('YmdHis') . '_' . $request->input('size_id') . '_' . $request->input('color_id') . '.' . $request->file('list_image_'.$i)->extension();
+                    $path = $request->file('list_image_'.$i)->storeAs(
+                        'img/product/' . $result->id, $imgName
+                    );
+                    (new ProductImage())->insertProductImage(
+                        [
+                            'product_id' => $result->id,
+                            'image' => $path,
+                        ]
+                    );
+                    if($parentProductObj->image == null) {
+                        $dataUpdate = [
+                            'default_image' => $path,
+                        ];
+                        (new Product())->updateProduct($parentProductObj->id, $dataUpdate);
+                    }
+                    if($result->image == null) {
+                        $dataUpdate = [
+                            'default_image' => $path,
+                        ];
+                        (new Product())->updateProduct($result->id, $dataUpdate);
+                    }
+                }
+            } 
             //sync to nhanh
             $addProductId = $result->id;
             $resNhanh = Helpers::callNhanhApi([
@@ -167,6 +206,8 @@ class ProductController extends Controller
             return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
         }
 
+        toast()->success('Thêm thành công');
+        return json_encode(['code' => 1, 'product_id' => $result->id]);
     }
 
     /**
@@ -180,21 +221,8 @@ class ProductController extends Controller
         $this->data['sizes'] = (new Size())->getListSize();
         $this->data['colors'] = (new Color())->getListColor();
         $this->data['product'] = (new Product())->getProductById($id);
-        $this->data['productSize'] = (new ProductSize())->getListProductSizeByProduct($id)->map(function ($i) {
-            return $i->size_id;
-        })->all();
-        $productColor = (new ProductColor())->getListProductColorByProduct($id);
-
-        $this->data['productColorObj'] = $productColor->map(function ($i) {
-            $obj = new \stdClass();
-            $obj->color = $i->color_id;
-            $obj->code = $i->code;
-            $obj->img = asset('public/' . $i->image);
-            return $obj;
-        })->all();
-        $this->data['productColorId'] = $productColor->map(function ($i) {
-            return $i->color_id;
-        })->all();
+        $this->data['productImage'] = (new ProductImage())->getListProductImageByProduct($id);
+        $this->data['listParentProduct'] = (new Product())->getListParentProduct();
         $this->data['trademarks'] = (new Trademark())->getListTrademark();
 
         if ($this->data['product']) {
@@ -240,22 +268,6 @@ class ProductController extends Controller
         $tag = $request->input('tag_id');
         $trademark = $request->input('trademark_id');
 
-        //update size
-        $sizes = explode(",", $request->input('sizes'));
-        (new ProductSize())->deleteProductSizeByProduct($id);
-        foreach ($sizes as $s) {
-            (new ProductSize())->insertProductSize(
-                [
-                    'product_id' => $id,
-                    'size_id' => $s,
-                ]
-            );
-        }
-
-        //delete unused color
-        $colors = explode(",", $request->input('colors'));
-        (new ProductColor())->removeProductColorByProduct($id, $colors);
-
         $dataUpdate = [
             'name' => $name,
             'slug' => $slug,
@@ -297,8 +309,12 @@ class ProductController extends Controller
      */
     public function getDelProduct($id)
     {
-        (new ProductSize())->deleteProductSizeByProduct($id);
-        (new ProductColor())->deleteProductColorByProduct($id);
+        $listChildProd = (new Product())->getListChildProduct($id);
+        if(count($listChildProd) > 0) {
+            toast()->error('Không thể xóa sản phẩm có sản phẩm con');
+            return redirect()->route('adMgetListProduct')->with('error', 'Xóa thất bại!');
+        }
+        (new ProductImage())->deleteProductImageByProduct($id);
         $result = (new Product())->deleteProduct($id);
 
         if ($result > 0) {
@@ -306,5 +322,152 @@ class ProductController extends Controller
         } else {
             return redirect()->route('adMgetListProduct')->with('error', 'Xóa thất bại!');
         }
+    }
+
+    public function syncProductFromNhanh()
+    {
+        ini_set('max_execution_time', 0);
+        // get list from nhanh
+        $cPage = 0;
+        $tPage = 0;
+
+        // get category nhanh
+        $listNhanhCate = Helpers::callNhanhApi("productcategory", "/product/category", true);
+        
+        do {
+            $cPage++;
+            //get list parent
+            $listParentProduct = $this->getListProductFromNhanh($cPage, 0);
+            if(!isset($listParentProduct->code)) {
+                if($tPage == 0) {
+                    $cPage = $listParentProduct->currentPage;
+                    $tPage = $listParentProduct->totalPages;
+                }
+                $listProduct = (array)$listParentProduct->products;
+                foreach ($listProduct as $product) {
+                    //insert parent product
+                    $nhanhParentCate = $this->getCategoryOfNhanh($listNhanhCate, $product->categoryId);
+                    $parentCate = Cate::firstOrCreate(['title' => $nhanhParentCate != null ? $nhanhParentCate->name : 'no-category']);    
+                    //status
+                    if($product->status != 'Inactive') {
+                        //insert parent product
+                        $parentPrd = Product::firstOrCreate([
+                            'product_id_nhanh' => $product->idNhanh
+                        ]);
+                        //status
+                        $parentStatusId = $this->getStatusIdFromNhanh($product->status);
+                        //trademark
+                        $branchName = !empty($product->brandName) ? $product->brandName : 'iPhuKien';
+                        $trademarkObj = Trademark::firstOrCreate(['name' => $branchName]);   
+                        //update product information
+                        $this->updateProductInformationFromNhanh(
+                            $product, $parentCate->id, $parentStatusId, $trademarkObj->id, $parentPrd->id);
+                        // updade child product
+                        $cChildPage = 0;
+                        $tChildPage = 0;
+                        do {
+                            $cChildPage++;
+                            $listChildProduct = $this->getListProductFromNhanh($cChildPage, $product->idNhanh);
+                            Log::info(isset($listChildProduct->code));
+                            if(!isset($listChildProduct->code)) {
+                                if($tChildPage == 0) {
+                                    $cChildPage = $listChildProduct->currentPage;
+                                    $tChildPage = $listChildProduct->totalPages;
+                                }
+                                $listChildrentProduct = (array)$listChildProduct->products;
+                                
+                                foreach ($listChildrentProduct as $p) {
+                                    //insert parent product
+                                    $nhanhChildCate = $this->getCategoryOfNhanh($listNhanhCate, $p->categoryId);
+                                    $childCate = Cate::firstOrCreate(['title' => $nhanhChildCate->name]);   
+                                    //insert parent product
+                                    $childPrd = Product::firstOrCreate([
+                                        'product_id_nhanh' => $p->idNhanh,
+                                        'parent_id' => $parentPrd->id
+                                    ]);
+                                    //status
+                                    $childStatusId = $this->getStatusIdFromNhanh($p->status);
+                                    //trademark
+                                    $childBranchName = !empty($p->brandName) ? $p->brandName : 'iPhuKien';
+                                    $chilTrademarkObj = Trademark::firstOrCreate(['name' => $childBranchName]); 
+                                    //update product information
+                                    if(count($p->attributes) > 0) {
+                                        foreach ($p->attributes as $att) {
+                                            if(strpos(reset($att)->attributeName, 'Kích thước') !== false){
+                                                $pSize = Size::firstOrCreate(['name' => reset($att)->name]);
+                                            }
+                                            if(strpos(reset($att)->attributeName, 'Màu sắc') !== false){
+                                                $pColor = Color::firstOrCreate(['name' => reset($att)->name]);
+                                            }
+                                        }
+                                    }
+                                    if(!$pSize) {
+                                        $pSize = Size::firstOrCreate(['name' => 'One Size']);
+                                    }
+                                    if(!$pColor) {
+                                        $pColor = Color::firstOrCreate(['name' => 'One Color']);
+                                    }
+                                    $this->updateProductInformationFromNhanh(
+                                        $p, $childCate->id, $childStatusId, $chilTrademarkObj->id, $childPrd->id, $pSize->id, $pColor->id);  
+                                }
+                            }
+                        } while ($cChildPage < $tChildPage);
+                    }
+                }
+            }
+        } while ($cPage < $tPage);
+
+        return redirect()->route('adMgetListProduct');
+    }
+
+    public function getListProductFromNhanh($page, $parentId) {
+        return Helpers::callNhanhApi([
+            'page' => $page,
+            'parentId' => $parentId,
+            'icpp' => 50
+        ], "/product/search");
+    }
+
+    public function getCategoryOfNhanh($listCate, $categoryId) {
+        foreach ($listCate as $c) {
+            if($c->id == $categoryId) {
+                return $c;
+            }
+        }
+    }
+
+    public function getStatusIdFromNhanh($status) {
+        $parentStatusId = 0;
+        switch ($status) {
+            case 'OutOfStock':
+                $parentStatusId = 11;
+                break;
+            case 'Active':
+                $parentStatusId = 13;
+                break;
+            case 'New':
+                $parentStatusId = 13;
+                break;
+        }  
+        
+        return $parentStatusId;
+    }
+
+    public function updateProductInformationFromNhanh($product, $parentCateId, $parentStatusId, $trademarkId, $parentPrdId, $sizeId, $colorId) {
+        $dataUpdate = [
+            'name' => $product->name,
+            'category_id' => $parentCateId,
+            'short_description' => $product->name,
+            'full_description' => $product->name,
+            'price' => $product->oldPrice != null ? $product->oldPrice : $product->price,
+            'sale_price' => $product->price,
+            'status_id' => $parentStatusId,
+            'tag_id' => 11,
+            'size_id' => $sizeId,
+            'color_id' => $colorId,
+            'trademark_id' => $trademarkId,
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+        (new Product())->updateProduct($parentPrdId, $dataUpdate);
     }
 }
