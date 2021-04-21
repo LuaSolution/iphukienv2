@@ -63,9 +63,11 @@ const x = setInterval(function() {
 </script>
 <div class="ipk-container">
     <div class="ipk-content-container">
+        @if($slider)
         <div class="remove-line-height banner">
-            <img src="{{ asset('public/assets/images/demo/slider.png') }}" />
+            <img src="{{ asset('/public/'. $slider->image) }}" />
         </div>
+        @endif
         <div class="list-category">
             <div class="row">
                 @foreach($cates as $item)
@@ -145,17 +147,9 @@ echo ('<script type="text/javascript">
 </div>
 <div class="ipk-container partners-container">
     <div class="partners carousel">
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
-        
+        @foreach ($partners as $key => $value) 
+        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/' . $value->image) }})"></div>
+        @endforeach
     </div>
 </div>
 <div class="ipk-container news-feed-container">

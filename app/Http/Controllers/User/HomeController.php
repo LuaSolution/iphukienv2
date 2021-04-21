@@ -9,6 +9,8 @@ use App\Product;
 use App\ProductColor;
 use App\SaleProduct;
 use App\StaticPage;
+use App\Slider;
+use App\Partner;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -42,6 +44,9 @@ class HomeController extends Controller
             $obj->product = $i;
             array_push($this->data['flashSale'], $obj);
         }
+
+        $this->data['slider'] = Slider::OrderBy('id' , 'DESC')->first();
+        $this->data['partners'] = Partner::take(8)->orderBy('created_at', 'desc')->get();
 
         return view('user.home', $this->data);
     }
