@@ -10,7 +10,17 @@ class Order extends Model
     protected $table = 'orders';
 
     protected $fillable = [
-        'id', 'address_id', 'payment_method_id', 'delivery_id', 'ship_fee', 'delivery_date', 'status', 'created_at', 'updated_at', 'nhanh_order_id'
+        'id', 
+        'address_id', 
+        'payment_method_id', 
+        'delivery_id', 
+        'ship_fee', 
+        'delivery_date', 
+        'status', 
+        'created_at', 
+        'updated_at', 
+        'nhanh_order_id',
+        'order_code'
     ];
 
     public function insertOrder($data)

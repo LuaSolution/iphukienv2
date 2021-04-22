@@ -87,13 +87,14 @@ $(document).ready(function () {
     let str = "";
     let sum = 0;
     let count = 0;
+    console.log(cart);
     for (const i in cart) {
         str += `<div class="product col l3">`
                 + `<div class="img" style="background-image: url(${cart[i].image})"></div>`
                 + `<div class="name">${cart[i].name}</div>`
                 + `<div class="price-color">`
                 + `<span class="price">${numberWithCommas(cart[i].salePrice)}đ</span>`
-                + `<span class="color">${cart[i].sizeName}, ${cart[i].colorName}</span>`
+                + `<span class="color">${cart[i].size}, ${cart[i].color}</span>`
                 + `</div>`
                 + `<div class="quantity-delete">`
                 + `<div class="quantity">`

@@ -200,6 +200,7 @@ $(document).ready(function () {
             _token: `{{ csrf_token() }}`
         })
         .done(function( data ) {
+            console.log(data);
             let shipService = JSON.parse(data);
             let totalShipFee = parseInt(shipService.shipFee) + parseInt(shipService.codFee) + parseInt(shipService.declaredFee);
             $("#total-ship-fee").html(`${numberWithCommas(totalShipFee)} VNĐ`);
@@ -310,6 +311,11 @@ $(document).on("click", ".complete", function () {
         if(res.code == 1) {
             localStorage.removeItem("ipk_cart");
             window.location.href = `{{ URL::to('/') . '/payment-complete/' }}${res.orderId}`;
+        } else {
+            M.toast({
+                html: res.message,
+                classes: 'add-cart-fail'
+            })
         }
     });
 });

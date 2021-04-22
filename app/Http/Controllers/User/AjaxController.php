@@ -81,6 +81,9 @@ class AjaxController extends Controller
     }
 
     public function createOrder(Request $request) {
+        if (!Auth::check() || Auth::user()->role_id != 2) {
+            return json_encode(['code' => 0, 'message' => 'Vui lòng đăng nhập']);
+        }
         // create order
         $addressId = $request->input('addressId');
         $paymentMethodId = $request->input('paymentMethodId');
@@ -98,10 +101,12 @@ class AjaxController extends Controller
             'status' => 'New',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
+            'order_code' => date('YmdHis') . '_' . Auth::user()->id,
+            'user_id' => Auth::user()->id
         ];
         $addedOrder = (new Order())->insertOrder($dataInsertOrder);
+        $addedOrderCode = $addedOrder->order_code;
         $addedOrderId = $addedOrder->id;
-
 
         foreach ($listProduct as $product) {
             $dataInsertDetail = [
@@ -109,9 +114,6 @@ class AjaxController extends Controller
                 'product_id' => $product->id,
                 'total_price' => $product->quantity * $product->price,
                 'total_count' => $product->quantity,
-                'color_id' => $product->color,
-                'size_id' => $product->size,
-                'image' => $product->image,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ];
@@ -119,7 +121,7 @@ class AjaxController extends Controller
         }
         //call nhanh
         $nhanhRes = Helpers::callNhanhApi([
-            'id' => $addedOrderId,
+            'id' => $addedOrderCode,
             'type' => 'Shipping',
             'customerCityName' => $request->input('customerCityName'),
             'customerDistrictName' => $request->input('customerDistrictName'),
@@ -133,7 +135,8 @@ class AjaxController extends Controller
             'productList' => $listProduct
         ], '/order/add');
         //update nhanh order id
-        (new Order())->updateOrder($addedOrderId, ['nhanh_order_id' => $nhanhRes->$addedOrderId]);
+        
+        (new Order())->updateOrder($addedOrderId, ['nhanh_order_id' => $nhanhRes->$addedOrderCode]);
         //send mail
 
         return json_encode(['code' => 1, 'orderId' => $addedOrderId]);
