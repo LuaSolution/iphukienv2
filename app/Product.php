@@ -53,7 +53,9 @@ class Product extends Model
                 ->select('products.*', 'categories.title as category_name')
                 ->where('products.id', $id)->first();
         } else {
-            $res = Product::where('slug', $id)->first();
+            $res = Product::leftJoin('categories', 'categories.id', '=', 'products.category_id')
+            ->select('products.*', 'categories.title as category_name')
+            ->where('products.slug', $id)->first();
         }
         return $res;
     }

@@ -118,7 +118,7 @@
                     @foreach($listChildProduct as $item)
                     <!-- lam toi day -->
                     <span class="size" 
-                        data-img="{{ asset('public/'.$item->listImage[0]->image) }}" 
+                        data-img="{{ asset(isset($item->listImage[0]->image) ? 'public/'.$item->listImage[0]->image : 'public/assets/images/header/logo.svg') }}" 
                         data-productname="{{$item->product->name}}"
                         data-color="{{ $item->product->color_name }}"
                         data-size="{{ $item->product->size_name }}"
@@ -343,7 +343,7 @@ function updateCart() {
     let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
     
     if(cart[productid]) {
-        cart[productid].quantity = quantity;
+        cart[productid].quantity = parseInt(cart[productid].quantity) + parseInt(quantity);
     } else {
         cart[productid] = {
             color: choosenColor,

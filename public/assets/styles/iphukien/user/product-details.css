@@ -44,7 +44,8 @@
     width: 100%;
     padding-top: 100%;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: contain;
+    background-position: center;
     display: block;
     cursor: pointer;
 }
