@@ -34,7 +34,6 @@ class ProductController extends Controller
 
         $data['listSameProduct'] = (new Product())->getListSameProduct($data['product']->category_id, $data['product']->id);
         foreach ($data['listSameProduct'] as $i) {
-            // $i->image = asset('public/'.(new ProductColor())->getListProductColorByProduct($i->id)[0]->image);
             $i->wishlist = null;
             if (Auth::check() && Auth::user()->role_id == 2) {
                 $i->wishlist = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $i->id);

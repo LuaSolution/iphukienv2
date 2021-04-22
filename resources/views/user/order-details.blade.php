@@ -18,22 +18,26 @@
     <div class="ipk-content-container order-details-container">
         @include('layouts.user-top', ['status' => 1])
         <div class="order-code">ĐƠN HÀNG #{{$order->nhanh_order_id}}</div>
-        <div class="list-status">
+        <!-- <div class="list-status">
             <div class="status finish"><span>Chưa xác nhận</span></div>
             <div class="status current"><span>Khách hủy</span></div>
             <div class="status"><span>Đã xác nhận</span></div>
             <div class="status"><span>Đang đóng gói</span></div>
             <div class="status"><span>Đang giao hàng</span></div>
             <div class="status"><span>Thành công</span></div>
-        </div>
+        </div> -->
 
         <iframe class="order-detail-iframe" src="{{$orderDetailUrl}}"  width="100%" height="600"></iframe>
 
         <div class="list-products">
             <div class="row products">
                 @foreach($orderDetail as $detail)
+                <?php
+                $listImg = \App\ProductImage::where('product_id', '=', $detail->product_id)->get();
+                $img = count($listImg) > 0 ? asset('public/'.$listImg[0]->image) : asset('public/assets/images/header/logo.svg');
+                ?>
                 <div class="product col l3">
-                    <div class="img" style="background-image: url({{ $detail->image }})"></div>
+                    <div class="img" style="background-image: url({{ $img }})"></div>
                     <div class="name">{{$detail->product_name}}</div>
                     <div class="price-color">
                         <span class="price">{{number_format($detail->total_price , 0, ',', '.')}}đ</span>

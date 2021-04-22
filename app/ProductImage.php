@@ -37,35 +37,8 @@ class ProductImage extends Model
     {
         return ProductImage::where('id', '=', $id)->delete();
     }
-    // public function getListProductColorByProductDistinct($productId)
-    // {
-    //     return ProductColor::where('product_id', '=', $productId)
-    //         ->leftJoin('colors', 'colors.id', '=', 'product_color.color_id')
-    //         ->select('colors.name as color_name', 'product_color.color_id')->distinct()->get();
-    // }
     public function deleteProductImageByProduct($id)
     {
         return ProductImage::where('product_id', '=', $id)->delete();
     }
-    // public function getListProductColorByProductAndColor($productId, $colorId)
-    // {
-    //     return ProductColor::where('product_id', '=', $productId)
-    //         ->where('color_id', '=', $colorId)->get();
-    // }
-    // public function updateImageByProductAndColor($productId, $colorId, $newPath)
-    // {
-    //     return ProductColor::where('product_id', '=', $productId)
-    //         ->where('color_id', '=', $colorId)
-    //         ->update(['image' => $newPath]);
-    // }
-    // public function removeProductColorByProduct($id, $colors)
-    // {
-    //     return ProductColor::where('product_id', '=', $id)
-    //         ->whereNotIn('color_id', $colors)
-    //         ->delete();
-    // }
-    // public function getFirstImage($productId)
-    // {
-    //     return ProductColor::where('product_id', '=', $productId)->first();
-    // }
 }

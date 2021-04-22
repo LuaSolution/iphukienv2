@@ -208,16 +208,16 @@ class UserController extends Controller
 
         $data['order'] = (new Order())->getById($orderId);
         $data['orderDetail'] = (new OrderDetail())->getListOrderDetailByOrder($orderId);
-        $checkSumData = config('app.nhanh_api_user_name') . $orderId;
+        $checkSumData = config('app.nhanh_api_user_name') . $data['order']->order_code;
         $checksum = md5(md5(config('app.nhanh_api_secret_key') . $checkSumData) . $checkSumData);
-        $data['orderDetailUrl'] = config('app.nhanh_api_host') . "/shipping/trackingframe?apiUsername=" . config('app.nhanh_api_user_name') . "&orderId=" . $orderId . "&checksum=" . $checksum;
+        $data['orderDetailUrl'] = config('app.nhanh_api_host') . "/shipping/trackingframe?apiUsername=" . config('app.nhanh_api_user_name') . "&orderId=" . $data['order']->order_code . "&checksum=" . $checksum;
         $data['countAllOrderProduct'] = 0;
         $data['countAllOrderPrice'] = 0;
         foreach ($data['orderDetail'] as $oD) {
             $data['countAllOrderProduct'] += $oD->total_count;
-            $data['countAllOrderPrice'] += $oD->total_count * $oD->total_price;
+            $data['countAllOrderPrice'] += $oD->total_price;
         }
-
+        
         return view('user/order-details', $data);
     }
 
@@ -226,8 +226,20 @@ class UserController extends Controller
         if (!Auth::check() || Auth::user()->role_id != 2) {
             return redirect()->route('login');
         }
-        $data['listOrder'] = (new Order())->getListOrderByUser(Auth::user()->id, 0, 3);
-
+        $listOrder = (new Order())->getListOrderByUser(Auth::user()->id);
+        $data['listOrder'] = [];
+        foreach($listOrder as $o) {
+            $obj = new \stdClass();
+            $obj->order = $o;
+            $orderDetail = (new OrderDetail())->getListOrderDetailByOrder($o->id);
+            $obj->total = 0;
+            foreach ($orderDetail as $key => $detail) {
+                $obj->total += $detail->total_price;
+            }
+            $obj->total += $o->ship_fee;
+            array_push($data['listOrder'], $obj);
+        }
+        
         return view('user/orders', $data);
     }
 
@@ -241,13 +253,14 @@ class UserController extends Controller
 
     public function getUserAddresses(Request $request)
     {
-        $listCity = callNhanhApi([
+        $listCity = Helpers::callNhanhApi([
             "type" => "CITY",
             "parentId" => 0,
         ], "/shipping/location");
         $data = [
             "list_city" => $listCity,
         ];
+        $data['addresses'] = (new Address())->getAddressByUser(Auth::user()->id);
 
         return view('user/user-addresses', $data);
     }

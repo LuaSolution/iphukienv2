@@ -19,9 +19,9 @@
         <div class="list-order">
             @foreach($listOrder as $order)
             <div class="order">
-                <div class="order-code">Đơn hàng: <a href="{{ route('user.order-details', $order->id) }}">#{{$order->nhanh_order_id}}</a> - <i>{{$order->status}}</i></div>
-                <div class="receive-date">Ngày nhận hàng: {{date('Y-m-d', strtotime($order->delivery_date))}}</div>
-                <div class="sum">{{number_format($order->total_order_price , 0, ',', '.')}} VND</div>
+                <div class="order-code">Đơn hàng: <a href="{{ route('user.order-details', $order->order->id) }}">#{{$order->order->nhanh_order_id}}</a> - <i>{{$order->order->status}}</i></div>
+                <div class="receive-date">Ngày nhận hàng: {{date('Y-m-d', strtotime($order->order->delivery_date))}}</div>
+                <div class="sum">{{number_format($order->total, 0, ',', '.')}} VND</div>
             </div>
             @endforeach
         </div>

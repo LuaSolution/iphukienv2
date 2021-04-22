@@ -8,7 +8,7 @@
     font-size: 22px;
     line-height: 28px;
     color: #C4C4C4;
-    background-image: url(/assets/images/payment/arrow.svg);
+    background-image: url(/public/assets/images/payment/arrow.svg);
     background-position: right 0 center;
     background-size: 23px 8px;
     background-repeat: no-repeat;
@@ -363,7 +363,7 @@
 }
 
 .close-add-address-popup {
-    background-image: url(/assets/images/product/close-button.svg);
+    background-image: url(/public/assets/images/product/close-button.svg);
     background-position: center;
     background-repeat: no-repeat;
     width: 30px;

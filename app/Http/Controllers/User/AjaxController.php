@@ -9,8 +9,6 @@ use App\User;
 use App\Order;
 use App\OrderDetail;
 use App\Product;
-use App\ProductColor;
-use App\ProductSize;
 use App\Wishlist;
 use App\ProductImage;
 use Illuminate\Support\Facades\Auth;
@@ -132,10 +130,10 @@ class AjaxController extends Controller
             'paymentMethod' => 'COD',
             'carrierId' => $request->input('carrierId'),
             'status' => 'New',
-            'productList' => $listProduct
+            'productList' => $listProduct,
+            'customerShipFee' => $shipFee
         ], '/order/add');
         //update nhanh order id
-        
         (new Order())->updateOrder($addedOrderId, ['nhanh_order_id' => $nhanhRes->$addedOrderCode]);
         //send mail
 

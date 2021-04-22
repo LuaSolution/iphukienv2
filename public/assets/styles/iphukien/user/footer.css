@@ -47,18 +47,18 @@
     margin-left: 15px;
 }
 .footer .social-icons .facebook-icon {
-    background-image: url(/assets/images/footer/facebook.svg);
+    background-image: url(/public/assets/images/footer/facebook.svg);
     width: 29px;
     height: 28px;
     margin-left: 0;
 }
 .footer .social-icons .instagram-icon {
-    background-image: url(/assets/images/footer/instagram.svg);
+    background-image: url(/public/assets/images/footer/instagram.svg);
     width: 29px;
     height: 28px;
 }
 .footer .social-icons .youtube-icon {
-    background-image: url(/assets/images/footer/youtube.svg);
+    background-image: url(/public/assets/images/footer/youtube.svg);
     width: 36px;
     height: 28px;
     background-size: 36px 28px;

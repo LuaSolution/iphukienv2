@@ -20,8 +20,8 @@ class OrderDetail extends Model
     public function getListOrderDetailByOrder($orderId)
     {
         return OrderDetail::leftJoin('products', 'products.id', '=', 'order_details.product_id')
-            ->leftJoin('colors', 'colors.id', '=', 'order_details.color_id')
-            ->leftJoin('sizes', 'sizes.id', '=', 'order_details.size_id')
+            ->leftJoin('colors', 'colors.id', '=', 'products.color_id')
+            ->leftJoin('sizes', 'sizes.id', '=', 'products.size_id')
             ->select('order_details.*', 'colors.name as color_name', 'sizes.name as size_name', 'products.name as product_name')
             ->where('order_id', '=', $orderId)->orderBy('created_at', 'desc')->get();
     }

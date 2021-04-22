@@ -21,39 +21,19 @@
             Thêm địa chỉ
         </div>
         <div class="list-address">
+            @foreach($addresses as $add)
             <div class="address">
-                <div class="address-content">123 tên đường, tên phường, tỉnh thành</div>
-                <div class="customer-name">Tên khách hàng</div>
-                <div class="customer-phone">+84 000</div>
-                <div class="customer-email">email</div>
+                <div class="address-content">{{$add->address}}</div>
+                <div class="customer-name">{{$add->name}}</div>
+                <div class="customer-phone">{{$add->phone}}</div>
+                <div class="customer-email">{{$add->email}}</div>
                 <div class="list-action">
-                    <a href="#!">Mặc định</a>
+                    <a href="#!" class="set-default">Mặc định</a>
                     <a href="#!">Sửa</a>
                     <a href="#!">Xóa</a>
                 </div>
             </div>
-            <div class="address">
-                <div class="address-content">123 tên đường, tên phường, tỉnh thành</div>
-                <div class="customer-name">Tên khách hàng</div>
-                <div class="customer-phone">+84 000</div>
-                <div class="customer-email">email</div>
-                <div class="list-action">
-                    <a href="#!">Mặc định</a>
-                    <a href="#!">Sửa</a>
-                    <a href="#!">Xóa</a>
-                </div>
-            </div>
-            <div class="address">
-                <div class="address-content">123 tên đường, tên phường, tỉnh thành</div>
-                <div class="customer-name">Tên khách hàng</div>
-                <div class="customer-phone">+84 000</div>
-                <div class="customer-email">email</div>
-                <div class="list-action">
-                    <a href="#!">Mặc định</a>
-                    <a href="#!">Sửa</a>
-                    <a href="#!">Xóa</a>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
@@ -73,7 +53,7 @@
                 <span>Ví dụ: 0866 909 606</span>
             </div>
             <div class="col m6 s12 form-input">
-                <input type="text" placeholder="SỐ ĐIỆN THOẠI *" />
+                <input type="text" placeholder="EMAIL *" />
                 <span>Ví dụ: 0866 909 606</span>
             </div>
             <div class="col m6 s12 form-input">
