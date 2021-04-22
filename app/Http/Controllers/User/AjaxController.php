@@ -163,19 +163,23 @@ class AjaxController extends Controller
     }
 
     public function addToWishlist(Request $request) {
-        if($request->input('type') == 'add-wishlist') {
-            $dataInsert = [
-                'product_id' => $request->input('productId'),
-                'user_id' => Auth::user()->id,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
-            ];
-            (new Wishlist())->insertWishlist($dataInsert);
-        } else {
-            (new Wishlist())->deleteWishlist(Auth::user()->id, $request->input('productId'));
-        }
+        if (Auth::check() && Auth::user()->role_id == 2) {
+            if($request->input('type') == 'add-wishlist') {
+                $dataInsert = [
+                    'product_id' => $request->input('productId'),
+                    'user_id' => Auth::user()->id,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ];
+                (new Wishlist())->insertWishlist($dataInsert);
+            } else {
+                (new Wishlist())->deleteWishlist(Auth::user()->id, $request->input('productId'));
+            }
 
-        return json_encode(['code' => 1]);
+            return json_encode(['code' => 1]);
+        }
+        
+        return json_encode(['code' => 0, 'message' => 'Vui lòng đăng nhập']);
     }
 
 }

@@ -4,8 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Product;
-use App\ProductColor;
-use App\ProductSize;
+use App\ProductImage;
 use App\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,31 +15,30 @@ class ProductController extends Controller
     {
         $data = [];
         $data['product'] = (new Product())->getProductById($id);
-        // $data['productColor'] = (new ProductColor())->getListProductColorByProduct($data['product']->id);
-        // $data['productColorDistinct'] = (new ProductColor())->getListProductColorByProductDistinct($data['product']->id);
-
-        $tmp = (new ProductColor())->getListProductColorByProduct($data['product']->id);
-        if ($tmp->isNotEmpty()) {
-            $data['productColor'] = $tmp;
+        $listChildProduct = (new Product())->getListChildProduct($id);
+        $productImageModel = new ProductImage();
+        $data['listChildProduct'] = [];
+        $data['listImage'] = [];
+        foreach($listChildProduct as $p) {
+            $obj = new \stdClass();
+            $obj->product = $p;
+            $obj->listImage = $productImageModel->getListProductImageByProduct($p->id);
+            foreach($obj->listImage as $i) {
+                array_push($data['listImage'], asset('public/'.$i->image));
+            }
+            array_push($data['listChildProduct'], $obj);
         }
-
-        $tmp = (new ProductColor())->getListProductColorByProductDistinct($data['product']->id);
-        if ($tmp->isNotEmpty()) {
-            $data['productColorDistinct'] = $tmp;
-        }
-
-        $data['productSize'] = (new ProductSize())->getListProductSizeByProduct($data['product']->id);
-        $data['listSameProduct'] = (new Product())->getListSameProduct($data['product']->category_id, $data['product']->id);
         if (Auth::check() && Auth::user()->role_id == 2) {
             $data['wishlist'] = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $id);
         }
+
+        $data['listSameProduct'] = (new Product())->getListSameProduct($data['product']->category_id, $data['product']->id);
         foreach ($data['listSameProduct'] as $i) {
             // $i->image = asset('public/'.(new ProductColor())->getListProductColorByProduct($i->id)[0]->image);
             $i->wishlist = null;
             if (Auth::check() && Auth::user()->role_id == 2) {
                 $i->wishlist = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $i->id);
             }
-            return view('user/product-details', $data);
         }
 
         return view('user/product-details', $data);

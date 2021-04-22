@@ -23,9 +23,15 @@ $(document).ready(function () {
                 let strColor = ''
                 str += '<a href="#!" class="previous"></a>'
                 for (i = 0; i < productInfo['listImage'].length; i++) {
-                    str += `<div class="carousel-item product-img ${productInfo['wishlist'] ? 'added-wishlist' : ''}">`
+                    str += `<div class="carousel-item product-img ${productInfo['wishlist'] ? 'added-wishlist' : ''}" data-img="${productInfo['listImage'][i]}">`
                         + `<span class="sale-percent">-${Math.round((productInfo['product']['price'] - productInfo['product']['sale_price']) / productInfo['product']['price'] * 100)}%</span>`
                         + `<img src="${productInfo['listImage'][i]}" />`
+                        + `</div>`
+                }
+                if(productInfo['listImage'].length == 0) {
+                    str += `<div class="carousel-item product-img ${productInfo['wishlist'] ? 'added-wishlist' : ''}" data-img="${localStorage.getItem('quickview_image_base_path') + '/assets/images/header/logo.svg'}">`
+                        + `<span class="sale-percent">-${Math.round((productInfo['product']['price'] - productInfo['product']['sale_price']) / productInfo['product']['price'] * 100)}%</span>`
+                        + `<img src="${localStorage.getItem('quickview_image_base_path') + '/assets/images/header/logo.svg'}" />`
                         + `</div>`
                 }
                 str += '<a href="#!" class="next"></a>'
@@ -69,7 +75,20 @@ $(document).ready(function () {
 
                 str = ""
                 for (i = 0; i < productInfo['listChildProduct'].length; i++) {
-                    str += `<span class="size">${productInfo['listChildProduct'][i]['product']['color_name']} - ${productInfo['listChildProduct'][i]['product']['size_name']}</span>`
+                    str += `<span class="size" `
+                        + `data-img="${ localStorage.getItem('quickview_image_base_path') + "/" + productInfo['listChildProduct'][i]['listImage'][0]['image']}" `
+                        + `data-productname="${ productInfo['listChildProduct'][i]['product']['name']}" `
+                        + `>`
+                        + `${productInfo['listChildProduct'][i]['product']['color_name']} - ${productInfo['listChildProduct'][i]['product']['size_name']}`
+                        + `</span>`
+                }
+                if(productInfo['listChildProduct'].length == 0) {
+                    str += `<span class="size" `
+                        + `data-img="${localStorage.getItem('quickview_image_base_path') + '/assets/images/header/logo.svg'}" `
+                        + `data-productname="${ productInfo['product']['name'] }" `
+                        + `>`
+                        + `One Color - One Size`
+                        + `</span>`
                 }
                 $("#quickview-colors-sizes").html(str)
 
@@ -82,13 +101,17 @@ $(document).ready(function () {
             })
     }
 })
-$(document).on("click", ".color", function () {
-    $('.color').removeClass('active')
-    $(this).addClass('active')
-})
 $(document).on("click", ".size", function () {
     $('.size').removeClass('active')
     $(this).addClass('active')
+    let cImg = $(this).data('img');
+    for(let i = 0; i < $('.product-img').length; i++) {
+        if($('.product-img')[i].dataset.img == cImg) {
+            $('.quickview-slider').carousel('set', i);
+            break;
+        }
+    }
+    $('#quickview-name').html($(this).data('productname'));
 })
 $(document).on("click", ".quickview-slider .previous", function () {
     $('.quickview-slider').carousel('prev')

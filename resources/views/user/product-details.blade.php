@@ -37,35 +37,55 @@
 <div class="ipk-container product-container">
     <div class="row ipk-content-container">
 
-    @if(isset($productColor) && !empty($productColor))
+        @if(count($listImage) > 0)
         <div class="col l1 s3 list-thumb-wrapper">
             <div class="img-block">
                 <a href="#!" class="up"></a>
                 <div class="thumbs-wrapper">
                     <div class="thumbs">
 
-                        @foreach($productColor as $item)
-                        <span style="background-image: url({{ asset('public/' . $item->image) }})"
-                            data-img="{{ asset('public/' . $item->image) }}"></span>
+                        @foreach($listImage as $item)
+                        <span style="background-image: url({{ $item }})"
+                            data-img="{{ $item }}"></span>
                         @endforeach
 
                     </div>
                 </div>
                 <a href="#!" class="down"></a>
             </div>
-            <div class="video-icon" data-video="{{ $product->video }}">
+            <div class="video-icon" 
+                data-video="{{ $product->video }}">
+                <a href="#!"></a>
+            </div>
+        </div>
+        @else
+        <div class="col l1 s3 list-thumb-wrapper">
+            <div class="img-block">
+                <a href="#!" class="up"></a>
+                <div class="thumbs-wrapper">
+                    <div class="thumbs">
+                        <span style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"
+                            data-img="{{ asset('public/assets/images/header/logo.svg') }}"></span>
+                    </div>
+                </div>
+                <a href="#!" class="down"></a>
+            </div>
+            <div class="video-icon" 
+                data-video="{{ $product->video }}">
                 <a href="#!"></a>
             </div>
         </div>
         @endif
         <div class="col l6 s9 main-image-wrapper">
             <span class="full-screen-btn modal-trigger" href="#list-image-popup"></span>
-            @if(isset($productColor ) && !empty($productColor))
-            <div class="main-image is-image" style="background-image: url({{ asset('public/' . $productColor[0]->image) }})"></div>
+            @if(count($listImage) > 0)
+            <div class="main-image is-image" style="background-image: url({{ $listImage[0] }})"></div>
+            @else
+            <div class="main-image is-image" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"></div>
             @endif
         </div>
         <div class="col l5 product-infos">
-            <div class="name">{{$product->name}}</div>
+            <div class="name" id="c-product-name">{{$product->name}}</div>
             <div class="description">{{$product->short_description}}</div>
             @if($product->tag_id != 0)
             <div class="list-tags">
@@ -91,22 +111,37 @@
                     <span class="status {{ $product->status_id == 13 ? 'con-hang' : '' }}"></span>
                 </div>
             </div>
-            <div class="colors-wrapper">
-                <div class="color-label">Màu sắc</div>
-                <div class="colors">
-                    @if(isset($productColorDistinct ) &&!empty($productColorDistinct))
-                    @foreach($productColorDistinct as $key=>$item)
-                    <span class="color" data-colorid="{{$item->color_id}}" style="font-size:16px" data-colorname="{{$item->color_name}}" data-img="{{ asset('public/' . $productColor[$key]->image) }}">{{$item->color_name}}</span>
-                    @endforeach
-                    @endif
-                </div>
-            </div>
+            
             <div class="sizes-wrapper">
-                <div class="color-label">Kích thước <a href="{{ url('huong-dan-chon-size') }}" target="_blank"  style="text-transform:none;font-weight:400"> (Hướng dẫn chọn size)</a></div>
+                <div class="color-label">Màu sác - Kích thước <a href="{{ url('huong-dan-chon-size') }}" target="_blank"  style="text-transform:none;font-weight:400"> (Hướng dẫn chọn size)</a></div>
                 <div class="sizes">
-                    @foreach( $productSize as $item)
-                    <span class="size" data-sizeid="{{$item->size_id}}" data-sizename="{{$item->name}}" style="font-size:16px">{{ $item->name }}</span>
+                    @foreach($listChildProduct as $item)
+                    <!-- lam toi day -->
+                    <span class="size" 
+                        data-img="{{ asset('public/'.$item->listImage[0]->image) }}" 
+                        data-productname="{{$item->product->name}}"
+                        data-color="{{ $item->product->color_name }}"
+                        data-size="{{ $item->product->size_name }}"
+                        data-productid="{{$item->product->id}}"
+                        data-nhanhproductid="{{$item->product->product_id_nhanh}}"
+                        data-price="{{$item->product->sale_price}}"
+                    >
+                        {{ $item->product->color_name }} - {{ $item->product->size_name }}
+                    </span>
                     @endforeach
+                    @if(count($listChildProduct) == 0)
+                    <span class="size" 
+                        data-img="{{ asset('public/assets/images/header/logo.svg') }}" 
+                        data-productname="{{$product->name}}"
+                        data-color="One Color"
+                        data-size="One Size"
+                        data-productid="{{$product->id}}"
+                        data-nhanhproductid="{{$product->product_id_nhanh}}"
+                        data-price="{{$product->sale_price}}"
+                    >
+                        One Color - One Size
+                    </span>
+                    @endif
                 </div>
             </div>
             <div class="pre-order-block">
@@ -140,19 +175,19 @@
 <div id="list-image-popup" class="modal">
     <div class="modal-content">
         <a href="#!" class="modal-close close-list-image-popup"></a>
-        @if(isset($productColor ) && !empty($productColor))
-        <div class="main-image-popup" style="background-image: url({{ asset('public/' . $productColor[0]->image) }})"></div>
+        @if(count($listImage) > 0)
+        <div class="main-image-popup" style="background-image: url({{ $listImage[0] }})"></div>
        @endif
         <div class="list-thumbs-popup">
             <div class="img-block-popup">
                 <a href="#!" class="arrow-left"></a>
                 <div class="thumbs-wrapper-popup">
                     <div class="thumbs-popup">
-                    @if(isset($productColor ) && !empty($productColor))
-                        @foreach($productColor as $item)
-                        <span style="background-image: url({{ asset('public/' . $item->image) }})"
-                            data-img="{{ asset('public/' . $item->image) }}"></span>
-                        @endforeach
+                        @if(count($listImage) > 0)
+                            @foreach($listImage as $item)
+                            <span style="background-image: url({{ $item }})"
+                                data-img="{{ $item }}"></span>
+                            @endforeach
                         @endif
                     </div>
                 </div>
@@ -202,6 +237,10 @@ $(document).on("click", ".color", function () {
 $(document).on("click", ".size", function () {
     $('.size').removeClass('active');
     $(this).addClass('active');
+    $('.main-image').addClass('is-image');
+    $('.main-image').html('');
+    $('.main-image')[0].style.backgroundImage = "url(" + $(this).data('img') + ")";
+    $('#c-product-name').html($(this).data('productname'));
 });
 $(document).on("click", ".decrease-detail", function () {
     if ($('.quantity').val() == 0) return;
@@ -249,8 +288,9 @@ $(document).on("click", ".add-wishlist-button", function () {
             })
             location.reload();
         } else {
+            let mes = JSON.parse(data).message ? JSON.parse(data).message : 'Cập nhật không thành công';
             M.toast({
-                html: 'Cập nhật không thành công',
+                html: mes,
                 classes: 'add-cart-fail'
             })
         }
@@ -281,45 +321,38 @@ $(document).on("click", ".video-icon", function () {
 });
 
 function updateCart() {
-    let listColorElement = $(".colors .color.active");
-    if(listColorElement.length == 0) {
-        M.toast({
-            html: 'Vui lòng chọn màu sắc',
-            classes: 'add-cart-fail'
-        })
-        return false;
-    }
-    let choosenColor = listColorElement[0].dataset.colorid;
-    let choosenColorName = listColorElement[0].dataset.colorname;
-
     let listSizeElement = $(".sizes .size.active");
     if(listSizeElement.length == 0) {
         M.toast({
-            html: 'Vui lòng chọn kích thước',
+            html: 'Vui lòng chọn màu sác - kích thước',
             classes: 'add-cart-fail'
         })
         return false;
     }
-    let choosenSize = listSizeElement[0].dataset.sizeid;
-    let choosenSizeName = listSizeElement[0].dataset.sizename;
+    // lam toi day
+    let productid = listSizeElement[0].dataset.productid;
+    let choosenColor = listSizeElement[0].dataset.color;
+    let choosenSize = listSizeElement[0].dataset.size;
+    let price = listSizeElement[0].dataset.price;
+    let nhanhProductId = listSizeElement[0].dataset.nhanhproductid;
+    let img = listSizeElement[0].dataset.img;
+    let prodName = listSizeElement[0].dataset.productname;
 
     let quantity = $("#quantity-detail").val() == 0 ? 1 : $("#quantity-detail").val();
 
     let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
-    // console.log(cart);
-    if(cart["{{ $product->id }}"]) {
-        cart["{{ $product->id }}"].quantity = quantity;
+    
+    if(cart[productid]) {
+        cart[productid].quantity = quantity;
     } else {
-        cart["{{ $product->id }}"] = {
+        cart[productid] = {
             color: choosenColor,
             size: choosenSize,
             quantity: quantity,
-            salePrice: "{{ $product->sale_price }}",
-            image: "{{asset(isset($productColor) && !empty($productColor) ? 'public/' . $productColor[0]->image : '')}}",
-            name: "{{ $product->name }}",
-            sizeName: choosenSizeName,
-            colorName: choosenColorName,
-            nhanhPorductId: "{{ $product->product_id_nhanh }}"
+            salePrice: price,
+            image: img,
+            name: prodName,
+            nhanhPorductId: nhanhProductId
         };
     }
     localStorage.setItem('ipk_cart',  JSON.stringify(cart));

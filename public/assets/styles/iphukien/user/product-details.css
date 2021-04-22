@@ -325,9 +325,10 @@
     line-height: 32px;
     color: #6C6C6C;
     cursor: pointer;
-    width: 75px;
+    width: fit-content;
     height: 32px;
     text-align: center;
+    padding: 0 10px;
 }
 
 .product-infos .sizes .size.active {
@@ -374,7 +375,7 @@
 .pre-order-block .buy-now-btn,
 .pre-order-block .add-to-card-btn-detail {
     font-weight: normal;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 18px;
     text-align: center;
     color: #FFFFFF;
@@ -389,7 +390,7 @@
     background-repeat: no-repeat;
     background-position: left 10px center;
     background-color: #131313;
-    padding-left: 20px;
+    padding-left: 30px;
 }
 
 .pre-order-block .buy-now-btn {
