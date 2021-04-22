@@ -9,6 +9,7 @@
 @section('styles')
 <link rel="stylesheet" href="{{ asset('public/iphukien/user/home.css') }}">
 <link rel="stylesheet" href="{{ asset('public/iphukien/user/list-product.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
 <style>
 .container{
     margin-top:30px;
@@ -150,9 +151,9 @@ echo ('<script type="text/javascript">
     </div>
 </div>
 <div class="ipk-container partners-container">
-    <div class="partners carousel">
+    <div class="partners owl-carousel owl-theme">
         @foreach ($partners as $key => $value) 
-        <div class="carousel-item partner-item" style="background-image: url({{ asset('public/' . $value->image) }})"></div>
+        <div class=" partner-item" style="background-image: url({{ asset('public/' . $value->image) }})"></div>
         @endforeach
     </div>
 </div>
@@ -168,6 +169,7 @@ echo ('<script type="text/javascript">
 @endsection
 
 @section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
 <script src="{{ asset('public/assets/scripts/iphukien/user/list-product.js') }}"></script>
 <script>
 $(document).ready(function () {
@@ -179,7 +181,23 @@ $(document).ready(function () {
         let top = 55 - value.offsetWidth / 2;
         value.style.marginTop = top + "px";
     });
-    $('.partners').carousel({ fullWidth: true });
+    $('.partners').owlCarousel({
+    loop: true,
+    items:3,
+    margin:10,
+    center: true,
+    responsive:{
+        400:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:5
+        }
+    }
+});
 });
 $(document).on("click", ".ipk-next-slide", function () {
     $('.sale-product-slider').carousel('next');
