@@ -176,7 +176,7 @@ class UserController extends Controller
         $result = (new Address())->insertAddress($dataInsert);
 
         if ($result) {
-            return redirect()->route('user.payment');
+            return redirect()->to(url()->previous());
         }
     }
 
@@ -253,6 +253,9 @@ class UserController extends Controller
 
     public function getUserAddresses(Request $request)
     {
+        if (!Auth::check() || Auth::user()->role_id != 2) {
+            return redirect()->route('login');
+        }
         $listCity = Helpers::callNhanhApi([
             "type" => "CITY",
             "parentId" => 0,
@@ -316,5 +319,23 @@ class UserController extends Controller
         $model->birthday = $year . '-' . $month . '-' . $day;
         $model->save();
         return redirect()->back();
+    }
+
+    public function setDefaultAddress(Request $request, $id) {
+        if (!Auth::check() || Auth::user()->role_id != 2) {
+            return redirect()->route('login');
+        }
+        (new Address())->removeDefault(Auth::user()->id);
+        (new Address())->updateAddress($id, ['is_default' => 1]);
+
+        return redirect()->route('user.addresses');
+    }
+    public function deleteAddress(Request $request, $id) {
+        if (!Auth::check() || Auth::user()->role_id != 2) {
+            return redirect()->route('login');
+        }
+        (new Address())->deleteAddress($id);
+
+        return redirect()->route('user.addresses');
     }
 }

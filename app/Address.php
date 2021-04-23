@@ -23,6 +23,9 @@ class Address extends Model
   public function updateAddress($id,$data){
   	return Address::where('id', '=', $id)->update($data);
   }
+  public function removeDefault($userId) {
+    return Address::where('user_id', '=', $userId)->update(['is_default' => 0]);
+  }
   public function getAddressByUser($userId){
   	return Address::where('user_id', '=', $userId)->get();
   }
