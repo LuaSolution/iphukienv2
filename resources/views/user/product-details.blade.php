@@ -148,7 +148,7 @@
                     <span class="increase-detail">+</span>
                 </div>
                 <a href="#!" class="add-to-card-btn-detail" >Thêm vào giỏ hàng</a>
-                <a href="#!" class="buy-now-btn" id="buy-now-btn-detail" style="width:180px">Mua ngay</a>
+                <a href="#!" id="buy-now-btn-detail" style="width:180px">Mua ngay</a>
             </div>
         </div>
     </div>

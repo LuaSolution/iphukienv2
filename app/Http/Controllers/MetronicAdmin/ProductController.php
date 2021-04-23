@@ -267,6 +267,7 @@ class ProductController extends Controller
         $status = $request->input('status_id');
         $tag = $request->input('tag_id');
         $trademark = $request->input('trademark_id');
+        $parent = $request->input('parent_id');
 
         $dataUpdate = [
             'name' => $name,
@@ -281,6 +282,7 @@ class ProductController extends Controller
             'sold' => 0,
             'video' => $video,
             'trademark_id' => $trademark,
+            'parent_id' => $parent,
             'updated_at' => date('Y-m-d H:i:s'),
         ];
         $result = (new Product())->updateProduct($id, $dataUpdate);

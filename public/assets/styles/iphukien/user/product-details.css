@@ -377,7 +377,7 @@
 }
 
 .pre-order-block .add-to-card-btn,
-.pre-order-block .buy-now-btn,
+.pre-order-block #buy-now-btn-detail,
 .pre-order-block .add-to-card-btn-detail {
     font-weight: normal;
     font-size: 14px;
@@ -398,7 +398,7 @@
     padding-left: 30px;
 }
 
-.pre-order-block .buy-now-btn {
+.pre-order-block #buy-now-btn-detail {
     background-color: #E24C4C;
 }
 

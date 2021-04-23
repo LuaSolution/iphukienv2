@@ -101,7 +101,7 @@
                         </div>
                         <div class="form-group form-md-line-input has-success">
                             <label class="control-label">Sản phẩm cha</label>
-                            <select id="parent" disabled class="form-control select2">
+                            <select id="parent" class="form-control select2">
                                 <option value="no-parent" selected>(No parent)</option>
                                 @foreach($listParentProduct as $key=>$item)
                                 <option value="{{ $item->id }}"
@@ -170,17 +170,17 @@
 <script src="{{ asset('public/metronic_assets/pages/scripts/components-select2.min.js') }}" type="text/javascript">
 </script>
 <script>
-$('#parent').on('change', function() {
-    let parentId = $(this).val();
-    $("#size-block").addClass('hide')
-    $("#color-block").addClass('hide')
-    $("#upload-img-block").addClass('hide')
-    if (parentId != 'no-parent') {
-        $("#size-block").removeClass('hide')
-        $("#color-block").removeClass('hide')
-        $("#upload-img-block").removeClass('hide')
-    } 
-})
+// $('#parent').on('change', function() {
+//     let parentId = $(this).val();
+//     $("#size-block").addClass('hide')
+//     $("#color-block").addClass('hide')
+//     $("#upload-img-block").addClass('hide')
+//     if (parentId != 'no-parent') {
+//         $("#size-block").removeClass('hide')
+//         $("#color-block").removeClass('hide')
+//         $("#upload-img-block").removeClass('hide')
+//     } 
+// })
 $(document).on("click",".add-more-img",function() {
   $("#upload-img-area").append(
     "<div class='upload-img-wrapper'>"
@@ -263,17 +263,17 @@ $(document).on("change",".upload-img-input",function() {
 });
 $(document).on("submit", "#create-new", function(e) {
     e.preventDefault();
-    if($("#parent").val() != 'no-parent') {
-        if($("#size").val() == 'no-size') {
-            alert("Chưa chọn size");
-        }
-        if($("#color").val() == 'no-color') {
-            alert("Chưa chọn màu sắc");
-        }
-        if(document.getElementsByClassName('upload-img-input').length == 0) {
-            alert("Chưa chọn hình ảnh");
-        }
-    }
+    // if($("#parent").val() != 'no-parent') {
+    //     if($("#size").val() == 'no-size') {
+    //         alert("Chưa chọn size");
+    //     }
+    //     if($("#color").val() == 'no-color') {
+    //         alert("Chưa chọn màu sắc");
+    //     }
+    //     if(document.getElementsByClassName('upload-img-input').length == 0) {
+    //         alert("Chưa chọn hình ảnh");
+    //     }
+    // }
     let fd = new FormData();
     fd.append('name', $("#form-name").val());
     fd.append('slug', $("#form-slug").val());
@@ -286,6 +286,7 @@ $(document).on("submit", "#create-new", function(e) {
     fd.append('video', $("#form-video").val());
     fd.append('tag_id', $("#tag").val());
     fd.append('trademark_id', $("#trademark").val());
+    fd.append('parent_id', $("#parent").val());
     fd.append('_token', '{{ csrf_token() }}');
 
     $.ajax({
