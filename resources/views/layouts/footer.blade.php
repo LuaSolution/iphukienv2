@@ -2,17 +2,22 @@
     <div class="ipk-content-container">
         <div class="row footer">
             <div class="col l4 s12">
-                <div class="name">CÔNG TY TNHH VẠN THÀNH VIÊN</div>
+            <!-- IPHUKIEN SHOP
+GPĐKKD số 8430376778 do Sở KHĐT TPHCM cấp
+Địa chỉ: 270/2/1 Phan Đình Phùng, Phú Nhuận, Ho Chi Minh City
+Email: iphukien270@gmail.com
+Hotline: 0795712079 -->
+                <div class="name">IPHUKIEN SHOP</div>
                 <div class="company-infos">
-                    <div class="company-info">GPĐKKD số 0315874273 do Sở KHĐT TPHCM cấp</div>
-                    <div class="company-info">Địa chỉ: 86-88 Đinh Tiên Hoàng, Phường 1, Quận Bình Thạnh, TP.HCM</div>
+                    <div class="company-info">GPĐKKD số 8430376778 do Sở KHĐT TPHCM cấp</div>
+                    <div class="company-info">Địa chỉ: 270/2/1 Phan Đình Phùng, Phú Nhuận, Ho Chi Minh City</div>
                     <div class="company-info">Văn phòng giao dịch: Lầu 2 - 5B Võ Văn Tần, Phường 6, Quận 3, TP.HCM</div>
-                    <div class="company-info">Email: contact@flatcloud.vn</div>
-                    <div class="company-info">Hotline: 1900 8000</div>
+                    <div class="company-info">Email: iphukien270@gmail.com</div>
+                    <div class="company-info">Hotline: 0795712079</div>
                 </div>
             </div>
             <div class="col l2 s12">
-                <div class="name">IPHUKIEN</div>
+                <div class="name">IPHUKIEN SHOP</div>
                 <div class="footer-link">
                     <a href="{{ url('gioi-thieu') }}">Giới thiệu về iPhuKien</a>
                     <a href="{{ url('news') }}">Tin tức</a>
