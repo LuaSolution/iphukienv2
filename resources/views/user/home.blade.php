@@ -66,7 +66,14 @@ const x = setInterval(function() {
     <div class="ipk-content-container">
         @if($slider)
         <div class="remove-line-height banner">
+            @if(strpos($slider->image, 'mp4') == true)
+            <video width="100%" height="340" controls>
+                <source src="{{ asset('/public/'. $slider->image) }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            @else
             <img src="{{ asset('/public/'. $slider->image) }}" />
+            @endif
         </div>
         @endif
         <div class="list-category">
@@ -87,10 +94,10 @@ const x = setInterval(function() {
             <div class="carousel carousel-slider sale-product-slider">
                 <div class="ipk-pre-slide"></div>
                 @foreach($flashSale as $key=>$item)
-                <?php 
-                $img = (new \App\Product())->getProductDefaultImage($item->product_id);
-                $saleP = (new \App\Product())->getProductById($item->product_id);
-                ?>
+                <?php
+$img = (new \App\Product())->getProductDefaultImage($item->product_id);
+$saleP = (new \App\Product())->getProductById($item->product_id);
+?>
                 <div class="carousel-item">
                     <div class="flash-deal-icon">Flash deal</div>
                     <div class="carousel-item-wrapper">
@@ -152,7 +159,7 @@ echo ('<script type="text/javascript">
 </div>
 <div class="ipk-container partners-container">
     <div class="partners owl-carousel owl-theme">
-        @foreach ($partners as $key => $value) 
+        @foreach ($partners as $key => $value)
         <div class=" partner-item" style="background-image: url({{ asset('public/' . $value->image) }})"></div>
         @endforeach
     </div>
