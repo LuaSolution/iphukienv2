@@ -111,6 +111,7 @@
                     <span class="status {{ $product->status_id == 13 ? 'con-hang' : '' }}"></span>
                 </div>
             </div>
+            @if(count($listColor) > 0)
             <div class="sizes-wrapper">
                 <div class="color-label">Màu sắc</div>
                 <div class="colors">
@@ -124,6 +125,8 @@
                     @endforeach
                 </div>
             </div>
+            @endif
+            @if(count($listSize) > 0)
             <div class="sizes-wrapper">
                 <div class="color-label">Kích thước <a href="{{ url('huong-dan-chon-size') }}" target="_blank"  style="text-transform:none;font-weight:400"> (Hướng dẫn chọn size)</a></div>
                 <div class="sizes">
@@ -137,6 +140,7 @@
                     @endforeach
                 </div>
             </div>
+            @endif
             <div class="pre-order-block">
                 <div class="quantity-input">
                     <span class="decrease-detail">-</span>
@@ -383,9 +387,9 @@ $(document).on("click", ".video-icon", function () {
     $(".ipk-preloader").addClass('hide');
 });
 
-function updateCart() {
+function updateCartDetail() {
+    @if(count($listSize) > 0)
     let listSizeElement = $(".sizes .size-detail.active");
-    console.log($(".sizes .size-detail.active"))
     if(listSizeElement.length == 0) {
         M.toast({
             html: 'Vui lòng chọn màu sác - kích thước',
@@ -393,6 +397,8 @@ function updateCart() {
         })
         return false;
     }
+    @endif
+    @if(count($listColor) > 0)
     let listColorElement = $(".colors .color-detail.active");
     if(listColorElement.length == 0) {
         M.toast({
@@ -401,6 +407,8 @@ function updateCart() {
         })
         return false;
     }
+    @endif
+    @if(count($listColor) > 0 && count($listSize) > 0)
     if(chooseProduct) {
         console.log(chooseProduct)
         let productid = chooseProduct.product.id;
@@ -434,15 +442,42 @@ function updateCart() {
             classes: 'add-cart-fail'
         })
     }
+    @endif
+    @if(count($listColor) == 0 && count($listSize) == 0)
+    // let productid = chooseProduct.product.id;
+    //     let choosenSize = $('.sizes .size-detail.active')[0].dataset.sizename;
+    //     let choosenColor = $('.colors .color-detail.active')[0].dataset.colorname;
+    //     let price = chooseProduct.product.sale_price;
+    //     let nhanhProductId = chooseProduct.product.product_id_nhanh;
+    //     let img = chooseProduct.image;
+    //     let prodName = chooseProduct.product.name;
+    //     let quantity = $("#quantity-detail").val() == 0 ? 1 : $("#quantity-detail").val();
+    //     let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
 
+    //     if(cart[productid]) {
+    //         cart[productid].quantity = parseInt(cart[productid].quantity) + parseInt(quantity);
+    //     } else {
+    //         cart[productid] = {
+    //             color: choosenColor,
+    //             size: choosenSize,
+    //             quantity: quantity,
+    //             salePrice: price,
+    //             image: img,
+    //             name: prodName,
+    //             nhanhPorductId: nhanhProductId,
+    //         };
+    //     }
+    //     localStorage.setItem('ipk_cart',  JSON.stringify(cart));
+    //     return true;
+    @endif
 }
 $(document).on("click","#buy-now-btn-detail",function() {
-    if(!updateCart()) return;
+    if(!updateCartDetail()) return;
 
     window.location.href = "{{ route('user.cart') }}";
 });
 $(document).on("click",".add-to-card-btn-detail",function() {
-    let updateRes = updateCart();
+    let updateRes = updateCartDetail();
     if(updateRes) {
         M.toast({
             html: 'Cập nhật giỏ hàng thành công',
