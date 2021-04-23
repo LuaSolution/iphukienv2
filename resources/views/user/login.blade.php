@@ -47,7 +47,7 @@
                     <div class="options">
                         <span class="fb" onclick="loginFb()">Đăng nhập</span>
                         <span class="or-txt">Hoặc</span>
-                        <span class="gg g-signin2" data-onsuccess="onSignIn"></span>
+                        <span class="gg g-signin2 login-google" data-onsuccess="onSignIn" onclick="loginWithGG()"></span>
                     </div>
                 </div>
             </div>
@@ -67,17 +67,18 @@
 @section('footer')
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script>
+let gUser = null;
 function onSignIn(googleUser) {
-    $(".ipk-preloader").removeClass('hide');
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId());
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail());
-
-    doLogin(profile.getName(), profile.getEmail(), `social_${profile.getId()}`)
+    gUser = profile;
 }
-
+function loginWithGG() {
+    doLogin(gUser.getName(), gUser.getEmail(), `social_${gUser.getId()}`) 
+}
 function doLogin(name, email, pass) {
     $.post( "{{route('ajax.login-with-social')}}", {
         name: name,

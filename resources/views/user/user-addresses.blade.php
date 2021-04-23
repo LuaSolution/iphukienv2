@@ -28,9 +28,8 @@
                 <div class="customer-phone">{{$add->phone}}</div>
                 <div class="customer-email">{{$add->email}}</div>
                 <div class="list-action">
-                    <a href="#!" class="set-default">Mặc định</a>
-                    <a href="#!">Sửa</a>
-                    <a href="#!">Xóa</a>
+                    <a href="{{ route('user.set-default-address', $add->id) }}" class="set-default">Mặc định</a>
+                    <a href="{{ route('user.delete-address', $add->id) }}">Xóa</a>
                 </div>
             </div>
             @endforeach
@@ -43,52 +42,53 @@
         <div class="new-address-popup-title">
             Thêm địa chỉ mới
         </div>
-        <form method="post" class="row add-new-address-form">
+        <form method="post" action="{{route('user.add-new-address')}}" class="row add-new-address-form">
+            {{ csrf_field() }}
             <div class="col m6 s12 form-input">
-                <input type="text" placeholder="HỌ VÀ TÊN *" />
+                <input type="text" placeholder="HỌ VÀ TÊN *" name="name" />
                 <span>Vui lòng điền đầy đủ Họ và Tên</span>
             </div>
             <div class="col m6 s12 form-input">
-                <input type="text" placeholder="SỐ ĐIỆN THOẠI *" />
+                <input type="text" placeholder="SỐ ĐIỆN THOẠI *" name="phone" />
                 <span>Ví dụ: 0866 909 606</span>
             </div>
             <div class="col m6 s12 form-input">
-                <input type="text" placeholder="EMAIL *" />
+                <input type="text" placeholder="EMAIL *" name="email"/>
                 <span>Ví dụ: 0866 909 606</span>
             </div>
             <div class="col m6 s12 form-input">
                 <div class="input-field">
-                    <select name="city" id="city">
+                    <select name="city" id="city" name="city">
                         <option value="" disabled selected>Chọn tỉnh/ thành phố</option>
                         @foreach ($list_city as $city)
-                            <option value="{{ $city->id }}">{{ $city->name }}</option>
+                        <option value="{{ $city->name }}" data-cityid="{{ $city->id }}">{{ $city->name }}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
             <div class="col m6 s12 form-input">
                 <div class="input-field">
-                    <select name="district" id="district">
+                    <select name="district" id="district" name="district">
                         <option value="" disabled selected>Chọn quận/ huyện</option>
                     </select>
                 </div>
             </div>
             <div class="col m6 s12 form-input">
                 <div class="input-field">
-                    <select name="district" id="district">
+                    <select name="ward" id="ward" name="ward">
                         <option value="" disabled selected>Chọn phường/ xã</option>
                     </select>
                 </div>
             </div>
             <div class="col m6 s12 form-input">
-                <input type="text" placeholder="SỐ NHÀ/ TÊN ĐƯỜNG *" />
+                <input type="text" placeholder="SỐ NHÀ/ TÊN ĐƯỜNG *" name="address" />
                 <span>Ví dụ: 86-88 đường Đinh Tiên Hoàng</span>
             </div>
             <div class="col s12 form-input">
                 <div class="set-default-address">
                     <p>
                         <label>
-                            <input type="checkbox" name="default-address" />
+                            <input type="checkbox" name="default-address" name="is_default" />
                             <span>Đặt làm địa chỉ mặc định</span>
                         </label>
                     </p>
@@ -116,6 +116,49 @@ $(document).ready(function () {
 $(document).on("click", ".address", function () {
     $('.address').removeClass('selected');
     $(this).addClass('selected');
+});
+$(document).on("change", "#city", function () {
+    $(".ipk-preloader").removeClass('hide');
+    let cityId = $("#city option:selected").data('cityid');
+    console.log(cityId)
+    $("#district option").remove();
+    $.get(
+        "{{ URL::to('/') }}/location/DISTRICT/" + cityId,
+        function (data) {
+            let districts = JSON.parse(data);
+            let dis;
+            $("#district").formSelect().append('<option value="" disabled selected>Chọn quận/ huyện</option>');
+            do {
+                dis = districts.pop();
+                $("#district").formSelect().append('<option value="' + dis.name + '" data-districtid="' + dis.id + '">' + dis.name + '</option>');
+            }
+            while (districts.length > 0);
+            $("#district").formSelect();
+            $(".ipk-preloader").addClass('hide');
+        }
+    );
+
+});
+$(document).on("change", "#district", function () {
+    $(".ipk-preloader").removeClass('hide');
+    let districtId = $("#district option:selected").data('districtid');
+    $("#ward option").remove();
+    $.get(
+        "{{ URL::to('/') }}/location/WARD/" + districtId,
+        function (data) {
+            console.log(data)
+            let wards = JSON.parse(data);
+            let ward;
+            $("#ward").formSelect().append('<option value="" disabled selected>Chọn phường/ xã</option>');
+            do {
+                ward = wards.pop();
+                $("#ward").formSelect().append('<option value="' + ward.name + '" data-wardid="' + ward.id + '">' + ward.name + '</option>');
+            }
+            while (wards.length > 0);
+            $("#ward").formSelect();
+            $(".ipk-preloader").addClass('hide');
+        }
+    );
 });
 </script>
 @endsection
