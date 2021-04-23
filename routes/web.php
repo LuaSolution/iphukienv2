@@ -175,6 +175,7 @@ Route::middleware(['runall', 'locale'])->group(function () {
     Route::post('/add-new-address', 'User\UserController@addNewAddress')->name('user.add-new-address');
     Route::get('/set-default-address/{id}', 'User\UserController@setDefaultAddress')->name('user.set-default-address');
     Route::get('/delete-address/{id}', 'User\UserController@deleteAddress')->name('user.delete-address');
+    Route::get('/get-child-product', 'User\AjaxController@getChildProduct')->name('ajax.get-child-product');
     Route::post('/login-social', 'User\AjaxController@loginWithSocial')->name('ajax.login-with-social');
     Route::post('/calc-shipping-fee', 'User\AjaxController@calcShippingFee')->name('ajax.calc-shipping-fee');
     Route::post('/create-order', 'User\AjaxController@createOrder')->name('ajax.create-order');
