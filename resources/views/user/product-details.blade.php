@@ -111,37 +111,31 @@
                     <span class="status {{ $product->status_id == 13 ? 'con-hang' : '' }}"></span>
                 </div>
             </div>
-            
             <div class="sizes-wrapper">
-                <div class="color-label">Màu sác - Kích thước <a href="{{ url('huong-dan-chon-size') }}" target="_blank"  style="text-transform:none;font-weight:400"> (Hướng dẫn chọn size)</a></div>
-                <div class="sizes">
-                    @foreach($listChildProduct as $item)
-                    <!-- lam toi day -->
-                    <span class="size" 
-                        data-img="{{ asset(isset($item->listImage[0]->image) ? 'public/'.$item->listImage[0]->image : 'public/assets/images/header/logo.svg') }}" 
-                        data-productname="{{$item->product->name}}"
-                        data-color="{{ $item->product->color_name }}"
-                        data-size="{{ $item->product->size_name }}"
-                        data-productid="{{$item->product->id}}"
-                        data-nhanhproductid="{{$item->product->product_id_nhanh}}"
-                        data-price="{{$item->product->sale_price}}"
+                <div class="color-label">Màu sắc</div>
+                <div class="colors">
+                    @foreach($listColor as $item)
+                    <span class="color" 
+                        data-colorname="{{ $item->name }}"
+                        data-colorid="{{ $item->id }}"
                     >
-                        {{ $item->product->color_name }} - {{ $item->product->size_name }}
+                        {{ $item->name }}
                     </span>
                     @endforeach
-                    @if(count($listChildProduct) == 0)
+                </div>
+            </div>
+            <div class="sizes-wrapper">
+                <div class="color-label">Kích thước <a href="{{ url('huong-dan-chon-size') }}" target="_blank"  style="text-transform:none;font-weight:400"> (Hướng dẫn chọn size)</a></div>
+                <div class="sizes">
+                    @foreach($listSize as $item)
+                    <!-- lam toi day -->
                     <span class="size" 
-                        data-img="{{ asset('public/assets/images/header/logo.svg') }}" 
-                        data-productname="{{$product->name}}"
-                        data-color="One Color"
-                        data-size="One Size"
-                        data-productid="{{$product->id}}"
-                        data-nhanhproductid="{{$product->product_id_nhanh}}"
-                        data-price="{{$product->sale_price}}"
+                        data-sizename="{{ $item->name }}"
+                        data-sizeid="{{ $item->id }}"
                     >
-                        One Color - One Size
+                        {{ $item->name }}
                     </span>
-                    @endif
+                    @endforeach
                 </div>
             </div>
             <div class="pre-order-block">
@@ -204,6 +198,7 @@
 @section('scripts')
 <script src="{{ asset('public/assets/scripts/iphukien/user/list-product.js') }}"></script>
 <script>
+let chooseProduct;
 $(document).ready(function () {
     var elems = document.querySelectorAll('#list-image-popup');
     M.Modal.init(elems, {
@@ -232,15 +227,78 @@ $(document).on("click", ".list-thumb-wrapper .down", function () {
 $(document).on("click", ".color", function () {
     $('.color').removeClass('active');
     $(this).addClass('active');
-    $('.main-image')[0].style.backgroundImage = "url(" + $(this).data('img') + ")";
+    if($('.size.active').length > 0) {
+        let sizeId = $('.size.active')[0].dataset.sizeid;
+        let colorId = $('.color.active')[0].dataset.colorid;
+        $.ajax({
+            url: `{{route('ajax.get-child-product')}}`,
+            type: 'get',
+            data: { 
+                'productId': '{{$product->id}}', 
+                'colorId': colorId, 
+                'sizeId': sizeId, 
+                '_token': `{{ csrf_token() }}` }
+        }).done(function (data) {
+            chooseProduct = JSON.parse(data);
+            console.log(chooseProduct);
+            if(chooseProduct.product != null) {
+                $('.main-image').addClass('is-image');
+                $('.main-image').html('');
+                $('.main-image')[0].style.backgroundImage = "url(" + chooseProduct.image + ")";
+                $('#c-product-name').html(chooseProduct.product.name);
+            } else {
+                M.toast({
+                    html: 'Sản phẩm không tồn tại',
+                    classes: 'add-cart-fail'
+                })
+            }
+            
+        })
+        .fail(function () {
+            M.toast({
+                html: 'Sản phẩm không tồn tại',
+                classes: 'add-cart-fail'
+            })
+        })
+    }
 });
 $(document).on("click", ".size", function () {
     $('.size').removeClass('active');
     $(this).addClass('active');
-    $('.main-image').addClass('is-image');
-    $('.main-image').html('');
-    $('.main-image')[0].style.backgroundImage = "url(" + $(this).data('img') + ")";
-    $('#c-product-name').html($(this).data('productname'));
+    
+    if($('.color.active').length > 0) {
+        let sizeId = $('.size.active')[0].dataset.sizeid;
+        let colorId = $('.color.active')[0].dataset.colorid;
+        $.ajax({
+            url: `{{route('ajax.get-child-product')}}`,
+            type: 'get',
+            data: { 
+                'productId': '{{$product->id}}', 
+                'colorId': colorId, 
+                'sizeId': sizeId, 
+                '_token': `{{ csrf_token() }}` }
+        }).done(function (data) {
+            chooseProduct = JSON.parse(data);
+            console.log(chooseProduct);
+            if(chooseProduct.product != null) {
+                $('.main-image').addClass('is-image');
+                $('.main-image').html('');
+                $('.main-image')[0].style.backgroundImage = "url(" + chooseProduct.image + ")";
+                $('#c-product-name').html(chooseProduct.product.name);
+            } else {
+                M.toast({
+                    html: 'Sản phẩm không tồn tại',
+                    classes: 'add-cart-fail'
+                })
+            }
+        })
+        .fail(function () {
+            M.toast({
+                html: 'Sản phẩm không tồn tại',
+                classes: 'add-cart-fail'
+            })
+        })
+    }
 });
 $(document).on("click", ".decrease-detail", function () {
     if ($('.quantity').val() == 0) return;
@@ -329,34 +387,48 @@ function updateCart() {
         })
         return false;
     }
-    // lam toi day
-    let productid = listSizeElement[0].dataset.productid;
-    let choosenColor = listSizeElement[0].dataset.color;
-    let choosenSize = listSizeElement[0].dataset.size;
-    let price = listSizeElement[0].dataset.price;
-    let nhanhProductId = listSizeElement[0].dataset.nhanhproductid;
-    let img = listSizeElement[0].dataset.img;
-    let prodName = listSizeElement[0].dataset.productname;
-
-    let quantity = $("#quantity-detail").val() == 0 ? 1 : $("#quantity-detail").val();
-
-    let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
-    
-    if(cart[productid]) {
-        cart[productid].quantity = parseInt(cart[productid].quantity) + parseInt(quantity);
-    } else {
-        cart[productid] = {
-            color: choosenColor,
-            size: choosenSize,
-            quantity: quantity,
-            salePrice: price,
-            image: img,
-            name: prodName,
-            nhanhPorductId: nhanhProductId
-        };
+    let listColorElement = $(".colors .color.active");
+    if(listColorElement.length == 0) {
+        M.toast({
+            html: 'Vui lòng chọn màu sác - kích thước',
+            classes: 'add-cart-fail'
+        })
+        return false;
     }
-    localStorage.setItem('ipk_cart',  JSON.stringify(cart));
-    return true;
+    if(chooseProduct) {
+        console.log(chooseProduct)
+        let productid = chooseProduct.product.id;
+        let choosenSize = $('.sizes .size.active')[0].dataset.sizename;
+        let choosenColor = $('.colors .color.active')[0].dataset.colorname;
+        let price = chooseProduct.product.sale_price;
+        let nhanhProductId = chooseProduct.product.product_id_nhanh;
+        let img = chooseProduct.image;
+        let prodName = chooseProduct.product.name;
+        let quantity = $("#quantity-detail").val() == 0 ? 1 : $("#quantity-detail").val();
+        let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
+        
+        if(cart[productid]) {
+            cart[productid].quantity = parseInt(cart[productid].quantity) + parseInt(quantity);
+        } else {
+            cart[productid] = {
+                color: choosenColor,
+                size: choosenSize,
+                quantity: quantity,
+                salePrice: price,
+                image: img,
+                name: prodName,
+                nhanhPorductId: nhanhProductId,
+            };
+        }
+        localStorage.setItem('ipk_cart',  JSON.stringify(cart));
+        return true;
+    } else {
+        M.toast({
+            html: 'Sản phẩm không tồn tại',
+            classes: 'add-cart-fail'
+        })
+    }
+    
 }
 $(document).on("click","#buy-now-btn-detail",function() {
     if(!updateCart()) return;

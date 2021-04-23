@@ -59,6 +59,12 @@ class Product extends Model
         }
         return $res;
     }
+    public function getChildProductByParentSizeColor($parentId, $sizeId, $colorId) {
+        return Product::where('products.parent_id', $parentId)
+            ->where('products.size_id', $sizeId)
+            ->where('products.color_id', $colorId)
+            ->first();
+    }
     public function getProductBySlug($slug)
     {
         return Product::where('slug', '=', $slug)->first();
@@ -142,10 +148,17 @@ class Product extends Model
         return Product::whereNull('parent_id')->get();
     }
     public function getListChildProduct($parentId) {
+        $cId = null;
+        if (!is_numeric($parentId)) {
+            $cId = Product::where('products.slug', $parentId)->first()->id;
+        } else {
+            $cId = $parentId;
+        }
+
         return Product::leftJoin('sizes', 'products.size_id', '=', 'sizes.id')
-            ->leftJoin('colors', 'products.color_id', '=', 'colors.id')
-            ->select('products.*', 'colors.name as color_name', 'sizes.name as size_name')
-            ->where('parent_id', '=', $parentId)->get();
+                ->leftJoin('colors', 'products.color_id', '=', 'colors.id')
+                ->select('products.*', 'colors.name as color_name', 'sizes.name as size_name')
+                ->where('parent_id', '=', $cId)->get();
     }
     public function getProductDefaultImage($parentId) {
         return Product::leftJoin('product_image', 'product_image.product_id', '=', 'products.id')

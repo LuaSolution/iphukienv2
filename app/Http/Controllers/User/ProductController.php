@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\ProductImage;
+use App\Color;
+use App\Size;
 use App\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +17,8 @@ class ProductController extends Controller
     {
         $data = [];
         $data['product'] = (new Product())->getProductById($id);
+        $data['listSize'] = (new Size())->getListSize();
+        $data['listColor'] = (new Color())->getListColor();
         $listChildProduct = (new Product())->getListChildProduct($id);
         $productImageModel = new ProductImage();
         $data['listChildProduct'] = [];
@@ -28,6 +32,7 @@ class ProductController extends Controller
             }
             array_push($data['listChildProduct'], $obj);
         }
+        // dd($data);
         if (Auth::check() && Auth::user()->role_id == 2) {
             $data['wishlist'] = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $id);
         }

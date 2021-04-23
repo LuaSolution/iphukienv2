@@ -183,4 +183,19 @@ class AjaxController extends Controller
         return json_encode(['code' => 0, 'message' => 'Vui lòng đăng nhập']);
     }
 
+    public function getChildProduct(Request $request) {
+        $obj = new \stdClass();
+        $obj->product = (new Product())->getChildProductByParentSizeColor(
+            $request->input('productId'), 
+            $request->input('sizeId'), 
+            $request->input('colorId')
+        );
+        if($obj->product != null) {
+            $listImg = (new ProductImage())->getListProductImageByProduct($obj->product->id);
+            $obj->image = count($listImg) > 0 ? asset('public/'.$listImg[0]->image) : asset('public/assets/images/header/logo.svg');
+        }
+
+        return json_encode($obj);
+    }
+
 }
