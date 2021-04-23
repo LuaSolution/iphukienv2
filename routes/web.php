@@ -88,13 +88,13 @@ Route::middleware(['runall', 'locale'])->group(function () {
             Route::get('/deliveries', 'DeliveryController@getListDelivery')->name('adMgetListDelivery');
             Route::get('/deliveries-del/{id}', 'DeliveryController@getDelDelivery')->name('adMgetDelDelivery');
 
-             // Trademarks
-             Route::get('/trademarks-add', 'TrademarkController@getAddTrademark')->name('adMgetAddTrademark');
-             Route::post('/trademarks-add', 'TrademarkController@postAddTrademark')->name('adMpostAddTrademark');
-             Route::get('/trademarks-edit/{id}', 'TrademarkController@getEditTrademark')->name('adMgetEditTrademark');
-             Route::post('/trademarks-edit/{id}', 'TrademarkController@postEditTrademark')->name('adMpostEditTrademark');
-             Route::get('/trademarks', 'TrademarkController@getListTrademark')->name('adMgetListTrademark');
-             Route::get('/trademarks-del/{id}', 'TrademarkController@getDelTrademark')->name('adMgetDelTrademark');
+            // Trademarks
+            Route::get('/trademarks-add', 'TrademarkController@getAddTrademark')->name('adMgetAddTrademark');
+            Route::post('/trademarks-add', 'TrademarkController@postAddTrademark')->name('adMpostAddTrademark');
+            Route::get('/trademarks-edit/{id}', 'TrademarkController@getEditTrademark')->name('adMgetEditTrademark');
+            Route::post('/trademarks-edit/{id}', 'TrademarkController@postEditTrademark')->name('adMpostEditTrademark');
+            Route::get('/trademarks', 'TrademarkController@getListTrademark')->name('adMgetListTrademark');
+            Route::get('/trademarks-del/{id}', 'TrademarkController@getDelTrademark')->name('adMgetDelTrademark');
 
             // Flash sale
             Route::get('/sale-products-add', 'SaleProductController@getAddSaleProduct')->name('adMgetAddSaleProduct');
@@ -112,6 +112,11 @@ Route::middleware(['runall', 'locale'])->group(function () {
             Route::get('/products-del/{id}', 'ProductController@getDelProduct')->name('adMgetDelProduct');
             Route::post('/update-product-image', 'ProductController@updateProductImage')->name('adMpostUpdateProductImage');
             Route::post('/delete-product-image', 'ProductController@deleteProductImage')->name('adMpostdeleteProductImage');
+
+            // Orders
+            Route::get('/orders', 'OrderController@getListOrder')->name('adMgetListOrders');
+            Route::get('/orders-edit/{id}', 'OrderController@getEditOrder')->name('adMgetEditOrders');
+            Route::get('/orders-del/{id}', 'OrderController@getDelOrder')->name('adMgetDelOrder');
 
             //contact
             Route::get('/contact-list', 'AdminController@getListContact')->name('adMgetListContact');
@@ -137,7 +142,7 @@ Route::middleware(['runall', 'locale'])->group(function () {
             Route::get('/static-del/{id}', 'StaticPagesController@getDeStaticPages')->name('adMgetDelStaticPages');
             Route::get('/static-edit/{id}', 'StaticPagesController@getEditStaticPages')->name('adMgetEditStaticPages');
             Route::post('/static-edit/{id}', 'StaticPagesController@postEditStaticPages')->name('adMpostEditStaticPages');
-        
+
             //Slider
             Route::resource('sliders', SliderController::class);
             Route::post('/sliders/{id}', 'SliderController@update')->name('sliders.update');

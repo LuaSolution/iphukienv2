@@ -294,6 +294,24 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="nav-item start @yield('list_orders_active')">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Quản lý đơn hàng</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item @yield('list_orders_active')">
+                        <a href="{{ route('adMgetListOrders') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Danh sách đơn hàng</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="nav-item start @yield('list_sale_products_active') @yield('add_sale_products_active')">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-home"></i>
@@ -347,12 +365,12 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item @yield('add_slider_active')">
+                    <!-- <li class="nav-item @yield('add_slider_active')">
                         <a href="{{ route('sliders.create') }}" class="nav-link">
                             <i class="icon-bar-chart"></i>
                             <span class="title">Thêm Slider</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item @yield('list_slider_active')">
                         <a href="{{ route('sliders.index') }}" class="nav-link">
                             <i class="icon-bar-chart"></i>

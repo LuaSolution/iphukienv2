@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\MetronicAdmin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Slider;
+use Illuminate\Http\Request;
 
 class SliderController extends Controller
 {
-    public function __construct(Slider $slider) {
+    public function __construct(Slider $slider)
+    {
         $this->slider = $slider;
     }
 
@@ -19,9 +20,9 @@ class SliderController extends Controller
      */
     public function index()
     {
-        $data =  $this->slider->all();
+        $data = $this->slider->all();
 
-        return view ('metronic_admin.sliders.list', compact('data'));
+        return view('metronic_admin.sliders.list', compact('data'));
     }
 
     /**
@@ -31,7 +32,7 @@ class SliderController extends Controller
      */
     public function create()
     {
-        return view ('metronic_admin.sliders.add');
+        return view('metronic_admin.sliders.add');
     }
 
     /**
@@ -42,7 +43,7 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-          // imageFile
+        // imageFile
         $imageFile = $request->file('image');
         $path = "";
 
@@ -56,7 +57,7 @@ class SliderController extends Controller
         ];
 
         $slider = new Slider();
-        
+
         $result = $slider->insertSlider($dataInsert);
 
         if ($result instanceof Slider) {
@@ -91,7 +92,7 @@ class SliderController extends Controller
         $data = $slider->getSliderById($id);
 
         if ($data) {
-            return view ('metronic_admin.sliders.edit', compact('data'));
+            return view('metronic_admin.sliders.edit', compact('data'));
         } else {
             return redirect()->route('sliders.index');
         }
@@ -111,7 +112,7 @@ class SliderController extends Controller
         $path = "";
 
         if ($request->hasFile('image')) {
-            $image = date_timestamp_get(date_create()) . '.' . $request->image->extension();
+            $image = $request->image->getClientOriginalName();
             $path = $request->image->storeAs('img/slider', $image);
         }
 

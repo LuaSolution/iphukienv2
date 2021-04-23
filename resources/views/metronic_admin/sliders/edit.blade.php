@@ -11,7 +11,7 @@
             <div class="portlet-title">
                 <div class="caption font-red-sunglo">
                     <i class="icon-settings font-red-sunglo"></i>
-                    <span class="caption-subject bold uppercase"> Chỉnh sửa Banner</span>
+                    <span class="caption-subject bold uppercase"> Chỉnh sửa Banner (chỗ này up file hình ảnh hoặc file mp4, đuôi khác nó ko hiện đc video)</span>
                 </div>
             </div>
             <div class="portlet-body form">
@@ -20,11 +20,11 @@
                     <div class="form-group form-md-line-input has-success">
                         <label class="col-sm-2 form-control-label">Hình đại diện</label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="form-image" name="image" accept="image/*" required>
+                            <input type="file" class="custom-file-input" id="form-image" name="image" required>
                             <label class="custom-file-label" for="form-image">
                                 @if($data->image != "")
                                     {{ substr($data->image,0,strpos($data->image,'?')) }}
-                                @else 
+                                @else
                                     Choose file
                                 @endif
                             </label>
