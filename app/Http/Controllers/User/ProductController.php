@@ -39,7 +39,7 @@ class ProductController extends Controller
                 array_push($checkHasSize, $p->size_id);
                 array_push($data['listSize'], $sizeModel->getSizeById($p->size_id));
             }
-            if (!in_array($p->size_id, $checkHasSize)) {
+            if (!in_array($p->color_id, $checkHasColor)) {
                 array_push($checkHasColor, $p->color_id);
                 array_push($data['listColor'], $colorModel->getColorById($p->color_id));
             }
