@@ -115,7 +115,7 @@
                 <div class="color-label">Màu sắc</div>
                 <div class="colors">
                     @foreach($listColor as $item)
-                    <span class="color"
+                    <span class="color-detail"
                         data-colorname="{{ $item->name }}"
                         data-colorid="{{ $item->id }}"
                     >
@@ -128,7 +128,7 @@
                 <div class="color-label">Kích thước <a href="{{ url('huong-dan-chon-size') }}" target="_blank"  style="text-transform:none;font-weight:400"> (Hướng dẫn chọn size)</a></div>
                 <div class="sizes">
                     @foreach($listSize as $item)
-                    <span class="size" 
+                    <span class="size-detail"
                         data-sizename="{{ $item->name }}"
                         data-sizeid="{{ $item->id }}"
                     >
@@ -197,7 +197,7 @@
 @section('scripts')
 <script src="{{ asset('public/assets/scripts/iphukien/user/list-product.js') }}"></script>
 <script>
-let chooseProduct;
+// let chooseProduct;
 $(document).ready(function () {
     var elems = document.querySelectorAll('#list-image-popup');
     M.Modal.init(elems, {
@@ -223,12 +223,12 @@ $(document).on("click", ".list-thumb-wrapper .down", function () {
     if ($(".thumbs span.hide").length == 0) return;
     $(".thumbs span.hide")[$(".thumbs span.hide").length - 1].classList.remove('hide');
 });
-$(document).on("click", ".color", function () {
-    $('.color').removeClass('active');
+$(document).on("click", ".color-detail", function () {
+    $('.color-detail').removeClass('active');
     $(this).addClass('active');
-    if($('.size.active').length > 0) {
-        let sizeId = $('.size.active')[0].dataset.sizeid;
-        let colorId = $('.color.active')[0].dataset.colorid;
+    if($('.size-detail.active').length > 0) {
+        let sizeId = $('.size-detail.active')[0].dataset.sizeid;
+        let colorId = $('.color-detail.active')[0].dataset.colorid;
         $.ajax({
             url: `{{route('ajax.get-child-product')}}`,
             type: 'get',
@@ -238,6 +238,7 @@ $(document).on("click", ".color", function () {
                 'sizeId': sizeId,
                 '_token': `{{ csrf_token() }}` }
         }).done(function (data) {
+            console.log(data)
             chooseProduct = JSON.parse(data);
             console.log(chooseProduct);
             if(chooseProduct.product != null) {
@@ -263,13 +264,13 @@ $(document).on("click", ".color", function () {
         })
     }
 });
-$(document).on("click", ".size", function () {
-    $('.size').removeClass('active');
+$(document).on("click", ".size-detail", function () {
+    $('.size-detail').removeClass('active');
     $(this).addClass('active');
 
-    if($('.color.active').length > 0) {
-        let sizeId = $('.size.active')[0].dataset.sizeid;
-        let colorId = $('.color.active')[0].dataset.colorid;
+    if($('.color-detail.active').length > 0) {
+        let sizeId = $('.size-detail.active')[0].dataset.sizeid;
+        let colorId = $('.color-detail.active')[0].dataset.colorid;
         $.ajax({
             url: `{{route('ajax.get-child-product')}}`,
             type: 'get',
@@ -279,6 +280,7 @@ $(document).on("click", ".size", function () {
                 'sizeId': sizeId,
                 '_token': `{{ csrf_token() }}` }
         }).done(function (data) {
+            console.log(data)
             chooseProduct = JSON.parse(data);
             console.log(chooseProduct);
             if(chooseProduct.product != null) {
@@ -382,7 +384,8 @@ $(document).on("click", ".video-icon", function () {
 });
 
 function updateCart() {
-    let listSizeElement = $(".sizes .size.active");
+    let listSizeElement = $(".sizes .size-detail.active");
+    console.log($(".sizes .size-detail.active"))
     if(listSizeElement.length == 0) {
         M.toast({
             html: 'Vui lòng chọn màu sác - kích thước',
@@ -390,7 +393,7 @@ function updateCart() {
         })
         return false;
     }
-    let listColorElement = $(".colors .color.active");
+    let listColorElement = $(".colors .color-detail.active");
     if(listColorElement.length == 0) {
         M.toast({
             html: 'Vui lòng chọn màu sác - kích thước',
@@ -401,8 +404,8 @@ function updateCart() {
     if(chooseProduct) {
         console.log(chooseProduct)
         let productid = chooseProduct.product.id;
-        let choosenSize = $('.sizes .size.active')[0].dataset.sizename;
-        let choosenColor = $('.colors .color.active')[0].dataset.colorname;
+        let choosenSize = $('.sizes .size-detail.active')[0].dataset.sizename;
+        let choosenColor = $('.colors .color-detail.active')[0].dataset.colorname;
         let price = chooseProduct.product.sale_price;
         let nhanhProductId = chooseProduct.product.product_id_nhanh;
         let img = chooseProduct.image;
