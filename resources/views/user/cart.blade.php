@@ -81,13 +81,31 @@ $(document).on("click", ".quantity .plus", function () {
 });
 $(document).on("click", ".delete-link a", function () {
     $(this).parent()[0].parentElement.parentElement.remove();
+    console.log($(this).data('productid'))
+    let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
+    console.log(cart[$(this).data('productid')])
+    let newCart = {};
+    let sum=0, count=0;
+    for (const i in cart) {
+        if(i != $(this).data('productid')) {
+            newCart[i] = cart[i];
+        }
+        
+    }
+    for (const i in newCart) {
+        sum += cart[i].salePrice * cart[i].quantity;
+        count++;
+    }
+    localStorage.setItem('ipk_cart',  JSON.stringify(newCart));
+    $("#sum-price").html(`TỔNG ${numberWithCommas(sum)} VNĐ`);
+    $("#count-products").html(`Có ${count} sản phẩm`);
 });
 $(document).ready(function () {
     let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
     let str = "";
     let sum = 0;
     let count = 0;
-    console.log(cart);
+    // console.log(cart);
     for (const i in cart) {
         str += `<div class="product col l3">`
                 + `<div class="img" style="background-image: url(${cart[i].image})"></div>`
@@ -103,7 +121,7 @@ $(document).ready(function () {
                 + `<span class="plus" data-productid="${i}">+</span>`
                 + `</div>`
                 + `<div class="delete-link">`
-                + `<a href="#!">Xóa</a>`
+                + `<a href="#!" data-productid="${i}">Xóa</a>`
                 + `</div>`
                 + `</div>`
                 + `</div>`;
