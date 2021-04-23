@@ -19,13 +19,21 @@
                 <div class="list-status" id="quickview-status"></div>
             </div>
             <div class="sizes-wrapper">
-                <div class="color-label">Màu sắc - Kích thước<a href="{{ url('huong-dan-chon-size') }}" target="_blank"  style="text-transform:none;font-weight:400">(Hướng dẫn chọn size)</a></div>
-                <div class="sizes" id="quickview-colors-sizes"></div>
+                <div class="color-label">Màu sắc</div>
+                <div class="colors" id="quickview-colors">
+                    
+                </div>
+            </div>
+            <div class="sizes-wrapper">
+                <div class="color-label">Kích thước<a href="{{ url('huong-dan-chon-size') }}" target="_blank"  style="text-transform:none;font-weight:400">(Hướng dẫn chọn size)</a></div>
+                <div class="sizes" id="quickview-sizes">
+                
+                </div>
             </div>
             <div class="pre-order-block">
                 <div class="quantity-input">
                     <span class="decrease">-</span>
-                    <input type="number" class="quantity" value="0" id="quantity" />
+                    <input type="number" class="quantity" value="1" id="quantity" />
                     <span class="increase">+</span>
                 </div>
                 <a href="#!" class="add-to-card-btn">Thêm vào giỏ hàng</a>

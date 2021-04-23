@@ -19,7 +19,8 @@
             <div class="button-wrapper">
                 <a class="modal-trigger quickview-btn" href="#quickview"
                     data-url="{{ route('ajax.quickview-product', $product->id) }}" data-token="{{ csrf_token() }}"
-                    data-imagepath="{{ asset('public/') }}" data-productid="{{ $product->id }}">Xem nhanh</a>
+                    data-imagepath="{{ asset('public/') }}" data-productid="{{ $product->id }}"
+                    data-getchildproducturl="{{route('ajax.get-child-product')}}">Xem nhanh</a>
             </div>
         </div>
         @endforeach

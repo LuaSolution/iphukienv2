@@ -100,8 +100,8 @@
             @endif
 
             <div class="price">
-                <div class="origin">{{ number_format($product->price, 0, ',', '.') }}đ</div>
-                <div class="sale">{{ number_format($product->sale_price, 0, ',', '.') }}đ <span>Giảm {{ round(($product->price-$product->sale_price) / $product->price * 100) }}%</span></div>
+                <div class="origin" id="origin-price">{{ number_format($product->price, 0, ',', '.') }}đ</div>
+                <div class="sale" id="sale-price">{{ number_format($product->sale_price, 0, ',', '.') }}đ <span>Giảm {{ round(($product->price-$product->sale_price) / $product->price * 100) }}%</span></div>
             </div>
             <div class="status-wrapper">
                 <div class="status-label">Tình trạng</div>
@@ -128,7 +128,6 @@
                 <div class="color-label">Kích thước <a href="{{ url('huong-dan-chon-size') }}" target="_blank"  style="text-transform:none;font-weight:400"> (Hướng dẫn chọn size)</a></div>
                 <div class="sizes">
                     @foreach($listSize as $item)
-                    <!-- lam toi day -->
                     <span class="size" 
                         data-sizename="{{ $item->name }}"
                         data-sizeid="{{ $item->id }}"
@@ -246,6 +245,8 @@ $(document).on("click", ".color", function () {
                 $('.main-image').html('');
                 $('.main-image')[0].style.backgroundImage = "url(" + chooseProduct.image + ")";
                 $('#c-product-name').html(chooseProduct.product.name);
+                $("#origin-price").html(chooseProduct.product.price + 'đ');
+                $("#sale-price").html(chooseProduct.product.sale_price + 'đ');
             } else {
                 M.toast({
                     html: 'Sản phẩm không tồn tại',
@@ -285,6 +286,8 @@ $(document).on("click", ".size", function () {
                 $('.main-image').html('');
                 $('.main-image')[0].style.backgroundImage = "url(" + chooseProduct.image + ")";
                 $('#c-product-name').html(chooseProduct.product.name);
+                $("#origin-price").html(numberWithCommas(chooseProduct.product.price) + 'đ');
+                $("#sale-price").html(numberWithCommas(chooseProduct.product.sale_price) + 'đ');
             } else {
                 M.toast({
                     html: 'Sản phẩm không tồn tại',

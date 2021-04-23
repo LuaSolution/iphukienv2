@@ -1,3 +1,4 @@
+let chooseProduct;
 $(document).ready(function () {
     $.each($(".product .img"), function (index, value) {
         value.style.height = value.offsetWidth + "px"
@@ -18,7 +19,7 @@ $(document).ready(function () {
             _token: localStorage.getItem('quickview_token')
         }).done(function (data) {
                 let productInfo = JSON.parse(data)
-                console.log(productInfo)
+                // console.log(productInfo)
                 let str = ''
                 let strColor = ''
                 str += '<a href="#!" class="previous"></a>'
@@ -73,24 +74,39 @@ $(document).ready(function () {
                 }
                 $("#quickview-status").html(str)
 
-                str = ""
+                // console.log(productInfo['listChildProduct'])
+                strSize = ""
+                strColor = ""
                 for (i = 0; i < productInfo['listChildProduct'].length; i++) {
-                    str += `<span class="size" `
-                        + `data-img="${ localStorage.getItem('quickview_image_base_path') + "/" + productInfo['listChildProduct'][i]['listImage'][0]['image']}" `
-                        + `data-productname="${ productInfo['listChildProduct'][i]['product']['name']}" `
-                        + `>`
-                        + `${productInfo['listChildProduct'][i]['product']['color_name']} - ${productInfo['listChildProduct'][i]['product']['size_name']}`
-                        + `</span>`
+                    strSize += `<span class="size"`
+                            + `data-sizename="${productInfo['listChildProduct'][i]['product']['size_name']}"`
+                            + `data-sizeid="${productInfo['listChildProduct'][i]['product']['size_id']}"`
+                            + `>`
+                            + `${productInfo['listChildProduct'][i]['product']['size_name']}`
+                            + `</span>`
+                    strColor += `<span class="color"`
+                            + `data-colorname="${productInfo['listChildProduct'][i]['product']['color_name']}"`
+                            + `data-colorid="${productInfo['listChildProduct'][i]['product']['color_id']}"`
+                            + `>`
+                            + `${productInfo['listChildProduct'][i]['product']['color_name']}`
+                            + `</span>`
                 }
                 if(productInfo['listChildProduct'].length == 0) {
-                    str += `<span class="size" `
-                        + `data-img="${localStorage.getItem('quickview_image_base_path') + '/assets/images/header/logo.svg'}" `
-                        + `data-productname="${ productInfo['product']['name'] }" `
+                    strSize += `<span class="size" `
+                        + `data-sizename="One Size"`
+                        + `data-sizeid="-1"`
                         + `>`
-                        + `One Color - One Size`
+                        + `One Size`
+                        + `</span>`
+                    strColor += `<span class="color" `
+                        + `data-colorname="One Color"`
+                        + `data-colorid="-1"`
+                        + `>`
+                        + `One Color`
                         + `</span>`
                 }
-                $("#quickview-colors-sizes").html(str)
+                $("#quickview-sizes").html(strSize)
+                $("#quickview-colors").html(strColor)
 
                 // set for card
                 localStorage.setItem('quickview_sale_price', productInfo['product']['sale_price'])
@@ -101,17 +117,95 @@ $(document).ready(function () {
             })
     }
 })
-$(document).on("click", ".size", function () {
-    $('.size').removeClass('active')
-    $(this).addClass('active')
-    let cImg = $(this).data('img');
-    for(let i = 0; i < $('.product-img').length; i++) {
-        if($('.product-img')[i].dataset.img == cImg) {
-            $('.quickview-slider').carousel('set', i);
-            break;
-        }
+$(document).on("click", ".color", function () {
+    $('.color').removeClass('active');
+    $(this).addClass('active');
+    if($('.size.active').length > 0) {
+        let sizeId = $('.size.active')[0].dataset.sizeid;
+        let colorId = $('.color.active')[0].dataset.colorid;
+        $.ajax({
+            url: localStorage.getItem('quickview_get_child_product_url'),
+            type: 'get',
+            data: { 
+                'productId': localStorage.getItem('quickview_product_id'), 
+                'colorId': colorId, 
+                'sizeId': sizeId, 
+                '_token': localStorage.getItem('quickview_token') 
+            }
+        }).done(function (data) {
+            chooseProduct = JSON.parse(data);
+            console.log(chooseProduct);
+            if(chooseProduct.product != null) {
+                $('#quickview-name').html(chooseProduct.product.name);
+                $("#quickview-origin").html(numberWithCommas(chooseProduct.product.price) + 'đ');
+                $("#quickview-sale").html(numberWithCommas(chooseProduct.product.sale_price) + 'đ');
+                let cImg = chooseProduct.image;
+                for(let i = 0; i < $('.product-img').length; i++) {
+                    if($('.product-img')[i].dataset.img == cImg) {
+                        $('.quickview-slider').carousel('set', i);
+                        break;
+                    }
+                }
+            } else {
+                M.toast({
+                    html: 'Sản phẩm không tồn tại',
+                    classes: 'add-cart-fail'
+                })
+            }
+            
+        })
+        .fail(function () {
+            M.toast({
+                html: 'Sản phẩm không tồn tại',
+                classes: 'add-cart-fail'
+            })
+        })
     }
-    $('#quickview-name').html($(this).data('productname'));
+});
+$(document).on("click", ".size", function () {
+    $('.size').removeClass('active');
+    $(this).addClass('active');
+    if($('.color.active').length > 0) {
+        let sizeId = $('.size.active')[0].dataset.sizeid;
+        let colorId = $('.color.active')[0].dataset.colorid;
+        $.ajax({
+            url: localStorage.getItem('quickview_get_child_product_url'),
+            type: 'get',
+            data: { 
+                'productId': localStorage.getItem('quickview_product_id'), 
+                'colorId': colorId, 
+                'sizeId': sizeId, 
+                '_token': localStorage.getItem('quickview_token') 
+            }
+        }).done(function (data) {
+            chooseProduct = JSON.parse(data);
+            console.log(chooseProduct);
+            if(chooseProduct.product != null) {
+                $('#quickview-name').html(chooseProduct.product.name);
+                $("#quickview-origin").html(numberWithCommas(chooseProduct.product.price) + 'đ');
+                $("#quickview-sale").html(numberWithCommas(chooseProduct.product.sale_price) + 'đ');
+                let cImg = chooseProduct.image;
+                for(let i = 0; i < $('.product-img').length; i++) {
+                    if($('.product-img')[i].dataset.img == cImg) {
+                        $('.quickview-slider').carousel('set', i);
+                        break;
+                    }
+                }
+            } else {
+                M.toast({
+                    html: 'Sản phẩm không tồn tại',
+                    classes: 'add-cart-fail'
+                })
+            }
+            
+        })
+        .fail(function () {
+            M.toast({
+                html: 'Sản phẩm không tồn tại',
+                classes: 'add-cart-fail'
+            })
+        })
+    }
 })
 $(document).on("click", ".quickview-slider .previous", function () {
     $('.quickview-slider').carousel('prev')
@@ -123,69 +217,71 @@ $(document).on("click", ".decrease", function () {
     if ($('.quantity').val() == 0) return
     let newQuantity = parseInt($('.quantity').val()) - 1
     $('.quantity').val(newQuantity)
-    let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {}
-    cart[localStorage.getItem('quickview_product_id')].quantity = newQuantity
-    localStorage.setItem('ipk_cart', JSON.stringify(cart))
 })
 $(document).on("click", ".increase", function () {
     let newQuantity = parseInt($('.quantity').val()) + 1
     $('.quantity').val(newQuantity)
-    let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {}
-    cart[localStorage.getItem('quickview_product_id')].quantity = newQuantity
-    localStorage.setItem('ipk_cart', JSON.stringify(cart))
 })
 $(document).on("click", ".quickview-btn", function () {
     localStorage.setItem('quickview_url', $(this).data('url'))
     localStorage.setItem('quickview_product_id', $(this).data('productid'))
     localStorage.setItem('quickview_token', $(this).data('token'))
     localStorage.setItem('quickview_image_base_path', $(this).data('imagepath'))
+    localStorage.setItem('quickview_get_child_product_url', $(this).data('getchildproducturl'))
+    
 })
 function updateCart() {
-    let listColorElement = $(".colors .color.active")
-    if (listColorElement.length == 0) {
+    let listSizeElement = $(".sizes .size.active");
+    if(listSizeElement.length == 0) {
         M.toast({
-            html: 'Vui lòng chọn màu sắc',
+            html: 'Vui lòng chọn màu sác - kích thước',
             classes: 'add-cart-fail'
         })
-        return false
+        return false;
     }
-    let choosenColor = listColorElement[0].dataset.colorid
-    let choosenColorName = listColorElement[0].dataset.colorname
-
-    let listSizeElement = $(".sizes .size.active")
-    if (listSizeElement.length == 0) {
+    let listColorElement = $(".colors .color.active");
+    if(listColorElement.length == 0) {
         M.toast({
-            html: 'Vui lòng chọn kích thước',
+            html: 'Vui lòng chọn màu sác - kích thước',
             classes: 'add-cart-fail'
         })
-        return false
+        return false;
     }
-    let choosenSize = listSizeElement[0].dataset.sizeid
-    let choosenSizeName = listSizeElement[0].dataset.sizename
-
-    let quantity = $("#quantity").val() == 0 ? 1 : $("#quantity").val()
-
-    let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {}
-    // console.log(cart);
-    if (cart[localStorage.getItem('quickview_product_id')]) {
-        cart[localStorage.getItem('quickview_product_id')].quantity = quantity
-    } else {
-        cart[localStorage.getItem('quickview_product_id')] = {
-            color: choosenColor,
-            size: choosenSize,
-            quantity: quantity,
-            image: $(".colors .color.active").data('img'),
-            salePrice: localStorage.getItem('quickview_sale_price'),
-            name: localStorage.getItem('quickview_product_name'),
-            sizeName: choosenSizeName,
-            colorName: choosenColorName,
-            nhanhPorductId: localStorage.getItem('quickview_nhanh_product_id')
+    if(chooseProduct) {
+        console.log(chooseProduct)
+        let productid = chooseProduct.product.id;
+        let choosenSize = $('.sizes .size.active')[0].dataset.sizename;
+        let choosenColor = $('.colors .color.active')[0].dataset.colorname;
+        let price = chooseProduct.product.sale_price;
+        let nhanhProductId = chooseProduct.product.product_id_nhanh;
+        let img = chooseProduct.image;
+        let prodName = chooseProduct.product.name;
+        let quantity = $("#quantity").val() == 0 ? 1 : $("#quantity").val();
+        let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
+        
+        if(cart[productid]) {
+            cart[productid].quantity = parseInt(cart[productid].quantity) + parseInt(quantity);
+        } else {
+            cart[productid] = {
+                color: choosenColor,
+                size: choosenSize,
+                quantity: quantity,
+                salePrice: price,
+                image: img,
+                name: prodName,
+                nhanhPorductId: nhanhProductId,
+            };
         }
+        localStorage.setItem('ipk_cart',  JSON.stringify(cart));
+        return true;
+    } else {
+        M.toast({
+            html: 'Sản phẩm không tồn tại',
+            classes: 'add-cart-fail'
+        })
     }
-    localStorage.setItem('ipk_cart', JSON.stringify(cart))
-    return true
 }
-$(document).on("click", "#buy-now-btn", function () {
+$(document).on("click", ".buy-now-btn", function () {
     if (!updateCart()) return
 
     window.location.href = $(this).data('url')

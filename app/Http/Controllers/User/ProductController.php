@@ -17,12 +17,14 @@ class ProductController extends Controller
     {
         $data = [];
         $data['product'] = (new Product())->getProductById($id);
-        $data['listSize'] = (new Size())->getListSize();
-        $data['listColor'] = (new Color())->getListColor();
+        $data['listSize'] = [];
+        $data['listColor'] = [];
         $listChildProduct = (new Product())->getListChildProduct($id);
         $productImageModel = new ProductImage();
         $data['listChildProduct'] = [];
         $data['listImage'] = [];
+        $sizeModel = new Size();
+        $colorModel = new Color();
         foreach($listChildProduct as $p) {
             $obj = new \stdClass();
             $obj->product = $p;
@@ -31,8 +33,10 @@ class ProductController extends Controller
                 array_push($data['listImage'], asset('public/'.$i->image));
             }
             array_push($data['listChildProduct'], $obj);
+            array_push($data['listSize'], $sizeModel->getSizeById($p->size_id));
+            array_push($data['listColor'], $colorModel->getColorById($p->color_id));
         }
-        // dd($data);
+        
         if (Auth::check() && Auth::user()->role_id == 2) {
             $data['wishlist'] = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $id);
         }
