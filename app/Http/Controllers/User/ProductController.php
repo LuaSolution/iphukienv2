@@ -25,6 +25,8 @@ class ProductController extends Controller
         $data['listImage'] = [];
         $sizeModel = new Size();
         $colorModel = new Color();
+        $checkHasSize = [];
+        $checkHasColor = [];
         foreach($listChildProduct as $p) {
             $obj = new \stdClass();
             $obj->product = $p;
@@ -33,8 +35,14 @@ class ProductController extends Controller
                 array_push($data['listImage'], asset('public/'.$i->image));
             }
             array_push($data['listChildProduct'], $obj);
-            array_push($data['listSize'], $sizeModel->getSizeById($p->size_id));
-            array_push($data['listColor'], $colorModel->getColorById($p->color_id));
+            if (!in_array($p->size_id, $checkHasSize)) {
+                array_push($checkHasSize, $p->size_id);
+                array_push($data['listSize'], $sizeModel->getSizeById($p->size_id));
+            }
+            if (!in_array($p->size_id, $checkHasSize)) {
+                array_push($checkHasColor, $p->color_id);
+                array_push($data['listColor'], $colorModel->getColorById($p->color_id));
+            }
         }
         
         if (Auth::check() && Auth::user()->role_id == 2) {
