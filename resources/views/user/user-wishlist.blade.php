@@ -9,7 +9,7 @@
 @section('styles')
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/user-top.css') }}">
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/user-wishlist.css') }}">
-<link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/list-product.css') }}">
+<link rel="stylesheet" href="{{ asset('public/iphukien/user/list-product.css') }}">
 @endsection
 
 @section('content')
