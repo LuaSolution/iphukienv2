@@ -444,31 +444,31 @@ function updateCartDetail() {
     }
     @endif
     @if(count($listColor) == 0 && count($listSize) == 0)
-    // let productid = chooseProduct.product.id;
-    //     let choosenSize = $('.sizes .size-detail.active')[0].dataset.sizename;
-    //     let choosenColor = $('.colors .color-detail.active')[0].dataset.colorname;
-    //     let price = chooseProduct.product.sale_price;
-    //     let nhanhProductId = chooseProduct.product.product_id_nhanh;
-    //     let img = chooseProduct.image;
-    //     let prodName = chooseProduct.product.name;
-    //     let quantity = $("#quantity-detail").val() == 0 ? 1 : $("#quantity-detail").val();
-    //     let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
+    let productid = '{{$product->id}}';
+    let choosenSize = '-';
+    let choosenColor = '-';
+    let price = '{{$product->sale_price}}';
+    let nhanhProductId = '{{$product->product_id_nhanh}}';
+    let img = '{{ asset('public/assets/images/header/logo.svg') }}';
+    let prodName = '{{$product->name}}';
+    let quantity = $("#quantity-detail").val() == 0 ? 1 : $("#quantity-detail").val();
+    let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
 
-    //     if(cart[productid]) {
-    //         cart[productid].quantity = parseInt(cart[productid].quantity) + parseInt(quantity);
-    //     } else {
-    //         cart[productid] = {
-    //             color: choosenColor,
-    //             size: choosenSize,
-    //             quantity: quantity,
-    //             salePrice: price,
-    //             image: img,
-    //             name: prodName,
-    //             nhanhPorductId: nhanhProductId,
-    //         };
-    //     }
-    //     localStorage.setItem('ipk_cart',  JSON.stringify(cart));
-    //     return true;
+    if(cart[productid]) {
+        cart[productid].quantity = parseInt(cart[productid].quantity) + parseInt(quantity);
+    } else {
+        cart[productid] = {
+            color: choosenColor,
+            size: choosenSize,
+            quantity: quantity,
+            salePrice: price,
+            image: img,
+            name: prodName,
+            nhanhPorductId: nhanhProductId,
+        };
+    }
+    localStorage.setItem('ipk_cart',  JSON.stringify(cart));
+    return true;
     @endif
 }
 $(document).on("click","#buy-now-btn-detail",function() {
