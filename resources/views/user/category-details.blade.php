@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '{{ $category->title }}')
+@section('title', $category->title )
 
 @section('header')
     @include('layouts.header', ['status' => 'complete'])

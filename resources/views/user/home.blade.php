@@ -145,14 +145,14 @@ echo ('<script type="text/javascript">
             <p class="block-title">SẢN PHẨM MỚI</p>
             @include('layouts.list-product', ['listProduct' => $proNew, 'hasReadMore' => false])
             <div class="container">
-                <a href="{{ url('/categories/none?sort=newest') }}" class="btn-xem-them" >XEM THÊM</a>
+                <a href="{{ url('/categories/-1') }}" class="btn-xem-them" >XEM THÊM</a>
             </div>
         </div>
         <div class="products-block" style="margin-top:0">
             <p class="block-title">SẢN PHẨM BÁN CHẠY</p>
             @include('layouts.list-product', ['listProduct' => $proTopSold, 'hasReadMore' => false])
             <div class="container">
-                <a href="{{ url('/categories/none?sort=mostbuy') }}" class="btn-xem-them" >XEM THÊM</a>
+                <a href="{{ url('/categories/-1') }}" class="btn-xem-them" >XEM THÊM</a>
             </div>
         </div>
     </div>
