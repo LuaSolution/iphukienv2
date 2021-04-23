@@ -2,9 +2,7 @@
     <div class="row products">
         @foreach($listProduct as $product)
         <div class="product col m3 s6 {{ $product->wishlist ? 'added-wishlist' : '' }}">
-            <?php
-$img = (new \App\Product())->getProductDefaultImage($product->id);
-?>
+            <?php $img = (new \App\Product())->getProductDefaultImage($product->id);?>
             <div class="img img_product" style="background-image: url({{ asset($img != null && $img->image != null ? 'public/' . $img->image : 'public/assets/images/header/logo.svg') }})">
             </div>
             <div class="name">
@@ -13,8 +11,12 @@ $img = (new \App\Product())->getProductDefaultImage($product->id);
                 </a>
             </div>
             <div class="price">
+                @if($product->sale_price == $product->price)
+                <span class="sale">{{ number_format($product->price, 0, ',', '.') }}đ</span>
+                @else
                 <span class="sale">{{ number_format($product->sale_price , 0, ',', '.') }}đ</span>
                 <span class="origin">{{ number_format($product->price, 0, ',', '.') }}đ</span>
+                @endif
             </div>
             <div class="button-wrapper">
                 <a class="modal-trigger quickview-btn" href="#quickview"
