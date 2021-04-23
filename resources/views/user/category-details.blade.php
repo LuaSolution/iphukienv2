@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '{{ $category->title }}')
+@section('title', $category->title )
 
 @section('header')
     @include('layouts.header', ['status' => 'complete'])
@@ -9,7 +9,6 @@
 @section('styles')
     <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/ipk-breadcrumb.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/category-details.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/list-product.css') }}">
     <link rel="stylesheet" href="https://materializecss.com/extras/noUiSlider/nouislider.css">
 @endsection
 

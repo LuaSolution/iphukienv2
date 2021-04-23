@@ -9,7 +9,7 @@
 @section('styles')
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/ipk-breadcrumb.css') }}">
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/product-details.css') }}">
-<link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/list-product.css') }}">
+<link rel="stylesheet" href="{{ asset('public/iphukien/user/list-product.css') }}">
 @endsection
 
 @section('fb-meta-tags')
@@ -53,7 +53,7 @@
                 </div>
                 <a href="#!" class="down"></a>
             </div>
-            <div class="video-icon" 
+            <div class="video-icon"
                 data-video="{{ $product->video }}">
                 <a href="#!"></a>
             </div>
@@ -70,7 +70,7 @@
                 </div>
                 <a href="#!" class="down"></a>
             </div>
-            <div class="video-icon" 
+            <div class="video-icon"
                 data-video="{{ $product->video }}">
                 <a href="#!"></a>
             </div>
@@ -115,7 +115,7 @@
                 <div class="color-label">Màu sắc</div>
                 <div class="colors">
                     @foreach($listColor as $item)
-                    <span class="color" 
+                    <span class="color"
                         data-colorname="{{ $item->name }}"
                         data-colorid="{{ $item->id }}"
                     >
@@ -232,10 +232,10 @@ $(document).on("click", ".color", function () {
         $.ajax({
             url: `{{route('ajax.get-child-product')}}`,
             type: 'get',
-            data: { 
-                'productId': '{{$product->id}}', 
-                'colorId': colorId, 
-                'sizeId': sizeId, 
+            data: {
+                'productId': '{{$product->id}}',
+                'colorId': colorId,
+                'sizeId': sizeId,
                 '_token': `{{ csrf_token() }}` }
         }).done(function (data) {
             chooseProduct = JSON.parse(data);
@@ -253,7 +253,7 @@ $(document).on("click", ".color", function () {
                     classes: 'add-cart-fail'
                 })
             }
-            
+
         })
         .fail(function () {
             M.toast({
@@ -266,17 +266,17 @@ $(document).on("click", ".color", function () {
 $(document).on("click", ".size", function () {
     $('.size').removeClass('active');
     $(this).addClass('active');
-    
+
     if($('.color.active').length > 0) {
         let sizeId = $('.size.active')[0].dataset.sizeid;
         let colorId = $('.color.active')[0].dataset.colorid;
         $.ajax({
             url: `{{route('ajax.get-child-product')}}`,
             type: 'get',
-            data: { 
-                'productId': '{{$product->id}}', 
-                'colorId': colorId, 
-                'sizeId': sizeId, 
+            data: {
+                'productId': '{{$product->id}}',
+                'colorId': colorId,
+                'sizeId': sizeId,
                 '_token': `{{ csrf_token() }}` }
         }).done(function (data) {
             chooseProduct = JSON.parse(data);
@@ -409,7 +409,7 @@ function updateCart() {
         let prodName = chooseProduct.product.name;
         let quantity = $("#quantity-detail").val() == 0 ? 1 : $("#quantity-detail").val();
         let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
-        
+
         if(cart[productid]) {
             cart[productid].quantity = parseInt(cart[productid].quantity) + parseInt(quantity);
         } else {
@@ -431,7 +431,7 @@ function updateCart() {
             classes: 'add-cart-fail'
         })
     }
-    
+
 }
 $(document).on("click","#buy-now-btn-detail",function() {
     if(!updateCart()) return;

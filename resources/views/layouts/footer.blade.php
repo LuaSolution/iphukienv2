@@ -2,38 +2,32 @@
     <div class="ipk-content-container">
         <div class="row footer">
             <div class="col l4 s12">
-            <!-- IPHUKIEN SHOP
-GPĐKKD số 8430376778 do Sở KHĐT TPHCM cấp
-Địa chỉ: 270/2/1 Phan Đình Phùng, Phú Nhuận, Ho Chi Minh City
-Email: iphukien270@gmail.com
-Hotline: 0795712079 -->
                 <div class="name">IPHUKIEN SHOP</div>
                 <div class="company-infos">
                     <div class="company-info">GPĐKKD số 8430376778 do Sở KHĐT TPHCM cấp</div>
-                    <div class="company-info">Địa chỉ: 270/2/1 Phan Đình Phùng, Phú Nhuận, Ho Chi Minh City</div>
-                    <div class="company-info">Văn phòng giao dịch: Lầu 2 - 5B Võ Văn Tần, Phường 6, Quận 3, TP.HCM</div>
-                    <div class="company-info">Email: iphukien270@gmail.com</div>
-                    <div class="company-info">Hotline: 0795712079</div>
+                    <div class="company-info">Địa chỉ: 270/2/1 Phan Đình Phùng, Phú Nhuận, Tp. Hồ Chí Minh</div>
+                    <div class="company-info">Email: <a href="mailto:iphukien270@gmail.com">iphukien270@gmail.com</a></div>
+                    <div class="company-info">Hotline: <a href="tel:0795712079">0795712079</a></div>
                 </div>
             </div>
             <div class="col l2 s12">
                 <div class="name">IPHUKIEN SHOP</div>
                 <div class="footer-link">
-                    <a href="{{ url('gioi-thieu') }}">Giới thiệu về iPhuKien</a>
+                    <a href="{{ url('gioi-thieu') }}">Giới thiệu</a>
                     <a href="{{ url('news') }}">Tin tức</a>
                     <a href="{{ url('tuyen-dung') }}">Tuyển dụng</a>
-                    <a href="{{ url('gop-y') }}">Góp ý</a>
+                    <!-- <a href="{{ url('gop-y') }}">Góp ý</a> -->
                 </div>
             </div>
             <div class="col l4 s12">
                 <div class="name">Hỗ trợ</div>
                 <div class="footer-link">
-                    <a href="{{ url('phuong-thuc-thanh-toan') }}">Phương Thức Thanh Toán</a>
+                    <a href="{{ url('phuong-thuc-thanh-toan') }}">Phương thức thanh toán </a>
                     <a href="{{ url('chinh-sach-doi-tra') }}">Chính sách vận chuyển & đổi hàng</a>
                     <a href="{{ url('cach-thuc-thanh-toan') }}">Cách thức thanh toán</a>
                     <a href="{{ url('thong-tin-ngan-hang') }}">Thông tin tài khoản ngân hàng</a>
-                    <a href="{{ url('hoa-don-dien-tu') }}">Hóa đơn điện tử</a>
-                    <a href="{{ url('chinh-sach-bao-mat') }}">Chính sách bảo mật thông tin</a>
+                    <!-- <a href="{{ url('hoa-don-dien-tu') }}">Hóa đơn điện tử</a> -->
+                    <!-- <a href="{{ url('chinh-sach-bao-mat') }}">Chính sách bảo mật thông tin</a> -->
                 </div>
             </div>
             <div class="col l2 s12">
@@ -43,7 +37,7 @@ Hotline: 0795712079 -->
                     <a href="https://www.youtube.com/" class="ipk-footer-icon youtube-icon"></a>
                 </div>
                 <div class="bo-cong-thuong-icon">
-                    <img src="{{ asset('public/assets/images/footer/cong-thuong.svg') }}" />
+                    <!-- <img src="{{ asset('public/assets/images/footer/cong-thuong.svg') }}" /> -->
                 </div>
             </div>
         </div>

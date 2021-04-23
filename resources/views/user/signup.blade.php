@@ -62,7 +62,7 @@
                 <p>
                     <label>
                         <input type="checkbox" />
-                        <span>Tôi chấp nhận những <a href="" target="_blank"><i>điều khoản</i></a> của Brand</span>
+                        <span>Tôi chấp nhận những <a href="{{ url('dieu-khoan') }}" target="_blank"><i>điều khoản</i></a> của Brand</span>
                     </label>
                 </p>
             </div>

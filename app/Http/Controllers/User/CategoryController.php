@@ -16,28 +16,37 @@ class CategoryController extends Controller
 {
     public function show(Request $request, $id)
     {
-        if ($request->sort) {
+        if ($id == -1) {
+            $this->data['listProduct'] = Product::orderBy('id', 'DESC')->paginate(8);
+        } else if ($request->sort) {
             switch ($request->sort) {
                 case "az":
-                    $this->data['listProduct'] = Product::where('category_id', $id)->orderBy('name', 'ASC')->paginate(5);
+                    $this->data['listProduct'] = Product::where('category_id', $id)->orderBy('name', 'ASC')->paginate(8);
                     break;
                 case "za":
-                    $this->data['listProduct'] = Product::where('category_id', $id)->orderBy('name', 'DESC')->paginate(5);
+                    $this->data['listProduct'] = Product::where('category_id', $id)->orderBy('name', 'DESC')->paginate(8);
                     break;
                 case "pasc":
-                    $this->data['listProduct'] = Product::where('category_id', $id)->orderBy('price', 'ASC')->orderBy('sale_price', 'ASC')->paginate(5);
+                    $this->data['listProduct'] = Product::where('category_id', $id)->orderBy('price', 'ASC')->orderBy('sale_price', 'ASC')->paginate(8);
                     break;
                 case "pdesc":
-                    $this->data['listProduct'] = Product::where('category_id', $id)->orderBy('price', 'DESC')->orderBy('sale_price', 'DESC')->paginate(5);
+                    $this->data['listProduct'] = Product::where('category_id', $id)->orderBy('price', 'DESC')->orderBy('sale_price', 'DESC')->paginate(8);
                     break;
                 default:
-                    $this->data['listProduct'] = Product::where('category_id', $id)->orderBy('id', 'DESC')->paginate(5);
+                    $this->data['listProduct'] = Product::where('category_id', $id)->orderBy('id', 'DESC')->paginate(8);
             }
 
         } else {
-            $this->data['listProduct'] = Product::where('category_id', $id)->orderBy('id', 'DESC')->paginate(5);
+            $this->data['listProduct'] = Product::where('category_id', $id)->orderBy('id', 'DESC')->paginate(8);
         }
-        $this->data['category'] = (new Cate())->getCateById($id);
+
+        if ($id == -1) {
+            $category = (object) ['title' => 'Danh sách sản phẩm'];
+
+            $this->data['category'] = $category;
+        } else {
+            $this->data['category'] = (new Cate())->getCateById($id);
+        }
         $this->data['colors'] = (new Color())->getListColor();
         $this->data['sizes'] = (new Size())->getListSize();
         $this->data['trademarks'] = (new Trademark())->getListTrademark();
@@ -89,7 +98,6 @@ class CategoryController extends Controller
             $product = DB::table('products')
                 ->whereBetween('price', json_decode($data['prices']));
         }
-
 
         if (count(json_decode($data['tags'])) === 0 && count(json_decode($data['trademarks'])) === 0 && count(json_decode($data['sizes'])) === 0 && count(json_decode($data['colors'])) === 0 && count(json_decode($data['prices'])) === 0) {
             $product = Product::where('category_id', $id);

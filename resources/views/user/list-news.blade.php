@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'iPhuKien - Phụ kiện chính hãng')
+@section('title', 'Phụ kiện chính hãng')
 
 @section('header')
 @include('layouts.header', ['status' => 'complete'])
@@ -23,7 +23,7 @@
                     <a href="{{route('news.show', ['news' => $item->slug])}}">
                         <img src="{{asset('public/img/post/'.$item->cover)}}">
                         <div class="news-title">{{$item->title}}</div>
-                        <div class="news-content">{{$item->description}}</div>
+                        <!-- <div class="news-content">{{$item->description}}</div> -->
                     </a>
                 </li>
                 @endforeach

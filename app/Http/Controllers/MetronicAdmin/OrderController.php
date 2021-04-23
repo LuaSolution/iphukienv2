@@ -42,4 +42,16 @@ class OrderController extends Controller
 
         return view('metronic_admin.orders.list', $this->data);
     }
+
+    public function getDelOrder($id)
+    {
+        $result = OrderDetail::where('order_id', $id)->delete();
+        $result = Order::where('id', $id)->delete();
+
+        if ($result > 0) {
+            return redirect()->route('adMgetListOrders')->with('success', 'Xóa thành công!');
+        } else {
+            return redirect()->route('adMgetListOrders')->with('error', 'Xóa thất bại!');
+        }
+    }
 }
