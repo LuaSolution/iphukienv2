@@ -5,13 +5,14 @@ namespace App\Http\Controllers\User;
 use App\Cate;
 use App\Http\Controllers\Controller;
 use App\Mail;
-use App\Product;
-use App\ProductImage;
-use App\SaleProduct;
-use App\StaticPage;
-use App\Slider;
 use App\Partner;
+use App\Product;
+use App\SaleProduct;
+use App\Slider;
+use App\StaticPage;
+use App\User;
 use Illuminate\Http\Request;
+use Mail as SendMail;
 
 class HomeController extends Controller
 {
@@ -29,7 +30,7 @@ class HomeController extends Controller
         $this->data['proNew'] = Product::take(8)->whereNull('parent_id')->orderBy('created_at', 'desc')->get();
         $this->data['proTopSold'] = Product::take(8)->whereNull('parent_id')->orderBy('sold', 'desc')->get();
         $this->data['flashSale'] = (new SaleProduct())->getListValidSaleProduct();
-        $this->data['slider'] = Slider::OrderBy('id' , 'DESC')->first();
+        $this->data['slider'] = Slider::OrderBy('id', 'DESC')->first();
         $this->data['partners'] = Partner::take(8)->orderBy('created_at', 'desc')->get();
 
         return view('user.home', $this->data);
@@ -54,6 +55,26 @@ class HomeController extends Controller
             return view('user.blank', $this->data);
         } else {
             return redirect()->route('getHome');
+        }
+    }
+
+    public function postForgotPassword(Request $req)
+    {
+        $user = User::where('email', $req->email)->first();
+        $passwd = uniqid();
+        $email = $req->email;
+        if ($user) {
+            $user->password = bcrypt($passwd);
+            $user->save();
+            SendMail::send('form', array('newpassword' => $passwd, 'name' => $user->name), function ($message) use ($email) {
+                $message->from('iphukien.send.mail@gmail.com', 'Iphukien');
+                $message->to($email)->subject('[Iphukien] Reset Password');
+            });
+            toast()->success('Đã reset mật khẩu');
+            return redirect()->back();
+        } else {
+            toast()->error('Email không tồn tại trong hệ thống');
+            return redirect()->back();
         }
     }
 }

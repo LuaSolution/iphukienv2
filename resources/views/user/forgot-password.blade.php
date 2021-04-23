@@ -14,7 +14,8 @@
 <div class="ipk-container forgot-password-container">
     <div class="ipk-content-container">
         <div class="title">Tìm lại mật khẩu</div>
-        <form method="post">
+        <form action="{{ route('postForgotPassword') }}" method="POST">
+        {{ csrf_field() }}
             <input type="text" name="email" placeholder="Vui lòng nhập email để lấy lại mật khẩu" class="email" />
             <input type="submit" name="submit-forgot-password" value="Gửi" class="submit-forgot-password-form" />
         </form>

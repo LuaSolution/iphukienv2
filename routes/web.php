@@ -169,6 +169,7 @@ Route::middleware(['runall', 'locale'])->group(function () {
     Route::get('/orders/{orderId}', 'User\UserController@orderDetails')->name('user.order-details');
     Route::get('/location/{type}/{parentId?}', 'User\AjaxController@getLocation')->name('ajax.location');
     Route::post('/post-contact', 'User\HomeController@postContact')->name('postContact');
+    Route::post('/post-forgot', 'User\HomeController@postForgotPassword')->name('postForgotPassword');
     Route::get('/orders', 'User\UserController@getListOrders')->name('user.orders');
     Route::get('/user-information', 'User\UserController@getUserInformation')->name('user.information');
     Route::post('/user-information', 'User\UserController@postUserInformation')->name('update.information');
