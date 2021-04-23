@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'iPhuKien - Phụ kiện chính hãng')
+@section('title', 'Phụ kiện chính hãng')
 
 @section('header')
 @include('layouts.header', ['status' => 'complete'])
@@ -148,7 +148,7 @@ echo ('<script type="text/javascript">
                 <a href="{{ url('/categories/-1') }}" class="btn-xem-them" >XEM THÊM</a>
             </div>
         </div>
-        <div class="products-block" style="margin-top:0">
+        <div class="products-block" style="margin-top:-70px">
             <p class="block-title">SẢN PHẨM BÁN CHẠY</p>
             @include('layouts.list-product', ['listProduct' => $proTopSold, 'hasReadMore' => false])
             <div class="container">
@@ -157,7 +157,7 @@ echo ('<script type="text/javascript">
         </div>
     </div>
 </div>
-<div class="ipk-container partners-container">
+<div class="ipk-container partners-container" style="margin-top: -100px">
     <div class="partners owl-carousel owl-theme">
         @foreach ($partners as $key => $value)
         <div class=" partner-item" style="background-image: url({{ asset('public/' . $value->image) }})"></div>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'iPhuKien - Phụ kiện chính hãng')
+@section('title', 'Phụ kiện chính hãng')
 
 @section('header')
 @include('layouts.header', ['status' => 'complete'])
@@ -43,15 +43,15 @@
                         @foreach($newsRelated as $item)
                             <div class="col m3 s6 news-item">
                                 <div class="news-img"
-                                    style="background-image: url({{ asset('public/assets/images/demo/day_da_watch.png') }})">
+                                    style="background-image: url({{ asset('public/img/post/'.$item->cover) }})">
                                 </div>
                                 <div class="news-title">{{ $item->title }}</div>
                                 <div class="news-content">{{ $item->description }}</div>
                                 <div class="news-last-line">
                                     <span>{{ $item->created_at }}</span>
-                                    <a
-                                        href="{{ route('news.show', ['news' => $item->slug]) }}">Chi
-                                        tiết</a>
+                                    <a href="{{ route('news.show', ['news' => $item->slug]) }}">
+                                        Chi tiết
+                                    </a>
                                 </div>
                             </div>
                         @endforeach

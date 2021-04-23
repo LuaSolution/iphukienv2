@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'iPhuKien - Giỏ hàng')
+@section('title', 'Giỏ hàng')
 
 @section('header')
 @include('layouts.header', ['status' => 'complete'])
