@@ -17,23 +17,23 @@ class CategoryController extends Controller
     public function show(Request $request, $id)
     {
         if ($id == -1) {
-            $this->data['listProduct'] = Product::orderBy('id', 'DESC')->whereNull('parent_id')->paginate(8);
+            $this->data['listProduct'] = Product::where('parent_id', null)->orderBy('id', 'DESC')->paginate(8);
         } else if ($request->sort) {
             switch ($request->sort) {
                 case "az":
-                    $this->data['listProduct'] = Product::where('category_id', $id)->whereNull('parent_id')->orderBy('name', 'ASC')->paginate(8);
+                    $this->data['listProduct'] = Product::where('category_id', $id)->where('parent_id', null)->orderBy('name', 'ASC')->paginate(8);
                     break;
                 case "za":
-                    $this->data['listProduct'] = Product::where('category_id', $id)->whereNull('parent_id')->orderBy('name', 'DESC')->paginate(8);
+                    $this->data['listProduct'] = Product::where('category_id', $id)->where('parent_id', null)->orderBy('name', 'DESC')->paginate(8);
                     break;
                 case "pasc":
-                    $this->data['listProduct'] = Product::where('category_id', $id)->whereNull('parent_id')->orderBy('price', 'ASC')->orderBy('sale_price', 'ASC')->paginate(8);
+                    $this->data['listProduct'] = Product::where('category_id', $id)->where('parent_id', null)->orderBy('price', 'ASC')->orderBy('sale_price', 'ASC')->paginate(8);
                     break;
                 case "pdesc":
-                    $this->data['listProduct'] = Product::where('category_id', $id)->whereNull('parent_id')->orderBy('price', 'DESC')->orderBy('sale_price', 'DESC')->paginate(8);
+                    $this->data['listProduct'] = Product::where('category_id', $id)->where('parent_id', null)->orderBy('price', 'DESC')->orderBy('sale_price', 'DESC')->paginate(8);
                     break;
                 default:
-                    $this->data['listProduct'] = Product::where('category_id', $id)->whereNull('parent_id')->orderBy('id', 'DESC')->paginate(8);
+                    $this->data['listProduct'] = Product::where('category_id', $id)->where('parent_id', null)->orderBy('id', 'DESC')->paginate(8);
             }
 
         } else {
