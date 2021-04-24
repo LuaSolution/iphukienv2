@@ -12,6 +12,7 @@ use App\Product;
 use App\Wishlist;
 use App\ProductImage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AjaxController extends Controller
 {
@@ -197,6 +198,20 @@ class AjaxController extends Controller
         }
 
         return json_encode($obj);
+    }
+
+    public function doChangePassword(Request $request) {
+        if (!Auth::check() || Auth::user()->role_id != 2) {
+            return json_encode(['code' => 0, 'message' => 'Vui lòng đăng nhập']);
+        }
+        $cUser = (new User())->getUserById(Auth::user()->id);
+        if(isset($cUser) && Hash::check($request->input('currentPass'), $cUser->password)) {
+            (new User())->updateUser(Auth::user()->id, ['password' => bcrypt($request->input('newPass'))]);
+
+            return json_encode(['code' => 1]);
+        } 
+
+        return json_encode(['code' => 0, 'message' => 'Mật khẩu hiện tại không đúng']);
     }
 
 }

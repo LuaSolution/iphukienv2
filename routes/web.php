@@ -175,6 +175,7 @@ Route::middleware(['runall', 'locale'])->group(function () {
     Route::post('/user-information', 'User\UserController@postUserInformation')->name('update.information');
     Route::get('/user-addresses', 'User\UserController@getUserAddresses')->name('user.addresses');
     Route::get('/user-change-password', 'User\UserController@changePassword')->name('user.change-password');
+    Route::post('/user-do-change-password', 'User\AjaxController@doChangePassword')->name('user.do-change-password');
     Route::get('/user-wishlist', 'User\UserController@getUserWishlist')->name('user.wishlist');
     Route::get('/news', 'User\NewsController@index')->name('news.index');
     Route::get('/news/{news}', 'User\NewsController@show')->name('news.show');

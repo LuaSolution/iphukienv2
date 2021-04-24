@@ -32,6 +32,11 @@ class User extends Authenticatable
         return User::where('email', '=', $email)->first();
     }
 
+    public function getUserById($id)
+    {
+        return User::where('id', '=', $id)->first();
+    }
+
     public function getListUser()
     {
         return User::paginate(5);

@@ -274,6 +274,10 @@ class UserController extends Controller
 
     public function changePassword(Request $request)
     {
+        if (!Auth::check() || Auth::user()->role_id != 2) {
+            return redirect()->route('login');
+        }
+        
         return view('user/user-change-password');
     }
 
