@@ -191,7 +191,7 @@ $(document).ready(function () {
     $('.partners').owlCarousel({
     loop: true,
     items:3,
-    margin:10,
+    margin:-5,
     center: true,
     responsive:{
         400:{
@@ -201,7 +201,7 @@ $(document).ready(function () {
             items:3
         },
         1000:{
-            items:5
+            items:7
         }
     }
 });

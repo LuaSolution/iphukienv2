@@ -112,7 +112,7 @@
                         <div class="form-group form-md-line-input has-success {{ $product->parent_id != null ? '' : 'hide' }}"
                             id="size-block">
                             <label class="control-label">Kích thước</label>
-                            <select class="bs-select form-control" disabled data-actions-box="true" name="size" id="size">
+                            <select class="bs-select form-control"  data-actions-box="true" name="size" id="size">
                                 <option value="no-size" selected>(No size)</option>
                                 @foreach($sizes as $key=>$item)
                                 <option value="{{ $item->id }}" {{ $item->id == $product->size_id ? 'selected' : '' }}>
@@ -123,7 +123,7 @@
                         <div class="form-group form-md-line-input has-success {{ $product->parent_id != null ? '' : 'hide' }}"
                             id="color-block">
                             <label class="control-label">Màu sắc</label>
-                            <select class="bs-select form-control" disabled name="color" id="color">
+                            <select class="bs-select form-control"  name="color" id="color">
                                 <option value="no-color" selected>(No color)</option>
                                 @foreach($colors as $key=>$item)
                                 <option value="{{ $item->id }}" {{ $item->id == $product->color_id ? 'selected' : '' }}>
@@ -179,7 +179,7 @@
 //         $("#size-block").removeClass('hide')
 //         $("#color-block").removeClass('hide')
 //         $("#upload-img-block").removeClass('hide')
-//     } 
+//     }
 // })
 $(document).on("click",".add-more-img",function() {
   $("#upload-img-area").append(
@@ -285,6 +285,8 @@ $(document).on("submit", "#create-new", function(e) {
     fd.append('status_id', $("#status").val());
     fd.append('video', $("#form-video").val());
     fd.append('tag_id', $("#tag").val());
+    fd.append('size_id', $("#size").val());
+    fd.append('color_id', $("#color").val());
     fd.append('trademark_id', $("#trademark").val());
     fd.append('parent_id', $("#parent").val());
     fd.append('_token', '{{ csrf_token() }}');

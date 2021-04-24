@@ -54,12 +54,13 @@ class Product extends Model
                 ->where('products.id', $id)->first();
         } else {
             $res = Product::leftJoin('categories', 'categories.id', '=', 'products.category_id')
-            ->select('products.*', 'categories.title as category_name')
-            ->where('products.slug', $id)->first();
+                ->select('products.*', 'categories.title as category_name')
+                ->where('products.slug', $id)->first();
         }
         return $res;
     }
-    public function getChildProductByParentSizeColor($parentId, $sizeId, $colorId) {
+    public function getChildProductByParentSizeColor($parentId, $sizeId, $colorId)
+    {
         return Product::where('products.parent_id', $parentId)
             ->where('products.size_id', $sizeId)
             ->where('products.color_id', $colorId)
@@ -130,6 +131,7 @@ class Product extends Model
     {
         return Product::where('category_id', '=', $cateId)
             ->where('id', '<>', $productId)
+            ->where('parent_id', '=', null)
             ->take(4)
             ->orderBy('created_at', 'desc')->get();
     }
@@ -138,16 +140,18 @@ class Product extends Model
         return Product::leftJoin('categories', 'categories.id', '=', 'products.category_id')
             ->leftJoin('trademarks', 'trademarks.id', '=', 'products.trademark_id')
             ->select('products.*')
-            ->where('products.name', 'like', '%'.$keyword.'%')
-            ->orWhere('categories.title', 'like', '%'.$keyword.'%')
-            ->orWhere('trademarks.name', 'like', '%'.$keyword.'%')
+            ->where('products.name', 'like', '%' . $keyword . '%')
+            ->orWhere('categories.title', 'like', '%' . $keyword . '%')
+            ->orWhere('trademarks.name', 'like', '%' . $keyword . '%')
             ->orderBy('pos', 'asc')->orderBy('created_at', 'desc')
             ->get();
-    }   
-    public function getListParentProduct() {
+    }
+    public function getListParentProduct()
+    {
         return Product::whereNull('parent_id')->get();
     }
-    public function getListChildProduct($parentId) {
+    public function getListChildProduct($parentId)
+    {
         $cId = null;
         if (!is_numeric($parentId)) {
             $cId = Product::where('products.slug', $parentId)->first()->id;
@@ -156,11 +160,12 @@ class Product extends Model
         }
 
         return Product::leftJoin('sizes', 'products.size_id', '=', 'sizes.id')
-                ->leftJoin('colors', 'products.color_id', '=', 'colors.id')
-                ->select('products.*', 'colors.name as color_name', 'sizes.name as size_name')
-                ->where('parent_id', '=', $cId)->get();
+            ->leftJoin('colors', 'products.color_id', '=', 'colors.id')
+            ->select('products.*', 'colors.name as color_name', 'sizes.name as size_name')
+            ->where('parent_id', '=', $cId)->get();
     }
-    public function getProductDefaultImage($parentId) {
+    public function getProductDefaultImage($parentId)
+    {
         return Product::leftJoin('product_image', 'product_image.product_id', '=', 'products.id')
             ->select('products.*', 'product_image.image')
             ->where('products.parent_id', $parentId)->first();

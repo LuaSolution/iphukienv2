@@ -36,7 +36,7 @@ class ProductController extends Controller
 
     public function updateProductImage(Request $request)
     {
-        if($request->input('type') == 'add') {
+        if ($request->input('type') == 'add') {
             $imgName = date('YmdHis') . '_' . $request->input('size_id') . '_' . $request->input('color_id') . '.' . $request->file('image')->extension();
             $path = $request->file('image')->storeAs(
                 'img/product/' . $request->input('id'), $imgName
@@ -74,7 +74,7 @@ class ProductController extends Controller
             (new Product())->updateProduct($parentProductObj->id, $dataUpdate);
             (new Product())->updateProduct($productObj->id, $dataUpdate);
         }
-        
+
         return json_encode(['code' => 1]);
     }
 
@@ -83,18 +83,18 @@ class ProductController extends Controller
         $productImageObj = (new ProductImage())->getListProductImageById($request->input('product_image_id'));
         $productObj = (new Product())->getProductById($productImageObj->product_id);
         $parentProductObj = (new Product())->getProductById($productObj->parent_id);
-        if($productImageObj->image == $productObj->default_image) {
+        if ($productImageObj->image == $productObj->default_image) {
             (new Product())->updateProduct($parentProductObj->id, [
                 'default_image' => null,
             ]);
         }
-        if($productImageObj->image == $parentProductObj->default_image) {
+        if ($productImageObj->image == $parentProductObj->default_image) {
             (new Product())->updateProduct($parentProductObj->id, [
                 'default_image' => null,
             ]);
         }
         (new ProductImage())->deleteProductImageById($request->input('product_image_id'));
-        
+
         return json_encode(['code' => 1]);
     }
 
@@ -158,12 +158,12 @@ class ProductController extends Controller
         $result = (new Product())->insertProduct($dataInsert);
 
         if ($result != null) {
-            if($result->parent_id !== null) {
+            if ($result->parent_id !== null) {
                 $parentProductObj = (new Product())->getProductById($result->parent_id);
 
-                for($i = 0; $i < $request->input('total_image'); $i++) {
-                    $imgName = date('YmdHis') . '_' . $i . '_' . $request->input('size_id') . '_' . $request->input('color_id') . '.' . $request->file('list_image_'.$i)->extension();
-                    $path = $request->file('list_image_'.$i)->storeAs(
+                for ($i = 0; $i < $request->input('total_image'); $i++) {
+                    $imgName = date('YmdHis') . '_' . $i . '_' . $request->input('size_id') . '_' . $request->input('color_id') . '.' . $request->file('list_image_' . $i)->extension();
+                    $path = $request->file('list_image_' . $i)->storeAs(
                         'img/product/' . $result->id, $imgName
                     );
                     (new ProductImage())->insertProductImage(
@@ -172,20 +172,20 @@ class ProductController extends Controller
                             'image' => $path,
                         ]
                     );
-                    if($parentProductObj->image == null) {
+                    if ($parentProductObj->image == null) {
                         $dataUpdate = [
                             'default_image' => $path,
                         ];
                         (new Product())->updateProduct($parentProductObj->id, $dataUpdate);
                     }
-                    if($result->image == null) {
+                    if ($result->image == null) {
                         $dataUpdate = [
                             'default_image' => $path,
                         ];
                         (new Product())->updateProduct($result->id, $dataUpdate);
                     }
                 }
-            } 
+            }
             //sync to nhanh
             $addProductId = $result->id;
             $resNhanh = Helpers::callNhanhApi([
@@ -238,6 +238,8 @@ class ProductController extends Controller
      */
     public function postEditProduct($id, Request $request)
     {
+        // dd($request->input('color_id'));
+        // dd($request->input('size_id'));
         $name = $request->input('name');
         if (!$name) {
             return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
@@ -267,7 +269,9 @@ class ProductController extends Controller
         $status = $request->input('status_id');
         $tag = $request->input('tag_id');
         $trademark = $request->input('trademark_id');
-        $parent = $request->input('parent_id');
+        $parent = $request->input('parent_id') == 'no-parent' ? null : $request->input('parent_id');
+        $size = $request->input('size_id') == 'no-size' ? null : $request->input('size_id');
+        $color = $request->input('color_id') == 'no-color' ? null : $request->input('color_id');
 
         $dataUpdate = [
             'name' => $name,
@@ -283,6 +287,8 @@ class ProductController extends Controller
             'video' => $video,
             'trademark_id' => $trademark,
             'parent_id' => $parent,
+            'size_id' => $size,
+            'color_id' => $color,
             'updated_at' => date('Y-m-d H:i:s'),
         ];
         $result = (new Product())->updateProduct($id, $dataUpdate);
@@ -312,7 +318,7 @@ class ProductController extends Controller
     public function getDelProduct($id)
     {
         $listChildProd = (new Product())->getListChildProduct($id);
-        if(count($listChildProd) > 0) {
+        if (count($listChildProd) > 0) {
             toast()->error('Không thể xóa sản phẩm có sản phẩm con');
             return redirect()->route('adMgetListProduct')->with('error', 'Xóa thất bại!');
         }
@@ -335,32 +341,32 @@ class ProductController extends Controller
 
         // get category nhanh
         $listNhanhCate = Helpers::callNhanhApi("productcategory", "/product/category", true);
-        
+
         do {
             $cPage++;
             //get list parent
             $listParentProduct = $this->getListProductFromNhanh($cPage, 0);
-            if(!isset($listParentProduct->code)) {
-                if($tPage == 0) {
+            if (!isset($listParentProduct->code)) {
+                if ($tPage == 0) {
                     $cPage = $listParentProduct->currentPage;
                     $tPage = $listParentProduct->totalPages;
                 }
-                $listProduct = (array)$listParentProduct->products;
+                $listProduct = (array) $listParentProduct->products;
                 foreach ($listProduct as $product) {
                     //insert parent product
                     $nhanhParentCate = $this->getCategoryOfNhanh($listNhanhCate, $product->categoryId);
-                    $parentCate = Cate::firstOrCreate(['title' => $nhanhParentCate != null ? $nhanhParentCate->name : 'no-category']);    
+                    $parentCate = Cate::firstOrCreate(['title' => $nhanhParentCate != null ? $nhanhParentCate->name : 'no-category']);
                     //status
-                    if($product->status != 'Inactive') {
+                    if ($product->status != 'Inactive') {
                         //insert parent product
                         $parentPrd = Product::firstOrCreate([
-                            'product_id_nhanh' => $product->idNhanh
+                            'product_id_nhanh' => $product->idNhanh,
                         ]);
                         //status
                         $parentStatusId = $this->getStatusIdFromNhanh($product->status);
                         //trademark
                         $branchName = !empty($product->brandName) ? $product->brandName : 'iPhuKien';
-                        $trademarkObj = Trademark::firstOrCreate(['name' => $branchName]);   
+                        $trademarkObj = Trademark::firstOrCreate(['name' => $branchName]);
                         //update product information
                         $this->updateProductInformationFromNhanh(
                             $product, $parentCate->id, $parentStatusId, $trademarkObj->id, $parentPrd->id);
@@ -371,46 +377,46 @@ class ProductController extends Controller
                             $cChildPage++;
                             $listChildProduct = $this->getListProductFromNhanh($cChildPage, $product->idNhanh);
                             Log::info(isset($listChildProduct->code));
-                            if(!isset($listChildProduct->code)) {
-                                if($tChildPage == 0) {
+                            if (!isset($listChildProduct->code)) {
+                                if ($tChildPage == 0) {
                                     $cChildPage = $listChildProduct->currentPage;
                                     $tChildPage = $listChildProduct->totalPages;
                                 }
-                                $listChildrentProduct = (array)$listChildProduct->products;
-                                
+                                $listChildrentProduct = (array) $listChildProduct->products;
+
                                 foreach ($listChildrentProduct as $p) {
                                     //insert parent product
                                     $nhanhChildCate = $this->getCategoryOfNhanh($listNhanhCate, $p->categoryId);
-                                    $childCate = Cate::firstOrCreate(['title' => $nhanhChildCate->name]);   
+                                    $childCate = Cate::firstOrCreate(['title' => $nhanhChildCate->name]);
                                     //insert parent product
                                     $childPrd = Product::firstOrCreate([
                                         'product_id_nhanh' => $p->idNhanh,
-                                        'parent_id' => $parentPrd->id
+                                        'parent_id' => $parentPrd->id,
                                     ]);
                                     //status
                                     $childStatusId = $this->getStatusIdFromNhanh($p->status);
                                     //trademark
                                     $childBranchName = !empty($p->brandName) ? $p->brandName : 'iPhuKien';
-                                    $chilTrademarkObj = Trademark::firstOrCreate(['name' => $childBranchName]); 
+                                    $chilTrademarkObj = Trademark::firstOrCreate(['name' => $childBranchName]);
                                     //update product information
-                                    if(count($p->attributes) > 0) {
+                                    if (count($p->attributes) > 0) {
                                         foreach ($p->attributes as $att) {
-                                            if(strpos(reset($att)->attributeName, 'Kích thước') !== false){
+                                            if (strpos(reset($att)->attributeName, 'Kích thước') !== false) {
                                                 $pSize = Size::firstOrCreate(['name' => reset($att)->name]);
                                             }
-                                            if(strpos(reset($att)->attributeName, 'Màu sắc') !== false){
+                                            if (strpos(reset($att)->attributeName, 'Màu sắc') !== false) {
                                                 $pColor = Color::firstOrCreate(['name' => reset($att)->name]);
                                             }
                                         }
                                     }
-                                    if(!$pSize) {
+                                    if (!$pSize) {
                                         $pSize = Size::firstOrCreate(['name' => 'One Size']);
                                     }
-                                    if(!$pColor) {
+                                    if (!$pColor) {
                                         $pColor = Color::firstOrCreate(['name' => 'One Color']);
                                     }
                                     $this->updateProductInformationFromNhanh(
-                                        $p, $childCate->id, $childStatusId, $chilTrademarkObj->id, $childPrd->id, $pSize->id, $pColor->id);  
+                                        $p, $childCate->id, $childStatusId, $chilTrademarkObj->id, $childPrd->id, $pSize->id, $pColor->id);
                                 }
                             }
                         } while ($cChildPage < $tChildPage);
@@ -422,23 +428,26 @@ class ProductController extends Controller
         return redirect()->route('adMgetListProduct');
     }
 
-    public function getListProductFromNhanh($page, $parentId) {
+    public function getListProductFromNhanh($page, $parentId)
+    {
         return Helpers::callNhanhApi([
             'page' => $page,
             'parentId' => $parentId,
-            'icpp' => 50
+            'icpp' => 50,
         ], "/product/search");
     }
 
-    public function getCategoryOfNhanh($listCate, $categoryId) {
+    public function getCategoryOfNhanh($listCate, $categoryId)
+    {
         foreach ($listCate as $c) {
-            if($c->id == $categoryId) {
+            if ($c->id == $categoryId) {
                 return $c;
             }
         }
     }
 
-    public function getStatusIdFromNhanh($status) {
+    public function getStatusIdFromNhanh($status)
+    {
         $parentStatusId = 0;
         switch ($status) {
             case 'OutOfStock':
@@ -450,12 +459,13 @@ class ProductController extends Controller
             case 'New':
                 $parentStatusId = 13;
                 break;
-        }  
-        
+        }
+
         return $parentStatusId;
     }
 
-    public function updateProductInformationFromNhanh($product, $parentCateId, $parentStatusId, $trademarkId, $parentPrdId, $sizeId, $colorId) {
+    public function updateProductInformationFromNhanh($product, $parentCateId, $parentStatusId, $trademarkId, $parentPrdId, $sizeId, $colorId)
+    {
         $dataUpdate = [
             'name' => $product->name,
             'category_id' => $parentCateId,
