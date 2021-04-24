@@ -44,7 +44,7 @@
     width: 100%;
     padding-top: 100%;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     display: block;
     cursor: pointer;
@@ -72,7 +72,7 @@
     width: 100%;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 100%;
+    background-size: cover;
     margin-left: 10px;
 }
 
@@ -117,8 +117,8 @@
 }
 
 .product-infos .list-tags .tag {
-    width: 90px;
-    height: 30px;
+    width: 75px;
+    height: 22px;
     display: inline-block;
     margin-left: 12px;
     -webkit-border-radius: 10px;
@@ -150,8 +150,8 @@
     text-align: center;
     color: #fff;
     display: block;
-    text-transform: uppercase;
-    line-height: 30px;
+    text-transform: capitalize;
+    line-height: 24px;
 }
 
 .product-infos .list-tags .tag.hang-moi::before {
@@ -207,6 +207,7 @@
     color: #fff;
     background: #EB5757;
     display: inline-block;
+    border-radius: 2px;
 }
 
 .product-infos .status-wrapper {
@@ -247,7 +248,7 @@
     content: 'Còn hàng';
     color: #219653;
     font-size: 16px;
-    text-transform: uppercase;
+    text-transform: inherit;
 }
 
 .product-infos .colors-wrapper {
@@ -276,16 +277,16 @@
     margin-top: 10px;
     margin-right: 10px;
     display: inline-block;
-    /* margin-left: 10px; */
     background-color: #EFEFEF;
     font-weight: normal;
-    font-size: 11px;
+    font-size: 16px;
     line-height: 32px;
     color: #6C6C6C;
     cursor: pointer;
     width: 120px;
     height: 32px;
     text-align: center;
+    text-transform: initial;
 }
 
 .product-infos .colors .color.active,
@@ -322,10 +323,9 @@
 .product-infos .sizes .size,
 .product-infos .sizes .size-detail {
     display: inline-block;
-    margin-left: 10px;
     background-color: #EFEFEF;
     font-weight: normal;
-    font-size: 11px;
+    font-size: 16px;
     line-height: 32px;
     color: #6C6C6C;
     cursor: pointer;
@@ -333,6 +333,7 @@
     height: 32px;
     text-align: center;
     padding: 0 10px;
+    text-transform: initial;
 }
 
 .product-infos .sizes .size.active,

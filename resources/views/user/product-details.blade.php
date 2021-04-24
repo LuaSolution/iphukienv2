@@ -128,7 +128,7 @@
             @endif
             @if(count($listSize) > 0)
             <div class="sizes-wrapper">
-                <div class="color-label">Kích thước <a href="{{ url('huong-dan-chon-size') }}" target="_blank"  style="text-transform:none;font-weight:400"> (Hướng dẫn chọn size)</a></div>
+                <div class="color-label">Kích thước <a href="https://iphukien.vn/huong-dan-chon-size" target="_blank" style="font-weight:400;text-decoration:underline;text-transform:initial"> (Hướng dẫn chọn size)</a></div>
                 <div class="sizes">
                     @foreach($listSize as $item)
                     <span class="size-detail"
@@ -153,7 +153,11 @@
         </div>
     </div>
     <div class="product-rating ipk-content-container">
-        <div class="fb-share-button" data-href="{{ url()->full() }}" data-layout="button_count"></div>
+        <div class="fb-share-button" data-layout="button_count">Chia sẻ  <script>
+var loc = "https://www.facebook.com/sharer/sharer.php?u=" + window.location.href;
+document.write('<a href="' + loc + '" target="_blank">Facebook</a>');
+</script>
+</div>
         <div class="add-wishlist-button" data-type="{{ !isset($wishlist) ? 'add-wishlist' : 'cancel-wishlist' }}">{{ !isset($wishlist) ? 'Thêm vào yêu thích' : 'Hủy yêu thích' }}</div>
     </div>
     <div class="product-descriptions ipk-content-container">

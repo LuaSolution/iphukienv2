@@ -68,46 +68,47 @@ class CategoryController extends Controller
 
         $product = Product::query();
 
-        $color = $data['colors']; 
-        $tag = $data['tags']; 
-        $size = $data['sizes']; 
+        $color = $data['colors'];
+        $tag = $data['tags'];
+        $size = $data['sizes'];
         $trademark = $data['trademarks'];
         $price = $data['prices'];
 
         $product = DB::table('products')
-            ->join('colors as c', function ($query) use ($color) {
-                if(count(json_decode($color)) > 0) {
-                    $query->on('products.color_id', '=', 'c.id')->whereIN('products.color_id', json_decode($color));
+            ->whereNotNull('products.parent_id')
+            ->where('category_id', $id)
+            ->where(function ($query) use ($color) {
+                if (count(json_decode($color)) > 0) {
+                    $query->join('colors', 'colors.id', 'products.color_id')->whereIn('products.color_id', json_decode($color));
                 }
             })
-            ->join('tags as t', function ($query) use ($tag) {
-                if(count(json_decode($tag)) > 0) {
-                    $query->on('products.tag_id', '=', 't.id')->whereIN('products.tag_id', json_decode($tag));
+            ->where(function ($query) use ($tag) {
+                if (count(json_decode($tag)) > 0) {
+                    $query->join('tags', 'tags.id', 'products.tag_id')->whereIn('products.tag_id', json_decode($tag));
                 }
             })
-            ->join('sizes as s', function ($query) use ($size) {
-                if(count(json_decode($size)) > 0) {
-                    $query->on('products.size_id', '=', 's.id')->whereIN('products.size_id', json_decode($size));
+            ->where(function ($query) use ($size) {
+                if (count(json_decode($size)) > 0) {
+                    $query->join('sizes', 'sizes.id', 'products.size_id')->whereIn('products.size_id', json_decode($size));
                 }
             })
-            ->join('trademarks as tr', function ($query) use ($trademark) {
-                if(count(json_decode($trademark)) > 0) {
-                    $query->on('products.trademark_id', '=', 'tr.id')->whereIN('products.trademark_id', json_decode($trademark));
+            ->where(function ($query) use ($trademark) {
+                if (count(json_decode($trademark)) > 0) {
+                    $query->join('trademarks', 'trademarks.id', 'products.trademark_id')->whereIn('products.trademark_id', json_decode($trademark));
                 }
             })
-            ->whereBetween('price', json_decode($price))
-            ->whereNull('products.parent_id')
-            ->where('category_id', $id);
+            ->whereBetween('price', json_decode($price));
 
         if (count(json_decode($data['tags'])) === 0 && count(json_decode($data['trademarks'])) === 0 && count(json_decode($data['sizes'])) === 0 && count(json_decode($data['colors'])) === 0 && count(json_decode($data['prices'])) === 0) {
             $product = DB::table('products')
-                        ->where('category_id', $id)
-                        ->whereNull('products.parent_id');
+                ->where('category_id', $id)
+                ->whereNull('products.parent_id');
         }
 
+        // dd($product->get());
         $listProduct = $product
             ->orderBy('products.id', 'DESC')
-            ->paginate(5)
+            ->paginate(8)
             ->appends(request()->query());
 
         $view = view('layouts.list-product', compact('listProduct'))->render();
