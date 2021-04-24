@@ -47,7 +47,7 @@
                     <div class="options">
                         <span class="fb" onclick="loginFb()">Đăng nhập</span>
                         <span class="or-txt">Hoặc</span>
-                        <span class="gg g-signin2 login-google" data-onsuccess="onSignIn" onclick="loginWithGG()"></span>
+                        <span class="gg g-signin2 login-google" data-onsuccess="onSignIn"></span>
                     </div>
                 </div>
             </div>
@@ -74,11 +74,12 @@ function onSignIn(googleUser) {
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail());
-    gUser = profile;
+    // gUser = profile;
+    doLogin(profile.getName(), profile.getEmail(), `social_${profile.getId()}`) 
 }
-function loginWithGG() {
-    doLogin(gUser.getName(), gUser.getEmail(), `social_${gUser.getId()}`) 
-}
+// function loginWithGG() {
+//     doLogin(gUser.getName(), gUser.getEmail(), `social_${gUser.getId()}`) 
+// }
 function doLogin(name, email, pass) {
     $.post( "{{route('ajax.login-with-social')}}", {
         name: name,
