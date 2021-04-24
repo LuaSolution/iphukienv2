@@ -155,8 +155,7 @@
     <div class="product-rating ipk-content-container">
         <div class="fb-share-button" data-layout="button_count">Chia sẻ  <script>
 var loc = "https://www.facebook.com/sharer/sharer.php?u=" + window.location.href;
-document.write('<a href="' + loc + '" target="_blank">Facebook</a>');
-</script>
+document.write('<a href="' + loc + '" target="_blank"><svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.43207 7.87329L6.75171 5.64302H4.75367V4.19572C4.75367 3.58568 5.03269 2.99066 5.92761 2.99066H6.83584V1.09199C6.83584 1.09199 6.01175 0.941406 5.22361 0.941406C3.5783 0.941406 2.50287 2.00975 2.50287 3.94346V5.64341H0.673828V7.87367H2.50287V13.2654H4.75367V7.87367L6.43207 7.87329Z" fill="black"/></svg></a>');</script>
 </div>
         <div class="add-wishlist-button" data-type="{{ !isset($wishlist) ? 'add-wishlist' : 'cancel-wishlist' }}">{{ !isset($wishlist) ? 'Thêm vào yêu thích' : 'Hủy yêu thích' }}</div>
     </div>
