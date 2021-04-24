@@ -75,7 +75,7 @@
                 <span><a href="{{ route('user.information') }}">{{ Auth::user()->name }}</a></span>
             </li>
             <li><a href="{{ route('user.orders') }}">Đơn hàng của tôi</a></li>
-            <li><a href="#!">Cài đặt tài khoản</a></li>
+            <li><a href="{{ route('user.information') }}">Cài đặt tài khoản</a></li>
             <li><a href="{{ route('doLogout') }}" class="ipk-logout">Đăng xuất</a></li>
         </ul>
     @endif

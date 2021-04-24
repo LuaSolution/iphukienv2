@@ -221,8 +221,7 @@
             const id = {{ $id }};
 
             $.ajax({
-                // Khi day len matet thi xoa cai iphukienv2 r^^a
-                url: `/search/categories/${id}?page=${page}&tags=[${tags}]&colors=[${colors}]&sizes=[${sizes}]&trademarks=[${trademarks}]&prices=[${prices}]`,
+                url: `/iphukienv2/search/categories/${id}?page=${page}&tags=[${tags}]&colors=[${colors}]&sizes=[${sizes}]&trademarks=[${trademarks}]&prices=[${prices}]`,
                 method: 'get',
                 dataType: 'JSON',
                 beforeSend: function () {
@@ -238,6 +237,10 @@
                     for (var i = 1; i <= data.total_page; i++) {
                         $("#paginate_custom").append(`<a href="javascript:void(0)" onclick="searchAjax(${i})" class="${i === data.currentPage ? 'active' : ''}" href="#">${i}</a>`);
                     }
+
+                    $.each($(".product"), function (index, value) {
+                        value.style.height = 412 + "px"
+                    })
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                 }

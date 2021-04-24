@@ -14,7 +14,7 @@
 }
 
 .row .col.product .name a {
-    margin-top: 5px;
+    margin-top: 15px;
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
@@ -25,6 +25,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     height: 42px;
+    text-transform: inherit;
 }
 
 .row .col.product .price {
@@ -178,8 +179,8 @@
 }
 
 #quickview .product-infos .list-tags .tag {
-    width: 66px;
-    height: 20px;
+    width: 75px;
+    height: 22px;
     display: inline-block;
     margin-left: 12px;
     -webkit-border-radius: 10px;
@@ -206,8 +207,8 @@
 
 #quickview .product-infos .list-tags .tag::before {
     font-weight: 500;
-    font-size: 10px;
-    line-height: 20px;
+    font-size: 14px;
+    line-height: 22px;
     text-align: center;
     color: #fff;
     display: block;
@@ -264,6 +265,7 @@
     color: #fff;
     background: #EB5757;
     display: inline-block;
+    border-radius: 2px;
 }
 
 #quickview .product-infos .status-wrapper {
@@ -342,6 +344,7 @@
     display: inline-block;
     padding: 10px 15px;
     cursor: pointer;
+    text-transform: initial;
 }
 
 #quickview .product-infos .colors .color:first-child {
@@ -433,7 +436,7 @@
     float: left;
     height: 100%;
     font-weight: normal;
-    font-size: 13px;
+    font-size: 20px;
     line-height: 18px;
     text-align: center;
     color: #000;
@@ -458,7 +461,7 @@
     text-align: center;
     color: #FFFFFF;
     float: left;
-    margin-left: 10px;
+    margin-left: 2px;
     padding: 2px;
 }
 

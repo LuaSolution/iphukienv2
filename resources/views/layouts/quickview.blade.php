@@ -21,13 +21,14 @@
             <div class="sizes-wrapper">
                 <div class="color-label">Màu sắc</div>
                 <div class="colors" id="quickview-colors">
-                    
+
                 </div>
             </div>
             <div class="sizes-wrapper">
-                <div class="color-label">Kích thước<a href="{{ url('huong-dan-chon-size') }}" target="_blank"  style="text-transform:none;font-weight:400">(Hướng dẫn chọn size)</a></div>
+                <div class="color-label">Kích thước
+                <a href="https://iphukien.vn/huong-dan-chon-size" target="_blank" style="text-transform:none;font-weight:400; text-decoration:underline">(Hướng dẫn chọn size)</a></div>
                 <div class="sizes" id="quickview-sizes">
-                
+
                 </div>
             </div>
             <div class="pre-order-block">
