@@ -6,8 +6,8 @@
                 <div class="company-infos">
                     <div class="company-info">GPĐKKD số 8430376778 do Sở KHĐT TPHCM cấp</div>
                     <div class="company-info">Địa chỉ: 270/2/1 Phan Đình Phùng, Phú Nhuận, Tp. Hồ Chí Minh</div>
-                    <div class="company-info">Email: <a href="mailto:iphukien270@gmail.com">iphukien270@gmail.com</a></div>
-                    <div class="company-info">Hotline: <a href="tel:0795712079">0795712079</a></div>
+                    <div class="company-info">Email: <a href="mailto:iphukien270@gmail.com" style="color:#000">iphukien270@gmail.com</a></div>
+                    <div class="company-info">Hotline: <a href="tel:0795712079" style="color:#000">0795712079</a></div>
                 </div>
             </div>
             <div class="col l2 s12">
