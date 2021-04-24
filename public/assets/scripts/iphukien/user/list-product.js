@@ -25,13 +25,13 @@ $(document).ready(function () {
             for (i = 0; i < productInfo['listImage'].length; i++) {
                 str += `<div class="carousel-item product-img ${productInfo['wishlist'] ? 'added-wishlist' : ''}" data-img="${productInfo['listImage'][i]}">`
                     + `<span class="sale-percent">-${Math.round((productInfo['product']['price'] - productInfo['product']['sale_price']) / productInfo['product']['price'] * 100)}%</span>`
-                    + `<img src="${productInfo['listImage'][i]}" />`
+                    + `<img style="height:100%" src="${productInfo['listImage'][i]}" />`
                     + `</div>`
             }
             if (productInfo['listImage'].length == 0) {
                 str += `<div class="carousel-item product-img ${productInfo['wishlist'] ? 'added-wishlist' : ''}" data-img="${localStorage.getItem('quickview_image_base_path') + '/assets/images/header/logo.svg'}">`
                     + `<span class="sale-percent">-${Math.round((productInfo['product']['price'] - productInfo['product']['sale_price']) / productInfo['product']['price'] * 100)}%</span>`
-                    + `<img src="${localStorage.getItem('quickview_image_base_path') + '/assets/images/header/logo.svg'}" />`
+                    + `<img style="height:100%"  src="${localStorage.getItem('quickview_image_base_path') + '/assets/images/header/logo.svg'}" />`
                     + `</div>`
             }
             str += '<a href="#!" class="next"></a>'
