@@ -8,9 +8,22 @@
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/cart.css') }}">
+<link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/ipk-breadcrumb.css') }}">
 @endsection
 
 @section('content')
+<div class="ipk-container product-breadcrumbs">
+        <div class="ipk-content-container">
+            <nav>
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <a href="{{ route('getHome') }}" class="breadcrumb">Trang chủ</a>
+                        <a href="javascript:void(0)" class="breadcrumb">Giỏ hàng</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
 <div class="ipk-container cart-container">
     <div class="ipk-content-container">
         <div class="title">Giỏ hàng</div>
@@ -90,7 +103,7 @@ $(document).on("click", ".delete-link a", function () {
         if(i != $(this).data('productid')) {
             newCart[i] = cart[i];
         }
-        
+
     }
     for (const i in newCart) {
         sum += cart[i].salePrice * cart[i].quantity;
