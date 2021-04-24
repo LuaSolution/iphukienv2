@@ -69,13 +69,16 @@ class UserController extends Controller
         }
         $email = $request->input('email');
         if (!$email) {
+            toast()->error('Chưa nhập Email');
             return redirect()->route('signup')->with('error', 'Chưa nhập Email');
         }
         $password = $request->input('password');
         if (!$password) {
+            toast()->error('Chưa nhập Password');
             return redirect()->route('signup')->with('error', 'Chưa nhập Password');
         }
         if (strlen($password) < 6) {
+            toast()->error('Password ít nhất 6 kí tự');
             return redirect()->route('signup')->with('error', 'Password ít nhất 6 kí tự');
         }
         $phone_number = $request->input('phone');
@@ -87,6 +90,7 @@ class UserController extends Controller
         $userCheck = $userModal->getUserByEmail($email);
 
         if ($userCheck) {
+            toast()->error('Email đã tồn tại');
             return redirect()->route('signup')->with('error', 'Email đã tồn tại');
         }
 
@@ -97,8 +101,8 @@ class UserController extends Controller
             'phone' => $phone_number,
             'role_id' => 2,
         ]);
-
-        return redirect()->route('getHome');
+        toast()->success('Đăng ký tài khoản thành công');
+        return redirect()->route('login');
     }
 
     public function cart(Request $request)
@@ -217,7 +221,7 @@ class UserController extends Controller
             $data['countAllOrderProduct'] += $oD->total_count;
             $data['countAllOrderPrice'] += $oD->total_price;
         }
-        
+
         return view('user/order-details', $data);
     }
 
@@ -228,7 +232,7 @@ class UserController extends Controller
         }
         $listOrder = (new Order())->getListOrderByUser(Auth::user()->id);
         $data['listOrder'] = [];
-        foreach($listOrder as $o) {
+        foreach ($listOrder as $o) {
             $obj = new \stdClass();
             $obj->order = $o;
             $orderDetail = (new OrderDetail())->getListOrderDetailByOrder($o->id);
@@ -239,7 +243,7 @@ class UserController extends Controller
             $obj->total += $o->ship_fee;
             array_push($data['listOrder'], $obj);
         }
-        
+
         return view('user/orders', $data);
     }
 
@@ -321,7 +325,8 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    public function setDefaultAddress(Request $request, $id) {
+    public function setDefaultAddress(Request $request, $id)
+    {
         if (!Auth::check() || Auth::user()->role_id != 2) {
             return redirect()->route('login');
         }
@@ -330,7 +335,8 @@ class UserController extends Controller
 
         return redirect()->route('user.addresses');
     }
-    public function deleteAddress(Request $request, $id) {
+    public function deleteAddress(Request $request, $id)
+    {
         if (!Auth::check() || Auth::user()->role_id != 2) {
             return redirect()->route('login');
         }

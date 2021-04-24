@@ -9,7 +9,7 @@
 @section('styles')
     <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/ipk-breadcrumb.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/category-details.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/list-product.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/iphukien/user/list-product.css') }}">
     <link rel="stylesheet" href="https://materializecss.com/extras/noUiSlider/nouislider.css">
 @endsection
 
@@ -134,7 +134,7 @@
 
             var slider = document.getElementById('price-range');
             noUiSlider.create(slider, {
-                start: [200000, 10000000],
+                start: [0, 10000000],
                 connect: true,
                 step: 1,
                 orientation: 'horizontal', // 'horizontal' or 'vertical'
@@ -221,7 +221,8 @@
             const id = {{ $id }};
 
             $.ajax({
-                url: `/search/categories/${id}?page=${page}&tags=[${tags}]&colors=[${colors}]&sizes=[${sizes}]&trademarks=[${trademarks}]&prices=[${prices}]`,
+                // Khi day len matet thi xoa cai iphukienv2 r^^a
+                url: `/iphukienv2/search/categories/${id}?page=${page}&tags=[${tags}]&colors=[${colors}]&sizes=[${sizes}]&trademarks=[${trademarks}]&prices=[${prices}]`,
                 method: 'get',
                 dataType: 'JSON',
                 beforeSend: function () {

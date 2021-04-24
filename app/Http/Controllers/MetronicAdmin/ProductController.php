@@ -269,7 +269,7 @@ class ProductController extends Controller
         $status = $request->input('status_id');
         $tag = $request->input('tag_id');
         $trademark = $request->input('trademark_id');
-        $parent = $request->input('parent_id');
+        $parent = $request->input('parent_id') == 'no-parent' ? null : $request->input('parent_id');
         $size = $request->input('size_id') == 'no-size' ? null : $request->input('size_id');
         $color = $request->input('color_id') == 'no-color' ? null : $request->input('color_id');
 
