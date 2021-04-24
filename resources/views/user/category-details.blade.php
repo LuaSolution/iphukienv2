@@ -222,7 +222,7 @@
 
             $.ajax({
                 // Khi day len matet thi xoa cai iphukienv2 r^^a
-                url: `/iphukienv2/search/categories/${id}?page=${page}&tags=[${tags}]&colors=[${colors}]&sizes=[${sizes}]&trademarks=[${trademarks}]&prices=[${prices}]`,
+                url: `/search/categories/${id}?page=${page}&tags=[${tags}]&colors=[${colors}]&sizes=[${sizes}]&trademarks=[${trademarks}]&prices=[${prices}]`,
                 method: 'get',
                 dataType: 'JSON',
                 beforeSend: function () {
