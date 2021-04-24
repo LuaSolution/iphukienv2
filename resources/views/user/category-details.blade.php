@@ -221,7 +221,7 @@
             const id = {{ $id }};
 
             $.ajax({
-                url: `/iphukienv2/search/categories/${id}?page=${page}&tags=[${tags}]&colors=[${colors}]&sizes=[${sizes}]&trademarks=[${trademarks}]&prices=[${prices}]`,
+                url: `/search/categories/${id}?page=${page}&tags=[${tags}]&colors=[${colors}]&sizes=[${sizes}]&trademarks=[${trademarks}]&prices=[${prices}]`,
                 method: 'get',
                 dataType: 'JSON',
                 beforeSend: function () {

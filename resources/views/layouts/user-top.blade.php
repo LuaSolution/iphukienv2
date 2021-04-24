@@ -7,15 +7,12 @@
         <div class="name">{{Auth::user()->name}}</div>
         <div class="email">{{Auth::user()->email}}</div>
     </div>
-    <a class="logout-link" href="{{ route('doLogout') }}">
-        Đăng xuất
-    </a>
 </div>
 <ul id='user-top-dropdown' class='dropdown-content'>
     <li><a href="{{ route('user.information') }}">THÔNG TIN TÀI KHOẢN</a></li>
     <li><a href="{{ route('user.addresses') }}">ĐỊA CHỈ NHẬN HÀNG</a></li>
     <li><a href="{{ route('user.change-password') }}">ĐỔI MẬT KHẨU</a></li>
     <li><a href="{{ route('user.orders') }}">LỊCH SỬ MUA HÀNG</a></li>
-    <li><a href="{{ route('user.wishlist') }}">DANH SÁCH YÊU THÍCH</a></li>
+    <li><a href="{{ route('doLogout') }}">ĐĂNG XUẤT</a></li>
 </ul>
 @endif

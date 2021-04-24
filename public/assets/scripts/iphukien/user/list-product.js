@@ -4,8 +4,6 @@ $(document).ready(function () {
         value.style.height = value.offsetWidth + "px"
     })
     $.each($(".product"), function (index, value) {
-        let cHeight = value.offsetHeight + 60
-        value.style.height = cHeight + "px"
     })
     var elems = document.querySelectorAll('#quickview')
     M.Modal.init(elems, {
