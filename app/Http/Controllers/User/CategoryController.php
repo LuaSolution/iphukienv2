@@ -68,46 +68,41 @@ class CategoryController extends Controller
 
         $product = Product::query();
 
-        if (count(json_decode($data['colors'])) > 0) {
-            $product = DB::table('products')
-                ->join('product_color', 'products.id', 'product_color.product_id')
-                ->join('colors', 'colors.id', 'product_color.color_id')
-                ->whereNull('products.parent_id')
-                ->whereIn('colors.id', json_decode($data['colors']));
-        }
+        $color = $data['colors']; 
+        $tag = $data['tags']; 
+        $size = $data['sizes']; 
+        $trademark = $data['trademarks'];
+        $price = $data['prices'];
 
-        if (count(json_decode($data['tags'])) > 0) {
-            $product = DB::table('products')
-                ->whereNull('products.parent_id')
-                ->join('tags', 'tags.id', '=', 'products.tag_id')
-                ->whereIn('products.tag_id', json_decode($data['tags']));
-        }
-
-        if (count(json_decode($data['sizes'])) > 0) {
-            $product = DB::table('products')
-                ->join('product_size', 'products.id', 'product_size.product_id')
-                ->join('sizes', 'sizes.id', 'product_size.size_id')
-                ->whereNull('products.parent_id')
-                ->whereIn('sizes.id', json_decode($data['sizes']));
-        }
-
-        if (count(json_decode($data['trademarks'])) > 0) {
-            $product = DB::table('products')
-                ->join('trademarks', 'trademarks.id', 'products.trademark_id')
-                ->whereNull('products.parent_id')
-                ->whereIn('trademarks.id', json_decode($data['trademarks']));
-        }
-
-        if (count(json_decode($data['prices'])) > 0) {
-            $product = DB::table('products')
-                ->whereNull('products.parent_id')
-                ->whereBetween('price', json_decode($data['prices']));
-        }
+        $product = DB::table('products')
+            ->join('colors as c', function ($query) use ($color) {
+                if(count(json_decode($color)) > 0) {
+                    $query->on('products.color_id', '=', 'c.id')->whereIN('products.color_id', json_decode($color));
+                }
+            })
+            ->join('tags as t', function ($query) use ($tag) {
+                if(count(json_decode($tag)) > 0) {
+                    $query->on('products.tag_id', '=', 't.id')->whereIN('products.tag_id', json_decode($tag));
+                }
+            })
+            ->join('sizes as s', function ($query) use ($size) {
+                if(count(json_decode($size)) > 0) {
+                    $query->on('products.size_id', '=', 's.id')->whereIN('products.size_id', json_decode($size));
+                }
+            })
+            ->join('trademarks as tr', function ($query) use ($trademark) {
+                if(count(json_decode($trademark)) > 0) {
+                    $query->on('products.trademark_id', '=', 'tr.id')->whereIN('products.trademark_id', json_decode($trademark));
+                }
+            })
+            ->whereBetween('price', json_decode($price))
+            ->whereNull('products.parent_id')
+            ->where('category_id', $id);
 
         if (count(json_decode($data['tags'])) === 0 && count(json_decode($data['trademarks'])) === 0 && count(json_decode($data['sizes'])) === 0 && count(json_decode($data['colors'])) === 0 && count(json_decode($data['prices'])) === 0) {
-            $product = Product::where('category_id', $id)->whereNull('products.parent_id');
-        } else {
-            $product = $product->where('category_id', $id)->whereNull('products.parent_id');
+            $product = DB::table('products')
+                        ->where('category_id', $id)
+                        ->whereNull('products.parent_id');
         }
 
         $listProduct = $product
