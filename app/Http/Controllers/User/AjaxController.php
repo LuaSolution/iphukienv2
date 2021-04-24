@@ -123,6 +123,7 @@ class AjaxController extends Controller
             'type' => 'Shipping',
             'customerCityName' => $request->input('customerCityName'),
             'customerDistrictName' => $request->input('customerDistrictName'),
+            'customerWardLocationName' => $request->input('customerWardLocationName'),
             'customerAddress' => $request->input('customerAddress'),
             'customerName' => $request->input('customerName'),
             'customerMobile' => $request->input('customerMobile'),

@@ -291,6 +291,7 @@ $(document).on("click", ".complete", function () {
     $.post( "{{ route('ajax.create-order') }}", {
         customerCityName: $('.list-address .address.selected').data('city'),
         customerDistrictName: $('.list-address .address.selected').data('district'),
+        customerWardLocationName: $('.list-address .address.selected').data('ward'),
         customerAddress: $('.list-address .address.selected').data('address'),
         addressId: $('.list-address .address.selected').data('addressid'),
         customerName: $('.list-address .address.selected').data('name'),
