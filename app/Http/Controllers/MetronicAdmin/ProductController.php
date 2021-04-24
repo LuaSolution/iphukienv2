@@ -238,8 +238,6 @@ class ProductController extends Controller
      */
     public function postEditProduct($id, Request $request)
     {
-        // dd($request->input('color_id'));
-        // dd($request->input('size_id'));
         $name = $request->input('name');
         if (!$name) {
             return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
@@ -341,7 +339,6 @@ class ProductController extends Controller
 
         // get category nhanh
         $listNhanhCate = Helpers::callNhanhApi("productcategory", "/product/category", true);
-
         do {
             $cPage++;
             //get list parent
@@ -439,6 +436,7 @@ class ProductController extends Controller
 
     public function getCategoryOfNhanh($listCate, $categoryId)
     {
+        if(!is_array($listCate)) return;
         foreach ($listCate as $c) {
             if ($c->id == $categoryId) {
                 return $c;
@@ -464,7 +462,7 @@ class ProductController extends Controller
         return $parentStatusId;
     }
 
-    public function updateProductInformationFromNhanh($product, $parentCateId, $parentStatusId, $trademarkId, $parentPrdId, $sizeId, $colorId)
+    public function updateProductInformationFromNhanh($product, $parentCateId, $parentStatusId, $trademarkId, $parentPrdId, $sizeId = null, $colorId = null)
     {
         $dataUpdate = [
             'name' => $product->name,

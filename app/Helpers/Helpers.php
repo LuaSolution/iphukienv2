@@ -21,6 +21,10 @@ class Helpers {
         $curlResult = curl_exec($curl);
         curl_close($curl);
         
-        return json_decode($curlResult)->code == 0 ? json_decode($curlResult) : json_decode($curlResult)->data;
+        // return json_decode($curlResult)->code == 0 ? json_decode($curlResult) : json_decode($curlResult)->data;
+        if(isset(json_decode($curlResult)->data)) return json_decode($curlResult)->data;
+        
+        return json_decode($curlResult);
+        
     }
 }
