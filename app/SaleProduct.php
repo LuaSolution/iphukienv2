@@ -43,6 +43,11 @@ class SaleProduct extends Model
         ->whereRaw('? >= from_date', [date("Y-m-d H:i:s")])
         ->whereRaw('? <= to_date', [date("Y-m-d H:i:s")])
         ->orderBy('created_at','desc')->get();
-  
-}
+  }
+  public function checkProductIsSale($productId){
+        return SaleProduct::where('product_id', '=', $productId)
+        ->whereRaw('? >= from_date', [date("Y-m-d H:i:s")])
+        ->whereRaw('? <= to_date', [date("Y-m-d H:i:s")])
+        ->orderBy('created_at','desc')->get();
+  }
 }
