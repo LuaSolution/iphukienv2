@@ -81,7 +81,7 @@ color: #523535;
 }
 .add-cart-success::before {
 content: '';
-background-image: url(/assets/images/product-details/done.svg);
+background-image: url(/public/assets/images/product-details/done.svg);
 background-position: center;
 background-size: 34px 34px;
 background-repeat: no-repeat;
@@ -116,7 +116,7 @@ color: #523535;
 }
 .add-cart-fail::before {
 content: '';
-background-image: url(/assets/images/product-details/done.svg);
+background-image: url(/public/assets/images/product-details/done.svg);
 background-position: center;
 background-size: 34px 34px;
 background-repeat: no-repeat;

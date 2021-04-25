@@ -50,35 +50,35 @@
 }
 
 .share-block a.fb-share {
-    background-image: url(/assets/images/news-details/fb.svg);
+    background-image: url(/public/assets/images/news-details/fb.svg);
     background-size: 7px 13px;
     width: 7px;
     height: 13px;
 }
 
 .share-block a.instagram-share {
-    background-image: url(/assets/images/news-details/in.svg);
+    background-image: url(/public/assets/images/news-details/in.svg);
     background-size: 12px 12px;
     width: 12px;
     height: 12px;
 }
 
 .share-block a.pinterest-share {
-    background-image: url(/assets/images/news-details/pin.svg);
+    background-image: url(/public/assets/images/news-details/pin.svg);
     background-size: 11px 13px;
     width: 11px;
     height: 13px;
 }
 
 .share-block a.twister-share {
-    background-image: url(/assets/images/news-details/tw.svg);
+    background-image: url(/public/assets/images/news-details/tw.svg);
     background-size: 17px 14px;
     width: 17px;
     height: 14px;
 }
 
 .share-block a.email-share {
-    background-image: url(/assets/images/news-details/email.svg);
+    background-image: url(/public/assets/images/news-details/email.svg);
     background-size: 18px 13px;
     width: 18px;
     height: 13px;

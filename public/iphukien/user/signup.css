@@ -79,11 +79,11 @@
     float: left;
 }
 .signup-container .options .fb {
-    background-image: url(/assets/images/signup/fb.svg);
+    background-image: url(/public/images/signup/fb.svg);
     width: 104px;
 }
 .signup-container .options .gg {
-    background-image: url(/assets/images/signup/gg.svg);
+    background-image: url(/public/images/signup/gg.svg);
     width: 102px;
 } */
 .signup-container .options .fb,
@@ -109,7 +109,7 @@
     text-align: center;
     vertical-align: middle;
     white-space: nowrap;
-    background-image: url(/public/assets/images/signup/fb.svg);
+    background-image: url(/public/public/images/signup/fb.svg);
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: left 10px center;
@@ -179,7 +179,7 @@
 }
 .add-cart-fail::before {
     content: '';
-    background-image: url(/assets/images/product-details/done.svg);
+    background-image: url(/public/assets/images/product-details/done.svg);
     background-position: center;
     background-size: 34px 34px;
     background-repeat: no-repeat;

@@ -4,7 +4,7 @@
     padding-top: 115px;
 }
 .complete-avatar {
-    background-image: url(/assets/images/payment-complete/complete.svg);
+    background-image: url(/public/assets/images/payment-complete/complete.svg);
     background-position: center;
     background-size: 98px 98px;
     background-repeat: no-repeat;
