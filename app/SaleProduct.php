@@ -32,6 +32,7 @@ class SaleProduct extends Model
   public function getListSaleProduct(){
   	return SaleProduct::leftJoin('products', 'products.id', '=', 'sale_products.product_id')
           ->select('sale_products.*', 'products.name as product_name')
+          ->whereNull('products.parent_id')
           ->orderBy('created_at','desc')->get();
   }
   public function deleteSaleProduct($id){
