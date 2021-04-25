@@ -109,7 +109,7 @@ $saleP = (new \App\Product())->getProductById($item->product_id);
                             <div class="name">{{ $saleP->name }}</div>
                             <div class="description">{{ $saleP->short_description }}</div>
                             <div class="price">
-                                <span class="sale">{{ number_format($saleP->sale_price , 0, ',', '.') }}đ</span>
+                                <span class="sale">{{ number_format($item->sale_price , 0, ',', '.') }}đ</span>
                                 <span class="origin">{{ number_format($saleP->price, 0, ',', '.') }}đ</span>
                             </div>
                             <div class="time hide-on-small-only">
