@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/user-top.css') }}">
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/order-details.css') }}">
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/footer.css') }}">
+<link rel="stylesheet" href="{{ asset('public/iphukien/user/common.css') }}">
 @endsection
 
 @section('content')
@@ -33,9 +34,9 @@
             <div class="row products">
                 @foreach($orderDetail as $detail)
                 <?php
-                $listImg = \App\ProductImage::where('product_id', '=', $detail->product_id)->get();
-                $img = count($listImg) > 0 ? asset('public/'.$listImg[0]->image) : asset('public/assets/images/header/logo.svg');
-                ?>
+$listImg = \App\ProductImage::where('product_id', '=', $detail->product_id)->get();
+$img = count($listImg) > 0 ? asset('public/' . $listImg[0]->image) : asset('public/assets/images/header/logo.svg');
+?>
                 <div class="product col l3">
                     <div class="img" style="background-image: url({{ $img }})"></div>
                     <div class="name">{{$detail->product_name}}</div>
