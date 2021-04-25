@@ -18,7 +18,11 @@ class ProductController extends Controller
     {
         $data = [];
         $data['product'] = (new Product())->getProductById($id);
-        $data['checkProductInSale'] = (new SaleProduct)->checkProductIsSale($id);
+        $checkProductInSale = (new SaleProduct)->checkProductIsSale($id);
+        $data['salePrice'] = $data['product']->sale_price;
+        if($checkProductInSale != null) {
+            $data['salePrice'] = $checkProductInSale->sale_price;
+        }
         $data['listSize'] = [];
         $data['listColor'] = [];
         $listChildProduct = (new Product())->getListChildProduct($id);

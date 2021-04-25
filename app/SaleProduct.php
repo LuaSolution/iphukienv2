@@ -48,6 +48,6 @@ class SaleProduct extends Model
         return SaleProduct::where('product_id', '=', $productId)
         ->whereRaw('? >= from_date', [date("Y-m-d H:i:s")])
         ->whereRaw('? <= to_date', [date("Y-m-d H:i:s")])
-        ->orderBy('created_at','desc')->get();
+        ->orderBy('created_at','desc')->first();
   }
 }

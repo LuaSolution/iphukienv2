@@ -98,10 +98,10 @@
                 @endif
             </div>
             @endif
-
+    
             <div class="price">
                 <div class="origin" id="origin-price">{{ number_format($product->price, 0, ',', '.') }}đ</div>
-                <div class="sale" id="sale-price">{{ number_format($product->sale_price, 0, ',', '.') }}đ <span>Giảm {{ round(($product->price-$product->sale_price) / $product->price * 100) }}%</span></div>
+                <div class="sale" id="sale-price">{{ number_format($salePrice, 0, ',', '.') }}đ <span>Giảm {{ round(($product->price-$salePrice) / $product->price * 100) }}%</span></div>
             </div>
             <div class="status-wrapper">
                 <div class="status-label">Tình trạng</div>
@@ -246,13 +246,14 @@ $(document).on("click", ".color-detail", function () {
                 '_token': `{{ csrf_token() }}` }
         }).done(function (data) {
             chooseProduct = JSON.parse(data);
+            console.log(chooseProduct)
             if(chooseProduct.product != null) {
                 $('.main-image').addClass('is-image');
                 $('.main-image').html('');
                 $('.main-image')[0].style.backgroundImage = "url(" + chooseProduct.image + ")";
                 $('#c-product-name').html(chooseProduct.product.name);
                 $("#origin-price").html(chooseProduct.product.price + 'đ');
-                $("#sale-price").html(chooseProduct.product.sale_price + 'đ');
+                $("#sale-price").html(chooseProduct.lastPrice + 'đ');
                 $(".add-to-card-btn-detail")[0].classList.remove('deactive');
                 $("#buy-now-btn-detail").removeClass('deactive');
             } else {
@@ -300,7 +301,7 @@ $(document).on("click", ".size-detail", function () {
                 $('.main-image')[0].style.backgroundImage = "url(" + chooseProduct.image + ")";
                 $('#c-product-name').html(chooseProduct.product.name);
                 $("#origin-price").html(numberWithCommas(chooseProduct.product.price) + 'đ');
-                $("#sale-price").html(numberWithCommas(chooseProduct.product.sale_price) + 'đ');
+                $("#sale-price").html(numberWithCommas(chooseProduct.lastPrice) + 'đ');
                 $(".add-to-card-btn-detail")[0].classList.remove('deactive');
                 $("#buy-now-btn-detail").removeClass('deactive');
             } else {
@@ -427,7 +428,7 @@ function updateCartDetail() {
         let productid = chooseProduct.product.id;
         let choosenSize = $('.sizes .size-detail.active')[0].dataset.sizename;
         let choosenColor = $('.colors .color-detail.active')[0].dataset.colorname;
-        let price = chooseProduct.product.sale_price;
+        let price = chooseProduct.lastPrice;
         let nhanhProductId = chooseProduct.product.product_id_nhanh;
         let img = chooseProduct.image;
         let prodName = chooseProduct.product.name;
@@ -462,7 +463,7 @@ function updateCartDetail() {
     let productid = '{{$product->id}}';
     let choosenSize = '-';
     let choosenColor = '-';
-    let price = '{{$product->sale_price}}';
+    let price = '{{$salePrice}}';
     let nhanhProductId = '{{$product->product_id_nhanh}}';
     let img = '{{ asset('public/assets/images/header/logo.svg') }}';
     let prodName = '{{$product->name}}';

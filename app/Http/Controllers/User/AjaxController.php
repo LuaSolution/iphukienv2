@@ -11,6 +11,7 @@ use App\OrderDetail;
 use App\Product;
 use App\Wishlist;
 use App\ProductImage;
+use App\SaleProduct;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -195,6 +196,11 @@ class AjaxController extends Controller
         if($obj->product != null) {
             $listImg = (new ProductImage())->getListProductImageByProduct($obj->product->id);
             $obj->image = count($listImg) > 0 ? asset('public/'.$listImg[0]->image) : asset('public/assets/images/header/logo.svg');
+        }
+        $checkProductInSale = (new SaleProduct)->checkProductIsSale($request->input('productId'));
+        $obj->lastPrice = $obj->product->sale_price;
+        if($checkProductInSale != null) {
+            $obj->lastPrice = $checkProductInSale->sale_price;
         }
 
         return json_encode($obj);
