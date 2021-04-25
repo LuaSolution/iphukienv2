@@ -76,7 +76,7 @@
             </li>
             <li><a href="{{ route('user.orders') }}">Đơn hàng của tôi</a></li>
             <li><a href="{{ route('user.information') }}">Cài đặt tài khoản</a></li>
-            <li><a href="{{ route('doLogout') }}" class="ipk-logout">Đăng xuất</a></li>
+            <li><a href="#!" class="ipk-logout" onclick="signOut()">Đăng xuất</a></li>
         </ul>
     @endif
 </header>
