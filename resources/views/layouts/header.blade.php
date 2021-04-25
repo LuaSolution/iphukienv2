@@ -8,7 +8,7 @@
     <div class="ipk-right-header">
         <form class="header-search-form" method="get" action="{{ route('product.search') }}">
             <input type="text" name="keyword" class="txt-search-header"
-                placeholder="Tìm sản phẩm, thương hiệu bạn mong muốn..." />
+                placeholder="Tìm sản phẩm bạn mong muốn" />
             <button type="submit" class="btn-search-header"></button>
         </form>
         @if(Auth::check())
