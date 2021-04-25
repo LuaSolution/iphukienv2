@@ -402,7 +402,10 @@
 .pre-order-block #buy-now-btn-detail {
     background-color: #E24C4C;
 }
-
+.pre-order-block .add-to-card-btn-detail.deactive,
+.pre-order-block #buy-now-btn-detail.deactive {
+    background-color: #ccc;
+}
 #list-image-popup {
     width: 90%;
     padding: 25px 0;

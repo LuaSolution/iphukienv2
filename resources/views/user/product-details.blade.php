@@ -147,8 +147,8 @@
                     <input type="number" class="quantity" value="1" id="quantity-detail" />
                     <span class="increase-detail">+</span>
                 </div>
-                <a href="#!" class="add-to-card-btn-detail" >Thêm vào giỏ hàng</a>
-                <a href="#!" id="buy-now-btn-detail" style="width:130px">Mua ngay</a>
+                <a href="#!" class="add-to-card-btn-detail deactive" >Thêm vào giỏ hàng</a>
+                <a href="#!" id="buy-now-btn-detail" class="deactive" style="width:130px">Mua ngay</a>
             </div>
         </div>
     </div>
@@ -245,9 +245,7 @@ $(document).on("click", ".color-detail", function () {
                 'sizeId': sizeId,
                 '_token': `{{ csrf_token() }}` }
         }).done(function (data) {
-            console.log(data)
             chooseProduct = JSON.parse(data);
-            console.log(chooseProduct);
             if(chooseProduct.product != null) {
                 $('.main-image').addClass('is-image');
                 $('.main-image').html('');
@@ -255,11 +253,15 @@ $(document).on("click", ".color-detail", function () {
                 $('#c-product-name').html(chooseProduct.product.name);
                 $("#origin-price").html(chooseProduct.product.price + 'đ');
                 $("#sale-price").html(chooseProduct.product.sale_price + 'đ');
+                $(".add-to-card-btn-detail")[0].classList.remove('deactive');
+                $("#buy-now-btn-detail").removeClass('deactive');
             } else {
                 M.toast({
                     html: 'Sản phẩm không tồn tại',
                     classes: 'add-cart-fail'
                 })
+                $(".add-to-card-btn-detail")[0].classList.add('deactive');
+                $("#buy-now-btn-detail").addClass('deactive');
             }
 
         })
@@ -268,6 +270,8 @@ $(document).on("click", ".color-detail", function () {
                 html: 'Sản phẩm không tồn tại',
                 classes: 'add-cart-fail'
             })
+            $(".add-to-card-btn-detail")[0].classList.add('deactive');
+            $("#buy-now-btn-detail").addClass('deactive');
         })
     }
 });
@@ -297,11 +301,15 @@ $(document).on("click", ".size-detail", function () {
                 $('#c-product-name').html(chooseProduct.product.name);
                 $("#origin-price").html(numberWithCommas(chooseProduct.product.price) + 'đ');
                 $("#sale-price").html(numberWithCommas(chooseProduct.product.sale_price) + 'đ');
+                $(".add-to-card-btn-detail")[0].classList.remove('deactive');
+                $("#buy-now-btn-detail").removeClass('deactive');
             } else {
                 M.toast({
                     html: 'Sản phẩm không tồn tại',
                     classes: 'add-cart-fail'
                 })
+                $(".add-to-card-btn-detail")[0].classList.add('deactive');
+                $("#buy-now-btn-detail").addClass('deactive');
             }
         })
         .fail(function () {
@@ -309,6 +317,8 @@ $(document).on("click", ".size-detail", function () {
                 html: 'Sản phẩm không tồn tại',
                 classes: 'add-cart-fail'
             })
+            $(".add-to-card-btn-detail")[0].classList.remove('deactive');
+            $("#buy-now-btn-detail").removeClass('deactive');
         })
     }
 });
@@ -444,6 +454,8 @@ function updateCartDetail() {
             html: 'Sản phẩm không tồn tại',
             classes: 'add-cart-fail'
         })
+        $(".add-to-card-btn-detail")[0].classList.add('deactive');
+        $("#buy-now-btn-detail").addClass('deactive');
     }
     @endif
     @if(count($listColor) == 0 && count($listSize) == 0)
@@ -475,19 +487,22 @@ function updateCartDetail() {
     @endif
 }
 $(document).on("click","#buy-now-btn-detail",function() {
-    if(!updateCartDetail()) return;
+    if(chooseProduct && chooseProduct.product != null) {
+        if(!updateCartDetail()) return;
 
-    window.location.href = "{{ route('user.cart') }}";
+        window.location.href = "{{ route('user.cart') }}";
+    }
 });
 $(document).on("click",".add-to-card-btn-detail",function() {
-    let updateRes = updateCartDetail();
-    if(updateRes) {
-        M.toast({
-            html: 'Cập nhật giỏ hàng thành công',
-            classes: 'add-cart-success'
-        });
+    if(chooseProduct && chooseProduct.product != null) {
+        let updateRes = updateCartDetail();
+        if(updateRes) {
+            M.toast({
+                html: 'Cập nhật giỏ hàng thành công',
+                classes: 'add-cart-success'
+            });
+        }
     }
-
 });
 </script>
 @endsection
