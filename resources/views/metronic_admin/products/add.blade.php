@@ -84,6 +84,7 @@
                         <div class="form-group form-md-line-input has-success">
                             <label class="control-label">Tags</label>
                             <select class="bs-select form-control" name="tag" id="tag">
+                                <option value="no-tag">(No tag)</option>
                                 @foreach($tags as $key=>$item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach

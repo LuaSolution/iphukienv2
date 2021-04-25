@@ -130,7 +130,7 @@ class ProductController extends Controller
             return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
         }
         $status = $request->input('status_id');
-        $tag = $request->input('tag_id');
+        $tag = $request->input('tag_id') == 'no-tag' ? null : $request->input('tag_id');
         $trademark = $request->input('trademark_id');
         $parent = $request->input('parent_id') == 'no-parent' ? null : $request->input('parent_id');
         $size = $request->input('size_id') == 'no-size' ? null : $request->input('size_id');

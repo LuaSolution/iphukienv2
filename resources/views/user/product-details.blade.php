@@ -87,7 +87,7 @@
         <div class="col l5 product-infos">
             <div class="name" id="c-product-name">{{$product->name}}</div>
             <div class="description">{{$product->short_description}}</div>
-            @if($product->tag_id != 0)
+            @if($product->tag_id != 0 && $product->tag_id != null)
             <div class="list-tags">
                 @if($product->tag_id == 11)
                     <span class="tag hang-moi"></span>
