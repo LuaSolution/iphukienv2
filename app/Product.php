@@ -74,7 +74,10 @@ class Product extends Model
     {
         return Product::where('slug', '=', $slug)->where('type', '=', $type)->first();
     }
-
+    public function getProductByNhanhId($nhanhId)
+    {
+        return Product::where('product_id_nhanh', '=', $nhanhId)->first();
+    }
     public function getListProduct()
     {
         return Product::leftJoin('categories', 'categories.id', '=', 'products.category_id')
