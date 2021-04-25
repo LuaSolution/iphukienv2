@@ -76,6 +76,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="{{ asset('public/metronic_assets/layouts/layout4/css/custom.min.css') }}"
         rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/metronic_assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/metronic_assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css" />
     <script src="{{ asset('public/ckeditor/ckeditor.js') }}"></script>
     <link href="{{ asset('public/metronic_assets/global/plugins/dropzone/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/metronic_assets/global/plugins/dropzone/basic.min.css') }}" rel="stylesheet" type="text/css" />

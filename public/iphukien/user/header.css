@@ -323,6 +323,13 @@ header .ipk-slide-out {
     }
     header .header-search-form {
         border: none;
-        float: right;
+        float: left;
+        width: 100%;
+    }
+    header .ipk-right-header {
+        left: 50px;
+    }
+    header .header-search-form .btn-search-header {
+        right: 0;
     }
 }

@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="{{ asset('public/iphukien/user/common.css') }}">
     <link rel="stylesheet" href="{{ asset('public/iphukien/user/header.css') }}">
     <link rel="stylesheet" href="{{ asset('public/iphukien/user/footer.css') }}">
+    <meta name="google-signin-client_id" content="445632322462-522or3m8qn2qaikj451irtimtegv2bqe.apps.googleusercontent.com">
     @yield('fb-meta-tags')
     @yield('meta-tags')
     @section('styles')
@@ -39,6 +40,7 @@
     @yield('header')
     @yield('content')
     <footer>
+        <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
         @yield('footer')
         @include('layouts.footer', ['status' => 'complete'])
         <!-- jQuery -->
@@ -53,6 +55,23 @@
         <script>
             function numberWithCommas(x) {
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            }
+            function onLoad() {
+                gapi.load('auth2', function() {
+                    gapi.auth2.init();
+                });
+            }
+            function signOut() {
+                if(gapi.auth2) {
+                    var auth2 = gapi.auth2.getAuthInstance();
+                    auth2.signOut().then(function () {
+                        console.log('User signed out.');
+                        window.location.href = `{{ route('doLogout') }}`
+                    });
+                } else {
+                    window.location.href = `{{ route('doLogout') }}`
+                }
+                
             }
         </script>
     </footer>

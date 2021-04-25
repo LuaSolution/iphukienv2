@@ -34,12 +34,26 @@
                 </select>
           </div>
           <div class="form-group form-md-line-input has-success">
-              <input class="form-control date-picker" id="form-from-date" name="from_date" size="16" type="text" value="" />
-              <label for="form-price">Từ ngày</label>
+            <div class="input-group date bs-datetime">
+                  <label for="form-price">Từ ngày</label>
+                  <input type="text" size="16" class="form-control" id="form-from-date" name="from_date" autocomplete="off">
+                  <span class="input-group-addon">
+                      <button class="btn default date-set" type="button">
+                          <i class="fa fa-calendar"></i>
+                      </button>
+                  </span>
+              </div>
           </div>
           <div class="form-group form-md-line-input has-success">
-              <input class="form-control date-picker" id="form-to-date" name="to_date" size="16" type="text" value="" />
-              <label for="form-price">Đến ngày</label>
+            <div class="input-group date bs-datetime">
+                  <label for="form-price">Đến ngày</label>
+                  <input type="text" size="16" class="form-control" id="form-to-date" name="to_date" autocomplete="off">
+                  <span class="input-group-addon">
+                      <button class="btn default date-set" type="button">
+                          <i class="fa fa-calendar"></i>
+                      </button>
+                  </span>
+              </div>
           </div>
           <div class="form-group form-md-line-input has-success">
               <input type="number" class="form-control" id="form-sale-price" name="sale_price" required="">
@@ -68,4 +82,17 @@
 <script src="{{ asset('public/metronic_assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('public/metronic_assets/global/plugins/clockface/js/clockface.js') }}" type="text/javascript"></script>
 <script src="{{ asset('public/metronic_assets/pages/scripts/components-date-time-pickers.min.js') }}" type="text/javascript"></script>
+<script>
+$( document ).ready(function() {
+    $('#form-from-date').datetimepicker({
+      startDate: new Date(),
+      format: "yyyy-mm-dd hh:ii:00",
+    });
+    $('#form-to-date').datetimepicker({
+      startDate: new Date(),
+      format: "yyyy-mm-dd hh:ii:00",
+    });
+});
+  
+</script>
 @endsection

@@ -40,8 +40,8 @@ class SaleProduct extends Model
   public function getListValidSaleProduct(){
         return SaleProduct::leftJoin('products', 'products.id', '=', 'sale_products.product_id')
         ->select('sale_products.*', 'products.name as product_name', 'products.short_description as product_des', 'products.price as origin_price')
-        ->whereRaw('? >= from_date', [date("Y-m-d")])
-        ->whereRaw('? <= to_date', [date("Y-m-d")])
+        ->whereRaw('? >= from_date', [date("Y-m-d H:i:s")])
+        ->whereRaw('? <= to_date', [date("Y-m-d H:i:s")])
         ->orderBy('created_at','desc')->get();
   
 }

@@ -41,11 +41,10 @@ class SaleProductController extends Controller
         if (!$salePrice) {
             return redirect()->route('adMgetListSaleProduct')->with('error', 'Thêm thất bại!');
         }
-
         $dataInsert = [
             'product_id' => $productId,
-            'from_date' => date("Y-m-d", strtotime($fromDate)),
-            'to_date' => date("Y-m-d", strtotime($toDate)),
+            'from_date' => date("Y-m-d H:i:s", strtotime($fromDate)),
+            'to_date' => date("Y-m-d H:i:s", strtotime($toDate)),
             'sale_price' => $salePrice,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),

@@ -10,10 +10,6 @@
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/login.css') }}">
 @endsection
 
-@section('meta-tags')
-<meta name="google-signin-client_id" content="445632322462-522or3m8qn2qaikj451irtimtegv2bqe.apps.googleusercontent.com">
-@endsection
-
 @section('fb-sdk')
 <div id="fb-root"></div>
 <script>
@@ -65,9 +61,7 @@
 @endsection
 
 @section('footer')
-<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script>
-let gUser = null;
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId());

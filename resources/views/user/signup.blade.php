@@ -6,10 +6,6 @@
 @include('layouts.header', ['status' => 'complete'])
 @endsection
 
-@section('meta-tags')
-<meta name="google-signin-client_id" content="445632322462-522or3m8qn2qaikj451irtimtegv2bqe.apps.googleusercontent.com">
-@endsection
-
 @section('styles')
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/signup.css') }}">
 @endsection
