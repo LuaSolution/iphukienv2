@@ -373,7 +373,6 @@ class ProductController extends Controller
                         do {
                             $cChildPage++;
                             $listChildProduct = $this->getListProductFromNhanh($cChildPage, $product->idNhanh);
-                            Log::info(isset($listChildProduct->code));
                             if (!isset($listChildProduct->code)) {
                                 if ($tChildPage == 0) {
                                     $cChildPage = $listChildProduct->currentPage;
@@ -386,34 +385,37 @@ class ProductController extends Controller
                                     $nhanhChildCate = $this->getCategoryOfNhanh($listNhanhCate, $p->categoryId);
                                     $childCate = Cate::firstOrCreate(['title' => $nhanhChildCate->name]);
                                     //insert parent product
-                                    $childPrd = Product::firstOrCreate([
-                                        'product_id_nhanh' => $p->idNhanh,
-                                        'parent_id' => $parentPrd->id,
-                                    ]);
-                                    //status
-                                    $childStatusId = $this->getStatusIdFromNhanh($p->status);
-                                    //trademark
-                                    $childBranchName = !empty($p->brandName) ? $p->brandName : 'iPhuKien';
-                                    $chilTrademarkObj = Trademark::firstOrCreate(['name' => $childBranchName]);
-                                    //update product information
-                                    if (count($p->attributes) > 0) {
-                                        foreach ($p->attributes as $att) {
-                                            if (strpos(reset($att)->attributeName, 'Kích thước') !== false) {
-                                                $pSize = Size::firstOrCreate(['name' => reset($att)->name]);
-                                            }
-                                            if (strpos(reset($att)->attributeName, 'Màu sắc') !== false) {
-                                                $pColor = Color::firstOrCreate(['name' => reset($att)->name]);
+                                    $checkChild = (new Product())->getProductByNhanhId($p->idNhanh);
+                                    if($checkChild == null) {
+                                        $childPrd = Product::firstOrCreate([
+                                            'product_id_nhanh' => $p->idNhanh,
+                                            'parent_id' => $parentPrd->id,
+                                        ]);
+                                        //status
+                                        $childStatusId = $this->getStatusIdFromNhanh($p->status);
+                                        //trademark
+                                        $childBranchName = !empty($p->brandName) ? $p->brandName : 'iPhuKien';
+                                        $chilTrademarkObj = Trademark::firstOrCreate(['name' => $childBranchName]);
+                                        //update product information
+                                        if (count($p->attributes) > 0) {
+                                            foreach ($p->attributes as $att) {
+                                                if (strpos(reset($att)->attributeName, 'Kích thước') !== false) {
+                                                    $pSize = Size::firstOrCreate(['name' => reset($att)->name]);
+                                                }
+                                                if (strpos(reset($att)->attributeName, 'Màu sắc') !== false) {
+                                                    $pColor = Color::firstOrCreate(['name' => reset($att)->name]);
+                                                }
                                             }
                                         }
+                                        if (!$pSize) {
+                                            $pSize = Size::firstOrCreate(['name' => 'One Size']);
+                                        }
+                                        if (!$pColor) {
+                                            $pColor = Color::firstOrCreate(['name' => 'One Color']);
+                                        }
+                                        $this->updateProductInformationFromNhanh(
+                                            $p, $childCate->id, $childStatusId, $chilTrademarkObj->id, $childPrd->id, $pSize->id, $pColor->id);
                                     }
-                                    if (!$pSize) {
-                                        $pSize = Size::firstOrCreate(['name' => 'One Size']);
-                                    }
-                                    if (!$pColor) {
-                                        $pColor = Color::firstOrCreate(['name' => 'One Color']);
-                                    }
-                                    $this->updateProductInformationFromNhanh(
-                                        $p, $childCate->id, $childStatusId, $chilTrademarkObj->id, $childPrd->id, $pSize->id, $pColor->id);
                                 }
                             }
                         } while ($cChildPage < $tChildPage);
