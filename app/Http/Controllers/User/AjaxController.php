@@ -198,9 +198,12 @@ class AjaxController extends Controller
             $obj->image = count($listImg) > 0 ? asset('public/'.$listImg[0]->image) : asset('public/assets/images/header/logo.svg');
         }
         $checkProductInSale = (new SaleProduct)->checkProductIsSale($request->input('productId'));
-        $obj->lastPrice = $obj->product->sale_price;
-        if($checkProductInSale != null) {
-            $obj->lastPrice = $checkProductInSale->sale_price;
+        // dd($obj->product);
+        if($obj->product != null) {
+            $obj->lastPrice = $obj->product->sale_price;
+            if($checkProductInSale != null) {
+                $obj->lastPrice = $checkProductInSale->sale_price;
+            }
         }
 
         return json_encode($obj);
