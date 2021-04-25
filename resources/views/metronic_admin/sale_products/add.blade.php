@@ -46,7 +46,7 @@
           </div>
           <div class="form-group form-md-line-input has-success">
             <div class="input-group date bs-datetime">
-                  <label for="form-price">Từ ngày</label>
+                  <label for="form-price">Đến ngày</label>
                   <input type="text" size="16" class="form-control" id="form-to-date" name="to_date" autocomplete="off">
                   <span class="input-group-addon">
                       <button class="btn default date-set" type="button">
