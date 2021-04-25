@@ -341,6 +341,7 @@ img {
 
   .ipk-content-container nav .breadcrumb {
     margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   .ipk-content-container .breadcrumb:last-child {
@@ -488,6 +489,14 @@ img {
     margin-top: 0px;
   }
 
+  .list-category .cat-item p {
+    min-height: 50px;
+  }
+
+  .ipk-content-container .title {
+    margin-bottom: 0px;
+  }
+
   .news-feed-container input.news-feed-email,
   .news-feed-container input.news-feed-email:focus {
     padding-left: 16px;
@@ -566,4 +575,56 @@ img {
     font-size: 16px;
   }
 
+  .product-infos .pre-order-block #buy-now-btn-detail {
+    margin: 0px 0 0 2px !important;
+    width: 100px !important;
+  }
+
+  .pre-order-block .add-to-card-btn,
+  .pre-order-block .add-to-card-btn-detail {
+    background-image: none;
+    background-color: #131313;
+    padding-left: 10px;
+  }
+
+  .pre-order-block .add-to-card-btn,
+  .pre-order-block #buy-now-btn-detail,
+  .pre-order-block .add-to-card-btn-detail {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 9px;
+    text-align: center;
+    color: #FFFFFF;
+    float: left;
+    margin-left: 2px;
+    padding: 15px 10px 10px 10px;
+  }
+
+  .pre-order-block .quantity-input {
+    width: 66px;
+  }
+
+  .quantity-input input[type=number]:not(.browser-default),
+  .quantity-input span {
+    font-size: 16px;
+  }
+
+  .ipk-container .product-rating {
+    margin-top: 0px;
+  }
+
+  #quickview .product-infos .status-wrapper {
+    margin-top: 20px;
+  }
+
+  #quickview .product-infos .colors .color {
+    width: calc((100% /3) - -74px);
+    margin-left: 0 !important;
+  }
+
+  .pre-order-block .buy-now-btn {
+    margin-left: auto !important;
+    margin: 5px 2px 0px 0px;
+    width: 180px !important;
+  }
 }

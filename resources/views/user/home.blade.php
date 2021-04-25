@@ -153,7 +153,7 @@ echo ('<script type="text/javascript">
             <p class="block-title">SẢN PHẨM BÁN CHẠY</p>
             @include('layouts.list-product', ['listProduct' => $proTopSold, 'hasReadMore' => false])
             <div class="container">
-                <a href="{{ url('/categories/-1') }}" class="btn-xem-them" >XEM THÊM</a>
+                <a href="{{ url('/categories/-2') }}" class="btn-xem-them" >XEM THÊM</a>
             </div>
         </div>
     </div>
