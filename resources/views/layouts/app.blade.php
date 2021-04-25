@@ -25,9 +25,9 @@
     <!--Import materialize.css-->
     <link rel="stylesheet" href="{{ asset('public/css/materialize.min.css') }}">
     <!-- iPhuKien css -->
-    <link rel="stylesheet" href="{{ asset('public/iphukien/user/common.css') }}">
     <link rel="stylesheet" href="{{ asset('public/iphukien/user/header.css') }}">
     <link rel="stylesheet" href="{{ asset('public/iphukien/user/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/iphukien/user/common.css') }}">
     <meta name="google-signin-client_id" content="445632322462-522or3m8qn2qaikj451irtimtegv2bqe.apps.googleusercontent.com">
     @yield('fb-meta-tags')
     @yield('meta-tags')
@@ -71,7 +71,7 @@
                 } else {
                     window.location.href = `{{ route('doLogout') }}`
                 }
-                
+
             }
         </script>
     </footer>

@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="{{ asset('public/iphukien/user/home.css') }}">
 <link rel="stylesheet" href="{{ asset('public/iphukien/user/list-product.css') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
+<link rel="stylesheet" href="{{ asset('public/iphukien/user/common.css') }}">
 <style>
 .container{
     margin-top:30px;
@@ -148,7 +149,7 @@ echo ('<script type="text/javascript">
                 <a href="{{ url('/categories/-1') }}" class="btn-xem-them" >XEM THÊM</a>
             </div>
         </div>
-        <div class="products-block" style="margin-top:-70px">
+        <div class="products-block" style="margin-top:-100px">
             <p class="block-title">SẢN PHẨM BÁN CHẠY</p>
             @include('layouts.list-product', ['listProduct' => $proTopSold, 'hasReadMore' => false])
             <div class="container">
