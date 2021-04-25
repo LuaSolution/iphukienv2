@@ -105,9 +105,11 @@ window.fbAsyncInit = function() {
 function loginFb() {
     $(".ipk-preloader").removeClass('hide');
     FB.login(function(response) {
+        console.log(response.status);
         if (response.status === 'connected') {
             console.log("res", response);
             FB.api('/me?fields=id,email,name', function(loginRes) {
+                console.log(loginRes)
                 doLogin(loginRes.name, loginRes.email, `social_${loginRes.id}`)
             });
         }
