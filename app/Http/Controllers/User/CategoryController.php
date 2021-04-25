@@ -16,8 +16,10 @@ class CategoryController extends Controller
 {
     public function show(Request $request, $id)
     {
-        if ($id == -1) {
-            $this->data['listProduct'] = Product::where('parent_id', null)->orderBy('id', 'DESC')->paginate(8);
+        if ($id == -1) { // danh sach hàng mới
+            $this->data['listProduct'] = Product::where('tag_id', 11)->where('parent_id', null)->orderBy('id', 'DESC')->paginate(8);
+        } else if ($id == -2) { // danh sach bán chạy
+            $this->data['listProduct'] = Product::where('tag_id', 12)->where('parent_id', null)->orderBy('id', 'DESC')->paginate(8);
         } else if ($request->sort) {
             switch ($request->sort) {
                 case "az":
@@ -40,7 +42,7 @@ class CategoryController extends Controller
             $this->data['listProduct'] = Product::where('category_id', $id)->whereNull('parent_id')->orderBy('id', 'DESC')->paginate(8);
         }
 
-        if ($id == -1) {
+        if ($id == -1 || $id == -2) {
             $category = (object) ['title' => 'Danh sách sản phẩm'];
 
             $this->data['category'] = $category;
