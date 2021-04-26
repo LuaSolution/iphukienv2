@@ -1,4 +1,4 @@
-let chooseProduct
+let chooseProduct, currentProduct
 $(document).ready(function () {
     $.each($(".product .img"), function (index, value) {
         value.style.height = value.offsetWidth + "px"
@@ -19,18 +19,18 @@ $(document).ready(function () {
         }).done(function (data) {
             let productInfo = JSON.parse(data)
             // console.log(productInfo)
+            currentProduct = productInfo
             let str = ''
-            let strColor = ''
             str += '<a href="#!" class="previous"></a>'
             for (i = 0; i < productInfo['listImage'].length; i++) {
                 str += `<div class="carousel-item product-img ${productInfo['wishlist'] ? 'added-wishlist' : ''}" data-img="${productInfo['listImage'][i]}">`
-                    + `<span class="sale-percent">-${Math.round((productInfo['product']['price'] - productInfo['product']['sale_price']) / productInfo['product']['price'] * 100)}%</span>`
+                    + `<span class="sale-percent">-${Math.round((productInfo['product']['price'] - productInfo['salePrice']) / productInfo['product']['price'] * 100)}%</span>`
                     + `<img style="height:100%" src="${productInfo['listImage'][i]}" />`
                     + `</div>`
             }
             if (productInfo['listImage'].length == 0) {
                 str += `<div class="carousel-item product-img ${productInfo['wishlist'] ? 'added-wishlist' : ''}" data-img="${localStorage.getItem('quickview_image_base_path') + '/assets/images/header/logo.svg'}">`
-                    + `<span class="sale-percent">-${Math.round((productInfo['product']['price'] - productInfo['product']['sale_price']) / productInfo['product']['price'] * 100)}%</span>`
+                    + `<span class="sale-percent">-${Math.round((productInfo['product']['price'] - productInfo['salePrice']) / productInfo['product']['price'] * 100)}%</span>`
                     + `<img style="height:100%"  src="${localStorage.getItem('quickview_image_base_path') + '/assets/images/header/logo.svg'}" />`
                     + `</div>`
             }
@@ -58,7 +58,7 @@ $(document).ready(function () {
 
             $("#quickview-origin").html(numberWithCommas(productInfo['product']['price']))
 
-            $("#quickview-sale").html(`${numberWithCommas(productInfo['product']['sale_price'])}đ <span>Giảm ${Math.round((productInfo['product']['price'] - productInfo['product']['sale_price']) / productInfo['product']['price'] * 100)}%</span>`)
+            $("#quickview-sale").html(`${numberWithCommas(productInfo['salePrice'])}đ <span>Giảm ${Math.round((productInfo['product']['price'] - productInfo['salePrice']) / productInfo['product']['price'] * 100)}%</span>`)
 
             switch (productInfo['product']['status_id']) {
                 case 11:
@@ -73,42 +73,46 @@ $(document).ready(function () {
             }
             $("#quickview-status").html(str)
 
-            // console.log(productInfo['listChildProduct'])
-            strSize = ""
-            strColor = ""
-            for (i = 0; i < productInfo['listChildProduct'].length; i++) {
-                strSize += `<span class="size"`
-                    + `data-sizename="${productInfo['listChildProduct'][i]['product']['size_name']}"`
-                    + `data-sizeid="${productInfo['listChildProduct'][i]['product']['size_id']}"`
-                    + `>`
-                    + `${productInfo['listChildProduct'][i]['product']['size_name']}`
-                    + `</span>`
-                strColor += `<span class="color"`
-                    + `data-colorname="${productInfo['listChildProduct'][i]['product']['color_name']}"`
-                    + `data-colorid="${productInfo['listChildProduct'][i]['product']['color_id']}"`
-                    + `>`
-                    + `${productInfo['listChildProduct'][i]['product']['color_name']}`
-                    + `</span>`
+            str = "";
+            for (i = 0; i < productInfo['listSize'].length; i++) {
+                str += `<span class="size"`
+                        + `data-sizename="${productInfo['listSize'][i]['name']}"`
+                        + `data-sizeid="${productInfo['listSize'][i]['id']}"`
+                        + `>`
+                        + `${productInfo['listSize'][i]['name']}`
+                        + `</span>`;
             }
-            if (productInfo['listChildProduct'].length == 0) {
-                strSize += `<span class="size" `
+            if(productInfo['listSize'].length == 0) {
+                str += `<span class="size" `
                     + `data-sizename="One Size"`
                     + `data-sizeid="-1"`
                     + `>`
                     + `One Size`
-                    + `</span>`
-                strColor += `<span class="color" `
-                    + `data-colorname="One Color"`
+                    + `</span>`;
+            }
+            $("#quickview-sizes").html(str)
+
+            str = "";
+            for (i = 0; i < productInfo['listColor'].length; i++) {
+                str += `<span class="color"`
+                        + `data-colorname="${productInfo['listColor'][i]['name']}"`
+                        + `data-colorid="${productInfo['listColor'][i]['id']}"`
+                        + `>`
+                        + `${productInfo['listColor'][i]['name']}`
+                        + `</span>`;
+            }
+            if(productInfo['listColor'].length == 0) {
+                str += `<span class="color" `
+                    + `data-colorname="One color"`
                     + `data-colorid="-1"`
                     + `>`
                     + `One Color`
-                    + `</span>`
+                    + `</span>`;
             }
-            $("#quickview-sizes").html(strSize)
-            $("#quickview-colors").html(strColor)
+            $("#quickview-colors").html(str)
 
             // set for card
-            localStorage.setItem('quickview_sale_price', productInfo['product']['sale_price'])
+            localStorage.setItem('quickview_sale_price', productInfo['salePrice'])
             localStorage.setItem('quickview_product_name', productInfo['product']['name'])
             localStorage.setItem('quickview_nhanh_product_id', productInfo['product']['product_id_nhanh'])
 
@@ -133,11 +137,11 @@ $(document).on("click", ".color", function () {
             }
         }).done(function (data) {
             chooseProduct = JSON.parse(data)
-            console.log(chooseProduct)
+            console.log("chooseProduct", chooseProduct)
             if (chooseProduct.product != null) {
                 $('#quickview-name').html(chooseProduct.product.name)
                 $("#quickview-origin").html(numberWithCommas(chooseProduct.product.price) + 'đ')
-                $("#quickview-sale").html(numberWithCommas(chooseProduct.product.sale_price) + 'đ')
+                $("#quickview-sale").html(numberWithCommas(chooseProduct.lastPrice) + 'đ')
                 let cImg = chooseProduct.image
                 for (let i = 0; i < $('.product-img').length; i++) {
                     if ($('.product-img')[i].dataset.img == cImg) {
@@ -145,11 +149,15 @@ $(document).on("click", ".color", function () {
                         break
                     }
                 }
+                $(".add-to-card-btn")[0].classList.remove('deactive');
+                $(".buy-now-btn")[0].classList.remove('deactive');
             } else {
                 M.toast({
                     html: 'Sản phẩm không tồn tại',
                     classes: 'add-cart-fail'
                 })
+                $(".add-to-card-btn")[0].classList.add('deactive');
+                $(".buy-now-btn")[0].classList.add('deactive');
             }
 
         })
@@ -158,6 +166,8 @@ $(document).on("click", ".color", function () {
                     html: 'Sản phẩm không tồn tại',
                     classes: 'add-cart-fail'
                 })
+                $(".add-to-card-btn")[0].classList.add('deactive');
+                $(".buy-now-btn")[0].classList.add('deactive');
             })
     }
 })
@@ -182,7 +192,7 @@ $(document).on("click", ".size", function () {
             if (chooseProduct.product != null) {
                 $('#quickview-name').html(chooseProduct.product.name)
                 $("#quickview-origin").html(numberWithCommas(chooseProduct.product.price) + 'đ')
-                $("#quickview-sale").html(numberWithCommas(chooseProduct.product.sale_price) + 'đ')
+                $("#quickview-sale").html(numberWithCommas(chooseProduct.lastPrice) + 'đ')
                 let cImg = chooseProduct.image
                 for (let i = 0; i < $('.product-img').length; i++) {
                     if ($('.product-img')[i].dataset.img == cImg) {
@@ -190,11 +200,15 @@ $(document).on("click", ".size", function () {
                         break
                     }
                 }
+                $(".add-to-card-btn")[0].classList.remove('deactive');
+                $(".buy-now-btn")[0].classList.remove('deactive');
             } else {
                 M.toast({
                     html: 'Sản phẩm không tồn tại',
                     classes: 'add-cart-fail'
                 })
+                $(".add-to-card-btn")[0].classList.add('deactive');
+                $(".buy-now-btn")[0].classList.add('deactive');
             }
 
         })
@@ -203,6 +217,8 @@ $(document).on("click", ".size", function () {
                     html: 'Sản phẩm không tồn tại',
                     classes: 'add-cart-fail'
                 })
+                $(".add-to-card-btn")[0].classList.add('deactive');
+                $(".buy-now-btn")[0].classList.add('deactive');
             })
     }
 })
@@ -227,39 +243,79 @@ $(document).on("click", ".quickview-btn", function () {
     localStorage.setItem('quickview_token', $(this).data('token'))
     localStorage.setItem('quickview_image_base_path', $(this).data('imagepath'))
     localStorage.setItem('quickview_get_child_product_url', $(this).data('getchildproducturl'))
-
 })
 function updateCart() {
-    let listSizeElement = $(".sizes .size.active")
-    if (listSizeElement.length == 0) {
-        M.toast({
-            html: 'Vui lòng chọn màu sác - kích thước',
-            classes: 'add-cart-fail'
-        })
-        return false
+    console.log(currentProduct)
+    if(currentProduct['listSize'].length > 0) {
+        let listSizeElement = $(".sizes .size.active")
+        if (listSizeElement.length == 0) {
+            M.toast({
+                html: 'Vui lòng chọn màu sác - kích thước',
+                classes: 'add-cart-fail'
+            })
+            return false
+        }
     }
-    let listColorElement = $(".colors .color.active")
-    if (listColorElement.length == 0) {
-        M.toast({
-            html: 'Vui lòng chọn màu sác - kích thước',
-            classes: 'add-cart-fail'
-        })
-        return false
+    if(currentProduct['listColor'].length > 0) {
+        let listColorElement = $(".colors .color.active")
+        if (listColorElement.length == 0) {
+            M.toast({
+                html: 'Vui lòng chọn màu sác - kích thước',
+                classes: 'add-cart-fail'
+            })
+            return false
+        }
     }
-    if (chooseProduct) {
-        console.log(chooseProduct)
-        let productid = chooseProduct.product.id
-        let choosenSize = $('.sizes .size.active')[0].dataset.sizename
-        let choosenColor = $('.colors .color.active')[0].dataset.colorname
-        let price = chooseProduct.product.sale_price
-        let nhanhProductId = chooseProduct.product.product_id_nhanh
-        let img = chooseProduct.image
-        let prodName = chooseProduct.product.name
-        let quantity = $("#quantity").val() == 0 ? 1 : $("#quantity").val()
-        let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {}
+    if(currentProduct['listColor'].length > 0 && currentProduct['listSize'].length > 0) {
+        if (chooseProduct) {
+            console.log(chooseProduct)
+            let productid = chooseProduct.product.id
+            let choosenSize = $('.sizes .size.active')[0].dataset.sizename
+            let choosenColor = $('.colors .color.active')[0].dataset.colorname
+            let price = chooseProduct.lastPrice
+            let nhanhProductId = chooseProduct.product.product_id_nhanh
+            let img = chooseProduct.image
+            let prodName = chooseProduct.product.name
+            let quantity = $("#quantity").val() == 0 ? 1 : $("#quantity").val()
+            let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {}
+    
+            if (cart[productid]) {
+                cart[productid].quantity = parseInt(cart[productid].quantity) + parseInt(quantity)
+            } else {
+                cart[productid] = {
+                    color: choosenColor,
+                    size: choosenSize,
+                    quantity: quantity,
+                    salePrice: price,
+                    image: img,
+                    name: prodName,
+                    nhanhPorductId: nhanhProductId,
+                }
+            }
+            localStorage.setItem('ipk_cart', JSON.stringify(cart))
+            return true
+        } else {
+            M.toast({
+                html: 'Sản phẩm không tồn tại',
+                classes: 'add-cart-fail'
+            })
+            $(".add-to-card-btn")[0].classList.add('deactive');
+            $(".buy-now-btn")[0].classList.add('deactive');
+        }
+    }
+    if(currentProduct['listColor'].length == 0 && currentProduct['listSize'].length == 0) {
+        let productid = currentProduct['product']['id'];
+        let choosenSize = '-';
+        let choosenColor = '-';
+        let price = currentProduct['product']['id'];
+        let nhanhProductId = currentProduct['product']['product_id_nhanh'];
+        let img = currentProduct['image'];
+        let prodName = currentProduct['product']['name'];
+        let quantity = $("#quantity-detail").val() == 0 ? 1 : $("#quantity-detail").val();
+        let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
 
-        if (cart[productid]) {
-            cart[productid].quantity = parseInt(cart[productid].quantity) + parseInt(quantity)
+        if(cart[productid]) {
+            cart[productid].quantity = parseInt(cart[productid].quantity) + parseInt(quantity);
         } else {
             cart[productid] = {
                 color: choosenColor,
@@ -269,15 +325,10 @@ function updateCart() {
                 image: img,
                 name: prodName,
                 nhanhPorductId: nhanhProductId,
-            }
+            };
         }
-        localStorage.setItem('ipk_cart', JSON.stringify(cart))
-        return true
-    } else {
-        M.toast({
-            html: 'Sản phẩm không tồn tại',
-            classes: 'add-cart-fail'
-        })
+        localStorage.setItem('ipk_cart',  JSON.stringify(cart));
+        return true;
     }
 }
 $(document).on("click", ".buy-now-btn", function () {

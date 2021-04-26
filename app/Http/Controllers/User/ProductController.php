@@ -23,7 +23,6 @@ class ProductController extends Controller
         if($checkProductInSale != null) {
             $data['salePrice'] = $checkProductInSale->sale_price;
         }
-// dd($data['salePrice']);
         $data['listSize'] = [];
         $data['listColor'] = [];
         $listChildProduct = (new Product())->getListChildProduct($id);

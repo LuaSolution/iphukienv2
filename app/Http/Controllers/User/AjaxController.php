@@ -12,6 +12,8 @@ use App\Product;
 use App\Wishlist;
 use App\ProductImage;
 use App\SaleProduct;
+use App\Size;
+use App\Color;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -146,10 +148,21 @@ class AjaxController extends Controller
     public function getQuickViewProduct(Request $request, $productId) {
         $data = [];
         $data['product'] = (new Product())->getProductById($productId);
+        $checkProductInSale = (new SaleProduct)->checkProductIsSale($productId);
+        $data['salePrice'] = $data['product']->sale_price;
+        if($checkProductInSale != null) {
+            $data['salePrice'] = $checkProductInSale->sale_price;
+        }
+        $data['listSize'] = [];
+        $data['listColor'] = [];
         $listChildProduct = (new Product())->getListChildProduct($productId);
         $productImageModel = new ProductImage();
         $data['listChildProduct'] = [];
         $data['listImage'] = [];
+        $sizeModel = new Size();
+        $colorModel = new Color();
+        $checkHasSize = [];
+        $checkHasColor = [];
         foreach($listChildProduct as $p) {
             $obj = new \stdClass();
             $obj->product = $p;
@@ -158,6 +171,19 @@ class AjaxController extends Controller
                 array_push($data['listImage'], asset('public/'.$i->image));
             }
             array_push($data['listChildProduct'], $obj);
+            if($p->size_id != null) {
+                if (!in_array($p->size_id, $checkHasSize)) {
+                    array_push($checkHasSize, $p->size_id);
+                    array_push($data['listSize'], $sizeModel->getSizeById($p->size_id));
+                }
+            }
+            
+            if($p->color_id != null) {
+                if (!in_array($p->color_id, $checkHasColor)) {
+                    array_push($checkHasColor, $p->color_id);
+                    array_push($data['listColor'], $colorModel->getColorById($p->color_id));
+                }
+            }
         }
         if (Auth::check() && Auth::user()->role_id == 2) {
             $data['wishlist'] = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $productId);
