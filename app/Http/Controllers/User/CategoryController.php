@@ -105,9 +105,16 @@ class CategoryController extends Controller
             $product = DB::table('products')
                 ->where('category_id', $id)
                 ->whereNull('products.parent_id');
+        } else {
+            $newId = [];
+
+            foreach ($product->get() as $value) {
+                array_push($newId, $value->parent_id);
+            }
+
+            $product = DB::table('products')->whereIn('id', array_unique($newId))->whereNull('products.parent_id');
         }
 
-        // dd($product->get());
         $listProduct = $product
             ->orderBy('products.id', 'DESC')
             ->paginate(8)
