@@ -98,7 +98,7 @@
                 @endif
             </div>
             @endif
-    
+
             <div class="price">
                 <div class="origin" id="origin-price">{{ number_format($product->price, 0, ',', '.') }}đ</div>
                 <div class="sale" id="sale-price">{{ number_format($salePrice, 0, ',', '.') }}đ <span>Giảm {{ round(($product->price-$salePrice) / $product->price * 100) }}%</span></div>
