@@ -37,8 +37,8 @@
                     <input type="number" class="quantity" value="1" id="quantity" />
                     <span class="increase">+</span>
                 </div>
-                <a href="#!" class="add-to-card-btn">Thêm vào giỏ hàng</a>
-                <a href="{{ route('user.cart') }}" class="buy-now-btn" style="width:180px" data-url="{{ route('user.cart') }}">Mua ngay</a>
+                <a href="#!" class="add-to-card-btn deactive">Thêm vào giỏ hàng</a>
+                <a href="{{ route('user.cart') }}" class="buy-now-btn deactive" style="width:180px" data-url="{{ route('user.cart') }}">Mua ngay</a>
             </div>
         </div>
     </div>
