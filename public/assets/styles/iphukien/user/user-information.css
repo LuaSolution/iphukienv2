@@ -90,3 +90,20 @@
     background-color: transparent;
     cursor: pointer;
 }
+@media only screen and (max-width: 414px){
+    .update-infos-txt {
+        font-size: 22px;
+        line-height: 22px;
+        padding-top: 24px;
+    }
+    #user-information-form {
+        margin-top: 20px;
+    }
+    .info-input-group {
+        padding-top: 30px;
+    }
+    .btn-group {
+        padding-bottom: 30px;
+    }
+}
+

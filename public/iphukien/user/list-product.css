@@ -4,8 +4,8 @@
 
 .row .col.product {
     padding: 30px;
+    height: 420px!important;
 }
-
 .row .col.product .img {
     width: 100%;
     background-size: cover;
@@ -91,8 +91,7 @@
     position: relative;
 }
 
-.col.product.added-wishlist::before,
-#quickview .product-img.added-wishlist::after {
+.col.product.added-wishlist::before, #quickview .product-img.added-wishlist::after {
     content: '';
     position: absolute;
     background-image: url(/public/assets/images/product/heart.svg);
@@ -274,9 +273,7 @@
     border-bottom: 1px solid #BDBDBD;
 }
 
-#quickview .product-infos .status-label,
-#quickview .product-infos .list-status .status,
-#quickview .product-infos .list-status {
+#quickview .product-infos .status-label, #quickview .product-infos .list-status .status, #quickview .product-infos .list-status {
     display: inline-block;
     font-weight: 500;
     font-size: 16px;
@@ -326,7 +323,6 @@
     text-transform: uppercase;
     color: #000000;
     margin-top: 10px;
-
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -431,8 +427,7 @@
     clear: both;
 }
 
-#quickview .quantity-input input,
-#quickview .quantity-input span {
+#quickview .quantity-input input, #quickview .quantity-input span {
     float: left;
     height: 100%;
     font-weight: normal;
@@ -453,8 +448,7 @@
     cursor: pointer;
 }
 
-#quickview .pre-order-block .add-to-card-btn,
-#quickview .pre-order-block .buy-now-btn {
+#quickview .pre-order-block .add-to-card-btn, #quickview .pre-order-block .buy-now-btn {
     font-weight: normal;
     font-size: 16px;
     line-height: 36px;
@@ -478,8 +472,7 @@
     background-color: #E24C4C;
 }
 
-#quickview .quickview-slider .previous,
-#quickview .quickview-slider .next {
+#quickview .quickview-slider .previous, #quickview .quickview-slider .next {
     background-repeat: no-repeat;
     width: 30px;
     height: 30px;
@@ -539,139 +532,109 @@
     .footer .social-icons {
         margin-top: 0px;
     }
-
-    .news-feed-container input.news-feed-email,
-    .news-feed-container input.news-feed-email:focus {
+    .news-feed-container input.news-feed-email, .news-feed-container input.news-feed-email:focus {
         padding-left: 16px;
         width: 245px;
     }
-
-    .news-feed-container input.news-feed-email,
-    .news-feed-container input.news-feed-email:focus {
+    .news-feed-container input.news-feed-email, .news-feed-container input.news-feed-email:focus {
         height: 38px;
     }
-
-    .news-feed-container input.news-feed-email,
-    .news-feed-container input.news-feed-email:focus {
+    .news-feed-container input.news-feed-email, .news-feed-container input.news-feed-email:focus {
         width: 240px;
     }
-
     .news-feed-container {
         background-color: #131313;
         padding: 20px 0 0 0;
         text-align: center;
         height: 110px;
     }
-
     .products .product.col {
         height: 320px !important;
     }
-
-
-
+    .products .product.s6 {
+        height: 260px !important;
+        background-color: #fff;
+        border: 1px solid #eee; 
+        }
     .products-block {
         margin-top: 30px;
     }
-
     .products-block .block-title {
         font-size: 20px;
     }
-
     .products {
         margin-top: 0px;
     }
-
-
     .pre-order-block {
         display: flex;
         flex-wrap: wrap;
         justify-content: start;
     }
-
-    .pre-order-block .add-to-card-btn,
-    .pre-order-block .add-to-card-btn-detail {
-        background-image: none;
-        background-repeat: no-repeat;
-        background-position: left 10px center;
-        background-color: #131313;
-        padding-left: 0px;
-    }
-
     .ipk-container .product-descriptions {
         margin-top: 30px;
     }
-
     .ipk-container .product-rating {
         margin-top: 15px;
     }
-
     .product-descriptions .content {
         padding: 10px;
     }
-
     .ipk-container .same-products-block {
         margin-top: 30px;
         padding-bottom: 30px;
     }
-
     .list-category .cat-item p {
         font-size: 16px;
     }
-
     .product-infos .pre-order-block #buy-now-btn-detail {
-        margin: 0px 0 0 2px !important;
-        width: 100px !important;
+        margin: 16px 0 0 0 !important;
+        width: 331px !important;
+        height: 39px;
+        line-height: 20px;
     }
-
-    .pre-order-block .add-to-card-btn,
-    .pre-order-block .add-to-card-btn-detail {
-        background-image: none;
-        background-color: #131313;
-        padding-left: 10px;
-    }
-
-    .pre-order-block .add-to-card-btn,
-    .pre-order-block #buy-now-btn-detail,
-    .pre-order-block .add-to-card-btn-detail {
+    .pre-order-block .add-to-card-btn, .pre-order-block #buy-now-btn-detail, .pre-order-block .add-to-card-btn-detail {
         font-weight: normal;
         font-size: 16px;
         line-height: 9px;
         text-align: center;
         color: #FFFFFF;
         float: left;
-        margin-left: 2px;
-        padding: 15px 10px 10px 10px;
+        margin-left: 17px;
+        padding: 10px 10px 10px 10px;
     }
-
     .pre-order-block .quantity-input {
-        width: 66px;
+        width: 88px;
     }
-
-    .quantity-input input[type=number]:not(.browser-default),
-    .quantity-input span {
+    .quantity-input input[type=number]:not(.browser-default), .quantity-input span {
         font-size: 16px;
     }
-
     .ipk-container .product-rating {
         margin-top: 0px;
     }
-
     #quickview .product-infos .status-wrapper {
         margin-top: 20px;
     }
-
     #quickview .product-infos .colors .color {
         width: calc((100% /3) - -74px);
         margin-left: 0 !important;
     }
-
     .pre-order-block .buy-now-btn {
         margin-left: auto !important;
         margin: 5px 2px 0px 0px;
         width: 157px !important;
     }
-
     #quickview .pre-order-block .add-to-card-btn {
         padding-left: 10px;
     }
+    .products .product.s6 {
+        padding: 8px !important;
+        margin-bottom: 10px;
+    }
+    .row .col.product .name a {
+        margin-top: 8px;
+    }
+    .row .col.product .price {
+        margin-top: 5px;
+    }
 }
+/* end 414 */

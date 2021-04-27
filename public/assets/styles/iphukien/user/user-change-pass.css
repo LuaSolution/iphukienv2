@@ -1,6 +1,7 @@
 .user-change-pass-container {
     padding-top: 20px;
 }
+
 .user-change-pass-txt {
     font-weight: bold;
     font-size: 30px;
@@ -9,9 +10,11 @@
     text-align: center;
     margin-top: 189px;
 }
+
 .pass-input-group {
     margin-top: 40px;
 }
+
 .pass-input-group input {
     font-weight: 500;
     font-size: 12px;
@@ -22,17 +25,19 @@
     box-sizing: border-box;
     padding: 10px;
 }
+
 #user-change-pass-form {
     max-width: 452px;
     margin: 0 auto;
 }
-.pass-input-group input[type=text]:not(.browser-default),
-.pass-input-group input[type=text]:not(.browser-default):focus:not([readonly]) {
+
+.pass-input-group input[type=text]:not(.browser-default), .pass-input-group input[type=text]:not(.browser-default):focus:not([readonly]) {
     margin-bottom: 0;
     border: 1px solid #231F20;
     box-sizing: border-box;
     padding-left: 20px;
 }
+
 .btn-group {
     font-weight: 500;
     font-size: 20px;
@@ -42,6 +47,7 @@
     color: #000000;
     padding-bottom: 138px;
 }
+
 .btn-group button {
     width: 150px;
     height: 50px;
@@ -53,4 +59,18 @@
     text-align: center;
     text-transform: uppercase;
     color: #000;
+}
+
+@media only screen and (max-width: 414px) {
+    .user-change-pass-txt {
+        font-size: 22px;
+        line-height: 22px;
+        margin-top: 24px;
+    }
+    .pass-input-group {
+        margin-top: 20px;
+    }
+    .btn-group {
+        padding-bottom: 30px;
+    }
 }

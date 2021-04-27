@@ -261,8 +261,7 @@
     height: 110px;
 }
 
-.news-feed-container span,
-.news-feed-container input {
+.news-feed-container span, .news-feed-container input {
     display: inline-block;
 }
 
@@ -274,8 +273,7 @@
     text-transform: uppercase;
 }
 
-.news-feed-container input.news-feed-email,
-.news-feed-container input.news-feed-email:focus {
+.news-feed-container input.news-feed-email, .news-feed-container input.news-feed-email:focus {
     width: 310px;
     height: 36px;
     font-weight: normal;
@@ -291,8 +289,7 @@
     margin-left: 30px;
 }
 
-.news-feed-container .submit-new-feed,
-.news-feed-container .submit-new-feed:focus {
+.news-feed-container .submit-new-feed, .news-feed-container .submit-new-feed:focus {
     margin-left: 8px;
     width: 91px;
     height: 38px;
@@ -317,8 +314,65 @@
     .carousel-item .carousel-item-wrapper {
         padding: 80px 20px 20px 20px;
     }
-
     .news-feed-container {
         height: unset;
     }
 }
+
+@media only screen and (max-width: 414px) {
+    .sale-products .item-infos .name {
+        font-size: 17px;
+    }
+    .item-infos .price .sale {
+        font-size: 16px;
+    }
+    .item-infos .price .origin {
+        font-size: 14px;
+    }
+    .sale-products .button-detail {
+        bottom: 21px;
+    }
+    .sale-products .button-detail a {
+        width: 150px;
+        height: 44px;
+        line-height: 44px;
+        font-size: 16px;
+    }
+    .carousel-item .carousel-item-wrapper {
+        padding: 30px 20px 10px 20px;
+    }
+    .sale-products {
+        margin-top: 24px;
+    }
+    .sale-products .flash-deal-icon {
+        width: 93px;
+        height: 30px;
+        font-size: 13px;
+        line-height: 35px;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+    .sale-products .item-infos {
+        padding-left: 10px;
+    }
+    .sale-products .item-infos .description {
+        margin-top: 0px;
+    }
+    .sale-products .item-infos .price {
+        margin-top: 5px;
+    }
+    .item-infos .time {
+        margin-top: 10px;
+    }
+    .sale-products .item-infos-mobile {
+        padding-left: 0px;
+    }
+    .sale-products {
+        padding-bottom: 0px;
+    }
+    .sale-products .ipk-pre-slide {
+        top: calc(50% - 48px);
+    }
+}
+
+/* end 414 */

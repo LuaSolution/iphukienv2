@@ -603,11 +603,11 @@
     }
 
     .product-descriptions .title {
-        font-size: 20px;
+        font-size: 17px;
     }
 
     .same-products-block .block-title {
-        font-size: 20px;
+        font-size: 25px;
     }
 
     .news-feed-container input.news-feed-email,
@@ -658,15 +658,6 @@
         justify-content: start;
     }
 
-    .pre-order-block .add-to-card-btn,
-    .pre-order-block .add-to-card-btn-detail {
-        /* background-image: url(/public/assets/images/product/cart.svg); */
-        background-repeat: no-repeat;
-        background-position: left 10px center;
-        background-color: #131313;
-        padding-left: 0px;
-    }
-
     .ipk-container .product-descriptions {
         margin-top: 30px;
     }
@@ -692,27 +683,6 @@
         margin: 0px 0 0 2px !important;
         width: 100px !important;
     }
-
-    .pre-order-block .add-to-card-btn,
-    .pre-order-block .add-to-card-btn-detail {
-        background-image: none;
-        background-color: #131313;
-        padding-left: 10px;
-    }
-
-    .pre-order-block .add-to-card-btn,
-    .pre-order-block #buy-now-btn-detail,
-    .pre-order-block .add-to-card-btn-detail {
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 9px;
-        text-align: center;
-        color: #FFFFFF;
-        float: left;
-        margin-left: 2px;
-        padding: 15px 10px 10px 10px;
-    }
-
     .pre-order-block .quantity-input {
         width: 66px;
     }
@@ -740,4 +710,40 @@
         margin: 5px 2px 0px 0px;
         width: 180px !important;
     }
+    .product-infos .name {
+        font-size: 17px;
+    }
+    .product-infos .price .origin {
+        font-size: 14px;
+    }
+    .product-infos .price .sale {
+        font-size: 17px;
+    }
+    .product-infos .price .sale {
+        font-size: 17px;
+        float: left;
+        margin-left: 10px;
+    }
+    .product-infos .price {
+        padding: 10px 8px;
+        }
+        .product-infos .status-label {
+            text-transform: capitalize;
+        }
+        .product-infos .pre-order-block {
+            margin-top: 16px;
+        }
+        .pre-order-block .add-to-card-btn-detail.deactive, .pre-order-block #buy-now-btn-detail.deactive {
+           
+            width: 225px;
+            height: 39px;
+            line-height: 20px;
+        }
+        .product-descriptions .content {
+            font-size: 16px;
+            }
+            .same-products-block .block-title {
+                line-height: 25px;
+            }
 }
+/* end 414 */

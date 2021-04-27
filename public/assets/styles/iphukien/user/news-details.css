@@ -29,15 +29,14 @@
 .news-details-line-1 .share-block {
     float: right;
     font-weight: normal;
-    font-size: 10px;
-    line-height: 12px;
+    font-size: 12px;
     color: #000;
 }
 
 .share-block span {
     line-height: 41px;
     font-weight: normal;
-    font-size: 10px;
+    font-size: 12px;
     color: #000;
 }
 
@@ -90,6 +89,7 @@
     font-size: 18px;
     line-height: 20px;
     color: #000;
+    opacity: 54%;
 }
 
 .news-details {
@@ -113,10 +113,11 @@
     font-size: 22px;
     line-height: 28px;
     color: #000;
+    padding-left: 10px;
 }
 
 .same-news-wrapper {
-    margin-top: 17px;
+    margin-top: 0px;
 }
 
 .carousel-item .news-img {
@@ -160,7 +161,7 @@
 
 .news-last-line span {
     font-weight: normal;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 20px;
     color: #999;
     float: left;
@@ -174,13 +175,14 @@
     background-color: #073552;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
-    border-radius: 3px;
+    border-radius: 4px;
     text-align: center;
     font-weight: normal;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 20px;
     color: #fff;
 }
+
 
 .same-news-wrapper .carousel.carousel-slider {
     height: 450px !important;
@@ -215,4 +217,41 @@
 .same-news-next .material-icons {
     font-size: 25px;
     line-height: 50px;
+}
+
+
+@media only screen and (max-width: 414px){
+    .news-details-wrapper {
+        border-radius: 4px;
+    }
+    .news-details-line-1 .news-title {
+        font-size: 17px;
+        line-height: 17px;
+    }
+    .share-block span {
+        font-size: 12px;
+    }
+    .news-details-line-2 {
+        font-size: 12px;
+        margin-top: 0px; 
+    }
+    .news-details-line-1 .share-block {
+        margin-top: -10px;
+    }
+    .news-details-wrapper {
+        padding: 20px 15px;
+        background: #fff;
+    }
+    .list-same-news {
+        margin-top: 30px;
+    }
+    .same-news-txt {
+        font-size: 16px;
+    }
+    .carousel-item .news-title {
+        padding: 5px 10px;
+    }
+    .carousel-item .news-last-line {
+        padding: 0px 10px 10px 10px;
+    }
 }

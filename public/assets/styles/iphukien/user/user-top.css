@@ -7,7 +7,7 @@
     background-size: 17px 17px;
     background-repeat: no-repeat;
     font-weight: normal;
-    font-size: 9px;
+    font-size: 12px;
     line-height: 32px;
     color: #000;
     background-color: rgba(76, 226, 167, 0.14);
@@ -103,4 +103,10 @@
     color: #000;
     padding: 0;
     
+}
+@media only screen and (max-width: 414px)
+{
+    .user-infos {
+        margin-top: 4px;
+    }
 }

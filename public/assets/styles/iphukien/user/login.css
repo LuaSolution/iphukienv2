@@ -1,6 +1,7 @@
 .login-container {
     padding: 135px 0 80px 0;
 }
+
 .login-container .title {
     font-weight: bold;
     font-size: 30px;
@@ -8,6 +9,7 @@
     text-transform: uppercase;
     color: #000000;
 }
+
 .login-container .sub-title {
     font-weight: 300;
     font-size: 17px;
@@ -15,12 +17,12 @@
     color: #000000;
     margin-top: 15px;
 }
+
 .login-container form {
     margin-top: 90px;
 }
-.login-container form .ipk-form-input,
-.login-container form .ipk-form-input[type=text]:not(.browser-default):focus:not([readonly]),
-.login-container form .ipk-form-input[type=password]:not(.browser-default):focus:not([readonly])  {
+
+.login-container form .ipk-form-input, .login-container form .ipk-form-input[type=text]:not(.browser-default):focus:not([readonly]), .login-container form .ipk-form-input[type=password]:not(.browser-default):focus:not([readonly]) {
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
@@ -29,6 +31,7 @@
     border-bottom: 1px solid #000000;
     width: 85%;
 }
+
 .login-container form .forgot-pass-btn {
     display: block;
     margin-top: 55px;
@@ -38,6 +41,7 @@
     color: #8B8585;
     text-decoration: underline;
 }
+
 .login-container form .btn-dang-nhap {
     padding: 15px 40px;
     font-weight: 500;
@@ -50,9 +54,11 @@
     background-color: transparent;
     cursor: pointer;
 }
+
 .login-container .create-account-btn {
     margin-top: 80px;
 }
+
 .login-container .create-account-btn a {
     font-weight: normal;
     font-size: 20px;
@@ -65,11 +71,13 @@
     width: 220px;
     height: 50px;
 }
+
 .login-container .or-group {
     width: 450px;
     margin: auto;
     margin-top: 75px;
 }
+
 .login-container .or-group .or-label {
     font-weight: normal;
     font-size: 22px;
@@ -77,17 +85,19 @@
     text-align: center;
     color: #000;
 }
+
 .login-container .or-group .options {
     width: fit-content;
     margin: auto;
     margin-top: 30px;
     overflow: hidden;
 }
-.login-container .options .fb,
-.login-container .options .gg {
+
+.login-container .options .fb, .login-container .options .gg {
     float: left;
     height: 40px;
 }
+
 .login-container .options .fb {
     width: 120px;
     height: 36px;
@@ -95,7 +105,7 @@
     background-color: #fff;
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 25%);
     -webkit-box-sizing: border-box;
-    -webkit-transition: background-color .218s,border-color .218s,box-shadow .218s;
+    -webkit-transition: background-color .218s, border-color .218s, box-shadow .218s;
     -webkit-user-select: none;
     -webkit-appearance: none;
     color: #262626;
@@ -112,6 +122,7 @@
     background-position: left 10px center;
     padding-left: 30px;
 }
+
 .login-container .options .or-txt {
     font-weight: normal;
     font-size: 22px;
@@ -121,7 +132,34 @@
     float: left;
     margin: 0 20px;
 }
+
 .login-container .options::after {
     content: '';
     clear: both;
 }
+
+@media only screen and (max-width: 414px) {
+    .login-container .title {
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 22px;
+        text-transform: uppercase;
+        color: #000000;
+        margin-top: 40px;
+    }
+    .login-container {
+        padding: 10px 0 0 !important;
+    }
+    .login-container form .forgot-pass-btn {
+        margin-top: 16px;
+    }
+    .login-container .or-group {
+        margin-top: 30px !important;
+    }
+    .login-container form .ipk-form-input, .login-container form .ipk-form-input[type=text]:not(.browser-default):focus:not([readonly]), .login-container form .ipk-form-input[type=password]:not(.browser-default):focus:not([readonly]) {
+    
+        width: 100%;
+    }
+}
+
+/* end 414 */

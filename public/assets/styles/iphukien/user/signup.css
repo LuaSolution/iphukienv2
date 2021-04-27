@@ -122,3 +122,28 @@
     border-bottom-left-radius: 5px;
     position: absolute;
 }
+
+@media only screen and (max-width: 414px)
+{
+    .signup-container .title {
+        font-size: 22px;
+        line-height: 22px;
+    }
+    .signup-container {
+        padding: 30px 0 30px 0;
+    }
+    .signup-container form .input-group {
+        width: 100%;
+    }
+    .signup-container form .input-group span {
+        width: 100%;
+    }
+    .signup-container .policy {
+        margin-top: 30px;
+    }
+    .signup-container .submit-signup-form {
+        margin-top: 30px;
+    }
+    
+
+}
