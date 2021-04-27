@@ -49,61 +49,63 @@
                 {{ $listProduct->appends(request()->input())->links() }}
             </div>
         </div>
-        <ul id="filter-slide-out" class="sidenav filter-slide-out">
-            <li class="filter-header">Trạng thái</li>
-            <li class="filter-checkbox">
-                @foreach($tags as $c)
-                <div class="filter-checkbox-block">
-                    <label>
-                        <input type="checkbox" name="tags" value="{{$c->id}}" class="filled-in"/>
-                        <span>{{$c->name}}</span>
-                    </label>
-                </div>
-                @endforeach
-            </li>
-            <li class="filter-header">Màu sắc</li>
-            <li class="filter-checkbox">
-                @foreach($colors as $c)
+        <form id="category-filter-form" method="get" action="get">
+            <ul id="filter-slide-out" class="sidenav filter-slide-out">
+                <li class="filter-header">Trạng thái</li>
+                <li class="filter-checkbox">
+                    @foreach($tags as $c)
                     <div class="filter-checkbox-block">
                         <label>
-                            <input type="checkbox" name="colors" value="{{$c->id}}" class="filled-in"/>
+                            <input type="checkbox" name="tags" value="{{$c->id}}" class="filled-in"/>
                             <span>{{$c->name}}</span>
                         </label>
                     </div>
-                @endforeach
-            </li>
-            <li class="filter-header">Kích cỡ</li>
-            <li class="filter-checkbox">
-                @foreach($sizes as $c)
-                    <div class="filter-checkbox-block">
-                        <label>
-                            <input type="checkbox" name="sizes" value="{{$c->id}}" class="filled-in"/>
-                            <span>{{$c->name}}</span>
-                        </label>
-                    </div>
-                @endforeach
-            </li>
-            <li class="filter-header">Thương hiệu</li>
-            <li class="filter-checkbox">
-                @foreach($trademarks as $c)
-                    <div class="filter-checkbox-block">
-                        <label>
-                            <input type="checkbox" name="trademarks" value="{{$c->id}}" class="filled-in"/>
-                            <span>{{$c->name}}</span>
-                        </label>
-                    </div>
-                @endforeach
-            </li>
-            <li class="filter-header">Mức giá</li>
-            <li class="filter-checkbox">
+                    @endforeach
+                </li>
+                <li class="filter-header">Màu sắc</li>
+                <li class="filter-checkbox">
+                    @foreach($colors as $c)
+                        <div class="filter-checkbox-block">
+                            <label>
+                                <input type="checkbox" name="colors" value="{{$c->id}}" class="filled-in"/>
+                                <span>{{$c->name}}</span>
+                            </label>
+                        </div>
+                    @endforeach
+                </li>
+                <li class="filter-header">Kích cỡ</li>
+                <li class="filter-checkbox">
+                    @foreach($sizes as $c)
+                        <div class="filter-checkbox-block">
+                            <label>
+                                <input type="checkbox" name="sizes" value="{{$c->id}}" class="filled-in"/>
+                                <span>{{$c->name}}</span>
+                            </label>
+                        </div>
+                    @endforeach
+                </li>
+                <li class="filter-header">Thương hiệu</li>
+                <li class="filter-checkbox">
+                    @foreach($trademarks as $c)
+                        <div class="filter-checkbox-block">
+                            <label>
+                                <input type="checkbox" name="trademarks" value="{{$c->id}}" class="filled-in"/>
+                                <span>{{$c->name}}</span>
+                            </label>
+                        </div>
+                    @endforeach
+                </li>
+                <li class="filter-header">Mức giá</li>
+                <li class="filter-checkbox">
 
-                <div class="price-range">
-                    <label for="min_price" id="min_price"></label>
-                    <label for="max_price" id="max_price"></label>
-                </div>
-                <div id="price-range"></div>
-            </li>
-        </ul>
+                    <div class="price-range">
+                        <label for="min_price" id="min_price"></label>
+                        <label for="max_price" id="max_price"></label>
+                    </div>
+                    <div id="price-range"></div>
+                </li>
+            </ul>
+        </form>
         @include('layouts.quickview')
     </div>
     <div id="loading">
@@ -180,13 +182,13 @@
         let prices = [];
 
         $('input[name="tags"]').on('change', function (e) {
-            if ($(this).is(':checked')) {
-                tags.push(e.target.value);
-            } else {
-                tags.splice(tags.indexOf(e.target.value), 1);
-            }
+            // if ($(this).is(':checked')) {
+            //     tags.push(e.target.value);
+            // } else {
+            //     tags.splice(tags.indexOf(e.target.value), 1);
+            // }
 
-            searchAjax();
+            // searchAjax();
         })
 
         $('input[name="colors"]').on('change', function (e) {
