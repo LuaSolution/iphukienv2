@@ -182,13 +182,13 @@
         let prices = [];
 
         $('input[name="tags"]').on('change', function (e) {
-            // if ($(this).is(':checked')) {
-            //     tags.push(e.target.value);
-            // } else {
-            //     tags.splice(tags.indexOf(e.target.value), 1);
-            // }
+            if ($(this).is(':checked')) {
+                tags.push(e.target.value);
+            } else {
+                tags.splice(tags.indexOf(e.target.value), 1);
+            }
 
-            // searchAjax();
+            searchAjax();
         })
 
         $('input[name="colors"]').on('change', function (e) {
@@ -223,7 +223,7 @@
             const id = {{ $id }};
 
             $.ajax({
-                url: `/search/categories/${id}?page=${page}&tags=[${tags}]&colors=[${colors}]&sizes=[${sizes}]&trademarks=[${trademarks}]&prices=[${prices}]`,
+                url: `{{route('categories.search_ajax', $category->id)}}?page=${page}&tags=[${tags}]&colors=[${colors}]&sizes=[${sizes}]&trademarks=[${trademarks}]&prices=[${prices}]`,
                 method: 'get',
                 dataType: 'JSON',
                 beforeSend: function () {

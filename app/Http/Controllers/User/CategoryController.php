@@ -76,52 +76,57 @@ class CategoryController extends Controller
         $trademark = $data['trademarks'];
         $price = $data['prices'];
 
-        $product = DB::table('products')
-            ->whereNotNull('products.parent_id')
-            ->where('category_id', $id)
-            ->where(function ($query) use ($color) {
-                if (count(json_decode($color)) > 0) {
-                    $query->join('colors', 'colors.id', 'products.color_id')->whereIn('products.color_id', json_decode($color));
-                }
-            })
-            ->where(function ($query) use ($tag) {
-                if (count(json_decode($tag)) > 0) {
-                    $query->join('tags', 'tags.id', 'products.tag_id')->whereIn('products.tag_id', json_decode($tag));
-                }
-            })
-            ->where(function ($query) use ($size) {
-                if (count(json_decode($size)) > 0) {
-                    $query->join('sizes', 'sizes.id', 'products.size_id')->whereIn('products.size_id', json_decode($size));
-                }
-            })
-            ->where(function ($query) use ($trademark) {
-                if (count(json_decode($trademark)) > 0) {
-                    $query->join('trademarks', 'trademarks.id', 'products.trademark_id')->whereIn('products.trademark_id', json_decode($trademark));
-                }
-            })
-            ->whereBetween('price', json_decode($price));
-
         if (count(json_decode($data['tags'])) === 0 && count(json_decode($data['trademarks'])) === 0 && count(json_decode($data['sizes'])) === 0 && count(json_decode($data['colors'])) === 0 && count(json_decode($data['prices'])) === 0) {
-            $product = DB::table('products')
+            return json_encode(DB::table('products')
                 ->where('category_id', $id)
-                ->whereNull('products.parent_id');
-        } else {
-            $newId = [];
+                ->whereNull('products.parent_id')->get());
+        } 
 
-            foreach ($product->get() as $value) {
-                array_push($newId, $value->parent_id);
+        $query = Product::where('category_id', $id)->whereNull('parent_id')->whereBetween('price', json_decode($price));
+        if (count(json_decode($tag)) > 0) {
+            $query = $query->whereIn('tag_id', json_decode($tag));
+        }
+        if (count(json_decode($trademark)) > 0) {
+            $query = $query->whereIn('trademark_id', json_decode($trademark));
+        }
+        $listProduct = $query->get();
+        $func = function($p) {
+            return $p['id'];
+        };
+        $listParentId = array_map($func, $listProduct->toArray());
+
+        $listFinal = [];
+        $listFinalId = [];
+        if (count(json_decode($size)) == 0 && count(json_decode($color)) == 0) {
+            $listFinal = $listProduct;
+        }
+        $listChild = Product::whereIn('parent_id', $listParentId)->get();
+        if (count(json_decode($size)) > 0) {
+            foreach($listChild as $p) {
+                if (!in_array($p->parent_id, $listFinalId)) {
+                    if (in_array($p->size_id, json_decode($size))) {
+                        array_push($listFinalId, $p->parent_id);
+                        array_push($listFinal, Product::where('id', '=', $p->parent_id)->first());
+                    }
+                }
             }
-
-            $product = DB::table('products')->whereIn('id', array_unique($newId))->whereNull('products.parent_id');
+        }
+        if (count(json_decode($color)) > 0) {
+            foreach($listChild as $p) {
+                if (!in_array($p->parent_id, $listFinalId)) {
+                    if (in_array($p->color_id, json_decode($color))) {
+                        array_push($listFinalId, $p->parent_id);
+                        array_push($listFinal, Product::where('id', '=', $p->parent_id)->first());
+                    }
+                }
+            }
         }
 
-        $listProduct = $product
-            ->orderBy('products.id', 'DESC')
-            ->paginate(8)
-            ->appends(request()->query());
+        $view = view('layouts.list-product', ['listProduct' => $listFinal, 'hasReadMore' => false])->render();
 
-        $view = view('layouts.list-product', compact('listProduct'))->render();
-
-        return response()->json(['currentPage' => $listProduct->currentPage(), 'total_page' => $listProduct->lastPage(), 'view' => $view], 200);
+        return response()->json(['currentPage' => 1, 'total_page' => 1, 'view' => $view], 200);
     }
+    
 }
+
+
