@@ -272,6 +272,7 @@ $(document).on("change", "#district", function () {
     );
 });
 $(document).on("click", ".complete", function () {
+    $(".ipk-preloader").removeClass('hide');
     let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
     let productList = [];
     let obj;
@@ -318,7 +319,13 @@ $(document).on("click", ".complete", function () {
                 classes: 'add-cart-fail'
             })
         }
-    });
+    })
+    .fail(function() {
+    alert( "error" );
+  })
+  .always(function() {
+    $(".ipk-preloader").addClass('hide');
+});
 });
 
 </script>
