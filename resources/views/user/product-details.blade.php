@@ -111,21 +111,14 @@
             <div class="sizes-wrapper">
                 <div class="color-label">Màu sắc <span>Đen</span></div>
                 <div class="colors">
-                    {{-- @foreach($listColor as $item) --}}
-                    {{-- <span class="color-detail"
+                    @foreach($listColor as $item)
+                    <span class="color-detail"
                         data-colorname="{{ $item->name }}"
                         data-colorid="{{ $item->id }}"
                     >
                         {{ $item->name }}
-                    </span> --}}
-                    {{-- @endforeach --}}
-                    <span class="color-item blue"></span>
-                    <span class="color-item cyan"></span>
-                    <span class="color-item pink"></span>
-                    <span class="color-item orange"></span>
-                    <span class="color-item yellow"></span>
-                    <span class="color-item green"></span>
-                    <span class="color-item purple"></span>
+                    </span>
+                    @endforeach
                 </div>
             </div>
             @endif
