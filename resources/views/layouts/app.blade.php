@@ -73,6 +73,16 @@
                 }
 
             }
+            // 
+            $( document ).ready(function() {
+                let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
+                let sum = 0;
+                for (const i in cart) {
+                    console.log(cart[i])
+                    sum += parseInt(cart[i]['quantity']);
+                }
+                $("#header-cart-total").html(sum)
+            });
         </script>
     </footer>
 </body>
