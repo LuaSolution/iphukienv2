@@ -470,7 +470,7 @@
 }
 
 #quickview .pre-order-block .add-to-card-btn.deactive, #quickview .pre-order-block .buy-now-btn.deactive {
-    /* background-color: #ccc; */
+    background-color: #ccc;
 }
 
 #quickview .pre-order-block .buy-now-btn {
