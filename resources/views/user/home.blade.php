@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="{{ asset('public/iphukien/user/list-product.css') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
 <link rel="stylesheet" href="{{ asset('public/iphukien/user/common.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
 <style>
 .container{
     margin-top:30px;
@@ -78,7 +80,7 @@ const x = setInterval(function() {
         </div>
         @endif
         <div class="list-category">
-            <div class="row">
+            <div class="row slide-wrapper-category">
                 @foreach($cates as $item)
                 <div class="col m5ths m4 s6 cat-item remove-line-height">
                     <a href="{{ route('categories.show', ['id' => $item->id]) }}">
@@ -179,6 +181,7 @@ echo ('<script type="text/javascript">
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
 <script src="{{ asset('public/assets/scripts/iphukien/user/list-product.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 <script>
 $(document).ready(function () {
     $.each($(".item-image"), function (index, value) {
@@ -213,5 +216,26 @@ $(document).on("click", ".ipk-next-slide", function () {
 $(document).on("click", ".ipk-pre-slide", function () {
     $('.sale-product-slider').carousel('prev');
 });
+$('.slide-wrapper-category').slick({
+            infinite: false,
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            responsive: [
+                {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    }
+                },
+                {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                    }
+                },
+            ]
+        });
 </script>
 @endsection
