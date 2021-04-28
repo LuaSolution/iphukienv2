@@ -13,6 +13,7 @@
     <li><a href="{{ route('user.addresses') }}">ĐỊA CHỈ NHẬN HÀNG</a></li>
     <li><a href="{{ route('user.change-password') }}">ĐỔI MẬT KHẨU</a></li>
     <li><a href="{{ route('user.orders') }}">LỊCH SỬ MUA HÀNG</a></li>
+    <li><a href="{{ route('user.wishlist') }}">DANH SÁCH YÊU THÍCH</a></li>
     <li><a href="{{ route('doLogout') }}">ĐĂNG XUẤT</a></li>
 </ul>
 @endif

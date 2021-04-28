@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/ipk-breadcrumb.css') }}">
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/product-details.css') }}">
 <link rel="stylesheet" href="{{ asset('public/iphukien/user/list-product.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
 @endsection
 
 @section('fb-meta-tags')
@@ -34,45 +36,39 @@
         </nav>
     </div>
 </div>
-<div class="ipk-container product-container">
+<div class="ipk-container product-container" id="product-container">
     <div class="row ipk-content-container">
 
         @if(count($listImage) > 0)
         <div class="col l1 s3 list-thumb-wrapper">
             <div class="img-block">
-                <a href="#!" class="up"></a>
-                <div class="thumbs-wrapper">
-                    <div class="thumbs">
-
+                <div class="thumbs-wrapper-slide">
+                    <div class="thumbs-slide">
                         @foreach($listImage as $item)
-                        <span style="background-image: url({{ $item }})"
+                        <span data-bg="{{ $item }}" style="background-image: url({{ $item }})"
                             data-img="{{ $item }}"></span>
                         @endforeach
-
+                        <div class="video-icon"
+                            data-video="{{ $product->video }}">
+                            <a href="#!"></a>
+                        </div>
                     </div>
                 </div>
-                <a href="#!" class="down"></a>
-            </div>
-            <div class="video-icon"
-                data-video="{{ $product->video }}">
-                <a href="#!"></a>
             </div>
         </div>
         @else
         <div class="col l1 s3 list-thumb-wrapper">
             <div class="img-block">
-                <a href="#!" class="up"></a>
-                <div class="thumbs-wrapper">
-                    <div class="thumbs">
-                        <span style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"
+                <div class="thumbs-wrapper-slide">
+                    <div class="thumbs-slide">
+                        <span data-bg="{{ asset('public/assets/images/header/logo.svg') }}" style="background-image: url({{ asset('public/assets/images/header/logo.svg') }})"
                             data-img="{{ asset('public/assets/images/header/logo.svg') }}"></span>
+                        <div class="video-icon"
+                            data-video="{{ $product->video }}">
+                            <a href="#!"></a>
+                        </div>
                     </div>
                 </div>
-                <a href="#!" class="down"></a>
-            </div>
-            <div class="video-icon"
-                data-video="{{ $product->video }}">
-                <a href="#!"></a>
             </div>
         </div>
         @endif
@@ -104,7 +100,7 @@
                 <div class="sale" id="sale-price">{{ number_format($salePrice, 0, ',', '.') }}đ <span>Giảm {{ round(($product->price-$salePrice) / $product->price * 100) }}%</span></div>
             </div>
             <div class="status-wrapper">
-                <div class="status-label">Tình trạng</div>
+                <div class="status-label">Tình trạng: </div>
                 <div class="list-status">
                     <span class="status {{ $product->status_id == 11 ? 'het-hang' : '' }}"></span>
                     <span class="status {{ $product->status_id == 12 ? 'dat-truoc' : '' }}"></span>
@@ -113,16 +109,23 @@
             </div>
             @if(count($listColor) > 0)
             <div class="sizes-wrapper">
-                <div class="color-label">Màu sắc</div>
+                <div class="color-label">Màu sắc <span>Đen</span></div>
                 <div class="colors">
-                    @foreach($listColor as $item)
-                    <span class="color-detail"
+                    {{-- @foreach($listColor as $item) --}}
+                    {{-- <span class="color-detail"
                         data-colorname="{{ $item->name }}"
                         data-colorid="{{ $item->id }}"
                     >
                         {{ $item->name }}
-                    </span>
-                    @endforeach
+                    </span> --}}
+                    {{-- @endforeach --}}
+                    <span class="color-item blue"></span>
+                    <span class="color-item cyan"></span>
+                    <span class="color-item pink"></span>
+                    <span class="color-item orange"></span>
+                    <span class="color-item yellow"></span>
+                    <span class="color-item green"></span>
+                    <span class="color-item purple"></span>
                 </div>
             </div>
             @endif
@@ -505,5 +508,26 @@ $(document).on("click",".add-to-card-btn-detail",function() {
         }
     }
 });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+    if (window.innerWidth <= 768) {
+        $('.thumbs-wrapper-slide .thumbs-slide').slick({
+            infinite: false,
+            slidesToShow: 3,
+            slidesToScroll: 3
+        });
+    } else {
+        $('.thumbs-wrapper-slide .thumbs-slide').slick({
+            infinite: false,
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            vertical: true
+        });
+    }
+    $('#product-container .list-thumb-wrapper .thumbs-wrapper-slide .thumbs-slide span').click(function () {
+        console.log('asd');
+        $('.main-image.is-image').css('background-image', 'url('+$(this).data('bg')+')');
+    });
 </script>
 @endsection
