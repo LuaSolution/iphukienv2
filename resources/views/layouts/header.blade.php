@@ -44,16 +44,16 @@
             </div>
             <div class="header-list">
                 <div id="list-san-pham" class="menu-item">
-                <?php $c = \App\Cate::get();?>
+                <?php $c = \App\Cate::where('parent_id', null)->get();?>
                             @foreach($c as $cate)
                     <div class="item-group">
                         <a href="{{ route('categories.show', ['id' => $cate->id]) }}" class="parent-item">{{ $cate->title }}</a>
-                        <!-- <div class="list-sub-item">
-                            <a href="#!" class="sub-item">Ốp lưng</a>
-                            <a href="#!" class="sub-item">Ốp Lưng 1</a>
-                            <a href="#!" class="sub-item">Ốp Lưng 2</a>
-                            <a href="#!" class="sub-item">Ốp Lưng 3</a>
-                        </div> -->
+                        <div class="list-sub-item">
+                        <?php $i = \App\Cate::where('parent_id', $cate->id)->get();?>
+                        @foreach($i as $sub)
+                            <a href="{{ route('categories.show', ['id' => $sub->id]) }}" class="sub-item">{{$sub->title}}</a>
+                            @endforeach
+                        </div>
                     </div>
                     @endforeach
                 </div>
