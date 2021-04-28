@@ -402,10 +402,10 @@
     background-color: #E24C4C;
 }
 
-.pre-order-block .add-to-card-btn-detail.deactive,
+/* .pre-order-block .add-to-card-btn-detail.deactive,
 .pre-order-block #buy-now-btn-detail.deactive {
     background-color: #ccc;
-}
+} */
 
 #list-image-popup {
     width: 90%;
@@ -771,6 +771,9 @@
         background-size: contain;
         margin: 10px 0;
         cursor: pointer;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
     }
 }
 
