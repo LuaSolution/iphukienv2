@@ -175,7 +175,6 @@ class Product extends Model
     }
     public function searchByName($keyword)
     {
-        // return Product::where('products.name', 'like', '%' . $keyword . '%')->get();
         return Product::leftJoin('categories', 'categories.id', '=', 'products.category_id')
             ->leftJoin('statuses', 'statuses.id', '=', 'products.status_id')
             ->leftJoin('tags', 'tags.id', '=', 'products.tag_id')

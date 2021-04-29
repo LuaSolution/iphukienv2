@@ -37,7 +37,7 @@
                             <label for="form-slug">Link thân thiện</label>
                         </div>
                         <div class="form-group form-md-line-input has-success">
-                            <input type="text" class="form-control" id="form-video" name="video" required=""
+                            <input type="text" class="form-control" id="form-video" name="video"
                                 value="{{ $product->video }}">
                             <label for="form-video">Video</label>
                         </div>
@@ -84,6 +84,7 @@
                         <div class="form-group form-md-line-input has-success">
                             <label class="control-label">Trạng thái</label>
                             <select class="bs-select form-control" name="status" id="status">
+                                <option value="no-status" {{$product->status_id == null ? 'selected' : ''}}>(No status)</option>
                                 @foreach($statuses as $key=>$item)
                                 <option value="{{ $item->id }}"
                                     {{ $item->id == $product->status_id ? 'selected' : '' }}>{{ $item->name }}</option>
@@ -93,6 +94,7 @@
                         <div class="form-group form-md-line-input has-success">
                             <label class="control-label">Tags</label>
                             <select class="bs-select form-control" name="tag" id="tag">
+                                <option value="no-tag" {{$product->tag_id == null ? 'selected' : ''}}>(No tag)</option>
                                 @foreach($tags as $key=>$item)
                                 <option value="{{ $item->id }}" {{ $item->id == $product->tag_id ? 'selected' : '' }}>
                                     {{ $item->name }}</option>

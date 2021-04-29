@@ -125,11 +125,8 @@ class ProductController extends Controller
         if (!$salePrice) {
             return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
         }
-        $video = $request->input('video');
-        if (!$video) {
-            return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
-        }
-        $status = $request->input('status_id');
+        $video = $request->input('video') == '' ? null : $request->input('video');
+        $status = $request->input('status_id') == 'no-status' ? null : $request->input('status_id');
         $tag = $request->input('tag_id') == 'no-tag' ? null : $request->input('tag_id');
         $trademark = $request->input('trademark_id');
         $parent = $request->input('parent_id') == 'no-parent' ? null : $request->input('parent_id');
@@ -260,12 +257,9 @@ class ProductController extends Controller
         if (!$salePrice) {
             return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
         }
-        $video = $request->input('video');
-        if (!$video) {
-            return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
-        }
-        $status = $request->input('status_id');
-        $tag = $request->input('tag_id');
+        $video = $request->input('video') == '' ? null : $request->input('video');
+        $status = $request->input('status_id') == 'no-status' ? null : $request->input('status_id');
+        $tag = $request->input('tag_id') == 'no-tag' ? null : $request->input('tag_id');
         $trademark = $request->input('trademark_id');
         $parent = $request->input('parent_id') == 'no-parent' ? null : $request->input('parent_id');
         $size = $request->input('size_id') == 'no-size' ? null : $request->input('size_id');
