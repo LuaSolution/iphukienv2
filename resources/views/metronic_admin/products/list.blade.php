@@ -18,7 +18,10 @@
             </div>
             <div class="portlet-body">
                 <div class="table-responsive">
-                    <a href="{{ route('syncProductFromNhanh') }}" class="sync-product">Đồng bộ sản phẩm từ nhanh</a>
+                    <a href="{{ route('syncProductFromNhanh') }}" class="sync-product" style="display: inline-block">Đồng bộ sản phẩm từ nhanh</a>
+                    <form method="get" style="height: 50px;width: 200px;display: inline-block;">
+                        <input type="text" name="keyword" placeholder="Nhập từ khóa" style="width: 100%;height: 100%;"/>
+                    </form>
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>

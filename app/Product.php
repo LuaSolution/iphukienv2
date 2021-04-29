@@ -173,4 +173,15 @@ class Product extends Model
             ->select('products.*', 'product_image.image')
             ->where('products.parent_id', $parentId)->first();
     }
+    public function searchByName($keyword)
+    {
+        // return Product::where('products.name', 'like', '%' . $keyword . '%')->get();
+        return Product::leftJoin('categories', 'categories.id', '=', 'products.category_id')
+            ->leftJoin('statuses', 'statuses.id', '=', 'products.status_id')
+            ->leftJoin('tags', 'tags.id', '=', 'products.tag_id')
+            ->select('products.*', 'tags.name as tag_name', 'categories.title as category_name', 'statuses.name as status_name')
+            ->orderBy('pos', 'asc')->orderBy('created_at', 'desc')
+            ->where('products.name', 'like', '%' . $keyword . '%')
+            ->paginate(10);
+    }
 }

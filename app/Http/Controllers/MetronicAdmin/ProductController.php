@@ -303,9 +303,14 @@ class ProductController extends Controller
     /**
      * Get list Tag page
      */
-    public function getListProduct()
+    public function getListProduct(Request $request)
     {
-        $this->data['products'] = (new Product())->getListProduct();
+        // $this->data['products'] = (new Product())->getListProduct();
+        if(null != $request->input('keyword')) {
+            $this->data['products'] = (new Product())->searchByName($request->input('keyword'));
+        } else {
+            $this->data['products'] = (new Product())->getListProduct();
+        }
 
         return view('metronic_admin.products.list', $this->data);
     }
