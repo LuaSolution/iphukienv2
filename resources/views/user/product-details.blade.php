@@ -143,8 +143,8 @@
                     <input type="number" class="quantity" value="1" id="quantity-detail" />
                     <span class="increase-detail">+</span>
                 </div>
-                <a href="#!" class="add-to-card-btn-detail deactive" >Thêm vào giỏ hàng</a>
-                <a href="#!" id="buy-now-btn-detail" class="deactive" style="width:130px">Mua ngay</a>
+                <a href="#!" class="add-to-card-btn-detail {{ count($listSize) > 0 && count($listColor) > 0 ? 'deactive' : '' }}" >Thêm vào giỏ hàng</a>
+                <a href="#!" id="buy-now-btn-detail" class="{{ count($listSize) > 0 && count($listColor) > 0 ? 'deactive' : '' }}" style="width:130px">Mua ngay</a>
             </div>
         </div>
     </div>
