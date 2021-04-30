@@ -7,6 +7,9 @@
 @endsection
 
 @section('styles')
+<link
+href="{{ asset('public/metronic_assets/global/plugins/font-awesome/css/font-awesome.min.css') }}"
+rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/cart.css') }}">
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/ipk-breadcrumb.css') }}">
 @endsection
@@ -24,9 +27,9 @@
             </nav>
         </div>
     </div>
-<div class="ipk-container cart-container">
+<div class="ipk-container cart-container" id="cart-page">
     <div class="ipk-content-container">
-        <div class="title">Giỏ hàng</div>
+        <div class="title">Giỏ hàng <i class="fa fa-arrow-right"></i> <span class="pass"> Thanh toán</span></div>
         <div class="products-wrapper">
             <div class="row products" id="products"></div>
             <div class="list-button-wrapper">
@@ -125,7 +128,7 @@ $(document).ready(function () {
                 + `<div class="name">${cart[i].name}</div>`
                 + `<div class="price-color">`
                 + `<span class="price">${numberWithCommas(cart[i].salePrice)}đ</span>`
-                + `<span class="color">${cart[i].size}, ${cart[i].color}</span>`
+                + `<span class="color-size"><div class="size">${cart[i].size}</div><span>,</span> <div>${cart[i].color}</div></span>`
                 + `</div>`
                 + `<div class="quantity-delete">`
                 + `<div class="quantity">`
@@ -142,7 +145,7 @@ $(document).ready(function () {
         count++;
     }
     $("#products").html(str);
-    $("#sum-price").html(`TỔNG ${numberWithCommas(sum)} VNĐ`);
+    $("#sum-price").html(`<span>TỔNG TIỀN:</span> <span>${numberWithCommas(sum)} VNĐ</span>`);
     $("#count-products").html(`Có ${count} sản phẩm`);
 });
 </script>

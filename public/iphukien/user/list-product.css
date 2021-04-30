@@ -657,5 +657,13 @@
         padding: 10px 0px;
     }
 }
-
+@media screen and (max-width: 1024px) {
+    .products-block .products-wrapper .product{
+        height: 345px!important;
+        overflow: hidden;
+    }
+    .products-block .products-wrapper .product .button-wrapper{
+        display: none !important;
+    }
+}
 /* end 414 */
