@@ -38,24 +38,28 @@
             </div>
         </li>
         <li class="hide-on-med-and-up">
-            @if (Auth::check() && Auth::user()->role_id == 2) {
-                <ul id='user-dropdown' class='dropdown-content'>
-                    <li class="first-line">
-                        <div class="avatar"
-                            style="background-image: url({{ isset(Auth::user()->avatar) ? asset('public/img/avatar/' . Auth::user()->avatar) : asset('public/assets/images/header/logo.svg') }})">
-                        </div>
-                        <span><a href="{{ route('user.information') }}">{{ Auth::user()->name }}</a></span>
-                    </li>
-                    <li><a href="{{ route('user.orders') }}">Đơn hàng của tôi</a></li>
-                    <li><a href="{{ route('user.information') }}">Cài đặt tài khoản</a></li>
-                    <li><a href="#!" class="ipk-logout" onclick="signOut()">Đăng xuất</a></li>
-                </ul>
-            @else
-                <div class="header-group-btn hide-on-small-only">
-                    <a href="{{ route('login') }}" class="ipk-btn btn-dang-nhap">Đăng nhập</a>
-                    <a href="{{ route('signup') }}" class="ipk-btn btn-dang-ky">Đăng ký ngay</a>
+            <div class="mobile-header-group-btn">
+            @if (Auth::check() && Auth::user()->role_id == 2) 
+                <div class="avatar"
+                    style="background-image: url({{ isset(Auth::user()->avatar) ? asset('public/img/avatar/' . Auth::user()->avatar) : asset('public/assets/images/header/logo.svg') }})">
                 </div>
+                <div class="ipk-mobile-link">
+                    <a href="{{ route('user.information') }}">{{ Auth::user()->name }}</a>
+                </div>
+                <div class="ipk-mobile-link">
+                    <a href="{{ route('user.orders') }}">Đơn hàng của tôi</a>
+                </div>
+                <div class="ipk-mobile-link">
+                    <a href="{{ route('user.information') }}">Cài đặt tài khoản</a>
+                </div>
+                <div class="ipk-mobile-link">
+                    <a href="#!" class="ipk-logout" onclick="signOut()">Đăng xuất</a>
+                </div>
+            @else
+                <a href="{{ route('login') }}" class="ipk-mobile-btn">Đăng nhập</a>
+                <a href="{{ route('signup') }}" class="ipk-mobile-btn">Đăng ký ngay</a>
             @endif
+            </div>
         </li>
         <li>
             <div class="ipk-tabs">

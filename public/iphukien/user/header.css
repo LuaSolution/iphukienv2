@@ -332,4 +332,31 @@ header .ipk-slide-out {
     header .header-search-form .btn-search-header {
         right: 0;
     }
+    .mobile-header-group-btn .ipk-mobile-btn {
+        width: 50%;
+        display: block;
+        text-align: center;
+        background-color: #fff;
+        margin: auto;
+        color: #000;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+    .mobile-header-group-btn .avatar {
+        width: 100px;
+        height: 100px;
+        background-repeat: no-repeat;
+        margin: auto;
+        background-color: #ccc;
+        background-position: center;
+    }
+    .mobile-header-group-btn .ipk-mobile-link {
+        text-align: center;
+    }
+    .mobile-header-group-btn .ipk-mobile-link a {
+        color: #fff;
+        font-size: 16px;
+    }
 }

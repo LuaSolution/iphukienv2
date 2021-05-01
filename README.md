@@ -10,3 +10,8 @@ iiphukien@gmail.com
 iPhuKien20@!
 ID: 595244321434114
 Scret: b29790f484b793adc62dd4dfa2355ef9
+
+ftp://45.130.228.4
+FTP hostname	ftp://sylencer.net
+FTP username	u846104315.iphukien.vn
+Pass: $Q7bP#VnZSyZ

@@ -382,7 +382,7 @@ class ProductController extends Controller
                                 foreach ($listChildrentProduct as $p) {
                                     //insert parent product
                                     $nhanhChildCate = $this->getCategoryOfNhanh($listNhanhCate, $p->categoryId);
-                                    $childCate = Cate::firstOrCreate(['title' => $nhanhChildCate->name]);
+                                    $childCate = Cate::firstOrCreate(['title' => isset($nhanhChildCate->name) ? $nhanhChildCate->name : 'no-category']);
                                     //insert parent product
                                     $checkChild = (new Product())->getProductByNhanhId($p->idNhanh);
                                     if($checkChild == null) {
@@ -406,10 +406,10 @@ class ProductController extends Controller
                                                 }
                                             }
                                         }
-                                        if (!$pSize) {
+                                        if (!isset($pSize)) {
                                             $pSize = Size::firstOrCreate(['name' => 'One Size']);
                                         }
-                                        if (!$pColor) {
+                                        if (!isset($pColor)) {
                                             $pColor = Color::firstOrCreate(['name' => 'One Color']);
                                         }
                                         $this->updateProductInformationFromNhanh(
