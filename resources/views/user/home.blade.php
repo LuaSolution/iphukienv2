@@ -70,7 +70,7 @@ const x = setInterval(function() {
         @if($slider)
         <div class="remove-line-height banner">
             @if(strpos($slider->image, 'mp4') == true)
-            <video width="100%" height="340" controls>
+            <video width="100%" height="540" controls>
                 <source src="{{ asset('/public/'. $slider->image) }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
