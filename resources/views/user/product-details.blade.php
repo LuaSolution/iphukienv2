@@ -109,7 +109,7 @@
             </div>
             @if(count($listColor) > 0)
             <div class="sizes-wrapper">
-                <div class="color-label">Màu sắc <span>Đen</span></div>
+                <div class="color-label">Màu sắc</div>
                 <div class="colors">
                     @foreach($listColor as $item)
                     <span class="color-detail"

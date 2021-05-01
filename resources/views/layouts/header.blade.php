@@ -71,7 +71,11 @@
                 <?php $c = \App\Cate::where('parent_id', null)->get();?>
                             @foreach($c as $cate)
                     <div class="item-group">
+                        @if(\App\Cate::where('parent_id', $cate->id)->count() > 0)
+                        <a href="#" class="parent-item">{{ $cate->title }}</a>
+                        @else
                         <a href="{{ route('categories.show', ['id' => $cate->id]) }}" class="parent-item">{{ $cate->title }}</a>
+                        @endif
                         <div class="list-sub-item">
                         <?php $i = \App\Cate::where('parent_id', $cate->id)->get();?>
                         @foreach($i as $sub)
