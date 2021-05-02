@@ -48,10 +48,10 @@
                         <span data-bg="{{ $item }}" style="background-image: url({{ $item }})"
                             data-img="{{ $item }}"></span>
                         @endforeach
-                        <div class="video-icon"
+                        {{-- <div class="video-icon"
                             data-video="{{ $product->video }}">
                             <a href="#!"></a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -508,14 +508,32 @@ $(document).on("click",".add-to-card-btn-detail",function() {
         $('.thumbs-wrapper-slide .thumbs-slide').slick({
             infinite: false,
             slidesToShow: 3,
-            slidesToScroll: 3
+            slidesToScroll: 3,
+            arrows: true,
+            responsive: [
+                {
+                breakpoint: 561,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                    }
+                },
+                {
+                breakpoint: 376,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                    }
+                }
+            ]
         });
     } else {
         $('.thumbs-wrapper-slide .thumbs-slide').slick({
             infinite: false,
             slidesToShow: 3,
             slidesToScroll: 3,
-            vertical: true
+            vertical: true,
+            arrows: true
         });
     }
     $('#product-container .list-thumb-wrapper .thumbs-wrapper-slide .thumbs-slide span').click(function () {
