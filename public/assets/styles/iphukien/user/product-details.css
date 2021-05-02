@@ -946,6 +946,10 @@
         margin-top: 10px;
     }
 
+    .button-wrapper {
+        display : none !important;
+    }
+
     #product-container .same-products-block .block-title {
         margin-top: 0px;
     }

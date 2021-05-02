@@ -213,7 +213,7 @@ img {
 
 #content .row .col.product {
   padding: 30px;
-  height: 420px!important;
+  /* height: 420px!important; */
 }
 
 .filter-block {
