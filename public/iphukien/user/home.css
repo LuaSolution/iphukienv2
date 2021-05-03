@@ -256,53 +256,7 @@
     margin-left: 0;
 }
 
-.news-feed-container {
-    background-color: #131313;
-    padding: 37px 0;
-    text-align: center;
-    height: 110px;
-}
 
-.news-feed-container span, .news-feed-container input {
-    display: inline-block;
-}
-
-.news-feed-container span {
-    font-weight: bold;
-    font-size: 17px;
-    line-height: 22px;
-    color: #FFFFFF;
-    text-transform: uppercase;
-}
-
-.news-feed-container input.news-feed-email, .news-feed-container input.news-feed-email:focus {
-    width: 310px;
-    height: 36px;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 36px;
-    color: #BABABA;
-    padding-left: 46px;
-    background-image: url(/public/assets/images/home/mail.svg);
-    background-repeat: no-repeat;
-    background-position: left 20px center;
-    background-color: #fff;
-    border: 1px solid #E1E1E1;
-    margin-left: 30px;
-}
-
-.news-feed-container .submit-new-feed, .news-feed-container .submit-new-feed:focus {
-    margin-left: 8px;
-    width: 91px;
-    height: 38px;
-    line-height: 38px;
-    background-color: #073552;
-    font-weight: normal;
-    font-size: 16px;
-    text-align: center;
-    color: #fff;
-    border: none;
-}
 
 .partners .partner-item {
     background-repeat: no-repeat;
@@ -315,9 +269,6 @@
 @media only screen and (max-width: 600px) {
     .carousel-item .carousel-item-wrapper {
         padding: 80px 20px 20px 20px;
-    }
-    .news-feed-container {
-        height: unset;
     }
 }
 

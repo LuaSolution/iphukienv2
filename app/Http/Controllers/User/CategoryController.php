@@ -43,7 +43,7 @@ class CategoryController extends Controller
         }
 
         if ($id == -1 || $id == -2) {
-            $category = (object) ['title' => 'Danh sách sản phẩm'];
+            $category = (object) ['id' => null, 'title' => 'Danh sách sản phẩm'];
 
             $this->data['category'] = $category;
         } else {
@@ -78,9 +78,9 @@ class CategoryController extends Controller
 
         if (count(json_decode($data['tags'])) === 0 && count(json_decode($data['trademarks'])) === 0 && count(json_decode($data['sizes'])) === 0 && count(json_decode($data['colors'])) === 0 && count(json_decode($data['prices'])) === 0) {
             return json_encode(DB::table('products')
-                ->where('category_id', $id)
-                ->whereNull('products.parent_id')->get());
-        } 
+                    ->where('category_id', $id)
+                    ->whereNull('products.parent_id')->get());
+        }
 
         $query = Product::where('category_id', $id)->whereNull('parent_id')->whereBetween('price', json_decode($price));
         if (count(json_decode($tag)) > 0) {
@@ -90,7 +90,7 @@ class CategoryController extends Controller
             $query = $query->whereIn('trademark_id', json_decode($trademark));
         }
         $listProduct = $query->get();
-        $func = function($p) {
+        $func = function ($p) {
             return $p['id'];
         };
         $listParentId = array_map($func, $listProduct->toArray());
@@ -102,7 +102,7 @@ class CategoryController extends Controller
         }
         $listChild = Product::whereIn('parent_id', $listParentId)->get();
         if (count(json_decode($size)) > 0) {
-            foreach($listChild as $p) {
+            foreach ($listChild as $p) {
                 if (!in_array($p->parent_id, $listFinalId)) {
                     if (in_array($p->size_id, json_decode($size))) {
                         array_push($listFinalId, $p->parent_id);
@@ -112,7 +112,7 @@ class CategoryController extends Controller
             }
         }
         if (count(json_decode($color)) > 0) {
-            foreach($listChild as $p) {
+            foreach ($listChild as $p) {
                 if (!in_array($p->parent_id, $listFinalId)) {
                     if (in_array($p->color_id, json_decode($color))) {
                         array_push($listFinalId, $p->parent_id);
@@ -126,7 +126,5 @@ class CategoryController extends Controller
 
         return response()->json(['currentPage' => 1, 'total_page' => 1, 'view' => $view], 200);
     }
-    
+
 }
-
-

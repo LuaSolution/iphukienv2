@@ -167,14 +167,6 @@ echo ('<script type="text/javascript">
         @endforeach
     </div>
 </div>
-<div class="ipk-container news-feed-container">
-    <form action="{{ route('postContact') }}" method="POST">
-        {{ csrf_field() }}
-        <span>Đăng ký nhận khuyến mãi </span>
-        <input type="text" name="email" placeholder="Email của bạn" class="news-feed-email" />
-        <input type="submit" value="Đồng ý" class="submit-new-feed" />
-    </form>
-</div>
 @include('layouts.quickview')
 @endsection
 
