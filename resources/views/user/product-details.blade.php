@@ -48,12 +48,12 @@
                         <span data-bg="{{ $item }}" style="background-image: url({{ $item }})"
                             data-img="{{ $item }}"></span>
                         @endforeach
-                        {{-- <div class="video-icon"
-                            data-video="{{ $product->video }}">
-                            <a href="#!"></a>
-                        </div> --}}
                     </div>
                 </div>
+            </div>
+            <div class="video-icon"
+                data-video="{{ $product->video }}">
+                <a href="#!"></a>
             </div>
         </div>
         @else

@@ -61,11 +61,11 @@
     background-repeat: no-repeat;
     background-position: center;
     background-color: #fff;
-    aspect-ratio: 1/1;
+    aspect-ratio: 3/2;
     border: 1px solid #DDDDDD;
     box-sizing: border-box;
-    width: 100%;
-    margin-top: 2px;
+    max-width: 190px;
+    margin: 10px auto 0;
 }
 
 .product-container .main-image {
