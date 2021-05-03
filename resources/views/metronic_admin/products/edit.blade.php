@@ -32,7 +32,7 @@
                             <label for="form-name">Tên sản phẩm</label>
                         </div>
                         <div class="form-group form-md-line-input has-success">
-                            <input type="text" class="form-control" id="form-slug" name="slug" required=""
+                            <input type="text" class="form-control" id="form-slug" name="slug"
                                 value="{{ $product->slug }}">
                             <label for="form-slug">Link thân thiện</label>
                         </div>

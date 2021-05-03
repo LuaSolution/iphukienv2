@@ -31,7 +31,7 @@
                             <label for="form-name">Tên sản phẩm</label>
                         </div>
                         <div class="form-group form-md-line-input has-success">
-                            <input type="text" class="form-control" id="form-slug" name="slug" required="">
+                            <input type="text" class="form-control" id="form-slug" name="slug" >
                             <label for="form-slug">Link thân thiện</label>
                         </div>
                         <div class="form-group form-md-line-input has-success">
@@ -157,7 +157,7 @@ $('#parent').on('change', function() {
         $("#size-block").removeClass('hide')
         $("#color-block").removeClass('hide')
         $("#upload-img-block").removeClass('hide')
-    } 
+    }
 })
 $(document).on("click",".add-more-img",function() {
   $("#upload-img-area").append(
@@ -243,7 +243,7 @@ $(document).on("submit", "#create-new", function(e) {
             } else {
                 alert(response.message);
             }
-            
+
         },
         error: function(response) {
             console.log(response.responseText)
