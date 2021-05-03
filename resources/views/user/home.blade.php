@@ -220,6 +220,7 @@ $('.slide-wrapper-category').slick({
             infinite: false,
             slidesToShow: 5,
             slidesToScroll: 1,
+            arrows: false,
             responsive: [
                 {
                 breakpoint: 1024,
