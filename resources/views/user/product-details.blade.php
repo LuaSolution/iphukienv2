@@ -537,7 +537,6 @@ $(document).on("click",".add-to-card-btn-detail",function() {
         });
     }
     $('#product-container .list-thumb-wrapper .thumbs-wrapper-slide .thumbs-slide span').click(function () {
-        console.log('asd');
         $('.main-image.is-image').css('background-image', 'url('+$(this).data('bg')+')');
     });
 </script>

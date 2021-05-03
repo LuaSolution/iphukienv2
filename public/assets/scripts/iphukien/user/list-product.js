@@ -3,9 +3,9 @@ $(document).ready(function () {
     $.each($(".product .img"), function (index, value) {
         value.style.height = value.offsetWidth + "px"
     })
-    $.each($(".product"), function (index, value) {
-        value.style.height = 412 + "px"
-    })
+    // $.each($(".product"), function (index, value) {
+    //     value.style.height = 412 + "px"
+    // })
     var elems = document.querySelectorAll('#quickview')
     M.Modal.init(elems, {
         'onOpenEnd': initCarouselModal
