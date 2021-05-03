@@ -15,6 +15,7 @@
                 <span class="sale">{{ number_format($product->price, 0, ',', '.') }}đ</span>
                 @else
                 <span class="sale">{{ number_format($product->sale_price , 0, ',', '.') }}đ</span>
+                <br/>
                 <span class="origin">{{ number_format($product->price, 0, ',', '.') }}đ</span>
                 @endif
             </div>

@@ -157,7 +157,7 @@
 .sale-products .button-detail {
     position: absolute;
     right: 45px;
-    bottom: 30px;
+    bottom: 0;
 }
 
 .sale-products .button-detail a {
@@ -203,8 +203,9 @@
     width: 47px;
     height: 52px;
     top: calc(50% - 26px);
-    right: 0;
+    right: 30px;
     position: absolute;
+    background-size: contain;
     cursor: pointer;
 }
 
@@ -214,11 +215,12 @@
     width: 47px;
     height: 52px;
     top: calc(50% - 26px);
-    left: 0;
+    left: 30px;
     position: absolute;
     cursor: pointer;
     transform: rotate(180deg);
     z-index: 1;
+    background-size: contain;
 }
 
 .products-block {
@@ -370,8 +372,12 @@
     .sale-products {
         padding-bottom: 0px;
     }
-    .sale-products .ipk-pre-slide {
-        top: calc(50% - 48px);
+    .sale-products .ipk-pre-slide,
+    .sale-products .ipk-next-slide {
+        top: calc(50% - 45px);
+        width: 28px;
+        height: 28px;
+        background-size: contain;
     }
 }
 

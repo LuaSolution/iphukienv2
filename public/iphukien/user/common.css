@@ -213,7 +213,7 @@ img {
 
 #content .row .col.product {
   padding: 30px;
-  height: 420px!important;
+  /* height: 420px!important; */
 }
 
 .filter-block {
@@ -615,7 +615,7 @@ img {
     padding-top: 24px;
   }
   .sale-products .carousel.carousel-slider {
-    height: 300px!important;
+    height: 350px!important;
   }
   .sale-products .carousel.carousel-slider .carousel-item {
     min-height: 300px!important;

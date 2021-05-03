@@ -758,7 +758,6 @@
 @media screen and (min-width: 769px) {
     #product-container .list-thumb-wrapper .thumbs-wrapper-slide .thumbs-slide {
         height: 570px;
-        overflow: scroll;
     }
 
     #product-container .list-thumb-wrapper .thumbs-wrapper-slide .thumbs-slide::-webkit-scrollbar,
@@ -768,7 +767,6 @@
 
     #product-container .list-thumb-wrapper .thumbs-wrapper-slide .slick-list.draggable {
         height: 100% !important;
-        overflow: scroll;
     }
 
     #product-container .list-thumb-wrapper .thumbs-wrapper-slide .thumbs-slide,
@@ -788,6 +786,23 @@
         background-size: cover;
         background-position: center;
     }
+    #product-container .thumbs-wrapper-slide .slick-prev{
+        z-index: 1;
+        top: 0px;
+        left: 50%;
+        transform: translateX(-50%) rotate(90deg);
+    }
+
+    #product-container .thumbs-wrapper-slide .slick-next{
+        z-index: 1;
+        top: calc(100% - 20px);
+        left: 50%;
+        transform: translateX(-50%) rotate(90deg);
+    }
+    #product-container .thumbs-wrapper-slide .slick-arrow::before{
+        color: #000;
+        font-size: 28px;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -801,9 +816,9 @@
     #product-container .list-thumb-wrapper .thumbs-wrapper-slide .thumbs-slide span,
     #product-container .list-thumb-wrapper .thumbs-wrapper-slide .thumbs-slide .video-icon {
         display: block;
-        aspect-ratio: 1/1;
-        background-size: contain;
-        max-width: 65px;
+        aspect-ratio: 2/1;
+        background-size: cover;
+        background-repeat: no-repeat;
         margin: 0 4px;
     }
 
@@ -831,7 +846,7 @@
     }
 
     #product-container .product-infos .name {
-        font-size: 17px;
+        font-size: 25px;
         font-weight: 700;
         line-height: 22px;
         color: #000000;
@@ -931,7 +946,23 @@
         margin-top: 10px;
     }
 
+    .button-wrapper {
+        display : none !important;
+    }
+
     #product-container .same-products-block .block-title {
         margin-top: 0px;
+    }
+    #product-container .thumbs-wrapper-slide .slick-prev{
+        z-index: 1;
+        left: 0;
+    }
+    #product-container .thumbs-wrapper-slide .slick-arrow::before{
+        color: #000;
+        font-size: 28px;
+    }
+    #product-container .thumbs-wrapper-slide .slick-next{
+        z-index: 1;
+        right: 0;
     }
 }
