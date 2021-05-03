@@ -220,8 +220,6 @@
         })
 
         function searchAjax(page = 1) {
-            const id = {{ $id }};
-
             $.ajax({
                 url: `{{route('categories.search_ajax', $category->id)}}?page=${page}&tags=[${tags}]&colors=[${colors}]&sizes=[${sizes}]&trademarks=[${trademarks}]&prices=[${prices}]`,
                 method: 'get',
