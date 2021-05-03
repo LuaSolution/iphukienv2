@@ -82,6 +82,7 @@
                     sum += parseInt(cart[i]['quantity']);
                 }
                 $("#header-cart-total").html(sum)
+                $("#header-cart-total-mobile").html(sum)
             });
         </script>
     </footer>

@@ -359,4 +359,49 @@ header .ipk-slide-out {
         color: #fff;
         font-size: 16px;
     }
+    .mobile-header-group-btn .ipk-mobile-link a.ipk-mobile-header-icon {
+        width: 40px;
+        height: 40px;
+        display: inline-block;
+        background-color: #fff;
+        margin-top: 15px;
+        background-repeat: no-repeat;
+        background-position: center;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+    }
+    .mobile-header-group-btn .ipk-mobile-link a.ipk-mobile-header-icon.facebook-mobile-icon {
+        background-image: url(/public/assets/images/header/facebook.svg);
+    }
+    .mobile-header-group-btn .ipk-mobile-link a.ipk-mobile-header-icon.instagram-mobile-icon {
+        background-image: url(/public/assets/images/header/instagram.svg);
+    }
+    .mobile-header-group-btn .ipk-mobile-link a.ipk-mobile-header-icon.youtube-mobile-icon {
+        background-image: url(/public/assets/images/header/youtube.svg);
+    }
+    .mobile-header-group-btn .ipk-mobile-link a.ipk-mobile-header-icon.wishlist-mobile-icon {
+        background-image: url(/public/assets/images/header/wishlist.svg);
+    }
+    .mobile-header-group-btn .ipk-mobile-link a.ipk-mobile-header-icon.cart-mobile-icon {
+        background-image: url(/public/assets/images/header/cart.svg);
+        position: relative;
+    }
+    .mobile-header-group-btn .ipk-mobile-link a.ipk-mobile-header-icon.cart-mobile-icon span {
+        position: absolute;
+        font-weight: 900;
+        font-size: 7px;
+        line-height: 10px;
+        text-align: center;
+        color: #FFFFFF;
+        background-color: #E24C4C;
+        display: block;
+        width: 10px;
+        height: 10px;
+        top: 6px;
+        right: 6px;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+    }
 }
