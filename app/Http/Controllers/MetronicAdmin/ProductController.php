@@ -473,7 +473,7 @@ class ProductController extends Controller
             'price' => $product->oldPrice != null ? $product->oldPrice : $product->price,
             'sale_price' => $product->price,
             'status_id' => $parentStatusId,
-            'tag_id' => 11,
+            'tag_id' => null,
             'size_id' => $sizeId,
             'color_id' => $colorId,
             'trademark_id' => $trademarkId,
