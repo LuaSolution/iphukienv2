@@ -89,7 +89,9 @@
     }
     .ipk-container{
         form{
-            input&ty
+            input[type="text"]{
+padding-left: 50px;
+            }
         }
     }
 }
