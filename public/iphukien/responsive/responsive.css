@@ -1,0 +1,52 @@
+@media (max-width: 375px) {
+  header.ipk-container {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .products-block p.block-title {
+    margin-bottom: 15px;
+  }
+  .products-block .products-wrapper .products .price {
+    display: flex;
+  }
+  .products-block .products-wrapper .products .price br {
+    display: none;
+  }
+  .products-block .products-wrapper .products .price span.sale {
+    margin-right: 5px;
+  }
+  .products-block .products-wrapper .products .price span.origin {
+    font-size: 12px;
+  }
+  .products-block .products-wrapper .products .button-wrapper a {
+    display: none;
+  }
+
+  .product-container .ipk-content-container .list-thumb-wrapper .img-block .thumbs-wrapper-slide .thumbs-slide .slick-list, .ipk-container .ipk-content-container .list-thumb-wrapper .img-block .thumbs-wrapper-slide .thumbs-slide .slick-list {
+    height: 100px;
+  }
+  .product-container .ipk-content-container .list-thumb-wrapper .img-block .thumbs-wrapper-slide .thumbs-slide .slick-list .slick-track, .ipk-container .ipk-content-container .list-thumb-wrapper .img-block .thumbs-wrapper-slide .thumbs-slide .slick-list .slick-track {
+    height: 100% !important;
+    left: 35%;
+  }
+  .product-container .ipk-content-container .list-thumb-wrapper .img-block .thumbs-wrapper-slide .thumbs-slide .slick-list .slick-track span, .ipk-container .ipk-content-container .list-thumb-wrapper .img-block .thumbs-wrapper-slide .thumbs-slide .slick-list .slick-track span {
+    background-size: contain !important;
+  }
+  .product-container .ipk-content-container .sale-products .carousel-slider .ipk-pre-slide, .ipk-container .ipk-content-container .sale-products .carousel-slider .ipk-pre-slide {
+    top: calc(50% - 48px);
+    left: 0;
+  }
+  .product-container .ipk-content-container .sale-products .carousel-slider .ipk-next-slide, .ipk-container .ipk-content-container .sale-products .carousel-slider .ipk-next-slide {
+    top: calc(50% - 48px);
+    right: 0;
+  }
+  .product-container .ipk-content-container .sale-products .sale-product-slider .carousel-item .carousel-item-wrapper .item-infos, .ipk-container .ipk-content-container .sale-products .sale-product-slider .carousel-item .carousel-item-wrapper .item-infos {
+    margin-bottom: 15px;
+  }
+  .product-container .ipk-content-container .product-infos .status-wrapper .list-status span.status, .ipk-container .ipk-content-container .product-infos .status-wrapper .list-status span.status {
+    margin-left: -2px;
+  }
+}
+
+/*# sourceMappingURL=responsive.css.map */

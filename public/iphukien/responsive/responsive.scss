@@ -1,0 +1,90 @@
+@mixin responsive($size) {
+    @media (max-width: #{$size}px) {
+        @content;
+    }
+}
+
+@include responsive(375){
+    header.ipk-container{
+        background: #FFFFFF;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    .products-block{
+        p.block-title{
+            margin-bottom: 15px;
+        }
+        .products-wrapper{
+            .products{
+                .price{
+                    display: flex;
+                    br{
+                        display: none;
+                    }
+                    span.sale{
+                        margin-right: 5px;
+                    }
+                    span.origin{
+                        font-size: 12px;
+                    }
+                }
+                .button-wrapper{
+                    a{
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+    .product-container,.ipk-container{
+        .ipk-content-container{
+            .list-thumb-wrapper{
+                .img-block{
+                    .thumbs-wrapper-slide{
+                        .thumbs-slide{
+                            .slick-list{
+                                height: 100px;
+                                .slick-track{
+                                    height: 100% !important;
+                                    left: 35%;
+                                    span{
+                                        background-size: contain!important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .sale-products{
+                .carousel-slider{
+                    .ipk-pre-slide{
+                        top: calc(50% - 48px);
+                        left: 0;
+                    }
+                    .ipk-next-slide{
+                        top: calc(50% - 48px);
+                        right: 0;
+                    }
+                }
+                .sale-product-slider{
+                    .carousel-item{
+                        .carousel-item-wrapper{
+                            .item-infos{
+                                margin-bottom: 15px;
+                            }
+                        }
+                    }
+                }
+            }
+            .product-infos{
+                .status-wrapper{
+                    .list-status{
+                        span.status{
+                            margin-left: -2px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

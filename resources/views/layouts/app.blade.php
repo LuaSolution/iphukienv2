@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="{{ asset('public/iphukien/user/header.css') }}">
     <link rel="stylesheet" href="{{ asset('public/iphukien/user/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('public/iphukien/user/common.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/iphukien/responsive/responsive.css') }}">
     <meta name="google-signin-client_id" content="445632322462-522or3m8qn2qaikj451irtimtegv2bqe.apps.googleusercontent.com">
     @yield('fb-meta-tags')
     @yield('meta-tags')
