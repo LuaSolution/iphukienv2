@@ -38,7 +38,6 @@
 </div>
 <div class="ipk-container product-container" id="product-container">
     <div class="row ipk-content-container">
-
         @if(count($listImage) > 0)
         <div class="col l1 s3 list-thumb-wrapper">
             <div class="img-block">
