@@ -3,9 +3,82 @@
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
+  header.ipk-container ul.sidenav {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  header.ipk-container ul.sidenav li {
+    flex-basis: 100%;
+  }
+  header.ipk-container ul.sidenav li.hide-on-med-and-up .mobile-header-group-btn .class-cart {
+    display: flex;
+  }
+  header.ipk-container ul.sidenav li.hide-on-med-and-up .mobile-header-group-btn .class-cart .icon-wish {
+    flex-basis: 100%;
+    width: 40px;
+    height: 40px;
+    display: block;
+    text-align: right;
+    padding-right: 15px;
+    margin-bottom: 10px;
+  }
+  header.ipk-container ul.sidenav li.hide-on-med-and-up .mobile-header-group-btn .class-cart .icon-wish a.wishlist-mobile-icon {
+    margin-top: unset;
+  }
+  header.ipk-container ul.sidenav li.hide-on-med-and-up .mobile-header-group-btn .class-cart .icon-cart {
+    flex-basis: 100%;
+    width: 40px;
+    height: 40px;
+    display: block;
+    text-align: left;
+    padding-left: 15px;
+  }
+  header.ipk-container ul.sidenav li.hide-on-med-and-up .mobile-header-group-btn .class-cart .icon-cart a.cart-mobile-icon {
+    margin-top: unset;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .ipk-mobile-link {
+    flex-basis: 100%;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-user {
+    order: 1;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-cart {
+    order: 2;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-order {
+    order: 3;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-sett {
+    order: 4;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-out {
+    order: 5;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-social {
+    order: 6;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .avatar {
+    display: none;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-social a {
+    margin-right: 20px;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-social a:last-child {
+    margin-right: 0;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .ipk-mobile-btn {
+    width: 40%;
+  }
 
   .products-block p.block-title {
     margin-bottom: 15px;
+  }
+  .products-block .products-wrapper .products .img_product {
+    background-size: cover;
   }
   .products-block .products-wrapper .products .price {
     display: flex;
@@ -20,7 +93,7 @@
     font-size: 12px;
   }
   .products-block .products-wrapper .products .button-wrapper a {
-    display: none;
+    display: none !important;
   }
 
   .product-container .ipk-content-container .list-thumb-wrapper .img-block .thumbs-wrapper-slide .thumbs-slide .slick-list, .ipk-container .ipk-content-container .list-thumb-wrapper .img-block .thumbs-wrapper-slide .thumbs-slide .slick-list {
@@ -47,10 +120,28 @@
   .product-container .ipk-content-container .product-infos .status-wrapper .list-status span.status, .ipk-container .ipk-content-container .product-infos .status-wrapper .list-status span.status {
     margin-left: -2px;
   }
-
-  .ipk-container form input[type=text] {
+  .product-container .ipk-content-container #content .products-wrapper .products .product .button-wrapper a, .ipk-container .ipk-content-container #content .products-wrapper .products .product .button-wrapper a {
+    display: none !important;
+  }
+  .product-container .ipk-container.news-feed-container form input[name=email], .ipk-container .ipk-container.news-feed-container form input[name=email] {
     padding-left: 50px;
   }
+}
+footer .footer-container .footer .s12 {
+  margin-right: 20px !important;
+}
+footer .ipk-container.news-feed-container form input[name=email] {
+  padding-left: 50px;
+}
+
+.categories-container .ipk-content-container .filter-block {
+  margin-top: unset !important;
+}
+.categories-container .ipk-content-container .filter-block .select-wrapper input.select-dropdown {
+  width: 150px;
+}
+.categories-container .ipk-content-container .filter-block .select-wrapper svg.caret {
+  right: -10px;
 }
 
 /*# sourceMappingURL=responsive.css.map */
