@@ -146,7 +146,9 @@ echo ('<script type="text/javascript">
         @endif
         <div class="products-block">
             <p class="block-title">SẢN PHẨM MỚI</p>
+            <div id="content">
             @include('layouts.list-product', ['listProduct' => $proNew, 'hasReadMore' => false])
+            </div>
             <div class="container">
                 <a href="{{ url('/categories/-1') }}" class="btn-xem-them" >XEM THÊM</a>
             </div>

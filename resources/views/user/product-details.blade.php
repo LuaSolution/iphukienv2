@@ -162,7 +162,9 @@ document.write('<a href="' + loc + '" target="_blank"><svg width="7" height="14"
     </div>
     <div class="same-products-block ipk-content-container">
         <p class="block-title">Sản phẩm tương tự</p>
+        <div id="content">
         @include('layouts.list-product', ['listProduct' => $listSameProduct, 'hasReadMore' => false])
+        </div>
     </div>
 </div>
 @include('layouts.quickview')
