@@ -238,8 +238,8 @@ $(document).on("change",".upload-img-input",function() {
   let fd = new FormData();
   fd.append('type', $(this).data('imageid') ? 'update' : 'add');
   fd.append('product_image_id', $(this).data('imageid'));
-  fd.append('size_id', {{$product->size_id}});
-  fd.append('color_id', {{$product->color_id}});
+  fd.append('size_id', $("#size").val());
+  fd.append('color_id', $("#color").val());
   fd.append('_token', '{{ csrf_token() }}');
   fd.append('image', this.files[0]);
   $.ajax({
