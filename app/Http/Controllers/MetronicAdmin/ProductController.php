@@ -396,7 +396,7 @@ class ProductController extends Controller
                                         $childBranchName = !empty($p->brandName) ? $p->brandName : 'iPhuKien';
                                         $chilTrademarkObj = Trademark::firstOrCreate(['name' => $childBranchName]);
                                         //update product information
-                                        if (count($p->attributes) > 0) {
+                                        if (isset($p->attributes) && count($p->attributes) > 0) {
                                             foreach ($p->attributes as $att) {
                                                 if (strpos(reset($att)->attributeName, 'Kích thước') !== false) {
                                                     $pSize = Size::firstOrCreate(['name' => reset($att)->name]);
