@@ -36,23 +36,23 @@
                 <a href="{{ route('getHome') }}"><img src="{{ asset('public/assets/images/header/logo.svg') }}"></a>
             </div>
         </li>
-        <li class="hide-on-med-and-up li2">
+        <li class="hide-on-med-and-up li2-1">
             <div class="mobile-header-group-btn">
                 @if (Auth::check() && Auth::user()->role_id == 2)
                 <div class="avatar"
                     style="background-image: url({{ isset(Auth::user()->avatar) ? asset('public/img/avatar/' . Auth::user()->avatar) : asset('public/assets/images/header/logo.svg') }})">
                 </div>
                 @endif
-                <div class="ipk-mobile-link class-social">
+                <div class="ipk-mobile-link class-social-1">
                     <a href="https://www.facebook.com/" class="ipk-mobile-header-icon facebook-mobile-icon"></a>
                     <a href="https://www.instagram.com/" class="ipk-mobile-header-icon instagram-mobile-icon"></a>
                     <a href="https://www.youtube.com/" class="ipk-mobile-header-icon youtube-mobile-icon"></a>
-                </div>  
+                </div>
                 @if (Auth::check() && Auth::user()->role_id == 2)
-                <div class="ipk-mobile-link class-user">
+                <div class="ipk-mobile-link class-user-1">
                     <a href="{{ route('user.information') }}">{{ Auth::user()->name }}</a>
                 </div>
-                <div class="ipk-mobile-link class-cart">
+                <div class="ipk-mobile-link class-cart-1">
                     <div class="icon-wish">
                         <a href="{{ route('user.wishlist') }}" class="ipk-mobile-header-icon wishlist-mobile-icon"></a>
                     </div>
@@ -62,14 +62,14 @@
                         </a>
                     </div>
 
-                </div>  
-                <div class="ipk-mobile-link class-order">
+                </div>
+                <div class="ipk-mobile-link class-order-1">
                     <a href="{{ route('user.orders') }}">Đơn hàng của tôi</a>
                 </div>
                 <div class="ipk-mobile-link class-sett">
                     <a href="{{ route('user.information') }}">Cài đặt tài khoản</a>
                 </div>
-                <div class="ipk-mobile-link class-out">
+                <div class="ipk-mobile-link class-out-1">
                     <a href="#!" class="ipk-logout" onclick="signOut()">Đăng xuất</a>
                 </div>
                 @else
@@ -112,6 +112,49 @@
                 </div>
             </div>
         </li>
+        <li class="hide-on-med-and-up li2-2">
+            <div class="mobile-header-group-btn">
+                @if (Auth::check() && Auth::user()->role_id == 2)
+                    <div class="avatar"
+                         style="background-image: url({{ isset(Auth::user()->avatar) ? asset('public/img/avatar/' . Auth::user()->avatar) : asset('public/assets/images/header/logo.svg') }})">
+                    </div>
+                @endif
+                <div class="ipk-mobile-link class-social">
+                    <a href="https://www.facebook.com/" class="ipk-mobile-header-icon facebook-mobile-icon"></a>
+                    <a href="https://www.instagram.com/" class="ipk-mobile-header-icon instagram-mobile-icon"></a>
+                    <a href="https://www.youtube.com/" class="ipk-mobile-header-icon youtube-mobile-icon"></a>
+                </div>
+                @if (Auth::check() && Auth::user()->role_id == 2)
+                    <div class="ipk-mobile-link class-user">
+                        <a href="{{ route('user.information') }}">{{ Auth::user()->name }}</a>
+                    </div>
+                    <div class="ipk-mobile-link class-cart">
+                        <div class="icon-wish">
+                            <a href="{{ route('user.wishlist') }}" class="ipk-mobile-header-icon wishlist-mobile-icon"></a>
+                        </div>
+                        <div class="icon-cart">
+                            <a href="{{ route('user.cart') }}" class="ipk-mobile-header-icon cart-mobile-icon">
+                                <span id="header-cart-total-mobile">0</span>
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="ipk-mobile-link class-order">
+                        <a href="{{ route('user.orders') }}">Đơn hàng của tôi</a>
+                    </div>
+                    <div class="ipk-mobile-link class-sett">
+                        <a href="{{ route('user.information') }}">Cài đặt tài khoản</a>
+                    </div>
+                    <div class="ipk-mobile-link class-out">
+                        <a href="#!" class="ipk-logout" onclick="signOut()">Đăng xuất</a>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" class="ipk-mobile-btn">Đăng nhập</a>
+                    <a href="{{ route('signup') }}" class="ipk-mobile-btn">Đăng ký ngay</a>
+                @endif
+            </div>
+        </li>
+
     </ul>
     @if(Auth::check())
     <ul id='user-dropdown' class='dropdown-content'>

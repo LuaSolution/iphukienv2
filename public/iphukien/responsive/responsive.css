@@ -10,10 +10,27 @@
   header.ipk-container ul.sidenav li {
     flex-basis: 100%;
   }
-  header.ipk-container ul.sidenav li.hide-on-med-and-up .mobile-header-group-btn .class-cart {
+  header.ipk-container ul.sidenav li .mobile-header-group-btn {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .ipk-mobile-link {
+    flex-basis: 100%;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .li1 {
+    order: 1;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-user-1 {
+    order: 2;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-order-1 {
+    order: 3;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-cart-1 {
+    order: 5;
     display: flex;
   }
-  header.ipk-container ul.sidenav li.hide-on-med-and-up .mobile-header-group-btn .class-cart .icon-wish {
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-cart-1 .icon-wish {
     flex-basis: 100%;
     width: 40px;
     height: 40px;
@@ -22,10 +39,10 @@
     padding-right: 15px;
     margin-bottom: 10px;
   }
-  header.ipk-container ul.sidenav li.hide-on-med-and-up .mobile-header-group-btn .class-cart .icon-wish a.wishlist-mobile-icon {
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-cart-1 .icon-wish a.wishlist-mobile-icon {
     margin-top: unset;
   }
-  header.ipk-container ul.sidenav li.hide-on-med-and-up .mobile-header-group-btn .class-cart .icon-cart {
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-cart-1 .icon-cart {
     flex-basis: 100%;
     width: 40px;
     height: 40px;
@@ -33,33 +50,35 @@
     text-align: left;
     padding-left: 15px;
   }
-  header.ipk-container ul.sidenav li.hide-on-med-and-up .mobile-header-group-btn .class-cart .icon-cart a.cart-mobile-icon {
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-cart-1 .icon-cart a.cart-mobile-icon {
     margin-top: unset;
   }
-  header.ipk-container ul.sidenav li .mobile-header-group-btn {
-    display: flex;
-    flex-wrap: wrap;
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .li3 {
+    order: 6;
   }
-  header.ipk-container ul.sidenav li .mobile-header-group-btn .ipk-mobile-link {
-    flex-basis: 100%;
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-social {
+    order: 7;
   }
-  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-user {
-    order: 1;
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-out {
+    order: 8;
   }
-  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-cart {
-    order: 2;
-  }
-  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-order {
-    order: 3;
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-social-1 {
+    display: none;
   }
   header.ipk-container ul.sidenav li .mobile-header-group-btn .class-sett {
     order: 4;
   }
-  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-out {
-    order: 5;
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-out-1 {
+    display: none;
   }
-  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-social {
-    order: 6;
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-user {
+    display: none;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-order {
+    display: none;
+  }
+  header.ipk-container ul.sidenav li .mobile-header-group-btn .class-cart {
+    display: none;
   }
   header.ipk-container ul.sidenav li .mobile-header-group-btn .avatar {
     display: none;
@@ -72,6 +91,14 @@
   }
   header.ipk-container ul.sidenav li .mobile-header-group-btn .ipk-mobile-btn {
     width: 40%;
+  }
+
+  .login-container .ipk-content-container .s12 .or-group .options {
+    display: flex;
+  }
+  .login-container .ipk-content-container .s12 .or-group .options span.or-txt {
+    font-size: 18px;
+    margin: 0 5px;
   }
 
   .products-block p.block-title {
@@ -138,7 +165,7 @@ footer .ipk-container.news-feed-container form input[name=email] {
   margin-top: unset !important;
 }
 .categories-container .ipk-content-container .filter-block .select-wrapper input.select-dropdown {
-  width: 150px;
+  height: 22px;
 }
 .categories-container .ipk-content-container .filter-block .select-wrapper svg.caret {
   right: -10px;
