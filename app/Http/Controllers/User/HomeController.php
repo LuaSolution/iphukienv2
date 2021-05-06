@@ -27,8 +27,8 @@ class HomeController extends Controller
     {
         $data = [];
         $this->data['cates'] = Cate::take(5)->get();
-        $this->data['proNew'] = Product::take(8)->whereNull('parent_id')->orderBy('created_at', 'desc')->get();
-        $this->data['proTopSold'] = Product::take(8)->whereNull('parent_id')->orderBy('sold', 'desc')->get();
+        $this->data['proNew'] = Product::take(8)->where('tag_id', 11)->whereNull('parent_id')->orderBy('created_at', 'desc')->get();
+        $this->data['proTopSold'] = Product::take(8)->where('tag_id', 12)->whereNull('parent_id')->orderBy('sold', 'desc')->get();
         $this->data['flashSale'] = (new SaleProduct())->getListValidSaleProduct();
         $this->data['slider'] = Slider::OrderBy('id', 'DESC')->first();
         $this->data['partners'] = Partner::take(8)->orderBy('created_at', 'desc')->get();
