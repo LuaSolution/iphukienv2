@@ -484,21 +484,16 @@ function updateCartDetail() {
     @endif
 }
 $(document).on("click","#buy-now-btn-detail",function() {
-    if(chooseProduct && chooseProduct.product != null) {
-        if(!updateCartDetail()) return;
-
-        window.location.href = "{{ route('user.cart') }}";
-    }
+    if(!updateCartDetail()) return;
+    window.location.href = "{{ route('user.cart') }}";
 });
 $(document).on("click",".add-to-card-btn-detail",function() {
-    if(chooseProduct && chooseProduct.product != null) {
-        let updateRes = updateCartDetail();
-        if(updateRes) {
-            M.toast({
-                html: 'Cập nhật giỏ hàng thành công',
-                classes: 'add-cart-success'
-            });
-        }
+    let updateRes = updateCartDetail();
+    if(updateRes) {
+        M.toast({
+            html: 'Cập nhật giỏ hàng thành công',
+            classes: 'add-cart-success'
+        });
     }
 });
 </script>

@@ -54,6 +54,11 @@ class ProductController extends Controller
             ];
             (new Product())->updateProduct($parentProductObj->id, $dataUpdate);
             (new Product())->updateProduct($productObj->id, $dataUpdate);
+            $dataUpdate = [
+                'size_id' => $request->input('size_id'),
+                'color_id' => $request->input('color_id')
+            ];
+            (new Product())->updateProduct($productObj->id, $dataUpdate);
         } else {
             $productImageObj = (new ProductImage())->getListProductImageById($request->input('product_image_id'));
             $imgName = date('YmdHis') . '_' . $request->input('size_id') . '_' . $request->input('color_id') . '.' . $request->file('image')->extension();
@@ -72,6 +77,11 @@ class ProductController extends Controller
                 'default_image' => $path,
             ];
             (new Product())->updateProduct($parentProductObj->id, $dataUpdate);
+            (new Product())->updateProduct($productObj->id, $dataUpdate);
+            $dataUpdate = [
+                'size_id' => $request->input('size_id'),
+                'color_id' => $request->input('color_id')
+            ];
             (new Product())->updateProduct($productObj->id, $dataUpdate);
         }
 
