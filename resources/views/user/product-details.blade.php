@@ -38,7 +38,6 @@
 </div>
 <div class="ipk-container product-container" id="product-container">
     <div class="row ipk-content-container">
-
         @if(count($listImage) > 0)
         <div class="col l1 s3 list-thumb-wrapper">
             <div class="img-block">
@@ -163,7 +162,9 @@ document.write('<a href="' + loc + '" target="_blank"><svg width="7" height="14"
     </div>
     <div class="same-products-block ipk-content-container">
         <p class="block-title">Sản phẩm tương tự</p>
+        <div id="content">
         @include('layouts.list-product', ['listProduct' => $listSameProduct, 'hasReadMore' => false])
+        </div>
     </div>
 </div>
 @include('layouts.quickview')
@@ -484,21 +485,16 @@ function updateCartDetail() {
     @endif
 }
 $(document).on("click","#buy-now-btn-detail",function() {
-    if(chooseProduct && chooseProduct.product != null) {
-        if(!updateCartDetail()) return;
-
-        window.location.href = "{{ route('user.cart') }}";
-    }
+    if(!updateCartDetail()) return;
+    window.location.href = "{{ route('user.cart') }}";
 });
 $(document).on("click",".add-to-card-btn-detail",function() {
-    if(chooseProduct && chooseProduct.product != null) {
-        let updateRes = updateCartDetail();
-        if(updateRes) {
-            M.toast({
-                html: 'Cập nhật giỏ hàng thành công',
-                classes: 'add-cart-success'
-            });
-        }
+    let updateRes = updateCartDetail();
+    if(updateRes) {
+        M.toast({
+            html: 'Cập nhật giỏ hàng thành công',
+            classes: 'add-cart-success'
+        });
     }
 });
 </script>

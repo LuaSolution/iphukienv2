@@ -18,8 +18,12 @@
         flex-basis: 100%;
 
         &.hide-on-med-and-up {
+<<<<<<< HEAD
           .mobile-header-group-btn {
           }
+=======
+          .mobile-header-group-btn {}
+>>>>>>> c60c1fdc46bad792e8663f4ada0b787f53355a84
         }
 
         .mobile-header-group-btn {
@@ -131,6 +135,10 @@
       }
     }
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> c60c1fdc46bad792e8663f4ada0b787f53355a84
   .login-container {
     .ipk-content-container {
       .s12 {
@@ -150,6 +158,7 @@
       }
     }
   }
+
   .products-block {
     p.block-title {
       margin-bottom: 15px;
@@ -179,14 +188,19 @@
 
         .button-wrapper {
           a {
+<<<<<<< HEAD
             display: none !important;
+=======
+            display: none;
+>>>>>>> c60c1fdc46bad792e8663f4ada0b787f53355a84
           }
         }
       }
     }
   }
 
-  .product-container, .ipk-container {
+  .product-container,
+  .ipk-container {
     .ipk-content-container {
       .list-thumb-wrapper {
         .img-block {
@@ -249,7 +263,11 @@
             .product {
               .button-wrapper {
                 a {
+<<<<<<< HEAD
                   display: none !important;
+=======
+                  display: none;
+>>>>>>> c60c1fdc46bad792e8663f4ada0b787f53355a84
                 }
               }
             }
@@ -262,6 +280,7 @@
     .ipk-container {
       &.news-feed-container {
         form {
+
           //input[type="text"] {
           input[name="email"] {
             //&::placeholder{
@@ -304,6 +323,7 @@ footer {
   .ipk-container {
     &.news-feed-container {
       form {
+
         //input[type="text"] {
         input[name="email"] {
           //&::placeholder{
@@ -342,6 +362,7 @@ footer {
       }
     }
   }
+<<<<<<< HEAD
 }
 
 .products-wrapper {
@@ -359,4 +380,6 @@ footer {
     border-right: 2px solid #000 !important;
     border-bottom: 2px solid #000 !important;
   }
+=======
+>>>>>>> c60c1fdc46bad792e8663f4ada0b787f53355a84
 }
