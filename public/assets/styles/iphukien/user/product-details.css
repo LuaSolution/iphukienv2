@@ -756,17 +756,10 @@
 
 /* end 414 */
 @media screen and (min-width: 769px) {
-    #product-container .list-thumb-wrapper .thumbs-wrapper-slide .thumbs-slide {
-        height: 570px;
-    }
 
     #product-container .list-thumb-wrapper .thumbs-wrapper-slide .thumbs-slide::-webkit-scrollbar,
     #product-container .list-thumb-wrapper .thumbs-wrapper-slide .slick-list.draggable::-webkit-scrollbar {
         display: none;
-    }
-
-    #product-container .list-thumb-wrapper .thumbs-wrapper-slide .slick-list.draggable {
-        height: 100% !important;
     }
 
     #product-container .list-thumb-wrapper .thumbs-wrapper-slide .thumbs-slide,

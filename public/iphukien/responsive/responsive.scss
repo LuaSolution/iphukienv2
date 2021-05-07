@@ -362,10 +362,22 @@ footer {
   }
 }
 
-
 @media only screen and (max-width: 768px) {
   [type="checkbox"]:checked + span:not(.lever):before {
     border-right: 2px solid #000 !important;
     border-bottom: 2px solid #000 !important;
   }
+}
+
+.thumbs-wrapper-slide{
+.thumbs-slide{
+  .product-thumbnail{
+    height: 95px;
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
 }

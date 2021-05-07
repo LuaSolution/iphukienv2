@@ -44,8 +44,9 @@
                 <div class="thumbs-wrapper-slide">
                     <div class="thumbs-slide">
                         @foreach($listImage as $item)
-                        <span data-bg="{{ $item }}" style="background-image: url({{ $item }})"
-                            data-img="{{ $item }}"></span>
+                            <div class="product-thumbnail">
+                                <img src="{{ $item }}" alt="">
+                            </div>
                         @endforeach
                     </div>
                 </div>
@@ -504,20 +505,20 @@ $(document).on("click",".add-to-card-btn-detail",function() {
         $('.thumbs-wrapper-slide .thumbs-slide').slick({
             infinite: false,
             slidesToShow: 3,
-            slidesToScroll: 3,
+            slidesToScroll: 1,
             arrows: true,
             responsive: [
                 {
                 breakpoint: 561,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 2
+                    slidesToScroll: 1
                     }
                 },
                 {
                 breakpoint: 376,
                 settings: {
-                    slidesToShow: 1,
+                    slidesToShow: 2,
                     slidesToScroll: 1
                     }
                 }
@@ -526,8 +527,8 @@ $(document).on("click",".add-to-card-btn-detail",function() {
     } else {
         $('.thumbs-wrapper-slide .thumbs-slide').slick({
             infinite: false,
-            slidesToShow: 3,
-            slidesToScroll: 3,
+            slidesToShow: 4,
+            slidesToScroll: 1,
             vertical: true,
             arrows: true
         });

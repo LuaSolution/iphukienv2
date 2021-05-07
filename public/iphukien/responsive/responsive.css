@@ -211,5 +211,13 @@ footer .ipk-container.news-feed-container form input[name=email] {
     border-bottom: 2px solid #000 !important;
   }
 }
+.thumbs-wrapper-slide .thumbs-slide .product-thumbnail {
+  height: 95px;
+}
+.thumbs-wrapper-slide .thumbs-slide .product-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 /*# sourceMappingURL=responsive.css.map */
