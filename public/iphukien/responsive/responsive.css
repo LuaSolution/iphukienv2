@@ -160,6 +160,7 @@
     display: block !important;
     margin: unset !important;
     height: 95px;
+    width: 100%;
   }
   .product-container .ipk-content-container .list-thumb-wrapper .img-block .thumbs-wrapper-slide,
 .ipk-container .ipk-content-container .list-thumb-wrapper .img-block .thumbs-wrapper-slide {
@@ -290,6 +291,11 @@ footer .ipk-container.news-feed-container form input[name=email] {
 }
 .carousel .carousel-item > img {
   object-fit: cover !important;
+}
+
+.product-container .list-thumb-wrapper .video-icon {
+  min-height: 95px !important;
+  max-width: 95px !important;
 }
 
 /*# sourceMappingURL=responsive.css.map */

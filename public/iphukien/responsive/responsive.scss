@@ -234,6 +234,8 @@
           display: block !important;
           margin: unset !important;
           height: 95px;
+          width: 100%;
+
         }
 
         .img-block {
@@ -471,3 +473,14 @@ footer {
 .carousel .carousel-item>img{
   object-fit: cover!important;
 }
+
+
+.product-container{
+  .list-thumb-wrapper{
+    .video-icon{
+      min-height: 95px!important;
+      max-width: 95px!important;
+    }
+  }
+}
+
