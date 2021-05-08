@@ -32,6 +32,13 @@ height: 200px;
     background-color: transparent;
     cursor: pointer;
 }
+
+#myVideo {
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
 </style>
 @endsection
 
@@ -70,7 +77,7 @@ const x = setInterval(function() {
         @if($slider)
         <div class="remove-line-height banner">
             @if(strpos($slider->image, 'mp4') == true)
-            <video width="100%" height="540" controls>
+            <video id="myVideo" autoplay loop muted>
                 <source src="{{ asset('/public/'. $slider->image) }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
