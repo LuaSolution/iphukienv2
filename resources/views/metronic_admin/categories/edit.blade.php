@@ -105,5 +105,8 @@ $(document).on('change', "#form-image", function (evt) {
   }
 
 })
+$(document).on('focusout', '#form-title', function () {
+  $("#form-slug").val(changeToSlug($(this).val()))
+})
 </script>
 @endsection

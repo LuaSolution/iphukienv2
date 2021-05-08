@@ -32,6 +32,13 @@ height: 200px;
     background-color: transparent;
     cursor: pointer;
 }
+
+#myVideo {
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
 </style>
 @endsection
 
@@ -70,7 +77,7 @@ const x = setInterval(function() {
         @if($slider)
         <div class="remove-line-height banner">
             @if(strpos($slider->image, 'mp4') == true)
-            <video width="100%" height="540" controls>
+            <video width="100%" id="myVideo" autoplay loop muted>
                 <source src="{{ asset('/public/'. $slider->image) }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -83,7 +90,7 @@ const x = setInterval(function() {
             <div class="row slide-wrapper-category">
                 @foreach($cates as $item)
                 <div class="col m5ths m4 s6 cat-item remove-line-height">
-                    <a href="{{ route('categories.show', ['id' => $item->id]) }}">
+                    <a href="{{ route('categories.show', ['id' => isset($item->slug) ? $item->slug : $item->id]) }}">
                         <div class="img-wrapper"
                             style="background-image: url({{ asset('/public/' . $item->image) }})"></div>
                         <p>{{ $item->title }}</p>

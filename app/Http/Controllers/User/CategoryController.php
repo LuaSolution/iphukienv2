@@ -21,25 +21,33 @@ class CategoryController extends Controller
         } else if ($id == -2) { // danh sach bán chạy
             $this->data['listProduct'] = Product::where('tag_id', 12)->where('parent_id', null)->orderBy('id', 'DESC')->paginate(8);
         } else if ($request->sort) {
+            $newId = $id;
+            if (!is_numeric($id)) {
+                $newId = (new Cate())->getCateBySlug($id)->id;
+            }
             switch ($request->sort) {
                 case "az":
-                    $this->data['listProduct'] = Product::where('category_id', $id)->where('parent_id', null)->orderBy('name', 'ASC')->paginate(8);
+                    $this->data['listProduct'] = Product::where('category_id', $newId)->where('parent_id', null)->orderBy('name', 'ASC')->paginate(8);
                     break;
                 case "za":
-                    $this->data['listProduct'] = Product::where('category_id', $id)->where('parent_id', null)->orderBy('name', 'DESC')->paginate(8);
+                    $this->data['listProduct'] = Product::where('category_id', $newId)->where('parent_id', null)->orderBy('name', 'DESC')->paginate(8);
                     break;
                 case "pasc":
-                    $this->data['listProduct'] = Product::where('category_id', $id)->where('parent_id', null)->orderBy('price', 'ASC')->orderBy('sale_price', 'ASC')->paginate(8);
+                    $this->data['listProduct'] = Product::where('category_id', $newId)->where('parent_id', null)->orderBy('price', 'ASC')->orderBy('sale_price', 'ASC')->paginate(8);
                     break;
                 case "pdesc":
-                    $this->data['listProduct'] = Product::where('category_id', $id)->where('parent_id', null)->orderBy('price', 'DESC')->orderBy('sale_price', 'DESC')->paginate(8);
+                    $this->data['listProduct'] = Product::where('category_id', $newId)->where('parent_id', null)->orderBy('price', 'DESC')->orderBy('sale_price', 'DESC')->paginate(8);
                     break;
                 default:
-                    $this->data['listProduct'] = Product::where('category_id', $id)->where('parent_id', null)->orderBy('id', 'DESC')->paginate(8);
+                    $this->data['listProduct'] = Product::where('category_id', $newId)->where('parent_id', null)->orderBy('id', 'DESC')->paginate(8);
             }
 
         } else {
-            $this->data['listProduct'] = Product::where('category_id', $id)->whereNull('parent_id')->orderBy('id', 'DESC')->paginate(8);
+            $newId = $id;
+            if (!is_numeric($id)) {
+                $newId = (new Cate())->getCateBySlug($id)->id;
+            }
+            $this->data['listProduct'] = Product::where('category_id', $newId)->whereNull('parent_id')->orderBy('id', 'DESC')->paginate(8);
         }
 
         if ($id == -1 || $id == -2) {
@@ -47,14 +55,21 @@ class CategoryController extends Controller
 
             $this->data['category'] = $category;
         } else {
-            $this->data['category'] = (new Cate())->getCateById($id);
+            $newId = $id;
+            if (!is_numeric($id)) {
+                $newId = (new Cate())->getCateBySlug($id)->id;
+            }
+            $this->data['category'] = (new Cate())->getCateById($newId);
         }
         $this->data['colors'] = (new Color())->getListColor();
         $this->data['sizes'] = (new Size())->getListSize();
         $this->data['trademarks'] = (new Trademark())->getListTrademark();
         $this->data['tags'] = (new Tag())->getListTags();
-
-        $this->data['id'] = $id;
+        $newId = $id;
+        if (!is_numeric($id)) {
+            $newId = (new Cate())->getCateBySlug($id)->id;
+        }
+        $this->data['id'] = $newId;
 
         if ($request->ajax()) {
             $listProduct = $this->data['listProduct'];

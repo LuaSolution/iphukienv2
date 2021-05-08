@@ -29,7 +29,7 @@
             <div class="nav-wrapper">
                 <div class="col s12">
                     <a href="{{ route('getHome') }}" class="breadcrumb">Trang chủ</a>
-                    <a href="{{ route('categories.show', ['id' => $product->category_id]) }}" class="breadcrumb">{{ $product->category_name }}</a>
+                    <a href="{{ route('categories.show', ['id' => isset($product->category_slug) ? $product->category_slug : $product->category_id]) }}" class="breadcrumb">{{ $product->category_name }}</a>
                     <a href="javascript:void(0)" class="breadcrumb">{{$product->name}}</a>
                 </div>
             </div>
