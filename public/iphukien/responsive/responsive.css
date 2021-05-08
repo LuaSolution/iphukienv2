@@ -260,6 +260,11 @@ footer .ipk-container.news-feed-container form input[name=email] {
 }
 
 @media screen and (max-width: 768px) {
+  .thumbs-wrapper-slide .thumbs-slide .product-thumbnail img {
+    border: 2px solid #fff;
+  }
+}
+@media screen and (max-width: 768px) {
   #product-container .product-infos .pre-order-block .add-to-card-btn-detail {
     width: 225px;
     height: 39px;
@@ -301,7 +306,7 @@ footer .ipk-container.news-feed-container form input[name=email] {
 
 @media screen and (max-width: 768px) {
   .product-container .list-thumb-wrapper .video-icon {
-    max-width: 100%;
+    max-width: 100% !important;
   }
 }
 
