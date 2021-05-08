@@ -417,6 +417,7 @@ footer {
   .thumbs-slide {
     .product-thumbnail {
       height: 95px;
+      cursor: pointer;
 
       img {
         width: 100%;
@@ -478,9 +479,18 @@ footer {
 .product-container{
   .list-thumb-wrapper{
     .video-icon{
-      min-height: 95px!important;
+      min-height: 85px!important;
       max-width: 95px!important;
     }
   }
 }
 
+@media screen and (max-width: 768px) {
+  .product-container{
+    .list-thumb-wrapper{
+      .video-icon{
+        max-width: 100%;
+      }
+    }
+  }
+}

@@ -251,6 +251,7 @@ footer .ipk-container.news-feed-container form input[name=email] {
 }
 .thumbs-wrapper-slide .thumbs-slide .product-thumbnail {
   height: 95px;
+  cursor: pointer;
 }
 .thumbs-wrapper-slide .thumbs-slide .product-thumbnail img {
   width: 100%;
@@ -294,8 +295,14 @@ footer .ipk-container.news-feed-container form input[name=email] {
 }
 
 .product-container .list-thumb-wrapper .video-icon {
-  min-height: 95px !important;
+  min-height: 85px !important;
   max-width: 95px !important;
+}
+
+@media screen and (max-width: 768px) {
+  .product-container .list-thumb-wrapper .video-icon {
+    max-width: 100%;
+  }
 }
 
 /*# sourceMappingURL=responsive.css.map */

@@ -44,7 +44,7 @@
                 <div class="thumbs-wrapper-slide">
                     <div class="thumbs-slide">
                         @foreach($listImage as $item)
-                            <div class="product-thumbnail">
+                            <div class="product-thumbnail" data-bg="{{ $item }}" data-img="{{ $item }}">
                                 <img src="{{ $item }}" alt="">
                             </div>
                         @endforeach
