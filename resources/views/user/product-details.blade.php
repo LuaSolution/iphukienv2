@@ -527,7 +527,7 @@ $(document).on("click",".add-to-card-btn-detail",function() {
     } else {
         $('.thumbs-wrapper-slide .thumbs-slide').slick({
             infinite: false,
-            slidesToShow: 4,
+            slidesToShow: 5,
             slidesToScroll: 1,
             vertical: true,
             arrows: true
