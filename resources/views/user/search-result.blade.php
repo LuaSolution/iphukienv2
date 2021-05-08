@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tìm kiếm theo từ khóa {{$keyword}}')
+@section('title', 'Tìm kiếm theo từ khóa')
 
 @section('header')
 @include('layouts.header', ['status' => 'complete'])

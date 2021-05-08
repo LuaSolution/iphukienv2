@@ -91,13 +91,13 @@
                         @if(\App\Cate::where('parent_id', $cate->id)->count() > 0)
                         <a href="#" class="parent-item">{{ $cate->title }}</a>
                         @else
-                        <a href="{{ route('categories.show', ['id' => $cate->id]) }}"
+                        <a href="{{ route('categories.show', ['id' => isset($cate->slug) ? $cate->slug : $cate->id]) }}"
                             class="parent-item">{{ $cate->title }}</a>
                         @endif
                         <div class="list-sub-item">
                             <?php $i = \App\Cate::where('parent_id', $cate->id)->get();?>
                             @foreach($i as $sub)
-                            <a href="{{ route('categories.show', ['id' => $sub->id]) }}"
+                            <a href="{{ route('categories.show', ['id' => isset($sub->slug) ? $sub->slug : $sub->id]) }}"
                                 class="sub-item">{{$sub->title}}</a>
                             @endforeach
                         </div>

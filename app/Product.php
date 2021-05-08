@@ -50,11 +50,11 @@ class Product extends Model
     {
         if (is_numeric($id)) {
             $res = Product::leftJoin('categories', 'categories.id', '=', 'products.category_id')
-                ->select('products.*', 'categories.title as category_name')
+                ->select('products.*', 'categories.title as category_name', 'categories.slug as category_slug')
                 ->where('products.id', $id)->first();
         } else {
             $res = Product::leftJoin('categories', 'categories.id', '=', 'products.category_id')
-                ->select('products.*', 'categories.title as category_name')
+                ->select('products.*', 'categories.title as category_name', 'categories.slug as category_slug')
                 ->where('products.slug', $id)->first();
         }
         return $res;
@@ -143,6 +143,7 @@ class Product extends Model
         return Product::leftJoin('categories', 'categories.id', '=', 'products.category_id')
             ->leftJoin('trademarks', 'trademarks.id', '=', 'products.trademark_id')
             ->select('products.*')
+            ->whereNull('products.parent_id')
             ->where('products.name', 'like', '%' . $keyword . '%')
             ->orWhere('categories.title', 'like', '%' . $keyword . '%')
             ->orWhere('trademarks.name', 'like', '%' . $keyword . '%')

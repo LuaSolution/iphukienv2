@@ -83,7 +83,7 @@ const x = setInterval(function() {
             <div class="row slide-wrapper-category">
                 @foreach($cates as $item)
                 <div class="col m5ths m4 s6 cat-item remove-line-height">
-                    <a href="{{ route('categories.show', ['id' => $item->id]) }}">
+                    <a href="{{ route('categories.show', ['id' => isset($item->slug) ? $item->slug : $item->id]) }}">
                         <div class="img-wrapper"
                             style="background-image: url({{ asset('/public/' . $item->image) }})"></div>
                         <p>{{ $item->title }}</p>
