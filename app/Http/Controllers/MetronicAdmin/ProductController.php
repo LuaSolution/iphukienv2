@@ -13,7 +13,6 @@ use App\Status;
 use App\Tag;
 use App\Trademark;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -56,7 +55,7 @@ class ProductController extends Controller
             (new Product())->updateProduct($productObj->id, $dataUpdate);
             $dataUpdate = [
                 'size_id' => $request->input('size_id'),
-                'color_id' => $request->input('color_id')
+                'color_id' => $request->input('color_id'),
             ];
             (new Product())->updateProduct($productObj->id, $dataUpdate);
         } else {
@@ -80,7 +79,7 @@ class ProductController extends Controller
             (new Product())->updateProduct($productObj->id, $dataUpdate);
             $dataUpdate = [
                 'size_id' => $request->input('size_id'),
-                'color_id' => $request->input('color_id')
+                'color_id' => $request->input('color_id'),
             ];
             (new Product())->updateProduct($productObj->id, $dataUpdate);
         }
@@ -265,7 +264,7 @@ class ProductController extends Controller
         }
         $salePrice = $request->input('sale_price');
         if (!$salePrice) {
-            return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
+            $salePrice = null;
         }
         $video = $request->input('video') == '' ? null : $request->input('video');
         $status = $request->input('status_id') == 'no-status' ? null : $request->input('status_id');
@@ -310,7 +309,7 @@ class ProductController extends Controller
     public function getListProduct(Request $request)
     {
         // $this->data['products'] = (new Product())->getListProduct();
-        if(null != $request->input('keyword')) {
+        if (null != $request->input('keyword')) {
             $this->data['products'] = (new Product())->searchByName($request->input('keyword'));
         } else {
             $this->data['products'] = (new Product())->getListProduct();
@@ -395,7 +394,7 @@ class ProductController extends Controller
                                     $childCate = Cate::firstOrCreate(['title' => isset($nhanhChildCate->name) ? $nhanhChildCate->name : 'no-category']);
                                     //insert parent product
                                     $checkChild = (new Product())->getProductByNhanhId($p->idNhanh);
-                                    if($checkChild == null) {
+                                    if ($checkChild == null) {
                                         $childPrd = Product::firstOrCreate([
                                             'product_id_nhanh' => $p->idNhanh,
                                             'parent_id' => $parentPrd->id,
@@ -447,7 +446,10 @@ class ProductController extends Controller
 
     public function getCategoryOfNhanh($listCate, $categoryId)
     {
-        if(!is_array($listCate)) return;
+        if (!is_array($listCate)) {
+            return;
+        }
+
         foreach ($listCate as $c) {
             if ($c->id == $categoryId) {
                 return $c;

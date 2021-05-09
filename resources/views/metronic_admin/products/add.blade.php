@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group form-md-line-input has-success">
                             <input type="number" class="form-control" id="form-sale-price" name="sale-price"
-                                required="">
+                               >
                             <label for="form-price">Giá giảm</label>
                         </div>
                         <div class="form-group form-md-line-input has-success">
