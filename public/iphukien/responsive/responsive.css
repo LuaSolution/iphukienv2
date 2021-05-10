@@ -175,14 +175,18 @@
 .ipk-container .ipk-content-container .list-thumb-wrapper .img-block .thumbs-wrapper-slide .thumbs-slide .slick-list .slick-track span {
     background-size: contain !important;
   }
+  .product-container .ipk-content-container .sale-products .carousel-slider,
+.ipk-container .ipk-content-container .sale-products .carousel-slider {
+    height: 390px !important;
+  }
   .product-container .ipk-content-container .sale-products .carousel-slider .ipk-pre-slide,
 .ipk-container .ipk-content-container .sale-products .carousel-slider .ipk-pre-slide {
-    top: calc(50% - 48px);
+    top: calc(50%);
     left: 0;
   }
   .product-container .ipk-content-container .sale-products .carousel-slider .ipk-next-slide,
 .ipk-container .ipk-content-container .sale-products .carousel-slider .ipk-next-slide {
-    top: calc(50% - 48px);
+    top: calc(50%);
     right: 0;
   }
   .product-container .ipk-content-container .sale-products .sale-product-slider .carousel-item .carousel-item-wrapper .item-infos,
@@ -292,7 +296,7 @@ footer .ipk-container.news-feed-container form input[name=email] {
 
 @media only screen and (max-width: 414px) {
   .sale-products .button-detail {
-    bottom: -37px !important;
+    bottom: -70px !important;
   }
 }
 .carousel .carousel-item > img {
@@ -302,6 +306,14 @@ footer .ipk-container.news-feed-container form input[name=email] {
 .product-container .list-thumb-wrapper .video-icon {
   min-height: 85px !important;
   max-width: 95px !important;
+}
+
+.carousel.carousel-slider .carousel-item {
+  width: 100%;
+  height: 587px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 @media screen and (max-width: 768px) {
