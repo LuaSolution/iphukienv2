@@ -17,9 +17,9 @@ class CategoryController extends Controller
     public function show(Request $request, $id)
     {
         if ($id == -1) { // danh sach hàng mới
-            $this->data['listProduct'] = Product::where('tag_id', 11)->where('parent_id', null)->orderBy('id', 'DESC')->paginate(8);
+            $this->data['listProduct'] = Product::where('tag_id', 11)->where('parent_id', null)->orderBy('id', 'DESC')->paginate(24);
         } else if ($id == -2) { // danh sach bán chạy
-            $this->data['listProduct'] = Product::where('tag_id', 12)->where('parent_id', null)->orderBy('id', 'DESC')->paginate(8);
+            $this->data['listProduct'] = Product::where('tag_id', 12)->where('parent_id', null)->orderBy('id', 'DESC')->paginate(24);
         } else if ($request->sort) {
             $newId = $id;
             if (!is_numeric($id)) {
@@ -27,19 +27,19 @@ class CategoryController extends Controller
             }
             switch ($request->sort) {
                 case "az":
-                    $this->data['listProduct'] = Product::where('category_id', $newId)->where('parent_id', null)->orderBy('name', 'ASC')->paginate(8);
+                    $this->data['listProduct'] = Product::where('category_id', $newId)->where('parent_id', null)->orderBy('name', 'ASC')->paginate(24);
                     break;
                 case "za":
-                    $this->data['listProduct'] = Product::where('category_id', $newId)->where('parent_id', null)->orderBy('name', 'DESC')->paginate(8);
+                    $this->data['listProduct'] = Product::where('category_id', $newId)->where('parent_id', null)->orderBy('name', 'DESC')->paginate(24);
                     break;
                 case "pasc":
-                    $this->data['listProduct'] = Product::where('category_id', $newId)->where('parent_id', null)->orderBy('price', 'ASC')->orderBy('sale_price', 'ASC')->paginate(8);
+                    $this->data['listProduct'] = Product::where('category_id', $newId)->where('parent_id', null)->orderBy('price', 'ASC')->orderBy('sale_price', 'ASC')->paginate(24);
                     break;
                 case "pdesc":
-                    $this->data['listProduct'] = Product::where('category_id', $newId)->where('parent_id', null)->orderBy('price', 'DESC')->orderBy('sale_price', 'DESC')->paginate(8);
+                    $this->data['listProduct'] = Product::where('category_id', $newId)->where('parent_id', null)->orderBy('price', 'DESC')->orderBy('sale_price', 'DESC')->paginate(24);
                     break;
                 default:
-                    $this->data['listProduct'] = Product::where('category_id', $newId)->where('parent_id', null)->orderBy('id', 'DESC')->paginate(8);
+                    $this->data['listProduct'] = Product::where('category_id', $newId)->where('parent_id', null)->orderBy('id', 'DESC')->paginate(24);
             }
 
         } else {
@@ -47,7 +47,7 @@ class CategoryController extends Controller
             if (!is_numeric($id)) {
                 $newId = (new Cate())->getCateBySlug($id)->id;
             }
-            $this->data['listProduct'] = Product::where('category_id', $newId)->whereNull('parent_id')->orderBy('id', 'DESC')->paginate(8);
+            $this->data['listProduct'] = Product::where('category_id', $newId)->whereNull('parent_id')->orderBy('id', 'DESC')->paginate(24);
         }
 
         if ($id == -1 || $id == -2) {
