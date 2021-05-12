@@ -45,7 +45,7 @@ height: 200px;
 @section('content')
 <script>
 function countDown(key, date) {
-    const countDownDate = new Date(date).getTime();
+    const countDownDate = new Date(date.replace(' ', 'T')).getTime();
 
 const x = setInterval(function() {
 // console.log(key)
