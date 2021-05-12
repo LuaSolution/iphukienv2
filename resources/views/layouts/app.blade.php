@@ -95,6 +95,20 @@
             $(document).on('click', 'a .link-arrow', function (e) {
                 e.preventDefault();
             });
+
+            window.onscroll = function () {
+                is_sticky();
+            };
+            let header = $('header');
+            let sticky = header.offset().top;
+
+            function is_sticky() {
+                if (window.pageYOffset > (sticky + 130)) {
+                    header.addClass("animated fadeInDown header-fixed");
+                } else {
+                    header.removeClass("animated fadeInDown header-fixed");
+                }
+            }
         });
     </script>
 </footer>
