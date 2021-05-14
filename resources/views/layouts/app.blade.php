@@ -97,7 +97,9 @@
             });
 
             window.onscroll = function () {
-                is_sticky();
+                 if ($(window).width() > 992) {
+                    is_sticky();
+                }
             };
             let header = $('header');
             let sticky = header.offset().top;

@@ -468,4 +468,25 @@ header.header-fixed {
   }
 }
 
+
+#quickview .carousel.carousel-slider .carousel-item {
+    width: 100%;
+    padding-top: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: unset;
+    min-height: unset;
+}
+
+#quickview .carousel.carousel-slider .carousel-item img{
+    position: absolute;
+    width: unset;
+    height: unset;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
 /*# sourceMappingURL=responsive.css.map */
