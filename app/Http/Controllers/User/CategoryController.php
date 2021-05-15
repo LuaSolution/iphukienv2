@@ -76,6 +76,14 @@ class CategoryController extends Controller
             return view('layouts.list-product', compact('listProduct'));
         }
 
+        $this->data['meta'] = [
+            'title' => 'Trang chủ',
+            'description' => 'mo ta 1',
+            'url' => 'url',
+            'keywords' => 'keywords',
+            'canonical' => 'canonical',
+        ];
+
         return view('user/category-details', $this->data);
     }
 

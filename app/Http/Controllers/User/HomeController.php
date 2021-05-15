@@ -26,13 +26,20 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $data = [];
-        $this->data['cates'] = Cate::take(5)->get();
+        $this->data['cates'] = Cate::orderBy('pos', 'asc')->take(5)->get();
         $this->data['proNew'] = Product::take(8)->where('tag_id', 11)->whereNull('parent_id')->orderBy('created_at', 'desc')->get();
         $this->data['proTopSold'] = Product::take(8)->where('tag_id', 12)->whereNull('parent_id')->orderBy('sold', 'desc')->get();
         $this->data['flashSale'] = (new SaleProduct())->getListValidSaleProduct();
         $this->data['slider'] = Slider::OrderBy('id', 'DESC')->first();
         $this->data['partners'] = Partner::take(8)->orderBy('created_at', 'desc')->get();
 
+        $this->data['meta'] = [
+            'title' => 'Trang chủ',
+            'description' => 'mo ta 1',
+            'url' => 'url',
+            'keywords' => 'keywords',
+            'canonical' => 'canonical',
+        ];
         return view('user.home', $this->data);
     }
 

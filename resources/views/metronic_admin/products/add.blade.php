@@ -163,7 +163,7 @@ $(document).on("click",".add-more-img",function() {
   $("#upload-img-area").append(
     "<div class='upload-img-wrapper'>"
     + "<div class='upload-img-item'>"
-    + "<input class='upload-img-input hide' type='file' />"
+    + "<input class='upload-img-input hide' type='file' accept='image/*' />"
     + "</div>"
     + "<span class='remove-img'>Xóa</span>"
     + "</div>"

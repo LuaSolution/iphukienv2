@@ -140,7 +140,7 @@
                                 @foreach($productImage as $key=>$item)
                                 <div class='upload-img-wrapper'>
                                     <div class='upload-img-item' style="background-image: url({{ asset('public/'.$item->image) }})">
-                                        <input class='upload-img-input hide' type='file' data-imageid='{{$item->id}}' />
+                                        <input class='upload-img-input hide' type='file' accept='image/*' data-imageid='{{$item->id}}' />
                                     </div>
                                     <span class='remove-img' data-imageid='{{$item->id}}'>Xóa</span>
                                 </div>
@@ -187,7 +187,7 @@ $(document).on("click",".add-more-img",function() {
   $("#upload-img-area").append(
     "<div class='upload-img-wrapper'>"
     + "<div class='upload-img-item'>"
-    + "<input class='upload-img-input hide' type='file' />"
+    + "<input class='upload-img-input hide' type='file' accept='image/*'/>"
     + "</div>"
     + "<span class='remove-img'>Xóa</span>"
     + "</div>"

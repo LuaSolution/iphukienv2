@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Phụ kiện chính hãng')
+@section('title', $meta['title'])
+@section('description', $meta['description'])
+@section('url', $meta['url'])
+@section('keywords', $meta['keywords'])
+@section('canonical', $meta['canonical'])
 
 @section('header')
 @include('layouts.header', ['status' => 'complete'])

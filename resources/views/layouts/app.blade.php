@@ -5,14 +5,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <title>{{config('config.title')}} | @yield('title')</title>
-    <meta content="{{config('config.description')}}"
+    <title>iPhukien | @yield('title')</title>
+    <meta content="@yield('description')"
           name="description"/>
-    <meta name="url" content="{{config('config.url')}}">
-    <meta property="og:url" content="{{config('config.url')}}"/>
-    <meta content="{{config('config.keywords')}}"
+
+    <meta name="url" content="@yield('url')">
+    <meta property="og:url" content="@yield('url')"/>
+
+    <meta content="@yield('keywords')"
           name="keywords"/>
-    <link rel="canonical" href="{{config('config.canonical')}}"/>
+
+    <link rel="canonical" href="@yield('canonical')"/>
+
     <link rel="icon" href="{{ asset('public/assets/images/header/favicon.svg') }}"
           type="image/gif" sizes="16x16">
 

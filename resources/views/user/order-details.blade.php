@@ -37,7 +37,7 @@
 $listImg = \App\ProductImage::where('product_id', '=', $detail->product_id)->get();
 $img = count($listImg) > 0 ? asset('public/' . $listImg[0]->image) : asset('public/assets/images/header/logo.svg');
 ?>
-                <div class="product col l3">
+                <div class="product col l3" style='margin-left: 0px;padding-right:10px'>
                     <div class="img" style="background-image: url({{ $img }})"></div>
                     <div class="name">{{$detail->product_name}}</div>
                     <div class="price-color">
