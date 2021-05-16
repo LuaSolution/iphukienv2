@@ -101,9 +101,7 @@
             });
 
             window.onscroll = function () {
-                 if ($(window).width() > 992) {
                     is_sticky();
-                }
             };
             let header = $('header');
             let sticky = header.offset().top;

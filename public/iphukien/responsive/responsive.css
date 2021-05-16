@@ -418,6 +418,11 @@ header.header-fixed {
   z-index: 99999;
 }
 
+header .sidenav {
+    min-height: 100vh;
+    height: 100vh;
+}
+
 .animated {
   -webkit-animation-duration: .4s;
   animation-duration: .4s;
