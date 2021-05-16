@@ -43,6 +43,7 @@
                     <a href="https://www.facebook.com/iPhukien" class="ipk-footer-icon facebook-icon"></a>
                     <a href="https://www.instagram.com/" class="ipk-footer-icon instagram-icon"></a>
                     <a href="https://www.youtube.com/" class="ipk-footer-icon youtube-icon"></a>
+                    <a href="https://vt.tiktok.com/ZSJU4Q1PE/" class="ipk-footer-icon tiktok-icon"></a>
                 </div>
                 <div class="bo-cong-thuong-icon">
                     <!-- <img src="{{ asset('public/assets/images/footer/cong-thuong.svg') }}" /> -->

@@ -4,6 +4,7 @@
         <a href="https://www.facebook.com/" class="ipk-header-icon facebook-icon hide-on-small-only"></a>
         <a href="https://www.instagram.com/" class="ipk-header-icon instagram-icon hide-on-small-only"></a>
         <a href="https://www.youtube.com/" class="ipk-header-icon youtube-icon hide-on-small-only"></a>
+        <a href="https://vt.tiktok.com/ZSJU4Q1PE/" class="ipk-header-icon tiktok-icon hide-on-small-only"></a>
     </div>
     <div class="ipk-right-header">
         <form class="header-search-form" method="get" action="{{ route('product.search') }}">
@@ -47,6 +48,7 @@
                     <a href="https://www.facebook.com/" class="ipk-mobile-header-icon facebook-mobile-icon"></a>
                     <a href="https://www.instagram.com/" class="ipk-mobile-header-icon instagram-mobile-icon"></a>
                     <a href="https://www.youtube.com/" class="ipk-mobile-header-icon youtube-mobile-icon"></a>
+                    <a href="https://vt.tiktok.com/ZSJU4Q1PE/" class="ipk-mobile-header-icon tiktok-mobile-icon"></a>
                 </div>
                 @if (Auth::check() && Auth::user()->role_id == 2)
                 <div class="ipk-mobile-link class-user-1">
@@ -119,6 +121,7 @@
                     <a href="https://www.facebook.com/" class="ipk-mobile-header-icon facebook-mobile-icon"></a>
                     <a href="https://www.instagram.com/" class="ipk-mobile-header-icon instagram-mobile-icon"></a>
                     <a href="https://www.youtube.com/" class="ipk-mobile-header-icon youtube-mobile-icon"></a>
+                    <a href="https://vt.tiktok.com/ZSJU4Q1PE/" class="ipk-mobile-header-icon tiktok-mobile-icon"></a>
                 </div>
                 @if (Auth::check() && Auth::user()->role_id == 2)
                     <div class="ipk-mobile-link class-user">

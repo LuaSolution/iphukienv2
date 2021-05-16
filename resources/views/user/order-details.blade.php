@@ -7,10 +7,10 @@
 @endsection
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/header.css') }}">
+<link rel="stylesheet" href="{{ asset('public/iphukien/user/header.css') }}">
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/user-top.css') }}">
 <link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/order-details.css') }}">
-<link rel="stylesheet" href="{{ asset('public/assets/styles/iphukien/user/footer.css') }}">
+<link rel="stylesheet" href="{{ asset('public/iphukien/user/footer.css') }}">
 <link rel="stylesheet" href="{{ asset('public/iphukien/user/common.css') }}">
 @endsection
 
