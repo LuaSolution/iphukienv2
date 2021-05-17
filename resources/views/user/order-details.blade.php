@@ -45,8 +45,7 @@ $img = count($listImg) > 0 ? asset('public/' . $listImg[0]->image) : asset('publ
                         <span class="color">{{$detail->size_name}}, {{$detail->color_name}}</span>
                     </div>
                     <div class="quantity">
-                        Số lượng<br />
-                        {{$detail->total_count}}
+                        Số lượng <span>{{$detail->total_count}}</span>
                     </div>
                 </div>
                 @endforeach

@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="ipk-container categories-container">
-        <div class="ipk-content-container">
+        <div class="ipk-content-container categories-heading">
             <div class="category-title">{{ $category->title }}</div>
             <div class="filter-block">
                 <a href="#" data-target="filter-slide-out" class="sidenav-trigger category-filter">Bộ lọc</a>
