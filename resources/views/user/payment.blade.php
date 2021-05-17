@@ -203,7 +203,11 @@ $(document).ready(function () {
             console.log(data);
             let shipService = JSON.parse(data);
             let totalShipFee = parseInt(shipService.shipFee) + parseInt(shipService.codFee) + parseInt(shipService.declaredFee);
+           if(sum < 500000) {
             $("#total-ship-fee").html(`${numberWithCommas(totalShipFee)} VNĐ`);
+           } else {
+            $("#total-ship-fee").html(`0 VNĐ`);
+           }
             let today = new Date();
             today.setHours(today.getHours() + shipService.estimatedDeliveryTime);
             let cYear = today.getFullYear();
