@@ -217,11 +217,6 @@
         background-size: contain !important;
     }
 
-    .product-container .ipk-content-container .sale-products .carousel-slider,
-    .ipk-container .ipk-content-container .sale-products .carousel-slider {
-        height: 390px !important;
-    }
-
     .product-container .ipk-content-container .sale-products .carousel-slider .ipk-pre-slide,
     .ipk-container .ipk-content-container .sale-products .carousel-slider .ipk-pre-slide {
         top: calc(50%);
@@ -371,7 +366,7 @@ footer .ipk-container.news-feed-container form input[name=email] {
 
 .carousel.carousel-slider .carousel-item {
     width: 100%;
-    height: 587px;
+    height: auto;
     position: absolute;
     top: 0;
     left: 0;
@@ -394,6 +389,7 @@ footer .ipk-container.news-feed-container form input[name=email] {
 
 .carousel.carousel-slider.sale-product-slider .carousel-item {
     position: relative;
+     height: auto !important;
 }
 
 @media screen and (max-width: 575px) {
@@ -537,6 +533,20 @@ header .sidenav {
 
 #paginate_custom .pagination li a:hover {
     background-color: #c6c6c6;
+}
+
+
+
+@media only screen and (max-width: 600px){
+    .carousel-item .carousel-item-wrapper{
+        padding: 0!important
+    }
+}
+
+@media only screen and (max-width: 414){
+    .carousel-item .carousel-item-wrapper{
+        padding: 0!important
+    }
 }
 
 
