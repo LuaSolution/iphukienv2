@@ -226,7 +226,7 @@ class AjaxController extends Controller
         $checkProductInSale = (new SaleProduct)->checkProductIsSale($request->input('productId'));
         // dd($obj->product);
         if($obj->product != null) {
-            $obj->lastPrice = $obj->product->sale_price;
+            $obj->lastPrice = $obj->product->sale_price != null ? $obj->product->sale_price : $obj->product->price;
             if($checkProductInSale != null) {
                 $obj->lastPrice = $checkProductInSale->sale_price;
             }
