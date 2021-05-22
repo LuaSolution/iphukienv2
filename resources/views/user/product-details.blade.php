@@ -95,10 +95,18 @@
             </div>
             @endif
 
+@if($salePrice > 0)
             <div class="price">
                 <div class="origin" id="origin-price">{{ number_format($product->price, 0, ',', '.') }}đ</div>
-                <div class="sale" id="sale-price">{{ number_format($salePrice, 0, ',', '.') }}đ <span>Giảm {{ round(($product->price-$salePrice) / $product->price * 100) }}%</span></div>
+                <div class="sale" id="sale-price">{{ number_format($salePrice, 0, ',', '.') }}đ </div>
             </div>
+            @else
+            <div class="price">
+                <div class="origin" id="origin-price" style="display:none"></div>
+                <div class="sale" id="sale-price" style="float:left">{{ number_format($product->price, 0, ',', '.') }}đ </div>
+            </div>
+            @endif
+
             <div class="status-wrapper">
                 <div class="status-label">Tình trạng: </div>
                 <div class="list-status">
@@ -250,8 +258,18 @@ $(document).on("click", ".color-detail", function () {
                 $('.main-image').html('');
                 $('.main-image')[0].style.backgroundImage = "url(" + chooseProduct.image + ")";
                 $('#c-product-name').html(chooseProduct.product.name);
-                $("#origin-price").html(chooseProduct.product.price + 'đ');
-                $("#sale-price").html(chooseProduct.lastPrice + 'đ');
+if(chooseProduct.lastPrice > 0 ) {
+    $("#origin-price").html(numberWithCommas(chooseProduct.product.price) + 'đ');
+                $("#sale-price").html(numberWithCommas(chooseProduct.lastPrice) + 'đ' + "<span id='price-discount'>Giảm " +parseInt(((chooseProduct.product.price - chooseProduct.lastPrice)/ chooseProduct.product.price )* 100)  +"%</span>");
+                $("#sale-price").css('float', 'right');
+                $("#origin-price").css('display', 'block');
+} else {
+    $("#origin-price").html('');
+                $("#sale-price").html(numberWithCommas(chooseProduct.product.price) + 'đ');
+                $("#sale-price").css('float', 'left');
+}
+            
+
                 $(".add-to-card-btn-detail")[0].classList.remove('deactive');
                 $("#buy-now-btn-detail").removeClass('deactive');
             } else {
@@ -298,8 +316,16 @@ $(document).on("click", ".size-detail", function () {
                 $('.main-image').html('');
                 $('.main-image')[0].style.backgroundImage = "url(" + chooseProduct.image + ")";
                 $('#c-product-name').html(chooseProduct.product.name);
-                $("#origin-price").html(numberWithCommas(chooseProduct.product.price) + 'đ');
-                $("#sale-price").html(numberWithCommas(chooseProduct.lastPrice) + 'đ');
+                if(chooseProduct.lastPrice > 0 ) {
+    $("#origin-price").html(numberWithCommas(chooseProduct.product.price) + 'đ');
+                $("#sale-price").html(numberWithCommas(chooseProduct.lastPrice) + 'đ' + "<span id='price-discount'>Giảm " +parseInt(((chooseProduct.product.price - chooseProduct.lastPrice)/ chooseProduct.product.price )* 100)  +"%</span>");
+                $("#sale-price").css('float', 'right');
+                $("#origin-price").css('display', 'block');
+} else {
+    $("#origin-price").html('');
+                $("#sale-price").html(numberWithCommas(chooseProduct.product.price) + 'đ');
+                $("#sale-price").css('float', 'left');
+}
                 $(".add-to-card-btn-detail")[0].classList.remove('deactive');
                 $("#buy-now-btn-detail").removeClass('deactive');
             } else {

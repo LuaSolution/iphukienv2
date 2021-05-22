@@ -12,18 +12,20 @@
                         {{ $product->name }}
                     </a>
                 </div>
+
                 <div class="price">
-                    @if($product->sale_price == $product->price)
-                        <span
-                            class="sale">{{ number_format($product->price, 0, ',', '.') }}đ</span>
-                    @else
+                    @if($product->sale_price > 0)
                         <span
                             class="sale">{{ number_format($product->sale_price , 0, ',', '.') }}đ</span>
                         <br />
                         <span
                             class="origin">{{ number_format($product->price, 0, ',', '.') }}đ</span>
+                    @else
+                        <span
+                            class="sale">{{ number_format($product->price , 0, ',', '.') }}đ</span>
                     @endif
                 </div>
+
                 <div class="button-wrapper">
                     <a class="modal-trigger quickview-btn" href="#quickview"
                         data-url="{{ route('ajax.quickview-product', $product->id) }}"
