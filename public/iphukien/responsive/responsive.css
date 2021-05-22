@@ -494,6 +494,7 @@ header .sidenav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .footer .social-icons .ipk-footer-icon {
@@ -549,5 +550,11 @@ header .sidenav {
     }
 }
 
-
+.categories-container .ipk-content-container .filter-block{
+    display: flex;
+    align-items: center;
+}
+.categories-container .ipk-content-container .filter-block .category-filter{
+        margin-right: 20px;
+}
 /*# sourceMappingURL=responsive.css.map */
