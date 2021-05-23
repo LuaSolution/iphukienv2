@@ -11,7 +11,7 @@ use App\Tag;
 use App\Trademark;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Metatag;
 class CategoryController extends Controller
 {
     public function show(Request $request, $id)
@@ -76,14 +76,7 @@ class CategoryController extends Controller
             return view('layouts.list-product', compact('listProduct'));
         }
 
-        $this->data['meta'] = [
-            'title' => 'Trang chủ',
-            'description' => 'mo ta 1',
-            'url' => 'url',
-            'keywords' => 'keywords',
-            'canonical' => 'canonical',
-        ];
-
+        $this->data['meta'] = Metatag::find(2);
         return view('user/category-details', $this->data);
     }
 

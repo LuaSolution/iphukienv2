@@ -5,14 +5,14 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\News;
-
+use App\Metatag;
 class NewsController extends Controller
 {
     public function index(Request $request)
     {
         $news = News::paginate(10);
         $this->data['newss'] = $news;
-
+        $this->data['meta'] = Metatag::find(4);
         return view('user/list-news', $this->data);
     }
 

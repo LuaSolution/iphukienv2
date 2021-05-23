@@ -380,6 +380,29 @@
                 </ul>
             </li>
 
+            <li class="nav-item start @yield('list_meta_active')">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Cấu hình thẻ meta</span>
+                    <span class="selected"></span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <!-- <li class="nav-item @yield('add_slider_active')">
+                        <a href="{{ route('sliders.create') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Thêm Slider</span>
+                        </a>
+                    </li> -->
+                    <li class="nav-item @yield('list_meta_active')">
+                        <a href="{{ route('adMgetListMeta') }}" class="nav-link">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Cấu hình thẻ meta</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
 
             <li class="nav-item start @yield('list_partner_active') @yield('add_partner_active')">
                 <a href="javascript:;" class="nav-link nav-toggle">

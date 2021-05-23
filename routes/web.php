@@ -146,6 +146,13 @@ Route::middleware(['runall', 'locale'])->group(function () {
             //Slider
             Route::resource('sliders', SliderController::class);
             Route::post('/sliders/{id}', 'SliderController@update')->name('sliders.update');
+            
+
+            //Metatags
+            Route::get('/metatags-edit/{id}', 'MetatagController@getEditMeta')->name('adMgetEditMeta');
+            Route::post('/metatags-edit/{id}', 'MetatagController@postEditMeta')->name('adMpostEditMeta');
+            Route::get('/metatags', 'MetatagController@getListMeta')->name('adMgetListMeta');
+            Route::get('/metatags-del/{id}', 'MetatagController@getDelMeta')->name('adMgetDelMeta');
 
             //Partner
             Route::resource('partners', PartnerController::class);

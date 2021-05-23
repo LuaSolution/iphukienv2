@@ -11,6 +11,7 @@ use App\SaleProduct;
 use App\Slider;
 use App\StaticPage;
 use App\User;
+use App\Metatag;
 use Illuminate\Http\Request;
 use Mail as SendMail;
 
@@ -32,13 +33,7 @@ class HomeController extends Controller
         $this->data['flashSale'] = (new SaleProduct())->getListValidSaleProduct();
         $this->data['slider'] = Slider::OrderBy('id', 'DESC')->first();
         $this->data['partners'] = Partner::take(8)->orderBy('created_at', 'desc')->get();
-        $this->data['meta'] = [
-            'title' => 'Trang chủ',
-            'description' => 'mo ta 1',
-            'url' => 'url',
-            'keywords' => 'keywords',
-            'canonical' => 'canonical',
-        ];
+        $this->data['meta'] = Metatag::find(1);
         return view('user.home', $this->data);
     }
 

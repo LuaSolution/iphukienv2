@@ -22,7 +22,7 @@
           </div>
         </div> -->
       </div>
-      <div class="portlet-body form">
+      <!-- <div class="portlet-body form">
         <form action="{{ route('adMupdateConfig') }}" method="post">
           {{ csrf_field() }}
           <div class="form-body">
@@ -56,7 +56,7 @@
             <button type="submit" class="btn blue" name="submit" id="update-config">Submit</button>
           </div>
         </form>
-      </div>
+      </div> -->
     </div>
     <!-- END SAMPLE FORM PORTLET-->
   </div>

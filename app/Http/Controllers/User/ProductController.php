@@ -11,7 +11,7 @@ use App\Wishlist;
 use App\SaleProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Metatag;
 class ProductController extends Controller
 {
     public function show(Request $request, $id)
@@ -66,7 +66,7 @@ class ProductController extends Controller
                 $i->wishlist = (new Wishlist())->getWishlistByUserAndProduct(Auth::user()->id, $i->id);
             }
         }
-        
+        $this->data['meta'] = Metatag::find(3);
         return view('user/product-details', $data);
     }
 
