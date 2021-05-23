@@ -4,6 +4,7 @@ namespace App\Http\Controllers\MetronicAdmin;
 
 use App\Http\Controllers\Controller;
 use App\Size;
+use App\Cate;
 use Illuminate\Http\Request;
 
 class SizeController extends Controller
@@ -14,6 +15,8 @@ class SizeController extends Controller
      */
     public function getAddSize()
     {
+        $this->data['categories'] = (new Cate())->getListCate();
+
         return view('metronic_admin.sizes.add', $this->data);
     }
 
@@ -30,6 +33,7 @@ class SizeController extends Controller
 
         $dataInsert = [
             'name' => $name,
+            'category_id' => $request->input('category'),
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
@@ -55,6 +59,7 @@ class SizeController extends Controller
 
         if ($size) {
             $this->data['size'] = $size;
+            $this->data['categories'] = (new Cate())->getListCate();
 
             return view('metronic_admin.sizes.edit', $this->data);
         } else {
@@ -77,6 +82,7 @@ class SizeController extends Controller
 
         $dataUpdate = [
             'name' => $name,
+            'category_id' => $request->input('category'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
         $result = (new Size())->updateSize($id, $dataUpdate);

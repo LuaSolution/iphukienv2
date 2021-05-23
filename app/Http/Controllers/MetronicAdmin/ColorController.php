@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MetronicAdmin;
 
 use App\Color;
+use App\Cate;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,8 @@ class ColorController extends Controller
      */
     public function getAddColor()
     {
+        $this->data['categories'] = (new Cate())->getListCate();
+        
         return view('metronic_admin.colors.add', $this->data);
     }
 
@@ -36,6 +39,7 @@ class ColorController extends Controller
         $dataInsert = [
             'name' => $name,
             'code' => $code,
+            'category_id' => $request->input('category'),
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
@@ -63,6 +67,7 @@ class ColorController extends Controller
 
         if ($color) {
             $this->data['color'] = $color;
+            $this->data['categories'] = (new Cate())->getListCate();
 
             return view('metronic_admin.colors.edit', $this->data);
         } else {
@@ -91,6 +96,7 @@ class ColorController extends Controller
         $dataUpdate = [
             'name' => $name,
             'code' => $code,
+            'category_id' => $request->input('category'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
         $colorModel = new Color();

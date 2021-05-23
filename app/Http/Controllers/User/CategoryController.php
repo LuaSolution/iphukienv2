@@ -49,26 +49,21 @@ class CategoryController extends Controller
             }
             $this->data['listProduct'] = Product::where('category_id', $newId)->whereNull('parent_id')->orderBy('id', 'DESC')->paginate(24);
         }
-
+        $newId = $id;
+        if (!is_numeric($id)) {
+            $newId = (new Cate())->getCateBySlug($id)->id;
+        }
         if ($id == -1 || $id == -2) {
             $category = (object) ['id' => null, 'title' => 'Danh sách sản phẩm'];
 
             $this->data['category'] = $category;
         } else {
-            $newId = $id;
-            if (!is_numeric($id)) {
-                $newId = (new Cate())->getCateBySlug($id)->id;
-            }
             $this->data['category'] = (new Cate())->getCateById($newId);
         }
-        $this->data['colors'] = (new Color())->getListColor();
-        $this->data['sizes'] = (new Size())->getListSize();
+        $this->data['colors'] = (new Color())->getListColorByCategory($newId);
+        $this->data['sizes'] = (new Size())->getListSizeByCategory($newId);
         $this->data['trademarks'] = (new Trademark())->getListTrademark();
         $this->data['tags'] = (new Tag())->getListTags();
-        $newId = $id;
-        if (!is_numeric($id)) {
-            $newId = (new Cate())->getCateBySlug($id)->id;
-        }
         $this->data['id'] = $newId;
 
         if ($request->ajax()) {

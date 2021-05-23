@@ -14,7 +14,7 @@ class Size extends Model
      * @var array
      */
     protected $fillable = [
-      'name'
+      'name', 'category_id'
   ];
 
   public function insertSize($data){
@@ -23,7 +23,9 @@ class Size extends Model
   public function updateSize($id,$data){
   	return Size::where('id', '=', $id)->update($data);
   }
-
+  public function getListSizeByCategory($catId){
+  	return Size::where('category_id', '=', $catId)->orderBy('created_at','desc')->get();
+  }
   public function getSizeById($id){
   	return Size::where('id', '=', $id)->first();
   }
