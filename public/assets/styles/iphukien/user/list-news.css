@@ -2,6 +2,10 @@
   padding-top: 65px;
 }
 
+.list-news-container .list-news {
+  min-height: 300px;
+}
+
 .list-news-txt {
   text-align: center;
   font-weight: bold;
@@ -207,6 +211,8 @@
 #wookmark1 {
   width: 100%;
 }
+
+
 
 @media only screen and (max-width: 414px) {
   .list-news-container {

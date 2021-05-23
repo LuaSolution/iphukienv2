@@ -14,7 +14,7 @@ class Color extends Model
      * @var array
      */
     protected $fillable = [
-      'name', 'code'
+      'name', 'code', 'category_id'
   ];
 
   public function insertColor($data){
@@ -26,6 +26,9 @@ class Color extends Model
 
   public function getColorById($id){
   	return Color::where('id', '=', $id)->first();
+  }
+  public function getListColorByCategory($catId){
+  	return Color::where('category_id', '=', $catId)->orderBy('created_at','desc')->get();
   }
   public function getListColor(){
   	return Color::orderBy('created_at','desc')->get();
