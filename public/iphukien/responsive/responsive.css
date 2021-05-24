@@ -552,7 +552,9 @@ header .sidenav {
 
 .categories-container .ipk-content-container .filter-block{
     display: flex;
-    align-items: center;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 100%;
 }
 .categories-container .ipk-content-container .filter-block .category-filter{
         margin-right: 20px;
