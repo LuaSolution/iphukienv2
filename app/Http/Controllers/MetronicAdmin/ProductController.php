@@ -158,6 +158,12 @@ class ProductController extends Controller
             'size_id' => $size,
             'color_id' => $color,
             'sold' => 0,
+
+            'meta_title' => $request->meta_title,
+            'meta_des' => $request->meta_des,
+            'meta_keywords' => $request->meta_keywords,
+            'meta_url' => $request->meta_url,
+
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
@@ -290,6 +296,12 @@ class ProductController extends Controller
             'parent_id' => $parent,
             'size_id' => $size,
             'color_id' => $color,
+
+            'meta_title' => $request->meta_title,
+            'meta_des' => $request->meta_des,
+            'meta_keywords' => $request->meta_keywords,
+            'meta_url' => $request->meta_url,
+
             'updated_at' => date('Y-m-d H:i:s'),
         ];
         $result = (new Product())->updateProduct($id, $dataUpdate);

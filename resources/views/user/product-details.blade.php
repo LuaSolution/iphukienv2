@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Tên của sản phẩm')
+@section('title', $product->meta_title)
+@section('description', $product->meta_des)
+@section('url', $product->meta_url)
+@section('keywords', $product->meta_keywords)
+@section('canonical', $product->meta_url)
+@section('image',  asset('public/assets/images/header/logo.svg'))
 
 @section('header')
 @include('layouts.header', ['status' => 'complete'])
@@ -14,13 +19,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
 @endsection
 
-@section('fb-meta-tags')
+<!-- @section('fb-meta-tags')
 <meta property="og:url" content="{{ url()->full() }}" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="{{ $product->name }}" />
 <meta property="og:description" content="{{ $product->full_description }}" />
 <meta property="og:image" content="{{ asset('public/assets/images/demo/watch.png') }}" />
-@endsection
+@endsection -->
 
 @section('content')
 <div class="ipk-container product-breadcrumbs">

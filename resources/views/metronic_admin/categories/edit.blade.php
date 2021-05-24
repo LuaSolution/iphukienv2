@@ -45,7 +45,7 @@
                                 <label class="custom-file-label" for="form-image">
                                     @if($cate->image != "")
                                         {{ substr($cate->image,0,strpos($cate->image,'?')) }}
-                                    @else 
+                                    @else
                                         Choose file
                                     @endif
                                 </label>
@@ -64,6 +64,41 @@
                                 @endforeach
                             </select>
                         </div>
+
+                        <div class="form-group form-md-line-input has-success">
+              <input type="text" class="form-control" id="form-title" name="meta_title"  value="{{ $cate->meta_title }}">
+              <label for="form-title">meta title</label>
+            </div>
+            <div class="form-group form-md-line-input has-success">
+              <input type="text" class="form-control" id="form-title" name="meta_des"  value="{{ $cate->meta_des }}">
+              <label for="form-title">meta description</label>
+            </div>
+            <div class="form-group form-md-line-input has-success">
+              <input type="text" class="form-control" id="form-title" name="meta_url"  value="{{ $cate->meta_url }}">
+              <label for="form-title">meta url</label>
+            </div>
+            <div class="form-group form-md-line-input has-success">
+              <input type="text" class="form-control" id="form-title" name="meta_keywords"  value="{{ $cate->meta_keywords }}">
+              <label for="form-title">meta keywords</label>
+            </div>
+            <div class="form-group form-md-line-input has-success">
+                            <label class="col-sm-2 form-control-label">meta image</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="form-image-meta" name="meta_image">
+                                <label class="custom-file-label" for="form-image">
+                                    @if($cate->meta_image != "")
+                                        {{ substr($cate->meta_image,0,strpos($cate->meta_image,'?')) }}
+                                    @else
+                                        Choose file
+                                    @endif
+                                </label>
+                            </div>
+                            <img id="file-show-meta" @if($cate->meta_image != "")
+                            src="{{ asset('/public/' .$cate->meta_image) }}" @else
+                            class="hidden" @endif >
+                        </div>
+
+
                     </div>
                     <div class="form-actions noborder">
                         <input type="reset" value="RESET" class="btn btn-secondary" />
@@ -107,6 +142,31 @@ $(document).on('change', "#form-image", function (evt) {
 })
 $(document).on('focusout', '#form-title', function () {
   $("#form-slug").val(changeToSlug($(this).val()))
+})
+</script>
+<script>
+$(document).on('change', "#form-image-meta", function (evt) {
+  var file = evt.target.files[0]
+
+  //Get tmp path
+  var tmp = URL.createObjectURL(event.target.files[0])
+  //Get name extension
+  var nameExtension = file.type
+
+  //Check image file
+  if (nameExtension.search('image') > -1 && file.size < (5 * 1024 * 1024)) {
+    $(this).next('label').text(file.name)
+    $("#file-show-meta").attr('src', tmp)
+    $("#file-show-meta").removeClass('hidden')
+
+
+  } else {
+    alert("Vui lòng chọn hình có dung lượng nhỏ hơn 5MB", 0)
+    $(this).next('label').text("Choose file")
+    $("#file-show").addClass('hidden')
+    $(this).val('')
+  }
+
 })
 </script>
 @endsection

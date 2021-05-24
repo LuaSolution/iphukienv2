@@ -45,7 +45,7 @@ class CategoryController extends Controller
         } else {
             $newId = $id;
             if (!is_numeric($id)) {
-                $newId = (new Cate())->getCateBySlug($id)->id;
+                $newId = Cate::where('slug', '=', $id)->first()->id;
             }
             $this->data['listProduct'] = Product::where('category_id', $newId)->whereNull('parent_id')->orderBy('id', 'DESC')->paginate(24);
         }
@@ -60,8 +60,8 @@ class CategoryController extends Controller
         } else {
             $this->data['category'] = (new Cate())->getCateById($newId);
         }
-        $this->data['colors'] = (new Color())->getListColorByCategory($newId);
-        $this->data['sizes'] = (new Size())->getListSizeByCategory($newId);
+        $this->data['colors'] = (new Color())->getListColorByCate($newId);
+        $this->data['sizes'] = (new Size())->getListSizeByCate($newId);
         $this->data['trademarks'] = (new Trademark())->getListTrademark();
         $this->data['tags'] = (new Tag())->getListTags();
         $this->data['id'] = $newId;
@@ -71,7 +71,6 @@ class CategoryController extends Controller
             return view('layouts.list-product', compact('listProduct'));
         }
 
-        $this->data['meta'] = Metatag::find(2);
         return view('user/category-details', $this->data);
     }
 

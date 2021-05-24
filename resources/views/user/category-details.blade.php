@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
-@section('title', $meta['title'])
-@section('description', $meta['description'])
-@section('url', $meta['url'])
-@section('keywords', $meta['keywords'])
-@section('canonical', $meta['canonical'])
+@section('title', @$category->meta_title?: "")
+@section('description', @$category->meta_des?: "")
+@section('url', @$category->meta_url?: "")
+@section('keywords', @$category->meta_keywords?: "")
+@section('canonical', @$category->meta_url?: "")
+@section('image',  asset('public/' . @$category->image?: "" ))
 
 @section('header')
-    @include('layouts.header', ['status' => 'complete'])
+@include('layouts.header', ['status' => 'complete'])
 @endsection
 
 @section('styles')

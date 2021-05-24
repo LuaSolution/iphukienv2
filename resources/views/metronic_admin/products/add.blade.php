@@ -91,6 +91,33 @@
                                 @endforeach
                             </select>
                         </div>
+                        
+                        <!-- meta tag -->
+                        <div class="form-group form-md-line-input has-success">
+              <input type="text" class="form-control" id="form-title" name="meta_title" >
+              <label for="form-title">meta title</label>
+            </div>
+            <div class="form-group form-md-line-input has-success">
+              <input type="text" class="form-control" id="form-title" name="meta_des" >
+              <label for="form-title">meta description</label>
+            </div>
+            <div class="form-group form-md-line-input has-success">
+              <input type="text" class="form-control" id="form-title" name="meta_url" >
+              <label for="form-title">meta url</label>
+            </div>
+            <div class="form-group form-md-line-input has-success">
+              <input type="text" class="form-control" id="form-title" name="meta_keywords">
+              <label for="form-title">meta keywords</label>
+            </div>
+            <div class="form-group form-md-line-input has-success">
+              <label class="col-sm-2 form-control-label">meta image</label>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="form-image-meta" name="meta_image">
+              </div>
+              <img id="file-show-meta" class="hidden" style="margin-top: 10px;max-width: 100%;max-height: 300px;">
+            </div>
+                        <!-- meta tag -->
+                        
                         <div class="form-group form-md-line-input has-success">
                             <label class="control-label">Sản phẩm cha</label>
                             <select id="parent" class="form-control select2">
@@ -251,6 +278,30 @@ $(document).on("submit", "#create-new", function(e) {
     });
 
 });
+
+$(document).on('change', "#form-image-meta", function (evt) {
+  var file = evt.target.files[0]
+
+  //Get tmp path
+  var tmp = URL.createObjectURL(event.target.files[0])
+  //Get name extension
+  var nameExtension = file.type
+
+  //Check image file
+  if (nameExtension.search('image') > -1 && file.size < (5 * 1024 * 1024)) {
+    $(this).next('label').text(file.name)
+    $("#file-show-meta").attr('src', tmp)
+    $("#file-show-meta").removeClass('hidden')
+
+
+  } else {
+    alert("Vui lòng chọn hình có dung lượng nhỏ hơn 5MB", 0)
+    $(this).next('label').text("Choose file")
+    $("#file-show").addClass('hidden')
+    $(this).val('')
+  }
+
+})
 </script>
 <script src="{{ asset('public/admin/js/post.js') }}" type="text/javascript"></script>
 @endsection

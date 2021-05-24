@@ -274,7 +274,6 @@ footer .ipk-container.news-feed-container form input[name=email] {
 
 .products-block .products-wrapper .products .product {
     margin-left: unset;
-    height: unset !important;
 }
 
 .categories-container .ipk-content-container .filter-block {
@@ -292,7 +291,6 @@ footer .ipk-container.news-feed-container form input[name=email] {
 
 .products-wrapper .products .product {
     margin-left: unset;
-    height: unset !important;
 }
 
 @media only screen and (max-width: 768px) {

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Product;
 
 class Size extends Model
 {
@@ -24,7 +25,12 @@ class Size extends Model
   	return Size::where('id', '=', $id)->update($data);
   }
   public function getListSizeByCategory($catId){
-  	return Size::where('category_id', '=', $catId)->orderBy('created_at','desc')->get();
+  	return Size::orderBy('created_at','desc')->get();
+  }
+  public function getListSizeByCate($catId){
+    $res = Product::where('category_id', $catId)->distinct()->pluck('size_id')->toArray();
+    $res2 = Size::whereIn('id', $res)->get();
+    return $res2;
   }
   public function getSizeById($id){
   	return Size::where('id', '=', $id)->first();

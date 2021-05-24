@@ -49,6 +49,14 @@ class CategoryController extends Controller
             $image = $slug . '.' . $request->image->extension();
             $path = $request->image->storeAs('img/cate', $image);
         }
+        // meta image
+        $imageFile = $request->file('meta_image');
+        $meta_path = "";
+        if ($request->hasFile('meta_image')) {
+            $meta_image = $slug . '-meta.' . $request->meta_image->extension();
+            $meta_path = $request->meta_image->storeAs('img/cate', $meta_image);
+        }
+
         $parentId = $request->input('parentId') != '' ? $request->input('parentId') : null;
         $dataInsert = [
             'title' => $title,
@@ -56,6 +64,13 @@ class CategoryController extends Controller
             'pos' => $pos,
             'parent_id' => $parentId,
             'image' => $path,
+
+            'meta_title' => $request->meta_title,
+            'meta_des' => $request->meta_des,
+            'meta_keywords' => $request->meta_keywords,
+            'meta_url' => $request->meta_url,
+            'meta_image' => $meta_path,
+
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
@@ -121,6 +136,15 @@ class CategoryController extends Controller
             $image = $slug . '.' . $request->image->extension();
             $path = $request->image->storeAs('img/cate', $image);
         }
+
+        // meta image
+        $imageFile = $request->file('meta_image');
+        $path_meta = "";
+        if ($request->hasFile('meta_image')) {
+            $meta_image = $slug . '-meta.' . $request->meta_image->extension();
+            $path_meta = $request->meta_image->storeAs('img/cate', $meta_image);
+        }
+
         $parentId = $request->input('parentId') != '' ? $request->input('parentId') : null;
 
         $dataUpdate = [
@@ -128,6 +152,12 @@ class CategoryController extends Controller
             'slug' => $slug,
             'pos' => $pos,
             'image' => $path,
+            'meta_title' => $request->meta_title,
+            'meta_des' => $request->meta_des,
+            'meta_keywords' => $request->meta_keywords,
+            'meta_url' => $request->meta_url,
+            'meta_image' => $path_meta,
+
             'parent_id' => $parentId,
             'updated_at' => date('Y-m-d H:i:s'),
         ];

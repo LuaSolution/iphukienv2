@@ -34,14 +34,6 @@
               <label for="form-code">Mã màu</label>
               <input type="text" id="code" name="code" class="form-control demo" data-control="hue" value="#ff6161">
             </div>
-            <div class="form-group form-md-line-input has-success">
-              <label class="control-label">Danh mục</label>
-              <select class="bs-select form-control" name="category" id="category">
-                  @foreach($categories as $key=>$item)
-                  <option value="{{ $item->id }}">{{ $item->title }}</option>
-                  @endforeach
-              </select>
-            </div>
           </div>
           <div class="form-actions noborder">
             <input type="reset" value="RESET" class="btn btn-secondary" />

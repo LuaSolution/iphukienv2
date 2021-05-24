@@ -41,8 +41,7 @@ class HomeController extends Controller
     {
         $m = new Mail;
         $m->email = $req->email;
-        $m->created_at = date('Y-m-d');
-        $m->save();
+         $m->save();
 
         toast()->success('Đăng ký email thành công');
         return redirect()->back();
