@@ -18,6 +18,40 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
 <style>
+.myModal {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modalContent {
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 .container{
     margin-top:30px;
 text-align: center;
@@ -182,6 +216,25 @@ echo ('<script type="text/javascript">
         @endforeach
     </div>
 </div>
+
+<!-- The Modal -->
+@if($promotion->hide == "1")
+<div id="myModal" class="myModal">
+
+    <div class="modalContent" style="margin-top:100px;max-width:500px">
+                                    <div class="remove-line-height banner">
+                                    <a href="{{ $promotion->href }}">
+                                    <img src="{{asset('public/' . $promotion->image) }}" />
+  </a>
+
+        </div>
+    <!-- <div class="btnp" style="bottom: 5px">
+      <a> Xem nội dung </a>
+    </div> -->
+  </div>
+</div>
+@endif
+
 @include('layouts.quickview')
 @endsection
 
@@ -191,6 +244,14 @@ echo ('<script type="text/javascript">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 <script>
 $(document).ready(function () {
+    var modal = document.getElementById("myModal");
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
     $.each($(".item-image"), function (index, value) {
         value.style.height = value.offsetWidth + "px";
     });
@@ -216,7 +277,7 @@ $(document).ready(function () {
         }
     }
 });
-});
+
 $(document).on("click", ".ipk-next-slide", function () {
     $('.sale-product-slider').carousel('next');
 });
@@ -245,5 +306,7 @@ $('.slide-wrapper-category').slick({
                 },
             ]
         });
+});
+
 </script>
 @endsection

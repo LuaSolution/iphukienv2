@@ -47,7 +47,7 @@ class CategoryController extends Controller
             if (!is_numeric($id)) {
                 $newId = Cate::where('slug', '=', $id)->first()->id;
             }
-            $this->data['listProduct'] = Product::where('category_id', $newId)->whereNull('parent_id')->orderBy('id', 'DESC')->paginate(24);
+            $this->data['listProduct'] = Product::where('category_id', $newId)->where('parent_id', null)->orderBy('id', 'DESC')->paginate(24);
         }
         $newId = $id;
         if (!is_numeric($id)) {

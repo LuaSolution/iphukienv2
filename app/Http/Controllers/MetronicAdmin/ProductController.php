@@ -120,19 +120,22 @@ class ProductController extends Controller
         $categoryId = $request->input('category_id');
         $shortDescription = $request->input('short_description');
         if (!$shortDescription) {
+            toast()->error('Thêm thất bại');
             return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
         }
         $fullDescription = $request->input('full_description');
         if (!$fullDescription) {
+            toast()->error('Thêm thất bại');
             return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
         }
         $price = $request->input('price');
         if (!$price) {
+            toast()->error('Thêm thất bại');
             return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
         }
         $salePrice = $request->input('sale_price');
         if (!$salePrice) {
-            return json_encode(['code' => 0, 'message' => "Thêm thất bại"]);
+            $salePrice = null;
         }
         $video = $request->input('video') == '' ? null : $request->input('video');
         $status = $request->input('status_id') == 'no-status' ? null : $request->input('status_id');
@@ -168,7 +171,6 @@ class ProductController extends Controller
             'updated_at' => date('Y-m-d H:i:s'),
         ];
         $result = (new Product())->insertProduct($dataInsert);
-
         if ($result != null) {
             if ($result->parent_id !== null) {
                 $parentProductObj = (new Product())->getProductById($result->parent_id);
@@ -204,7 +206,7 @@ class ProductController extends Controller
                 [
                     'id' => $addProductId,
                     'name' => $result->name,
-                    'price' => $result->sale_price,
+                    'price' => $request->input('price'),
                 ],
             ], "/product/add");
             $dataUpdate = [

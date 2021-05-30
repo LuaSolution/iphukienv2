@@ -28,7 +28,7 @@
             <div class="status"><span>Thành công</span></div>
         </div> -->
 
-        <iframe class="order-detail-iframe" src="{{$orderDetailUrl}}"  width="100%" height="600"></iframe>
+        <!-- <iframe class="order-detail-iframe" src="{{$orderDetailUrl}}"  width="100%" height="600"></iframe> -->
 
         <div class="list-products">
             <div class="row products">
@@ -59,7 +59,7 @@ $img = count($listImg) > 0 ? asset('public/' . $listImg[0]->image) : asset('publ
                 <div class="left-info">Ngày đặt hàng: {{date("Y-m-d", strtotime($order->created_at))}}</div>
                 <div class="left-info">Hình thức thanh toán: {{$order->payment_method_name}}</div>
                 <div class="left-info">Dự kiến nhận hàng: {{date("Y-m-d", strtotime($order->delivery_date))}}</div>
-                <div class="left-info receiver-info">Người nhận: {{$order->receiver_name}}</div>
+                <div class="left-info receiver-info thu-css">Người nhận: {{$order->receiver_name}}</div>
                 <div class="left-info">Địa chỉ: {{$order->receiver_address}}</div>
                 <div class="left-info">Số điện thoại: {{$order->receiver_phone}}</div>
                 <div class="left-info">Email: {{$order->receiver_email}}</div>
@@ -79,7 +79,11 @@ $img = count($listImg) > 0 ? asset('public/' . $listImg[0]->image) : asset('publ
                 </div>
                 <div class="right-info sum">
                     <span>Tổng cộng</span>
+                    @if($countAllOrderPrice > 500000)
+                    <span>{{ number_format($countAllOrderPrice , 0, ',', '.') }} VNĐ</span>
+                    @else
                     <span>{{ number_format($order->ship_fee+$countAllOrderPrice , 0, ',', '.') }} VNĐ</span>
+                    @endif
                 </div>
             </div>
         </div>

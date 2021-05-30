@@ -536,13 +536,15 @@ header .sidenav {
 
 
 
+
+
 @media only screen and (max-width: 600px){
     .carousel-item .carousel-item-wrapper{
         padding: 0!important
     }
 }
 
-@media only screen and (max-width: 414){
+@media only screen and (max-width: 414px){
     .carousel-item .carousel-item-wrapper{
         padding: 0!important
     }

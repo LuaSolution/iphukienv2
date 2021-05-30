@@ -8,8 +8,8 @@
                 </div>
                 <div class="name">
                     <a
-                        href="{{ route('products.show', $product->slug ? $product->slug : $product->id) }}">
-                        {{ $product->name }}
+                        href="{{ route('products.show', $product->slug ? $product->slug : $product->id) }}"
+                        style="text-transform: capitalize">{{ mb_strtolower($product->name) }}
                     </a>
                 </div>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Cate;
 use App\Http\Controllers\Controller;
 use App\Mail;
+use App\Promotion;
 use App\Partner;
 use App\Product;
 use App\SaleProduct;
@@ -34,6 +35,7 @@ class HomeController extends Controller
         $this->data['slider'] = Slider::OrderBy('id', 'DESC')->first();
         $this->data['partners'] = Partner::take(8)->orderBy('created_at', 'desc')->get();
         $this->data['meta'] = Metatag::find(1);
+        $this->data['promotion'] = Promotion::find(1);
         return view('user.home', $this->data);
     }
 

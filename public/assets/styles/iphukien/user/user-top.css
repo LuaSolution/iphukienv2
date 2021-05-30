@@ -17,7 +17,7 @@
     border-radius: 3px;
 }
 .user-infos {
-    padding: 20px;
+    padding: 20px 0 0 0;
     margin-top: 25px;
     padding-left: 60px;
     background-color: #000;
@@ -104,9 +104,54 @@
     padding: 0;
     
 }
+
+@media only screen and (max-width: 736px)
+{
+    .user-infos {
+        margin-top: 20px;
+    }
+    .user-infos .user-top-dropdown {
+        left: 1px;
+    }
+}
+@media only screen and (max-width: 568px)
+{
+    .user-infos {
+        height: 95px;
+        padding-left: 20px;
+    }
+
+}
 @media only screen and (max-width: 414px)
 {
     .user-infos {
-        margin-top: 4px;
+        margin-top: 25px;
+        height: 93px;
     }
+    
+        
+
+}
+@media only screen and (max-width: 375px)
+{
+    .user-infos {
+        margin-top: 20px;
+        height: 94px;
+    }
+    .user-infos .avatar {
+        width: 50px;
+        height: 50px;
+    }
+    
+}
+
+@media only screen and (max-width: 320px)
+{
+    .user-infos {
+        margin-top: 15px;
+    }
+    .notify-text {
+        font-size: 10px;
+    }
+    
 }

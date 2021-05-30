@@ -950,7 +950,7 @@ img {
   }
 
   #cart-page .list-button-wrapper {
-    margin-top: 0 !important;
+    margin-top: 30px !important;
     padding: 20px 0 24px;
   }
 
@@ -970,5 +970,44 @@ img {
 
   #cart-page .list-button-wrapper .list-button .count-products {
     text-align: left;
+  }
+}
+@media only screen and (max-width: 736px)
+{
+  .news-feed-container {
+    height: 99px;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .news-feed-container span {
+    font-size: 13px;
+  }
+
+  .news-feed-container {
+    height: 100px;
+  }
+
+}
+
+@media screen and (max-width: 568px)
+{
+  .news-feed-container {
+    height: 120px;
+  }
+}
+
+@media screen and (max-width: 375px)
+{
+  .news-feed-container {
+    height: 119px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .news-feed-container input.news-feed-email,
+  .news-feed-container input.news-feed-email:focus {
+    width: 190px;
   }
 }

@@ -55,10 +55,16 @@ $(document).ready(function () {
                     break
             }
             $("#quickview-list-tag").html(str)
-
-            $("#quickview-origin").html(numberWithCommas(productInfo['product']['price']))
-
-            $("#quickview-sale").html(`${numberWithCommas(productInfo['salePrice'])}đ <span>Giảm ${Math.round((productInfo['product']['price'] - productInfo['salePrice']) / productInfo['product']['price'] * 100)}%</span>`)
+            if (productInfo['salePrice'] > 0) {
+                $("#quickview-origin").html(numberWithCommas(productInfo['product']['price']) + 'đ');
+                $("#quickview-sale").html(`${numberWithCommas(productInfo['salePrice'])}đ <span>Giảm ${Math.round((productInfo['product']['price'] - productInfo['salePrice']) / productInfo['product']['price'] * 100)}%</span>`);
+                $("#quickview-sale").css('float', 'right');
+                $("#quickview-origin").css('display', 'block');
+            } else {
+                $("#quickview-origin").html('');
+                $("#quickview-sale").html(numberWithCommas(productInfo['product']['price']) + 'đ');
+                $("#quickview-sale").css('float', 'left');
+            }
 
             switch (productInfo['product']['status_id']) {
                 case 11:
@@ -76,13 +82,13 @@ $(document).ready(function () {
             str = "";
             for (i = 0; i < productInfo['listSize'].length; i++) {
                 str += `<span class="size"`
-                        + `data-sizename="${productInfo['listSize'][i]['name']}"`
-                        + `data-sizeid="${productInfo['listSize'][i]['id']}"`
-                        + `>`
-                        + `${productInfo['listSize'][i]['name']}`
-                        + `</span>`;
+                    + `data-sizename="${productInfo['listSize'][i]['name']}"`
+                    + `data-sizeid="${productInfo['listSize'][i]['id']}"`
+                    + `>`
+                    + `${productInfo['listSize'][i]['name']}`
+                    + `</span>`;
             }
-            if(productInfo['listSize'].length == 0) {
+            if (productInfo['listSize'].length == 0) {
                 str += `<span class="size" `
                     + `data-sizename="One Size"`
                     + `data-sizeid="-1"`
@@ -95,13 +101,13 @@ $(document).ready(function () {
             str = "";
             for (i = 0; i < productInfo['listColor'].length; i++) {
                 str += `<span class="color"`
-                        + `data-colorname="${productInfo['listColor'][i]['name']}"`
-                        + `data-colorid="${productInfo['listColor'][i]['id']}"`
-                        + `>`
-                        + `${productInfo['listColor'][i]['name']}`
-                        + `</span>`;
+                    + `data-colorname="${productInfo['listColor'][i]['name']}"`
+                    + `data-colorid="${productInfo['listColor'][i]['id']}"`
+                    + `>`
+                    + `${productInfo['listColor'][i]['name']}`
+                    + `</span>`;
             }
-            if(productInfo['listColor'].length == 0) {
+            if (productInfo['listColor'].length == 0) {
                 str += `<span class="color" `
                     + `data-colorname="One color"`
                     + `data-colorid="-1"`
@@ -140,8 +146,16 @@ $(document).on("click", ".color", function () {
             console.log("chooseProduct", chooseProduct)
             if (chooseProduct.product != null) {
                 $('#quickview-name').html(chooseProduct.product.name)
-                $("#quickview-origin").html(numberWithCommas(chooseProduct.product.price) + 'đ')
-                $("#quickview-sale").html(numberWithCommas(chooseProduct.lastPrice) + 'đ')
+                if (productInfo['salePrice'] > 0) {
+                    $("#quickview-origin").html(numberWithCommas(productInfo['product']['price']) + 'đ');
+                    $("#quickview-sale").html(`${numberWithCommas(productInfo['salePrice'])}đ <span>Giảm ${Math.round((productInfo['product']['price'] - productInfo['salePrice']) / productInfo['product']['price'] * 100)}%</span>`);
+                    $("#quickview-sale").css('float', 'right');
+                    $("#quickview-origin").css('display', 'block');
+                } else {
+                    $("#quickview-origin").html('');
+                    $("#quickview-sale").html(numberWithCommas(productInfo['product']['price']) + 'đ');
+                    $("#quickview-sale").css('float', 'left');
+                }
                 let cImg = chooseProduct.image
                 for (let i = 0; i < $('.product-img').length; i++) {
                     if ($('.product-img')[i].dataset.img == cImg) {
@@ -191,8 +205,16 @@ $(document).on("click", ".size", function () {
             console.log(chooseProduct)
             if (chooseProduct.product != null) {
                 $('#quickview-name').html(chooseProduct.product.name)
-                $("#quickview-origin").html(numberWithCommas(chooseProduct.product.price) + 'đ')
-                $("#quickview-sale").html(numberWithCommas(chooseProduct.lastPrice) + 'đ')
+                if (productInfo['salePrice'] > 0) {
+                    $("#quickview-origin").html(numberWithCommas(productInfo['product']['price']) + 'đ');
+                    $("#quickview-sale").html(`${numberWithCommas(productInfo['salePrice'])}đ <span>Giảm ${Math.round((productInfo['product']['price'] - productInfo['salePrice']) / productInfo['product']['price'] * 100)}%</span>`);
+                    $("#quickview-sale").css('float', 'right');
+                    $("#quickview-origin").css('display', 'block');
+                } else {
+                    $("#quickview-origin").html('');
+                    $("#quickview-sale").html(numberWithCommas(productInfo['product']['price']) + 'đ');
+                    $("#quickview-sale").css('float', 'left');
+                }
                 let cImg = chooseProduct.image
                 for (let i = 0; i < $('.product-img').length; i++) {
                     if ($('.product-img')[i].dataset.img == cImg) {
@@ -246,7 +268,7 @@ $(document).on("click", ".quickview-btn", function () {
 })
 function updateCart() {
     console.log(currentProduct)
-    if(currentProduct['listSize'].length > 0) {
+    if (currentProduct['listSize'].length > 0) {
         let listSizeElement = $(".sizes .size.active")
         if (listSizeElement.length == 0) {
             M.toast({
@@ -256,7 +278,7 @@ function updateCart() {
             return false
         }
     }
-    if(currentProduct['listColor'].length > 0) {
+    if (currentProduct['listColor'].length > 0) {
         let listColorElement = $(".colors .color.active")
         if (listColorElement.length == 0) {
             M.toast({
@@ -266,7 +288,7 @@ function updateCart() {
             return false
         }
     }
-    if(currentProduct['listColor'].length > 0 && currentProduct['listSize'].length > 0) {
+    if (currentProduct['listColor'].length > 0 && currentProduct['listSize'].length > 0) {
         if (chooseProduct) {
             console.log(chooseProduct)
             let productid = chooseProduct.product.id
@@ -278,7 +300,7 @@ function updateCart() {
             let prodName = chooseProduct.product.name
             let quantity = $("#quantity").val() == 0 ? 1 : $("#quantity").val()
             let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {}
-    
+
             if (cart[productid]) {
                 cart[productid].quantity = parseInt(cart[productid].quantity) + parseInt(quantity)
             } else {
@@ -303,7 +325,7 @@ function updateCart() {
             $(".buy-now-btn")[0].classList.add('deactive');
         }
     }
-    if(currentProduct['listColor'].length == 0 && currentProduct['listSize'].length == 0) {
+    if (currentProduct['listColor'].length == 0 && currentProduct['listSize'].length == 0) {
         let productid = currentProduct['product']['id'];
         let choosenSize = '-';
         let choosenColor = '-';
@@ -314,7 +336,7 @@ function updateCart() {
         let quantity = $("#quantity-detail").val() == 0 ? 1 : $("#quantity-detail").val();
         let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
 
-        if(cart[productid]) {
+        if (cart[productid]) {
             cart[productid].quantity = parseInt(cart[productid].quantity) + parseInt(quantity);
         } else {
             cart[productid] = {
@@ -327,7 +349,7 @@ function updateCart() {
                 nhanhPorductId: nhanhProductId,
             };
         }
-        localStorage.setItem('ipk_cart',  JSON.stringify(cart));
+        localStorage.setItem('ipk_cart', JSON.stringify(cart));
         return true;
     }
 }

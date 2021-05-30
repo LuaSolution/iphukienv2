@@ -86,8 +86,8 @@
             @endif
         </div>
         <div class="col l5 product-infos">
-            <div class="name" id="c-product-name">{{$product->name}}</div>
-            <div class="description">{{$product->short_description}}</div>
+            <div class="name" id="c-product-name" style="text-transform: capitalize">{{ mb_strtolower($product->name) }}</div>
+            <div class="description">{!! $product->short_description !!}</div>
             @if($product->tag_id != 0 && $product->tag_id != null)
             <div class="list-tags">
                 @if($product->tag_id == 11)
@@ -171,7 +171,7 @@ document.write('<a href="' + loc + '" target="_blank"><svg width="7" height="14"
     <div class="product-descriptions ipk-content-container">
         <div class="title">Mô tả sản phẩm</div>
         <div class="content">
-            {{ $product->full_description }}
+            {!! $product->full_description !!}
         </div>
     </div>
     <div class="same-products-block ipk-content-container">
@@ -263,9 +263,9 @@ $(document).on("click", ".color-detail", function () {
                 $('.main-image').html('');
                 $('.main-image')[0].style.backgroundImage = "url(" + chooseProduct.image + ")";
                 $('#c-product-name').html(chooseProduct.product.name);
-if(chooseProduct.lastPrice > 0 ) {
+if(chooseProduct.product.sale_price > 0 ) {
     $("#origin-price").html(numberWithCommas(chooseProduct.product.price) + 'đ');
-                $("#sale-price").html(numberWithCommas(chooseProduct.lastPrice) + 'đ' + "<span id='price-discount'>Giảm " +parseInt(((chooseProduct.product.price - chooseProduct.lastPrice)/ chooseProduct.product.price )* 100)  +"%</span>");
+                $("#sale-price").html(numberWithCommas(chooseProduct.product.sale_price) + 'đ' + "<span id='price-discount'>Giảm " +parseInt(((chooseProduct.product.price - chooseProduct.product.sale_price)/ chooseProduct.product.price )* 100)  +"%</span>");
                 $("#sale-price").css('float', 'right');
                 $("#origin-price").css('display', 'block');
 } else {
@@ -273,7 +273,7 @@ if(chooseProduct.lastPrice > 0 ) {
                 $("#sale-price").html(numberWithCommas(chooseProduct.product.price) + 'đ');
                 $("#sale-price").css('float', 'left');
 }
-            
+
 
                 $(".add-to-card-btn-detail")[0].classList.remove('deactive');
                 $("#buy-now-btn-detail").removeClass('deactive');
@@ -321,9 +321,9 @@ $(document).on("click", ".size-detail", function () {
                 $('.main-image').html('');
                 $('.main-image')[0].style.backgroundImage = "url(" + chooseProduct.image + ")";
                 $('#c-product-name').html(chooseProduct.product.name);
-                if(chooseProduct.lastPrice > 0 ) {
+                if(chooseProduct.product.sale_price > 0 ) {
     $("#origin-price").html(numberWithCommas(chooseProduct.product.price) + 'đ');
-                $("#sale-price").html(numberWithCommas(chooseProduct.lastPrice) + 'đ' + "<span id='price-discount'>Giảm " +parseInt(((chooseProduct.product.price - chooseProduct.lastPrice)/ chooseProduct.product.price )* 100)  +"%</span>");
+                $("#sale-price").html(numberWithCommas(chooseProduct.product.sale_price) + 'đ' + "<span id='price-discount'>Giảm " +parseInt(((chooseProduct.product.price - chooseProduct.product.sale_price)/ chooseProduct.product.price )* 100)  +"%</span>");
                 $("#sale-price").css('float', 'right');
                 $("#origin-price").css('display', 'block');
 } else {
@@ -413,6 +413,7 @@ $(document).on("click", ".add-wishlist-button", function () {
 
 
 $(document).on("click", ".thumbs span", function () {
+    console.log(1234)
     $('.main-image').addClass('is-image');
     $('.main-image').html('');
     $('.main-image')[0].style.backgroundImage = "url(" + $(this).data('img') + ")";
@@ -565,7 +566,9 @@ $(document).on("click",".add-to-card-btn-detail",function() {
         });
     }
     $('#product-container .list-thumb-wrapper .thumbs-wrapper-slide .thumbs-slide .product-thumbnail').click(function () {
-        $('.main-image.is-image').css('background-image', 'url('+$(this).data('bg')+')');
+        $('.main-image').addClass('is-image');
+        $('.main-image').html('');
+        $('.main-image').css('background-image', 'url('+$(this).data('bg')+')');
     });
 </script>
 @endsection

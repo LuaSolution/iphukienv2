@@ -41,12 +41,27 @@
                         <div class="form-group form-md-line-input has-success">
                             <textarea id="form-short-description-txt" class="text-content form-control"
                                 name="short-description"></textarea>
-                            <label for="form-title">Mô tả ngắn</label>
+                                <label for="form-title">Mô tả ngắn</label>
+              <script>
+                CKEDITOR.replace('form-short-description-txt', {
+                  language: "en",
+                  filebrowserUploadUrl: "{!! route('uploadImage', ['_token' => csrf_token() ]) !!}",
+                  filebrowserUploadMethod: "form"
+                });
+              </script>
                         </div>
                         <div class="form-group form-md-line-input has-success">
                             <textarea id="form-description-txt" class="text-content form-control"
                                 name="description"></textarea>
-                            <label for="form-title">Mô tả</label>
+                                <label for="form-title">Mô tả</label>
+                                <script>
+                CKEDITOR.replace('form-description-txt', {
+                  language: "en",
+                  filebrowserUploadUrl: "{!! route('uploadImage', ['_token' => csrf_token() ]) !!}",
+                  filebrowserUploadMethod: "form"
+                });
+              </script>
+                            
                         </div>
                         <div class="form-group form-md-line-input has-success">
                             <input type="number" class="form-control" id="form-price" name="price" required="">

@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="{{ asset('public/iphukien/user/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('public/iphukien/user/common.css') }}">
     <link rel="stylesheet" href="{{ asset('public/iphukien/responsive/responsive.css') }}">
+
     <meta name="google-signin-client_id"
         content="445632322462-522or3m8qn2qaikj451irtimtegv2bqe.apps.googleusercontent.com">
     <!-- @yield('fb-meta-tags') -->
@@ -41,6 +42,7 @@
 </head>
 
 <body>
+@include('toast::messages-jquery')
     <!-- Messenger Plugin chat Code -->
     <div id="fb-root"></div>
     <script>
@@ -84,18 +86,23 @@
         <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
         @yield('footer')
         @include('layouts.footer', ['status' => 'complete'])
-        <!-- jQuery -->
-        <script src="{{ asset('public/js/jquery-3.6.0.min.js') }}"></script>
+<!-- jQuery -->
+<script src="{{ asset('public/js/jquery-3.6.0.min.js') }}"></script>
         <!-- Materialize -->
         <script src="{{ asset('public/js/materialize.min.js') }}"></script>
         <!-- header js -->
         <script src="{{ asset('public/assets/scripts/iphukien/user/header.js') }}"></script>
+        
         @section('scripts')
         @show
-        @include('toast::messages-jquery')
+    
         <script>
+            $(document).ready(function () {
+                console.log('on load !')
+            })
             function numberWithCommas(x) {
-                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+                return x ? x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") :'';
             }
 
             function onLoad() {

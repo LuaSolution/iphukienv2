@@ -373,3 +373,26 @@
     right: 0;
     display: block;
 }
+@media screen and (max-width: 736px) 
+{
+    .list-address .address {
+        margin-left: 0px;
+    }
+
+.address-block .title {
+    font-size: 22px;
+
+}
+.payment-container .order-infos .address-block-title {
+    padding-top: 30px;
+}
+.payment-infos .info.sum span {
+    font-size: 20px;
+}
+.payment-delivery-block {
+    padding-bottom: 20px;
+}
+.payment-infos .payment-infos-title {
+    margin-bottom: 20px;
+}
+}

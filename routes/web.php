@@ -154,6 +154,11 @@ Route::middleware(['runall', 'locale'])->group(function () {
             Route::get('/metatags', 'MetatagController@getListMeta')->name('adMgetListMeta');
             Route::get('/metatags-del/{id}', 'MetatagController@getDelMeta')->name('adMgetDelMeta');
 
+             //promotions
+             Route::get('/promotions-edit/{id}', 'PromotionController@getEdit')->name('adMgetEditPromotion');
+             Route::post('/promotions-edit/{id}', 'PromotionController@postEdit')->name('adMpostEditPromotion');
+             Route::get('/promotions', 'PromotionController@getList')->name('adMgetListPromotion');
+
             //Partner
             Route::resource('partners', PartnerController::class);
         });
