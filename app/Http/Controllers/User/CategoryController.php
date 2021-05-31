@@ -11,15 +11,23 @@ use App\Tag;
 use App\Trademark;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Metatag;
+
 class CategoryController extends Controller
 {
     public function show(Request $request, $id)
     {
         if ($id == -1) { // danh sach hàng mới
-            $this->data['listProduct'] = Product::where('tag_id', 11)->where('parent_id', null)->orderBy('id', 'DESC')->paginate(24);
+            $this->data['listProduct'] = Product::where('tag_id', 11)
+                ->where('slug', '<>', null)
+                ->where('parent_id', null)
+                ->orderBy('id', 'DESC')
+                ->paginate(24);
         } else if ($id == -2) { // danh sach bán chạy
-            $this->data['listProduct'] = Product::where('tag_id', 12)->where('parent_id', null)->orderBy('id', 'DESC')->paginate(24);
+            $this->data['listProduct'] = Product::where('tag_id', 12)
+                ->where('slug', '<>', null)
+                ->where('parent_id', null)
+                ->orderBy('id', 'DESC')
+                ->paginate(24);
         } else if ($request->sort) {
             $newId = $id;
             if (!is_numeric($id)) {
@@ -47,7 +55,11 @@ class CategoryController extends Controller
             if (!is_numeric($id)) {
                 $newId = Cate::where('slug', '=', $id)->first()->id;
             }
-            $this->data['listProduct'] = Product::where('category_id', $newId)->where('parent_id', null)->orderBy('id', 'DESC')->paginate(24);
+            $this->data['listProduct'] = Product::where('category_id', $newId)
+                ->where('slug', '<>', null)
+                ->where('parent_id', null)
+                ->orderBy('id', 'DESC')
+                ->paginate(24);
         }
         $newId = $id;
         if (!is_numeric($id)) {

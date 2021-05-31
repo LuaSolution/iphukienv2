@@ -5,14 +5,14 @@ namespace App\Http\Controllers\User;
 use App\Cate;
 use App\Http\Controllers\Controller;
 use App\Mail;
-use App\Promotion;
+use App\Metatag;
 use App\Partner;
 use App\Product;
+use App\Promotion;
 use App\SaleProduct;
 use App\Slider;
 use App\StaticPage;
 use App\User;
-use App\Metatag;
 use Illuminate\Http\Request;
 use Mail as SendMail;
 
@@ -29,8 +29,17 @@ class HomeController extends Controller
     {
         $data = [];
         $this->data['cates'] = Cate::orderBy('pos', 'asc')->take(5)->get();
-        $this->data['proNew'] = Product::take(8)->where('tag_id', 11)->whereNull('parent_id')->orderBy('created_at', 'desc')->get();
-        $this->data['proTopSold'] = Product::take(8)->where('tag_id', 12)->whereNull('parent_id')->orderBy('sold', 'desc')->get();
+        $this->data['proNew'] = Product::take(8)->where('tag_id', 11)
+            ->whereNull('parent_id')
+            ->where('slug', '<>', null)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $this->data['proTopSold'] = Product::take(8)
+            ->where('tag_id', 12)
+            ->where('slug', '<>', null)
+            ->whereNull('parent_id')
+            ->orderBy('sold', 'desc')
+            ->get();
         $this->data['flashSale'] = (new SaleProduct())->getListValidSaleProduct();
         $this->data['slider'] = Slider::OrderBy('id', 'DESC')->first();
         $this->data['partners'] = Partner::take(8)->orderBy('created_at', 'desc')->get();
@@ -43,7 +52,7 @@ class HomeController extends Controller
     {
         $m = new Mail;
         $m->email = $req->email;
-         $m->save();
+        $m->save();
 
         toast()->success('Đăng ký email thành công');
         return redirect()->back();

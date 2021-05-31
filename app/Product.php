@@ -143,6 +143,7 @@ class Product extends Model
         return Product::leftJoin('categories', 'categories.id', '=', 'products.category_id')
             ->leftJoin('trademarks', 'trademarks.id', '=', 'products.trademark_id')
             ->select('products.*')
+            ->where('products.slug', '<>', null)
             ->whereNull('products.parent_id')
             ->where('products.name', 'like', '%' . $keyword . '%')
             ->orWhere('categories.title', 'like', '%' . $keyword . '%')

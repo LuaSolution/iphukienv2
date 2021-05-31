@@ -195,7 +195,11 @@ echo ('<script type="text/javascript">
             @include('layouts.list-product', ['listProduct' => $proNew, 'hasReadMore' => false])
             </div>
             <div class="container">
+            @if(count($proNew) > 0)
                 <a href="{{ url('/categories/-1') }}" class="btn-xem-them" >XEM THÊM</a>
+            @else
+                <a class="btn-xem-them" >KHÔNG CÓ SẢN PHẨM</a>
+            @endif
             </div>
         </div>
         <div class="products-block" style="margin-top:-100px">
@@ -203,8 +207,14 @@ echo ('<script type="text/javascript">
             <div id="content">
             @include('layouts.list-product', ['listProduct' => $proTopSold, 'hasReadMore' => false])
             </div>
+          
             <div class="container">
-                <a href="{{ url('/categories/-2') }}" class="btn-xem-them" >XEM THÊM</a>
+            @if(count($proTopSold) > 0)
+            <a href="{{ url('/categories/-2') }}" class="btn-xem-them" >XEM THÊM</a>
+            @else
+            <a class="btn-xem-them" >KHÔNG CÓ DỮ LIỆU</a>
+            @endif
+                
             </div>
         </div>
     </div>
