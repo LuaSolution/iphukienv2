@@ -8,8 +8,8 @@
         <div class="product-infos">
             <div class="name" id="quickview-name"></div>
             <div class="description" id="quickview-short-description"></div>
-            <div class="list-tags" id="quickview-list-tag">
-            </div>
+            <!-- <div class="list-tags" id="quickview-list-tag">
+            </div> -->
             <div class="price">
                 <div class="origin" id="quickview-origin"></div>
                 <div class="sale" id="quickview-sale"></div>
