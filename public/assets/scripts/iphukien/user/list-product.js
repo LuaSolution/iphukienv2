@@ -24,13 +24,13 @@ $(document).ready(function () {
             str += '<a href="#!" class="previous"></a>'
             for (i = 0; i < productInfo['listImage'].length; i++) {
                 str += `<div class="carousel-item product-img ${productInfo['wishlist'] ? 'added-wishlist' : ''}" data-img="${productInfo['listImage'][i]}">`
-                    + `<span class="sale-percent">-${Math.round((productInfo['product']['price'] - productInfo['salePrice']) / productInfo['product']['price'] * 100)}%</span>`
+                    + `<span class="sale-percent">-${Math.round((productInfo['product']['price'] - productInfo['product']['sale_price']) / productInfo['product']['price'] * 100)}%</span>`
                     + `<img style="height:100%" src="${productInfo['listImage'][i]}" />`
                     + `</div>`
             }
             if (productInfo['listImage'].length == 0) {
                 str += `<div class="carousel-item product-img ${productInfo['wishlist'] ? 'added-wishlist' : ''}" data-img="${localStorage.getItem('quickview_image_base_path') + '/assets/images/header/logo.svg'}">`
-                    + `<span class="sale-percent">-${Math.round((productInfo['product']['price'] - productInfo['salePrice']) / productInfo['product']['price'] * 100)}%</span>`
+                    + `<span class="sale-percent">-${Math.round((productInfo['product']['price'] - productInfo['product']['sale_price']) / productInfo['product']['price'] * 100)}%</span>`
                     + `<img style="height:100%"  src="${localStorage.getItem('quickview_image_base_path') + '/assets/images/header/logo.svg'}" />`
                     + `</div>`
             }
@@ -55,9 +55,9 @@ $(document).ready(function () {
                     break
             }
             $("#quickview-list-tag").html(str)
-            if (productInfo['salePrice'] > 0) {
+            if (productInfo['product']['sale_price'] > 0) {
                 $("#quickview-origin").html(numberWithCommas(productInfo['product']['price']) + 'đ');
-                $("#quickview-sale").html(`${numberWithCommas(productInfo['salePrice'])}đ <span>Giảm ${Math.round((productInfo['product']['price'] - productInfo['salePrice']) / productInfo['product']['price'] * 100)}%</span>`);
+                $("#quickview-sale").html(`${numberWithCommas(productInfo['product']['sale_price'])}đ <span>Giảm ${Math.round((productInfo['product']['price'] - productInfo['product']['sale_price']) / productInfo['product']['price'] * 100)}%</span>`);
                 $("#quickview-sale").css('float', 'right');
                 $("#quickview-origin").css('display', 'block');
             } else {
@@ -118,7 +118,7 @@ $(document).ready(function () {
             $("#quickview-colors").html(str)
 
             // set for card
-            localStorage.setItem('quickview_sale_price', productInfo['salePrice'])
+            localStorage.setItem('quickview_sale_price', productInfo['product']['sale_price'])
             localStorage.setItem('quickview_product_name', productInfo['product']['name'])
             localStorage.setItem('quickview_nhanh_product_id', productInfo['product']['product_id_nhanh'])
 
@@ -146,9 +146,9 @@ $(document).on("click", ".color", function () {
             console.log("chooseProduct", chooseProduct)
             if (chooseProduct.product != null) {
                 $('#quickview-name').html(chooseProduct.product.name)
-                if (productInfo['salePrice'] > 0) {
+                if (chooseProduct.product.sale_price > 0) {
                     $("#quickview-origin").html(numberWithCommas(productInfo['product']['price']) + 'đ');
-                    $("#quickview-sale").html(`${numberWithCommas(productInfo['salePrice'])}đ <span>Giảm ${Math.round((productInfo['product']['price'] - productInfo['salePrice']) / productInfo['product']['price'] * 100)}%</span>`);
+                    $("#quickview-sale").html(`${numberWithCommas(chooseProduct.product.sale_price)}đ <span>Giảm ${Math.round((productInfo['product']['price'] - chooseProduct.product.sale_price) / productInfo['product']['price'] * 100)}%</span>`);
                     $("#quickview-sale").css('float', 'right');
                     $("#quickview-origin").css('display', 'block');
                 } else {
@@ -205,14 +205,14 @@ $(document).on("click", ".size", function () {
             console.log(chooseProduct)
             if (chooseProduct.product != null) {
                 $('#quickview-name').html(chooseProduct.product.name)
-                if (productInfo['salePrice'] > 0) {
-                    $("#quickview-origin").html(numberWithCommas(productInfo['product']['price']) + 'đ');
-                    $("#quickview-sale").html(`${numberWithCommas(productInfo['salePrice'])}đ <span>Giảm ${Math.round((productInfo['product']['price'] - productInfo['salePrice']) / productInfo['product']['price'] * 100)}%</span>`);
+                if (chooseProduct['product']['sale_price'] > 0) {
+                    $("#quickview-origin").html(numberWithCommas(chooseProduct['product']['price']) + 'đ');
+                    $("#quickview-sale").html(`${numberWithCommas(chooseProduct['product']['sale_price'])}đ <span>Giảm ${Math.round((chooseProduct['product']['price'] - chooseProduct['product']['sale_price']) / chooseProduct['product']['price'] * 100)}%</span>`);
                     $("#quickview-sale").css('float', 'right');
                     $("#quickview-origin").css('display', 'block');
                 } else {
                     $("#quickview-origin").html('');
-                    $("#quickview-sale").html(numberWithCommas(productInfo['product']['price']) + 'đ');
+                    $("#quickview-sale").html(numberWithCommas(chooseProduct['product']['price']) + 'đ');
                     $("#quickview-sale").css('float', 'left');
                 }
                 let cImg = chooseProduct.image
