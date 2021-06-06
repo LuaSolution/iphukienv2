@@ -1,6 +1,6 @@
 <?php
 
-Route::middleware(['runall', 'locale'])->group(function () {
+Route::middleware(['locale'])->group(function () {
     Route::get('change-language/{language}', 'MainController@changeLanguage')->name('user.change-language');
     Auth::routes();
 

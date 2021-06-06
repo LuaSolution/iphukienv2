@@ -9,6 +9,11 @@ $(document).on("click", ".ipk-tab", function () {
     $(this).addClass('active');
     $('#' + $(this).data('id')).addClass('active');
 });
-$(document).on("click", ".parent-item",function(){
-    $(this).parent().children('.list-sub-item')[0].classList.toggle('active');
+$(".parent-item").on({
+    mouseenter: function () {
+        $(this).parent().children('.list-sub-item')[0].classList.toggle('active');
+    },
+    mouseleave: function () {
+        $(this).parent().children('.list-sub-item')[0].classList.remove('active');
+    }
 });
