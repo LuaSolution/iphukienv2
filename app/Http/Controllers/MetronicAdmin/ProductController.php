@@ -378,9 +378,12 @@ class ProductController extends Controller
                     //status
                     if ($product->status != 'Inactive') {
                         //insert parent product
-                        $parentPrd = Product::firstOrCreate([
-                            'product_id_nhanh' => $product->idNhanh,
-                        ]);
+                        $parentPrd = (new Product())->getProductByNhanhId($product->categoryId);
+                        if ($parentPrd == null) {
+                            $parentPrd = Product::firstOrCreate([
+                                'product_id_nhanh' => $product->idNhanh,
+                            ]);
+                        }
                         //status
                         $parentStatusId = $this->getStatusIdFromNhanh($product->status);
                         //trademark
