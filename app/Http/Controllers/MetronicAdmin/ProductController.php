@@ -378,20 +378,20 @@ class ProductController extends Controller
                     //status
                     if ($product->status != 'Inactive') {
                         //insert parent product
-                        $parentPrd = (new Product())->getProductByNhanhId($product->categoryId);
+                        $parentPrd = (new Product())->getProductByNhanhId($product->idNhanh);
                         if ($parentPrd == null) {
                             $parentPrd = Product::firstOrCreate([
                                 'product_id_nhanh' => $product->idNhanh,
                             ]);
+                            //status
+                            $parentStatusId = $this->getStatusIdFromNhanh($product->status);
+                            //trademark
+                            $branchName = !empty($product->brandName) ? $product->brandName : 'iPhuKien';
+                            $trademarkObj = Trademark::firstOrCreate(['name' => $branchName]);
+                            //update product information
+                            $this->updateProductInformationFromNhanh(
+                                $product, $parentCate->id, $parentStatusId, $trademarkObj->id, $parentPrd->id);
                         }
-                        //status
-                        $parentStatusId = $this->getStatusIdFromNhanh($product->status);
-                        //trademark
-                        $branchName = !empty($product->brandName) ? $product->brandName : 'iPhuKien';
-                        $trademarkObj = Trademark::firstOrCreate(['name' => $branchName]);
-                        //update product information
-                        $this->updateProductInformationFromNhanh(
-                            $product, $parentCate->id, $parentStatusId, $trademarkObj->id, $parentPrd->id);
                         // updade child product
                         $cChildPage = 0;
                         $tChildPage = 0;

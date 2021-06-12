@@ -30,6 +30,12 @@ class Trademark extends Model
   public function getListTrademark(){
   	return Trademark::orderBy('created_at','desc')->get();
   }
+  public function getListTrademarkByCate($catId)
+    {
+        $res = Product::where('category_id', $catId)->distinct()->pluck('trademark_id')->toArray();
+        $res2 = Trademark::whereIn('id', $res)->get();
+        return $res2;
+    }
   public function deleteTrademark($id){
   	return Trademark::where('id', '=', $id)->delete();
   }

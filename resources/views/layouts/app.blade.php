@@ -39,9 +39,28 @@
     @yield('meta-tags')
     @section('styles')
     @show
+    <style>
+        body {
+      overflow: overlay;
+    }
+
+    .scrollbar::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    .scrollbar::-webkit-scrollbar {
+      width: 10px;
+      background-color: transparent;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: #eee;
+    }
+        </style>
 </head>
 
-<body>
+<body  class="scrollbar">
 @include('toast::messages-jquery')
     <!-- Messenger Plugin chat Code -->
     <div id="fb-root"></div>

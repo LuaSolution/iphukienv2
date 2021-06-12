@@ -31,7 +31,7 @@
             </a>
         </div>
     </div>
-    <ul id="slide-out" class="sidenav ipk-slide-out">
+    <ul id="slide-out" class="sidenav ipk-slide-out scrollbar">
         <li class="li1">
             <a href="#" class="sidenav-close"></a>
             <div class="ipk-logo-view">

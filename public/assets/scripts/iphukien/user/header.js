@@ -9,11 +9,11 @@ $(document).on("click", ".ipk-tab", function () {
     $(this).addClass('active');
     $('#' + $(this).data('id')).addClass('active');
 });
-$(".parent-item").on({
+$(".item-group").on({
     mouseenter: function () {
-        $(this).parent().children('.list-sub-item')[0].classList.toggle('active');
+        $(this).children('.list-sub-item')[0].classList.toggle('active');
     },
     mouseleave: function () {
-        $(this).parent().children('.list-sub-item')[0].classList.remove('active');
+        $(this).children('.list-sub-item')[0].classList.remove('active');
     }
 });

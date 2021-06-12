@@ -55,7 +55,13 @@ class CategoryController extends Controller
             if (!is_numeric($id)) {
                 $newId = Cate::where('slug', '=', $id)->first()->id;
             }
-            $this->data['listProduct'] = Product::where('category_id', $newId)
+            $cateList = Cate::where('id', $newId)
+                ->orWhere('parent_id', $newId)
+                ->distinct()
+                ->pluck('id')
+                ->toArray();
+
+            $this->data['listProduct'] = Product::whereIn('category_id', $cateList)
                 ->where('slug', '<>', null)
                 ->where('parent_id', null)
                 ->orderBy('id', 'DESC')
@@ -74,7 +80,7 @@ class CategoryController extends Controller
         }
         $this->data['colors'] = (new Color())->getListColorByCate($newId);
         $this->data['sizes'] = (new Size())->getListSizeByCate($newId);
-        $this->data['trademarks'] = (new Trademark())->getListTrademark();
+        $this->data['trademarks'] = (new Trademark())->getListTrademarkByCate($newId);
         $this->data['tags'] = (new Tag())->getListTags();
         $this->data['id'] = $newId;
 
