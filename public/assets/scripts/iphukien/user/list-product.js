@@ -195,17 +195,7 @@ $(document).on("click", ".size", function () {
             url: localStorage.getItem('quickview_get_child_product_url'),
             type: 'get',
             data: {
-                'productId': localStorage.getItem('quickview_produ
-150
-                    $("#quickview-origin").html(numberWithCommas(chooseProduct['product']['price']) + 'đ');
-151
-                    $("#quickview-sale").html(`${numberWithCommas(chooseProduct.product.sale_price)}đ <span>Giảm ${Math.round((chooseProduct['product']['price'] - chooseProduct.product.sale_price) / productInfo['product']['price'] * 100)}%</span>`);
-152
-                    $("#quickview-sale").css('float', 'right');
-153
-                    $("#quickview-origin").css('display', 'block');
-154
-                    ct_id'),
+                'productId': localStorage.getItem('quickview_product_id'),
                 'colorId': colorId,
                 'sizeId': sizeId,
                 '_token': localStorage.getItem('quickview_token')
