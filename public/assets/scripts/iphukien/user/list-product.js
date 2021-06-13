@@ -147,13 +147,13 @@ $(document).on("click", ".color", function () {
             if (chooseProduct.product != null) {
                 $('#quickview-name').html(chooseProduct.product.name)
                 if (chooseProduct.product.sale_price > 0) {
-                    $("#quickview-origin").html(numberWithCommas(productInfo['product']['price']) + 'đ');
-                    $("#quickview-sale").html(`${numberWithCommas(chooseProduct.product.sale_price)}đ <span>Giảm ${Math.round((productInfo['product']['price'] - chooseProduct.product.sale_price) / productInfo['product']['price'] * 100)}%</span>`);
+                    $("#quickview-origin").html(numberWithCommas(chooseProduct['product']['price']) + 'đ');
+                    $("#quickview-sale").html(`${numberWithCommas(chooseProduct['product']['sale_price'])}đ <span>Giảm ${Math.round((chooseProduct['product']['price'] - chooseProduct['product']['sale_price']) / chooseProduct['product']['price'] * 100)}%</span>`);
                     $("#quickview-sale").css('float', 'right');
                     $("#quickview-origin").css('display', 'block');
                 } else {
                     $("#quickview-origin").html('');
-                    $("#quickview-sale").html(numberWithCommas(productInfo['product']['price']) + 'đ');
+                    $("#quickview-sale").html(numberWithCommas(chooseProduct['product']['price']) + 'đ');
                     $("#quickview-sale").css('float', 'left');
                 }
                 let cImg = chooseProduct.image
@@ -195,7 +195,17 @@ $(document).on("click", ".size", function () {
             url: localStorage.getItem('quickview_get_child_product_url'),
             type: 'get',
             data: {
-                'productId': localStorage.getItem('quickview_product_id'),
+                'productId': localStorage.getItem('quickview_produ
+150
+                    $("#quickview-origin").html(numberWithCommas(chooseProduct['product']['price']) + 'đ');
+151
+                    $("#quickview-sale").html(`${numberWithCommas(chooseProduct.product.sale_price)}đ <span>Giảm ${Math.round((chooseProduct['product']['price'] - chooseProduct.product.sale_price) / productInfo['product']['price'] * 100)}%</span>`);
+152
+                    $("#quickview-sale").css('float', 'right');
+153
+                    $("#quickview-origin").css('display', 'block');
+154
+                    ct_id'),
                 'colorId': colorId,
                 'sizeId': sizeId,
                 '_token': localStorage.getItem('quickview_token')
