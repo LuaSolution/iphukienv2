@@ -58,24 +58,25 @@
             </div>
             <div class="col m6 s12 form-input">
                 <div class="input-field">
-                    <select name="city" id="city" name="city">
-                        <option value="" disabled selected>Chọn tỉnh/ thành phố</option>
+                    <select name="city" id="city" name="city"  data-native-menu="false">
+                        <option disabled selected>Chọn tỉnh/ thành phố</option>
                         @foreach ($list_city as $city)
                         <option value="{{ $city->name }}" data-cityid="{{ $city->id }}">{{ $city->name }}</option>
                         @endforeach
+                        <optgroup disabled></optgroup>
                     </select>
                 </div>
             </div>
             <div class="col m6 s12 form-input">
                 <div class="input-field">
-                    <select name="district" id="district" name="district">
+                    <select name="district" id="district" name="district"  data-native-menu="false">
                         <option value="" disabled selected>Chọn quận/ huyện</option>
                     </select>
                 </div>
             </div>
             <div class="col m6 s12 form-input">
                 <div class="input-field">
-                    <select name="ward" id="ward" name="ward">
+                    <select name="ward" id="ward" name="ward"  data-native-menu="false">
                         <option value="" disabled selected>Chọn phường/ xã</option>
                     </select>
                 </div>
