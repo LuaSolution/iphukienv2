@@ -651,6 +651,12 @@ img {
     padding: 0;
   }
 }
+@media only screen and (max-width: 896px)
+{
+  .products-wrapper img{
+    height: auto !important;
+  };
+}
 
 @media only screen and (max-width: 768px) {
   .footer .social-icons {
