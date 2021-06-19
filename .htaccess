@@ -7,8 +7,8 @@ Header set Access-Control-Allow-Origin "http://localhost:3000/"
 
     RewriteEngine On
     Header set Access-Control-Allow-Origin *
-    # RewriteCond %{HTTPS} off
-    # RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+    RewriteCond %{HTTPS} off
+    RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
