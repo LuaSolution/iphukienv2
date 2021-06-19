@@ -58,7 +58,7 @@
             </div>
             <div class="col m6 s12 form-input">
                 <div class="input-field">
-                    <select name="city" id="city" name="city"  data-native-menu="false">
+                    <select name="city" id="city" name="city" class="browser-default" data-native-menu="false">
                         <option disabled selected>Chọn tỉnh/ thành phố</option>
                         @foreach ($list_city as $city)
                         <option value="{{ $city->name }}" data-cityid="{{ $city->id }}">{{ $city->name }}</option>
@@ -69,14 +69,14 @@
             </div>
             <div class="col m6 s12 form-input">
                 <div class="input-field">
-                    <select name="district" id="district" name="district"  data-native-menu="false">
+                    <select name="district" id="district" name="district" class="browser-default" data-native-menu="false">
                         <option value="" disabled selected>Chọn quận/ huyện</option>
                     </select>
                 </div>
             </div>
             <div class="col m6 s12 form-input">
                 <div class="input-field">
-                    <select name="ward" id="ward" name="ward"  data-native-menu="false">
+                    <select name="ward" id="ward" name="ward" class="browser-default" data-native-menu="false">
                         <option value="" disabled selected>Chọn phường/ xã</option>
                     </select>
                 </div>
@@ -111,8 +111,6 @@
 $(document).ready(function () {
     var elems = document.querySelectorAll('#new-address-popup');
     M.Modal.init(elems, {"endingTop": '5%'});
-    var elems = document.querySelectorAll('select');
-    M.FormSelect.init(elems);
 });
 $(document).on("click", ".address", function () {
     $('.address').removeClass('selected');

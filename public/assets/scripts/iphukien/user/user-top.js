@@ -1,3 +1,5 @@
-$(document).ready(function () {
-    $('.user-top-dropdown').dropdown();
+$(document).on("click",".user-top-dropdown",function() {
+    $('#user-top-dropdown').toggleClass('hide');
+    
+    return false;
 });
