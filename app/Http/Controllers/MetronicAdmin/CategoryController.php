@@ -151,7 +151,6 @@ class CategoryController extends Controller
             'title' => $title,
             'slug' => $slug,
             'pos' => $pos,
-            'image' => $path,
             'meta_title' => $request->meta_title,
             'meta_des' => $request->meta_des,
             'meta_keywords' => $request->meta_keywords,
@@ -161,6 +160,10 @@ class CategoryController extends Controller
             'parent_id' => $parentId,
             'updated_at' => date('Y-m-d H:i:s'),
         ];
+
+        if($request->hasFile('image')) {
+            $dataUpdate['image'] = $path;
+        }
         $cateModel = new Cate();
         $result = $cateModel->updateCate($id, $dataUpdate);
         if ($result > 0) {
