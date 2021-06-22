@@ -139,8 +139,8 @@ const x = setInterval(function() {
         </div>
         @if(count($flashSale) > 0)
         <div class="sale-products">
-            <div class="carousel carousel-slider sale-product-slider">
-                <div class="ipk-pre-slide"></div>
+            <div class="carousel carousel-slider slide sale-product-slider">
+                <div class="carousel-inner">
                 @foreach($flashSale as $key=>$item)
                 <?php
 $img = (new \App\Product())->getProductDefaultImage($item->product_id);
@@ -154,7 +154,7 @@ $saleP = (new \App\Product())->getProductById($item->product_id);
                         </div>
                         <div class="item-infos">
                             <div class="name">{{ $saleP->name }}</div>
-                            <div class="description">{{ $saleP->short_description }}</div>
+                            <div class="description">{!! $saleP->short_description !!}</div>
                             <div class="price">
                                 <span class="sale">{{ number_format($item->sale_price , 0, ',', '.') }}đ</span><br/>
                                 <span class="origin">{{ number_format($saleP->price, 0, ',', '.') }}đ</span>
@@ -179,13 +179,8 @@ $saleP = (new \App\Product())->getProductById($item->product_id);
                         <a href="{{ route('products.show', $saleP->id) }}">Xem chi tiết</a>
                     </div>
                 </div>
-            <?php
-echo ('<script type="text/javascript">
-                countDown(' . $key . ', "' . $item->to_date . '")
-            </script>')
-?>
                 @endforeach
-                <div class="ipk-next-slide"></div>
+                </div>
             </div>
         </div>
         @endif
@@ -265,7 +260,7 @@ window.onclick = function(event) {
     $.each($(".item-image"), function (index, value) {
         value.style.height = value.offsetWidth + "px";
     });
-    $('.sale-product-slider').carousel({ fullWidth: true });
+    $('.sale-product-slider').slick({ fullWidth: true });
     $.each($(".partners img"), function (index, value) {
         let top = 55 - value.offsetWidth / 2;
         value.style.marginTop = top + "px";
