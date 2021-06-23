@@ -3,9 +3,13 @@
         @foreach($listProduct as $product)
             <div class="product col m3 s6">
                 <?php $img = (new \App\Product())->getProductDefaultImage($product->id);?>
-                <div class="img img_product"
+                <a
+                        href="{{ route('products.show', $product->slug ? $product->slug : $product->id) }}">
+                        <div class="img img_product"
                     style="background-image: url({{ asset($img != null && $img->image != null ? 'public/' . $img->image : 'public/assets/images/header/logo.svg') }})">
                 </div>
+                    </a>
+              
                 <div class="name">
                     <a
                         href="{{ route('products.show', $product->slug ? $product->slug : $product->id) }}"

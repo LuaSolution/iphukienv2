@@ -59,7 +59,7 @@
 .sale-products .item-infos {
     width: 70%;
     float: left;
-    padding-left: 25px;
+    padding: 24px;
 }
 
 .sale-products .item-infos-mobile {
@@ -307,6 +307,7 @@
         border-bottom-left-radius: 5px;
     }
     .sale-products .item-infos {
+        padding: 0px;
         padding-left: 10px;
     }
     .sale-products .item-infos .description {
@@ -330,6 +331,9 @@
         width: 28px;
         height: 28px;
         background-size: contain;
+    }
+    .item-infos .price .origin {
+        margin-left: 0px;
     }
 }
 
