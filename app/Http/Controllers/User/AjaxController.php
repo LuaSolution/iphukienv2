@@ -93,7 +93,7 @@ class AjaxController extends Controller
         $shipFee = $request->input('shipFee');
         $deliveryDate = $request->input('deliveryDate');
         $listProduct = json_decode($request->input('productList'));
-        
+
         $dataInsertOrder = [
             'address_id' => $addressId,
             'payment_method_id' => $paymentMethodId,
@@ -109,6 +109,14 @@ class AjaxController extends Controller
         $addedOrder = (new Order())->insertOrder($dataInsertOrder);
         $addedOrderCode = $addedOrder->order_code;
         $addedOrderId = $addedOrder->id;
+        $paymentMethodId = '';
+        if($addedOrder->payment_method_id === '2'){
+            $paymentMethodId = 'COD';
+        } elseif($addedOrder->payment_method_id === '3'){
+            $paymentMethodId = 'VnPay';
+        } elseif($addedOrder->payment_method_id === '4'){
+            $paymentMethodId = 'Internet_Banking';
+        }
 
         foreach ($listProduct as $product) {
             $dataInsertDetail = [
@@ -132,7 +140,7 @@ class AjaxController extends Controller
             'customerName' => $request->input('customerName'),
             'customerMobile' => $request->input('customerMobile'),
             'customerEmail' => $request->input('customerEmail'),
-            'paymentMethod' => 'COD',
+            'paymentMethod' => $paymentMethodId,
             'carrierId' => $request->input('carrierId'),
             'status' => 'New',
             'productList' => $listProduct,
@@ -142,7 +150,7 @@ class AjaxController extends Controller
         (new Order())->updateOrder($addedOrderId, ['nhanh_order_id' => $nhanhRes->$addedOrderCode]);
         //send mail
 
-        return json_encode(['code' => 1, 'orderId' => $addedOrderId]);
+        return json_encode(['code' => 1, 'orderId' => $addedOrderId, 'paymentMethodId' => $paymentMethodId]);
     }
 
     public function getQuickViewProduct(Request $request, $productId) {

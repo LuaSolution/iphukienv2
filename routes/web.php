@@ -166,7 +166,7 @@ Route::middleware(['locale'])->group(function () {
 
     });
 
-    Route::get('/payment/order/{id}', 'User\PaymentController@index');
+    Route::get('/payment/order/{id}', 'User\PaymentController@index')->name('user.payment.createOrder');
     Route::get('/payment/vnpay/verify', 'User\PaymentController@verify');
     Route::get('/', 'User\HomeController@index')->name('getHome');
     Route::get('/login', 'User\UserController@login')->name('login');

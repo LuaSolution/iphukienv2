@@ -5,12 +5,14 @@ namespace App\Http\Controllers\User;
 
 
 use App\Http\Controllers\Controller;
+use App\Order;
 
 class PaymentController extends Controller
 {
     public function index($id){
         $vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = env('APP_URL', 'http://127.0.0.1:8000') . "/payment/vnpay/verify";
+        $vnp_Returnurl = env('APP_URL') . "/payment/vnpay/verify";
+        dd(env('NHANH_API_USER_NAME'));
 //        http://localhost:8000/vnpay_php/vnpay_return.php?vnp_Amount=12412400&
 //vnp_BankCode=NCB&
 //vnp_BankTranNo=20210705211034&
@@ -26,8 +28,8 @@ class PaymentController extends Controller
         $vnp_TmnCode = "FNBLPD6L";//Mã website tại VNPAY
         $vnp_HashSecret = "BOSROMFBEMKCGPHXMQRRAAIBHPFATGPJ"; //Chuỗi bí mật
 
-        $vnp_TxnRef = date('YmdHis');//Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-        $vnp_OrderInfo = 'sfhdhdfh';
+        $vnp_TxnRef = $id;
+        $vnp_OrderInfo = 'Thông tin đơn hàng';
         $vnp_OrderType = 'CNB';
         $vnp_Amount = 124124 * 100;
         $vnp_Locale = 'vn';
@@ -44,7 +46,7 @@ class PaymentController extends Controller
             "vnp_OrderInfo" => $vnp_OrderInfo,
             "vnp_OrderType" => $vnp_OrderType,
             "vnp_ReturnUrl" => $vnp_Returnurl,
-            "vnp_TxnRef" => 'inforOrder' . $vnp_TxnRef,
+            "vnp_TxnRef" => $vnp_TxnRef,
         );
         ksort($inputData);
         $query = "";
@@ -72,23 +74,17 @@ class PaymentController extends Controller
 
     public function verify(){
         $request = request()->all();
-        $string = $request['vnp_SecureHash'];
-        $output = false;
-
-        $encrypt_method = "AES-256-CBC";
-        $secret_key = 'This is my secret key';
-        $secret_iv = 'This is my secret iv';
-
-        $key = hash('sha256', $secret_key);
-        $iv = substr(hash('sha256', $secret_iv), 0, 16);
-
-        $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
-        echo "<pre>";
-        print_r($iv);
-        echo "</pre>";
-        echo "<pre>";
-        print_r($request);
-        echo "</pre>";
-        die;
+        $vnp_ResponseCode = !empty($request['vnp_ResponseCode']) ? $request['vnp_ResponseCode'] : '99';
+        $vnp_TxnRef = !empty($request['vnp_TxnRef']) ? $request['vnp_TxnRef'] : null;
+        $order = Order::where(['order_code' => $vnp_TxnRef])->first();
+        if($vnp_ResponseCode === '00'){
+            $order->status = 'PaymentSuccess';
+        } elseif($vnp_ResponseCode === '24') {
+            $order->status = 'PAymentPending';
+        } else {
+            $order->status = 'PaymentError';
+        }
+        $order->save();
+        return redirect('/');
     }
 }
