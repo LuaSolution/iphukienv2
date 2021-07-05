@@ -1,5 +1,6 @@
 <?php
 
+
 Route::middleware(['locale'])->group(function () {
     Route::get('change-language/{language}', 'MainController@changeLanguage')->name('user.change-language');
     Auth::routes();
@@ -165,6 +166,8 @@ Route::middleware(['locale'])->group(function () {
 
     });
 
+    Route::get('/payment/order/{id}', 'User\PaymentController@index');
+    Route::get('/payment/vnpay/verify', 'User\PaymentController@verify');
     Route::get('/', 'User\HomeController@index')->name('getHome');
     Route::get('/login', 'User\UserController@login')->name('login');
     Route::get('/logout', 'User\UserController@doLogout')->name('doLogout');
