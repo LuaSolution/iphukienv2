@@ -7,6 +7,7 @@ use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Order;
 use App\OrderDetail;
+use App\PaymentMethod;
 use App\Product;
 use App\ProductImage;
 use App\SaleProduct;
@@ -16,6 +17,7 @@ use App\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AjaxController extends Controller
 {
@@ -99,6 +101,7 @@ class AjaxController extends Controller
             $deliveryDate = $request->input('deliveryDate');
             $listProduct = json_decode($request->input('productList'));
 
+            $orderCode = date('YmdHis') . '_' . Auth::user()->id;
             $dataInsertOrder = [
                 'address_id' => $addressId,
                 'payment_method_id' => $paymentMethodId,
@@ -108,12 +111,13 @@ class AjaxController extends Controller
                 'status' => 'New',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
-                'order_code' => date('YmdHis') . '_' . Auth::user()->id,
+                'order_code' => $orderCode,
                 'user_id' => Auth::user()->id,
             ];
             $addedOrder = (new Order())->insertOrder($dataInsertOrder);
             $addedOrderCode = $addedOrder->order_code;
             $addedOrderId = $addedOrder->id;
+
 
             foreach ($listProduct as $product) {
                 $dataInsertDetail = [
@@ -126,6 +130,7 @@ class AjaxController extends Controller
                 ];
                 (new OrderDetail())->insertOrderDetail($dataInsertDetail);
             }
+
             //call nhanh
             $nhanhRes = Helpers::callNhanhApi([
                 'id' => $addedOrderCode,
@@ -147,7 +152,17 @@ class AjaxController extends Controller
             (new Order())->updateOrder($addedOrderId, ['nhanh_order_id' => $nhanhRes->$addedOrderCode]);
             //send mail
 
-            return json_encode(['code' => 1, 'orderId' => $addedOrderId]);
+            $mail = Mail::send('MailOrder', array('name' => 'nad', 'email' => 'ifa.lms.app@gmail.com', 'content' => '2345'), function ($message) {
+                $message->to('dvanh271295@gmail.com', 'Visitor')->subject('Visitor Feedback!');
+            });
+            $urlVnPay = PaymentMethod::getUrlPaymentVnPay($orderCode);
+
+            return json_encode([
+                'code' => 1,
+                'orderId' => $addedOrderId,
+                'orderCode' => $orderCode,
+                'paymentMethodId' => $paymentMethodId
+            ]);
         } catch (\Exception $e) {
             dd($e);
         }
