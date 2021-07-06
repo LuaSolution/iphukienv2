@@ -24,19 +24,19 @@
                 <div class="list-address">
                     @foreach($addresses as $key => $item)
                     <div class="address {{$item->is_default == 1 ? 'selected' : ''}}"
-                        data-addressid="{{$item->id}}"
-                        data-city="{{$item->city}}"
-                        data-district="{{$item->district}}"
-                        data-ward="{{$item->ward}}"
-                        data-address="{{$item->address}}"
-                        data-name="{{$item->name}}"
-                        data-email="{{$item->email}}"
-                        data-phone="{{$item->phone}}"
+                        data-addressid="{{!empty($item->id) ? $item->id : null}}"
+                        data-city="{{!empty($item->city) ? $item->city : null}}"
+                        data-district="{{!empty($item->district) ? $item->district : null}}"
+                        data-ward="{{!empty($item->ward) ? $item->ward : null}}"
+                        data-address="{{!empty($item->address) ? $item->address : null}}"
+                        data-name="{{!empty($item->name) ? $item->name : null}}"
+                        data-email="{{!empty($item->email) ? $item->email : null}}"
+                        data-phone="{{!empty($item->phone) ? $item->phone : null}}"
                     >
-                        <div class="address-content">{{$item->address}}</div>
-                        <div class="customer-name">{{$item->name}}</div>
-                        <div class="customer-phone">{{$item->phone}}</div>
-                        <div class="customer-email">{{$item->email}}</div>
+                        <div class="address-content">{{!empty($item->address) ? $item->address : null}}</div>
+                        <div class="customer-name">{{!empty($item->name) ? $item->name : null}}</div>
+                        <div class="customer-phone">{{!empty($item->phone) ? $item->phone : null}}</div>
+                        <div class="customer-email">{{!empty($item->email) ? $item->email : null}}</div>
                     </div>
                     @endforeach
                 </div>
@@ -52,7 +52,7 @@
                     <div class="methods-title">Chọn hình thức thanh toán</div>
                     <div class="list-method">
                         @foreach($paymentMethods as $key => $item)
-                        <div class="method-item payment-method-item {{$key == 0 ? 'selected' : ''}}" data-paymentmethodid="{{$item->id}}">{{$item->name}}</div>
+                        <div class="method-item payment-method-item {{$key == 0 ? 'selected' : ''}}" data-paymentmethodid="{{$item->id}}">{{!empty($item->name) ? $item->name : null}}</div>
                         @endforeach
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                     <div class="methods-title">Chọn hình thức vận chuyển</div>
                     <div class="list-method">
                         @foreach($deliveries as $key => $item)
-                        <div class="method-item delivery-method-item {{$key == 0 ? 'selected' : ''}}" data-deliveryid="{{$item->id}}">{{$item->name }}</div>
+                        <div class="method-item delivery-method-item {{$key == 0 ? 'selected' : ''}}" data-deliveryid="{{$item->id}}">{{!empty($item->name) ? $item->name : null }}</div>
                         @endforeach
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                     <select name="city" id="city">
                         <option value="" disabled selected>Chọn tỉnh/ thành phố</option>
                         @foreach ($listCity as $city)
-                            <option value="{{ $city->name }}" data-cityid="{{ $city->id }}">{{ $city->name }}</option>
+                            <option value="{{ $city->name }}" data-cityid="{{ $city->id }}">{{ !empty($city->name) ? $city->name: null }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -204,7 +204,7 @@ $(document).ready(function () {
             let shipService = JSON.parse(data);
             let totalShipFee = parseInt(shipService.shipFee) + parseInt(shipService.codFee) + parseInt(shipService.declaredFee);
             let orderPrice = sum + totalShipFee;
-            
+
            if(sum < 500000) {
             $("#total-ship-fee").html(`${numberWithCommas(totalShipFee)} VNĐ`);
            } else {
@@ -216,7 +216,7 @@ $(document).ready(function () {
             let cYear = today.getFullYear();
             let cMonth = today.getMonth() <= 8 ? `0${today.getMonth()+1}` : today.getMonth()+1;
             let cDate = today.getDate() <= 9 ? `0${today.getDate()}` : today.getDate();
-            
+
             $("#receive-date").html(`${cYear}-${cMonth}-${cDate}`);
             $("#total-order").html(`${numberWithCommas(orderPrice)} VNĐ`);
             $("#sum-price").html(`TỔNG ${numberWithCommas(orderPrice)} VNĐ`);
@@ -315,11 +315,15 @@ $(document).on("click", ".complete", function () {
         _token: `{{ csrf_token() }}`
     })
     .done(function( data ) {
-        console.log(data)
         let res = JSON.parse(data);
         if(res.code == 1) {
+          if(res?.paymentMethodId === 'VnPay' || res?.paymentMethodId === 'Internet_Banking') {
+            window.location.href = `{{ URL::to('/') . '/payment/order/' }}${res.orderId}`;
+          } else {
             localStorage.removeItem("ipk_cart");
             window.location.href = `{{ URL::to('/') . '/payment-complete/' }}${res.orderId}`;
+          }
+
         } else {
             M.toast({
                 html: res.message,

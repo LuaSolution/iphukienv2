@@ -118,6 +118,7 @@ $(document).on("click", ".delete-link a", function () {
 });
 $(document).ready(function () {
     let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
+    console.log(cart, 3432234);
     let str = "";
     let sum = 0;
     let count = 0;
