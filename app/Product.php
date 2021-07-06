@@ -140,15 +140,11 @@ class Product extends Model
     }
     public function searchByKeyword($keyword)
     {
-        return Product::leftJoin('categories', 'categories.id', '=', 'products.category_id')
-            ->leftJoin('trademarks', 'trademarks.id', '=', 'products.trademark_id')
-            ->select('products.*')
+        return Product::select('products.*')
             ->where('products.slug', '<>', null)
-            ->whereNull('products.parent_id')
+            ->where('products.parent_id', null)
             ->where('products.name', 'like', '%' . $keyword . '%')
-            ->orWhere('categories.title', 'like', '%' . $keyword . '%')
-            ->orWhere('trademarks.name', 'like', '%' . $keyword . '%')
-            ->orderBy('pos', 'asc')->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'desc')
             ->get();
     }
     public function getListParentProduct()
