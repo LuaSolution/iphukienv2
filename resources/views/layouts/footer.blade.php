@@ -34,8 +34,9 @@
                     <a href="{{ url('chinh-sach-doi-tra') }}">Chính sách vận chuyển & đổi hàng</a>
                     <a href="{{ url('cach-thuc-thanh-toan') }}">Cách thức thanh toán</a>
                     <a href="{{ url('thong-tin-ngan-hang') }}">Thông tin tài khoản ngân hàng</a>
-                    <!-- <a href="{{ url('hoa-don-dien-tu') }}">Hóa đơn điện tử</a> -->
-                    <!-- <a href="{{ url('chinh-sach-bao-mat') }}">Chính sách bảo mật thông tin</a> -->
+                    <a href="{{ url('chinh-sach-dieu-khoan-su-dung') }}">Chính sách điều khoản sử dụng</a>
+                    <a href="{{ url('chinh-sach-bao-mat') }}">Chính sách bảo mật</a>
+                    <a href="{{ url('chinh-sach-hoan-huy') }}">Chính sách hoàn/hủy</a>
                 </div>
             </div>
             <div class="col l2 s12">
