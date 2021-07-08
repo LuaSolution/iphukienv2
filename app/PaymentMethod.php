@@ -43,17 +43,12 @@ class PaymentMethod extends Model
         return PaymentMethod::where('id', '=', $id)->delete();
     }
 
-    public static function getUrlPaymentVnPay($id)
+    public static function getUrlPaymentVnPay($id, $amount, $vnp_Url, $vnp_Returnurl, $vnp_TmnCode, $vnp_HashSecret)
     {
-        $vnp_Url = env('URL_VNPAY');
-        $vnp_Returnurl = env('URL_CALLBACK_VNPAY') . "/payment/vnpay/verify";
-        $vnp_TmnCode = env('WEBSITE_CODE');
-        $vnp_HashSecret = env('CHECKSUM_CODE');
-
         $vnp_TxnRef = $id;
         $vnp_OrderInfo = 'Thông tin đơn hàng';
         $vnp_OrderType = 'CNB';
-        $vnp_Amount = 124124 * 100;
+        $vnp_Amount = $amount * 100;
         $vnp_Locale = 'vn';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
         $inputData = array(

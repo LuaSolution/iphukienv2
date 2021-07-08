@@ -45,4 +45,8 @@ class Order extends Model
     public function updateOrder($id,$data){
         return Order::where('id', '=', $id)->update($data);
     }
+
+    public function OrderDetailInfo(){
+        return $this->hasMany(OrderDetail::class, 'order_id', 'id');
+    }
 }
