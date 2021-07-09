@@ -1,0 +1,109 @@
+.user-information-container {
+    padding-top: 20px;
+}
+.update-infos-txt {
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 35px;
+    color: #000000;
+    padding-top: 145px;
+    text-align: center;
+}
+#user-information-form {
+    max-width: 452px;
+    margin: 0 auto;
+    margin-top: 65px;
+}
+.user-avatar .caption {
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 16px;
+    color: #7B7B7B;
+}
+.upload-group .current-avatar {
+    width: 150px;
+    height: 150px;
+    background-color: #ccc;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    margin-top: 5px;
+}
+.info-input-group {
+    padding-top: 40px;
+    clear: both;
+}
+.info-input-group label {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #7B7B7B;
+    display: block;
+}
+.info-input-group .non-block {
+    display: inline-block;
+}
+.info-input-group input[type=text]:not(.browser-default) {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: #5B5B5B;
+    margin-bottom: 0;
+}
+.info-input-group::after {
+    content: '';
+    clear: both;
+}
+.info-input-group .select-wrapper {
+    width: 30%;
+    float: left;
+    margin-left: 5%;
+}
+.info-input-group .select-wrapper.user-select {
+    margin-left: 0;
+}
+.gender-radio {
+    margin-left: 10px;
+}
+.gender-radio [type="radio"]:checked+span,
+.gender-radio [type="radio"]:not(:checked)+span {
+    font-weight: normal;
+    font-size: 13px;
+    color: #000;
+}
+.btn-group {
+    padding-bottom: 90px;
+    text-align: center;
+}
+.btn-group button {
+    width: 180px;
+    height: 58px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 27px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #000;
+    background-color: transparent;
+    cursor: pointer;
+}
+@media only screen and (max-width: 414px){
+    .update-infos-txt {
+        font-size: 22px;
+        line-height: 22px;
+        padding-top: 24px;
+    }
+    #user-information-form {
+        margin-top: 20px;
+    }
+    .info-input-group {
+        padding-top: 30px;
+    }
+    .btn-group {
+        padding-bottom: 30px;
+    }
+}
+

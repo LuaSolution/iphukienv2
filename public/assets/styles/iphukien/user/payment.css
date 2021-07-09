@@ -1,0 +1,398 @@
+.payment-container .order-infos .address-block-title {
+    padding-top: 65px;
+    text-align: center;
+}
+
+.order-infos .address-block-title .gio-hang {
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 28px;
+    color: #C4C4C4;
+    background-image: url(/public/assets/images/payment/arrow.svg);
+    background-position: right 0 center;
+    background-size: 23px 8px;
+    background-repeat: no-repeat;
+    padding-right: 35px;
+    text-transform: uppercase;
+}
+
+.order-infos .address-block-title span {
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 41px;
+    color: #000;
+    text-transform: uppercase;
+}
+
+.address-block .title {
+    font-weight: bold;
+    font-size: 34px;
+    line-height: 41px;
+    text-transform: uppercase;
+    color: #000;
+    margin-top: 50px;
+}
+
+.address-block .sub-title {
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 14px;
+    color: #000;
+    margin-top: 10px;
+}
+
+.address-block .list-address {
+    overflow: hidden;
+}
+
+.address-block .list-address::after,
+.payment-delivery-block::after,
+.payment-infos .info::after {
+    content: '';
+    clear: both;
+}
+
+.list-address .address {
+    float: left;
+    width: calc(50% - 62.5px);
+    padding: 13px 17px 13px 35px;
+    border: 1px solid #231F20;
+    box-sizing: border-box;
+    -webkit-border-radius: 18px;
+    -moz-border-radius: 18px;
+    border-radius: 18px;
+    position: relative;
+    margin-top: 23px;
+    margin-left: 125px;
+    cursor: pointer;
+}
+
+.list-address .address:nth-child(odd) {
+    margin-left: 0;
+}
+
+.list-address .address::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    top: 13px;
+    left: 10px;
+    border: 1px solid #231F20;
+}
+
+.list-address .address.selected::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    top: 17px;
+    left: 14px;
+    background-color: #000;
+}
+
+.address .address-content {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: #5B5B5B;
+}
+
+.address .customer-name {
+    margin-top: 20px;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: #000;
+}
+
+.address .customer-phone,
+.address .customer-email {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+    color: #5B5B5B;
+    margin-top: 6px;
+}
+
+.address-block .add-new-address {
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 26px;
+    color: #000;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.payment-delivery-block {
+    margin-top: 45px;
+    overflow: hidden;
+    padding-bottom: 80px;
+    border-bottom: 1px solid #8F8B8B;
+}
+
+.payment-delivery-block .methods {
+    float: left;
+    width: calc(50% - 62.5px);
+}
+
+.payment-delivery-block .methods:nth-child(even) {
+    margin-left: 125px;
+}
+
+.methods .methods-title {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 32px;
+    color: #000;
+}
+
+.methods .list-method {
+    margin-top: 15px;
+}
+
+.list-method .method-item {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    color: #000;
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+}
+
+.list-method .method-item::before {
+    content: '';
+    position: absolute;
+    border: 1px solid #1D310C;
+    box-sizing: border-box;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    top: calc(50% - 7px);
+    left: 0px;
+    width: 16px;
+    height: 16px;
+}
+
+.list-method .method-item.selected::after {
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    top: calc(50% - 3.5px);
+    left: 4px;
+    width: 8px;
+    height: 8px;
+    background-color: #1D310C;
+}
+
+.payment-container .payment-infos {
+    padding-top: 50px;
+    max-width: 604px;
+    margin: auto;
+}
+
+.payment-infos .payment-infos-title {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 32px;
+    text-align: center;
+    color: #000;
+}
+
+.payment-infos .info {
+    padding-top: 5px;
+    overflow: hidden;
+}
+
+.payment-infos .info span {
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 20px;
+    color: #000;
+    float: left;
+    width: 50%;
+}
+
+.payment-infos .info.sum {
+    margin-top: 5px;
+}
+
+.payment-infos .info.sum span {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 35px;
+}
+
+.payment-infos .info span:nth-child(odd) {
+    text-align: left;
+}
+
+.payment-infos .info span:nth-child(even) {
+    text-align: right;
+}
+
+.list-button-wrapper {
+    padding: 30px 0;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    margin-top: 80px;
+}
+
+.list-button {
+    width: fit-content;
+    margin: auto;
+    overflow: hidden;
+}
+
+.list-button a {
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 22px;
+    text-align: center;
+    padding: 12px 38px;
+    box-sizing: border-box;
+    float: left;
+}
+
+.list-button .come-back {
+    color: #000;
+    background-color: #fff;
+    border: 2px solid #000;
+}
+
+.list-button .complete {
+    color: #fff;
+    background-color: #000000;
+    border: 2px solid #000000;
+    margin-left: 60px;
+}
+
+.list-button .sum {
+    float: left;
+    margin-left: 60px;
+}
+
+.list-button .sum .sum-price {
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 41px;
+    color: #000;
+}
+
+.list-button .sum .count-products {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 13px;
+    color: #000;
+}
+
+#new-address-popup {
+    width: 90%;
+    min-height: 90%;
+    padding: 20px;
+}
+
+#new-address-popup .new-address-popup-title {
+    font-weight: bold;
+    font-size: 33px;
+    line-height: 41px;
+    text-transform: uppercase;
+    color: #000;
+    text-align: center;
+}
+
+#new-address-popup .form-input {
+    padding: 0 20px;
+    margin-top: 10px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+#new-address-popup .form-input .input-field {
+    margin: 0;
+}
+
+#new-address-popup .select-wrapper input.select-dropdown {
+    margin: 0;
+}
+
+#new-address-popup .form-input span {
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 14px;
+    color: #000;
+}
+
+#new-address-popup .form-input input {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    text-transform: uppercase;
+    color: #5B5B5B;
+}
+
+#new-address-popup .set-default-address span {
+    font-weight: normal;
+    font-size: 19px;
+    line-height: 23px;
+    color: #000;
+}
+
+#new-address-popup .form-input button {
+    width: 280px;
+    height: 40px;
+    border: 1px solid #000000;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #000000;
+    margin: 0 auto;
+}
+
+.close-add-address-popup {
+    background-image: url(/public/assets/images/product/close-button.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+}
+@media screen and (max-width: 736px) 
+{
+    .list-address .address {
+        margin-left: 0px;
+    }
+
+.address-block .title {
+    font-size: 22px;
+
+}
+.payment-container .order-infos .address-block-title {
+    padding-top: 30px;
+}
+.payment-infos .info.sum span {
+    font-size: 20px;
+}
+.payment-delivery-block {
+    padding-bottom: 20px;
+}
+.payment-infos .payment-infos-title {
+    margin-bottom: 20px;
+}
+}

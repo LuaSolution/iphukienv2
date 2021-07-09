@@ -1,0 +1,26 @@
+.user-wishlist-container {
+    padding-top: 20px;
+    padding-bottom: 0px;
+}
+.user-wishlist-txt {
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 37px;
+    text-align: center;
+    color: #000;
+    margin-top: 110px;
+}
+
+@media only screen and (max-width: 414px)
+{
+    .user-wishlist-txt {
+        margin-top: 24px;
+    }
+    .user-wishlist-txt {
+        font-size: 22px;
+    }
+    .products-wrapper
+    {
+        margin-top: 24px;
+    }
+}
