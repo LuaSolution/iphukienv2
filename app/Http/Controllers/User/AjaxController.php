@@ -132,29 +132,29 @@ class AjaxController extends Controller
             }
 
             //call nhanh
-//            $nhanhRes = Helpers::callNhanhApi([
-//                'id' => $addedOrderCode,
-//                'type' => 'Shipping',
-//                'customerCityName' => $request->input('customerCityName'),
-//                'customerDistrictName' => $request->input('customerDistrictName'),
-//                'customerWardLocationName' => $request->input('customerWardLocationName'),
-//                'customerAddress' => $request->input('customerAddress'),
-//                'customerName' => $request->input('customerName'),
-//                'customerMobile' => $request->input('customerMobile'),
-//                'customerEmail' => $request->input('customerEmail'),
-//                'paymentMethod' => 'COD',
-//                'carrierId' => $request->input('carrierId'),
-//                'status' => 'New',
-//                'productList' => $listProduct,
-//                'customerShipFee' => $shipFee,
-//            ], '/order/add');
-//            //update nhanh order id
-//            (new Order())->updateOrder($addedOrderId, ['nhanh_order_id' => $nhanhRes->$addedOrderCode]);
+            $nhanhRes = Helpers::callNhanhApi([
+                'id' => $addedOrderCode,
+                'type' => 'Shipping',
+                'customerCityName' => $request->input('customerCityName'),
+                'customerDistrictName' => $request->input('customerDistrictName'),
+                'customerWardLocationName' => $request->input('customerWardLocationName'),
+                'customerAddress' => $request->input('customerAddress'),
+                'customerName' => $request->input('customerName'),
+                'customerMobile' => $request->input('customerMobile'),
+                'customerEmail' => $request->input('customerEmail'),
+                'paymentMethod' => 'COD',
+                'carrierId' => $request->input('carrierId'),
+                'status' => 'New',
+                'productList' => $listProduct,
+                'customerShipFee' => $shipFee,
+            ], '/order/add');
+            //update nhanh order id
+            (new Order())->updateOrder($addedOrderId, ['nhanh_order_id' => $nhanhRes->$addedOrderCode]);
 
             //send mail
-//            $mail = Mail::send('MailOrder', array('name' => 'nad', 'email' => 'ifa.lms.app@gmail.com', 'content' => '2345'), function ($message) {
-//                $message->to('dvanh271295@gmail.com', 'Visitor')->subject('Visitor Feedback!');
-//            });
+            $mail = Mail::send('MailOrder', array('name' => 'nad', 'email' => 'ifa.lms.app@gmail.com', 'content' => '2345'), function ($message) {
+                $message->to('dvanh271295@gmail.com', 'Visitor')->subject('Visitor Feedback!');
+            });
 
             return json_encode([
                 'code' => 1,
