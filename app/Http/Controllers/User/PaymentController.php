@@ -70,7 +70,7 @@ class PaymentController extends Controller
                 toast()->error('Payment Error', 'Alert');
             }
         } else {
-            toast()->success('Order not found');
+            toast()->error('Order not found');
         }
         return redirect('/');
     }
