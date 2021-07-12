@@ -28,6 +28,8 @@ class PaymentController extends Controller
             toast()->error('Invalid amount', 'Alert');
             return redirect('/');
         }
+
+
         if(!empty($orderInfo->status) && $orderInfo->status === 'PaymentSuccess'){
             toast()->error('Order already confirmed', 'Alert');
             return redirect('/');

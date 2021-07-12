@@ -129,10 +129,12 @@
                     <div class="input-field">
                         <select name="city" id="city">
                             <option value="" disabled selected>Chọn tỉnh/ thành phố</option>
-                            @foreach ($listCity as $city)
-                                <option value="{{ $city->name }}"
-                                        data-cityid="{{ $city->id }}">{{ !empty($city->name) ? $city->name: null }}</option>
-                            @endforeach
+                            @if(!empty($listCity))
+                                @foreach ($listCity as $city)
+                                    <option value="{{ $city->name }}"
+                                            data-cityid="{{ $city->id }}">{{ !empty($city->name) ? $city->name: null }}</option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
                 </div>
@@ -322,7 +324,7 @@
                     let res = JSON.parse(data);
                     if (res.code == 1) {
                         localStorage.removeItem("ipk_cart");
-                        if (res?.paymentMethodId === '2' || res?.paymentMethodId === '3') {
+                        if (Number(res?.paymentMethodId) > 2) {
                             window.location.href = `{{ URL::to('/') . '/payment/order/' }}${res.orderCode}`;
                         } else {
                             window.location.href = `{{ URL::to('/') . '/payment-complete/' }}${res.orderId}`;
