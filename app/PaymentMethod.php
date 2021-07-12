@@ -45,6 +45,22 @@ class PaymentMethod extends Model
 
     public static function getUrlPaymentVnPay($id, $amount, $vnp_Url, $vnp_Returnurl, $vnp_TmnCode, $vnp_HashSecret)
     {
+        $inputData = self::makeInput($id, $amount, $vnp_Returnurl, $vnp_TmnCode);
+        $query = self::makeMergeInput($inputData)['query'];
+        $hashdata = self::makeMergeInput($inputData)['hashdata'];
+        $vnp_Url = $vnp_Url . "?" . $query;
+
+        $vnpSecureHash = hash('sha256', $vnp_HashSecret . $hashdata);
+        $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
+        $order = Order::with(['OrderDetailInfo'])->where(['order_code' => $id])->first();
+        $order->vnp_secure_hash = $vnpSecureHash;
+        $order->save();
+
+        return $vnp_Url;
+    }
+
+    public static function makeInput($id, $amount, $vnp_Returnurl, $vnp_TmnCode)
+    {
         $vnp_TxnRef = $id;
         $vnp_OrderInfo = 'Thông tin đơn hàng';
         $vnp_OrderType = 'CNB';
@@ -66,6 +82,10 @@ class PaymentMethod extends Model
             "vnp_TxnRef" => $vnp_TxnRef,
         );
         ksort($inputData);
+        return $inputData;
+    }
+
+    public static function makeMergeInput($inputData){
         $query = "";
         $i = 0;
         $hashdata = "";
@@ -78,14 +98,8 @@ class PaymentMethod extends Model
             }
             $query .= urlencode($key) . "=" . urlencode($value) . '&';
         }
-
-        $vnp_Url = $vnp_Url . "?" . $query;
-        if (isset($vnp_HashSecret)) {
-            $vnpSecureHash = hash('sha256', $vnp_HashSecret . $hashdata);
-            $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
-        }
-
-
-        return $vnp_Url;
+        $model['query'] = $query;
+        $model['hashdata'] = $hashdata;
+        return $model;
     }
 }
