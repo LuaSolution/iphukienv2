@@ -54,6 +54,37 @@ class PaymentController extends Controller
         if (!empty($order)) {
             if ($vnp_ResponseCode === '00') {
                 toast()->success('Confirm Success', 'Alert');
+            } elseif ($vnp_ResponseCode === '01') {
+                toast()->error('Order not found', 'Alert');
+            } elseif ($vnp_ResponseCode === '04') {
+                toast()->error('Invalid amount', 'Alert');
+            } elseif ($vnp_ResponseCode === '02') {
+                toast()->error('Order already confirmed', 'Alert');
+            } elseif ($vnp_ResponseCode === '97') {
+                toast()->error('Invalid signature', 'Alert');
+            } elseif ($vnp_ResponseCode === '99') {
+                toast()->error('Unknow error', 'Alert');
+            } elseif ($vnp_ResponseCode === '24') {
+                toast()->error('Cancel Order Payment', 'Alert');
+            } else {
+                toast()->error('Payment Error', 'Alert');
+            }
+        } else {
+            toast()->success('Order not found');
+        }
+        return redirect('/');
+    }
+
+    public function verifyConfirm()
+    {
+        $request = request()->all();
+        $vnp_ResponseCode = !empty($request['vnp_ResponseCode']) ? $request['vnp_ResponseCode'] : '99';
+        $vnp_TxnRef = !empty($request['vnp_TxnRef']) ? $request['vnp_TxnRef'] : null;
+        $order = Order::where(['order_code' => $vnp_TxnRef])->first();
+
+        if (!empty($order)) {
+            if ($vnp_ResponseCode === '00') {
+                toast()->success('Confirm Success', 'Alert');
                 $order->status = 'PaymentSuccess';
             } elseif ($vnp_ResponseCode === '01') {
                 toast()->error('Order not found', 'Alert');

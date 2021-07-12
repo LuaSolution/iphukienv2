@@ -168,6 +168,7 @@ Route::middleware(['locale'])->group(function () {
 
     Route::get('/payment/order/{id}', 'User\PaymentController@index')->name('user.payment.createOrder');
     Route::get('/payment/vnpay/verify', 'User\PaymentController@verify');
+    Route::get('/payment/vnpay/callback', 'User\PaymentController@verifyConfirm');
     Route::get('/', 'User\HomeController@index')->name('getHome');
     Route::get('/login', 'User\UserController@login')->name('login');
     Route::get('/logout', 'User\UserController@doLogout')->name('doLogout');
