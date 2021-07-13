@@ -88,7 +88,7 @@ class PaymentController extends Controller
             $checkPayment = Order::checkResponseVnPay($order, $vnp_TxnRef, $vnp_ResponseCode, $vnp_Amount, $vnp_SecureHash, $vnp_HashSecret);
             $order->status = $checkPayment['status'];
             $order->save();
-            return response()->json($checkPayment, 200);
+            return response()->json(['RspCode' => $checkPayment['RspCode'], 'Message' => $checkPayment['Message']], 200);
         } else {
             return response()->json($checkPayment, 200);
         }

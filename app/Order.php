@@ -87,16 +87,16 @@ class Order extends Model
         }
 
         if (!empty($vnp_ResponseCode) && $vnp_ResponseCode === '99') {
-            $model['vnp_ResponseCode'] = $vnp_ResponseCode;
-            $model['message'] = 'Unknow error';
+            $model['RspCode'] = '00';
+            $model['Message'] = 'Unknow error';
             $model['status'] = 'PaymentError';
             $model['type'] = 'error';
             return $model;
         }
 
         if ($order->order_code !== $vnp_TxnRef || $vnp_ResponseCode === '01') {
-            $model['vnp_ResponseCode'] = $vnp_ResponseCode;
-            $model['message'] = 'Order Not Found';
+            $model['RspCode'] = $vnp_ResponseCode;
+            $model['Message'] = 'Order Not Found';
             $model['status'] = 'PaymentError';
             $model['type'] = 'error';
             return $model;
@@ -104,24 +104,24 @@ class Order extends Model
 
 
         if ($order->status === 'PaymentSuccess' || $vnp_ResponseCode === '02') {
-            $model['vnp_ResponseCode'] = $vnp_ResponseCode;
-            $model['message'] = 'Order already confirmed';
+            $model['RspCode'] = $vnp_ResponseCode;
+            $model['Message'] = 'Order already confirmed';
             $model['status'] = 'PaymentSuccess';
             $model['type'] = 'error';
             return $model;
         }
 
         if ($amount != $vnp_Amount / 100 || $vnp_ResponseCode === '04') {
-            $model['vnp_ResponseCode'] = $vnp_ResponseCode;
-            $model['message'] = 'Invalid amount';
+            $model['RspCode'] = $vnp_ResponseCode;
+            $model['Message'] = 'Invalid amount';
             $model['status'] = 'PaymentError';
             $model['type'] = 'error';
             return $model;
         }
 
         if (!$checkHashKey || $vnp_ResponseCode === '97') {
-            $model['vnp_ResponseCode'] = $vnp_ResponseCode;
-            $model['message'] = 'Invalid Checksum';
+            $model['RspCode'] = $vnp_ResponseCode;
+            $model['Message'] = 'Invalid Checksum';
             $model['status'] = 'PaymentError';
             $model['type'] = 'error';
             return $model;
