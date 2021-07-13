@@ -74,23 +74,17 @@ class PaymentController extends Controller
     {
         $request = request()->all();
 
-        $checkPayment['RspCode'] = '99';
-        $checkPayment['message'] = 'Unknow error';
-
         $vnp_TxnRef = !empty($request['vnp_TxnRef']) ? $request['vnp_TxnRef'] : null;
         $vnp_ResponseCode = !empty($request['vnp_ResponseCode']) ? $request['vnp_ResponseCode'] : '99';
         $vnp_Amount = !empty($request['vnp_Amount']) ? $request['vnp_Amount'] : 0;
         $vnp_SecureHash = !empty($request['vnp_SecureHash']) ? $request['vnp_SecureHash'] : 0;
         $vnp_HashSecret = env('CHECKSUM_CODE');
         $order = Order::with(['OrderDetailInfo'])->where(['order_code' => $vnp_TxnRef])->first();
-
-        if (!empty($order)) {
-            $checkPayment = Order::checkResponseVnPay($order, $vnp_TxnRef, $vnp_ResponseCode, $vnp_Amount, $vnp_SecureHash, $vnp_HashSecret);
+        $checkPayment = Order::checkResponseVnPay($order, $vnp_TxnRef, $vnp_ResponseCode, $vnp_Amount, $vnp_SecureHash, $vnp_HashSecret);
+        if(!empty($order)){
             $order->status = $checkPayment['status'];
             $order->save();
-            return response()->json(['RspCode' => $checkPayment['RspCode'], 'Message' => $checkPayment['Message']], 200);
-        } else {
-            return response()->json($checkPayment, 200);
         }
+        return response()->json(['RspCode' => $checkPayment['RspCode'], 'Message' => $checkPayment['Message']], 200);
     }
 }
