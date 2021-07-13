@@ -90,8 +90,7 @@ class PaymentController extends Controller
             $order->save();
             return response()->json($checkPayment, 200);
         } else {
-            toast()->error('Order not found');
+            return response()->json($checkPayment, 200);
         }
-        return response()->json($checkPayment, 200);
     }
 }
