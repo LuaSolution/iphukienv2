@@ -99,7 +99,6 @@ class Order extends Model
                 return $model;
             }
 
-
             if ($order->status === 'PaymentSuccess' || $vnp_ResponseCode === '02') {
                 $model['RspCode'] = '02';
                 $model['Message'] = 'Order already confirmed';
@@ -125,7 +124,7 @@ class Order extends Model
             $model['RspCode'] = '00';
             $model['Message'] = 'Confirm Success';
             $model['status'] = 'PaymentError';
-            $model['type'] = 'error';
+            $model['type'] = 'success';
             return $model;
         }
 

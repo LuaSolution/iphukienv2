@@ -60,9 +60,9 @@ class PaymentController extends Controller
             $checkPayment = Order::checkResponseVnPay($order, $vnp_TxnRef, $vnp_ResponseCode, $vnp_Amount, $vnp_SecureHash, $vnp_HashSecret);
             $order->status = $checkPayment['status'];
             if($checkPayment['type'] === 'error'){
-                toast()->error($checkPayment['message']);
+                toast()->error($checkPayment['Message']);
             }else {
-                toast()->success($checkPayment['message']);
+                toast()->success($checkPayment['Message']);
             }
         } else {
             toast()->error('Order not found');
