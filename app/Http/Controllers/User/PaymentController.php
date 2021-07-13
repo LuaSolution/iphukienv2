@@ -74,6 +74,9 @@ class PaymentController extends Controller
     {
         $request = request()->all();
 
+        $checkPayment['RspCode'] = '99';
+        $checkPayment['message'] = 'Unknow error';
+
         $vnp_TxnRef = !empty($request['vnp_TxnRef']) ? $request['vnp_TxnRef'] : null;
         $vnp_ResponseCode = !empty($request['vnp_ResponseCode']) ? $request['vnp_ResponseCode'] : '99';
         $vnp_Amount = !empty($request['vnp_Amount']) ? $request['vnp_Amount'] : 0;
@@ -89,6 +92,6 @@ class PaymentController extends Controller
         } else {
             toast()->error('Order not found');
         }
-        return response()->json([], 200);
+        return response()->json($checkPayment, 200);
     }
 }
