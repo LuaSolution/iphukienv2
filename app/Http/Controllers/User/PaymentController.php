@@ -48,27 +48,22 @@ class PaymentController extends Controller
     public function verify()
     {
         $request = request()->all();
+
         $vnp_TxnRef = !empty($request['vnp_TxnRef']) ? $request['vnp_TxnRef'] : null;
         $vnp_ResponseCode = !empty($request['vnp_ResponseCode']) ? $request['vnp_ResponseCode'] : '99';
         $vnp_Amount = !empty($request['vnp_Amount']) ? $request['vnp_Amount'] : 0;
         $vnp_SecureHash = !empty($request['vnp_SecureHash']) ? $request['vnp_SecureHash'] : 0;
         $vnp_HashSecret = env('CHECKSUM_CODE');
         $order = Order::with(['OrderDetailInfo'])->where(['order_code' => $vnp_TxnRef])->first();
-        $checkHashKey = hash_equals($order->vnp_secure_hash, $vnp_SecureHash);
-        echo "<pre>";
-        print_r($order->vnp_secure_hash);
-        echo "</pre>";
-        echo "<pre>";
-        print_r($vnp_SecureHash);
-        echo "</pre>";
-        echo "<pre>";
-        print_r($checkHashKey);
-        echo "</pre>";
-        die;
+
         if (!empty($order)) {
             $checkPayment = Order::checkResponseVnPay($order, $vnp_TxnRef, $vnp_ResponseCode, $vnp_Amount, $vnp_SecureHash, $vnp_HashSecret);
             $order->status = $checkPayment['status'];
-            toast()->$checkPayment['type']($checkPayment['message']);
+            if($checkPayment['type'] === 'error'){
+                toast()->error($checkPayment['message']);
+            }else {
+                toast()->success($checkPayment['message']);
+            }
         } else {
             toast()->error('Order not found');
         }
@@ -78,6 +73,7 @@ class PaymentController extends Controller
     public function verifyConfirm()
     {
         $request = request()->all();
+
         $vnp_TxnRef = !empty($request['vnp_TxnRef']) ? $request['vnp_TxnRef'] : null;
         $vnp_ResponseCode = !empty($request['vnp_ResponseCode']) ? $request['vnp_ResponseCode'] : '99';
         $vnp_Amount = !empty($request['vnp_Amount']) ? $request['vnp_Amount'] : 0;
@@ -89,10 +85,10 @@ class PaymentController extends Controller
             $checkPayment = Order::checkResponseVnPay($order, $vnp_TxnRef, $vnp_ResponseCode, $vnp_Amount, $vnp_SecureHash, $vnp_HashSecret);
             $order->status = $checkPayment['status'];
             $order->save();
-            toast()->$checkPayment['type']($checkPayment['message']);
+            return response()->json($checkPayment, 200);
         } else {
             toast()->error('Order not found');
         }
-        return redirect('/');
+        return response()->json([], 200);
     }
 }

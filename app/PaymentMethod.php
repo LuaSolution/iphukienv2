@@ -100,6 +100,7 @@ class PaymentMethod extends Model
         }
         $model['query'] = $query;
         $model['hashdata'] = $hashdata;
+
         return $model;
     }
 }
