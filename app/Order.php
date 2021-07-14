@@ -24,6 +24,13 @@ class Order extends Model
         'user_id'
     ];
 
+    CONST PAYMENT_RESPONSE = [
+        '01' => 'Order Not Found',
+        '02' => 'Order already confirmed',
+        '97' => 'Invalid Checksum',
+        '04' => 'Invalid amount',
+    ]  ;
+
     public function insertOrder($data)
     {
         return Order::create($data);
@@ -67,7 +74,11 @@ class Order extends Model
             }
         }
 
-        if(!empty($order)){
+        if (empty($vnp_TxnRef) || empty($vnp_ResponseCode) || empty($vnp_Amount) || empty($vnp_SecureHash) || empty($vnp_HashSecret)) {
+            return $model;
+        }
+
+        if (!empty($order)) {
             $vnp_Returnurl = env('URL_CALLBACK_VNPAY') . "/payment/vnpay/verify";
             $vnp_TmnCode = env('WEBSITE_CODE');
             /// code in order
@@ -90,18 +101,18 @@ class Order extends Model
                 return $model;
             }
 
-            if ($order->status === 'PaymentSuccess' || $vnp_ResponseCode === '02') {
-                $model['RspCode'] = '02';
-                $model['Message'] = 'Order already confirmed';
-                $model['status'] = 'PaymentSuccess';
-                $model['type'] = 'error';
-                return $model;
-            }
-
             if (!$checkHashKey || $vnp_ResponseCode === '97') {
                 $model['RspCode'] = '97';
                 $model['Message'] = 'Invalid Checksum';
                 $model['status'] = 'PaymentError';
+                $model['type'] = 'error';
+                return $model;
+            }
+
+            if ($order->status === 'PaymentSuccess' || $vnp_ResponseCode === '02') {
+                $model['RspCode'] = '02';
+                $model['Message'] = 'Order already confirmed';
+                $model['status'] = 'PaymentSuccess';
                 $model['type'] = 'error';
                 return $model;
             }
@@ -112,11 +123,5 @@ class Order extends Model
             $model['type'] = 'error';
             return $model;
         }
-
-        if (empty($vnp_TxnRef) || empty($vnp_ResponseCode) || empty($vnp_Amount) || empty($vnp_SecureHash) || empty($vnp_HashSecret)) {
-            return $model;
-        }
-
-        return $model;
     }
 }
