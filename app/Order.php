@@ -105,6 +105,7 @@ class Order extends Model
                 $model['type'] = 'error';
                 return $model;
             }
+            return $model;
         } else {
             $model['RspCode'] = '01';
             $model['Message'] = 'Order Not Found';

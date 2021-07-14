@@ -81,6 +81,7 @@ class PaymentController extends Controller
         $vnp_HashSecret = env('CHECKSUM_CODE');
         $order = Order::with(['OrderDetailInfo'])->where(['order_code' => $vnp_TxnRef])->first();
         $checkPayment = Order::checkResponseVnPay($order, $vnp_TxnRef, $vnp_ResponseCode, $vnp_Amount, $vnp_SecureHash, $vnp_HashSecret);
+
         if(!empty($order)){
             $order->status = $checkPayment['status'];
             $order->save();
