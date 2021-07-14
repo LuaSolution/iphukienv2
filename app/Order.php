@@ -67,10 +67,6 @@ class Order extends Model
             }
         }
 
-        if (empty($vnp_TxnRef) || empty($vnp_ResponseCode) || empty($vnp_Amount) || empty($vnp_SecureHash) || empty($vnp_HashSecret)) {
-            return $model;
-        }
-
         if (!empty($order)) {
             $vnp_Returnurl = env('URL_CALLBACK_VNPAY') . "/payment/vnpay/verify";
             $vnp_TmnCode = env('WEBSITE_CODE');
