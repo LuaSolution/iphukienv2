@@ -117,14 +117,6 @@ class Order extends Model
             return $model;
         }
 
-        if (!empty($vnp_ResponseCode) && $vnp_ResponseCode === '99') {
-            $model['RspCode'] = '00';
-            $model['Message'] = 'Confirm Success';
-            $model['status'] = 'PaymentError';
-            $model['type'] = 'success';
-            return $model;
-        }
-
         return $model;
     }
 }
