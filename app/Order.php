@@ -24,13 +24,6 @@ class Order extends Model
         'user_id'
     ];
 
-    CONST PAYMENT_RESPONSE = [
-        '01' => 'Order Not Found',
-        '02' => 'Order already confirmed',
-        '97' => 'Invalid Checksum',
-        '04' => 'Invalid amount',
-    ]  ;
-
     public function insertOrder($data)
     {
         return Order::create($data);
