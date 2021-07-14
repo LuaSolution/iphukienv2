@@ -67,7 +67,6 @@ class Order extends Model
             }
         }
 
-
         if(!empty($order)){
             $vnp_Returnurl = env('URL_CALLBACK_VNPAY') . "/payment/vnpay/verify";
             $vnp_TmnCode = env('WEBSITE_CODE');
@@ -83,17 +82,9 @@ class Order extends Model
 
             $checkHashKey = hash_equals($vnpSecureHash_Order, $vnpSecureHash_Request);
 
-            if (!$checkHashKey || $vnp_ResponseCode === '97') {
-                $model['RspCode'] = '97';
-                $model['Message'] = 'Invalid Checksum';
-                $model['status'] = 'PaymentError';
-                $model['type'] = 'error';
-                return $model;
-            }
-
-            if ($order->order_code !== $vnp_TxnRef || $vnp_ResponseCode === '01') {
-                $model['RspCode'] = '01';
-                $model['Message'] = 'Order Not Found';
+            if ($amount != $vnp_Amount / 100 || $vnp_ResponseCode === '04') {
+                $model['RspCode'] = '04';
+                $model['Message'] = 'Invalid amount';
                 $model['status'] = 'PaymentError';
                 $model['type'] = 'error';
                 return $model;
@@ -107,13 +98,19 @@ class Order extends Model
                 return $model;
             }
 
-            if ($amount != $vnp_Amount / 100 || $vnp_ResponseCode === '04') {
-                $model['RspCode'] = '04';
-                $model['Message'] = 'Invalid amount';
+            if (!$checkHashKey || $vnp_ResponseCode === '97') {
+                $model['RspCode'] = '97';
+                $model['Message'] = 'Invalid Checksum';
                 $model['status'] = 'PaymentError';
                 $model['type'] = 'error';
                 return $model;
             }
+        } else {
+            $model['RspCode'] = '01';
+            $model['Message'] = 'Order Not Found';
+            $model['status'] = 'PaymentError';
+            $model['type'] = 'error';
+            return $model;
         }
 
         if (empty($vnp_TxnRef) || empty($vnp_ResponseCode) || empty($vnp_Amount) || empty($vnp_SecureHash) || empty($vnp_HashSecret)) {
