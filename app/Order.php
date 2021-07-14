@@ -55,6 +55,13 @@ class Order extends Model
 
     public static function checkResponseVnPay($data, $order)
     {
+        $amount = 0;
+        if (!empty($order['OrderDetailInfo'])) {
+            foreach ($order['OrderDetailInfo'] as $value) {
+                $amount += $value['total_price'];
+            }
+        }
+
         $inputData = array();
         $returnData = array();
         $vnp_HashSecret = env('CHECKSUM_CODE');
@@ -81,30 +88,40 @@ class Order extends Model
 //        $vnpTranId = $inputData['vnp_TransactionNo']; //Mã giao dịch tại VNPAY
 //        $vnp_BankCode = $inputData['vnp_BankCode']; //Ngân hàng thanh toán
         $secureHash = hash('sha256',$vnp_HashSecret . $hashData);
-        $orderId = $inputData['vnp_TxnRef'];
+//        $orderId = $inputData['vnp_TxnRef'];
 
         try {
             if ($secureHash == $vnp_SecureHash) {
                 if (!empty($order)) {
-                    if (!empty($order["status"]) && $orderId ) {
+                    if (!empty($order["status"]) && $order["status"] === "New" ) {
                         $returnData['RspCode'] = '00';
                         $returnData['Message'] = 'Confirm Success';
-                    } else {
+                        $returnData['Type'] = 'success';
+                    } elseif ($amount != $inputData['vnp_Amount'] / 100) {
+                        $returnData['RspCode'] = '04';
+                        $returnData['Message'] = 'Invalid amount';
+                        $returnData['Type'] = 'error';
+                    } elseif(!empty($order["status"]) && $order["status"] === "PaymentSuccess") {
                         $returnData['RspCode'] = '02';
                         $returnData['Message'] = 'Order already confirmed';
+                        $returnData['Type'] = 'error';
                     }
                 } else {
                     $returnData['RspCode'] = '01';
                     $returnData['Message'] = 'Order not found';
+                    $returnData['Type'] = 'error';
                 }
             } else {
                 $returnData['RspCode'] = '97';
                 $returnData['Message'] = 'Invalid Checksum';
+                $returnData['Type'] = 'error';
             }
         } catch (Exception $e) {
             $returnData['RspCode'] = '99';
             $returnData['Message'] = 'Unknow error';
+            $returnData['Type'] = 'error';
         }
+
         return $returnData;
     }
 }
