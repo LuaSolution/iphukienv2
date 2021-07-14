@@ -52,9 +52,6 @@ class PaymentMethod extends Model
 
         $vnpSecureHash = hash('sha256', $vnp_HashSecret . $hashdata);
         $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
-        $order = Order::with(['OrderDetailInfo'])->where(['order_code' => $id])->first();
-        $order->vnp_secure_hash = $vnpSecureHash;
-        $order->save();
 
         return $vnp_Url;
     }
