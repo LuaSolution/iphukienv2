@@ -68,7 +68,7 @@ class PaymentController extends Controller
         $order = Order::with(['OrderDetailInfo'])->where(['order_code' => $vnp_TxnRef])->first();
         $checkPayment = Order::checkResponseVnPay($request, $order);
         if (!empty($order) && $checkPayment['RspCode'] === '00') {
-            $order->status = $checkPayment['status'];
+            $order->status = 'PaymentSuccess';
             $order->save();
         }
 
