@@ -53,7 +53,7 @@ class PaymentController extends Controller
         $checkPayment = Order::checkResponseVnPay($request, $order);
 
         if ($checkPayment['RspCode'] === '00' || $checkPayment['RspCode'] === '02') {
-            toast()->success('Đơn hàng đang được xử lý!');
+            toast()->success('Order is being processed!');
         } else {
             toast()->error($checkPayment['Message']);
         }
