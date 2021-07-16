@@ -57,19 +57,27 @@ class PaymentController extends Controller
         } else {
             toast()->error($checkPayment['Message']);
         }
+
         return redirect('/');
     }
 
     public function verifyConfirm()
     {
-        $request = request()->all();
+        try {
+            $request = request()->all();
 
-        $vnp_TxnRef = !empty($request['vnp_TxnRef']) ? $request['vnp_TxnRef'] : null;
-        $order = Order::with(['OrderDetailInfo'])->where(['order_code' => $vnp_TxnRef])->first();
-        $checkPayment = Order::checkResponseVnPay($request, $order);
-        if (!empty($order) && $checkPayment['RspCode'] === '00') {
-            $order->status = 'PaymentSuccess';
-            $order->save();
+            $vnp_TxnRef = !empty($request['vnp_TxnRef']) ? $request['vnp_TxnRef'] : null;
+            $order = Order::with(['OrderDetailInfo'])->where(['order_code' => $vnp_TxnRef])->first();
+            $checkPayment = Order::checkResponseVnPay($request, $order);
+            if (!empty($order) && $checkPayment['RspCode'] === '00') {
+                $order->status = 'PaymentSuccess';
+                $order->save();
+            }
+        } catch (Exception $e) {
+            $returnData['RspCode'] = '99';
+            $returnData['Message'] = 'Unknow error';
+            $returnData['Type'] = 'error';
+            return response()->json($returnData, 200);
         }
 
         return response()->json($checkPayment, 200);
