@@ -127,29 +127,30 @@
                 </div>
                 <div class="col m6 s12 form-input">
                     <div class="input-field">
-                        <select name="city" id="city">
-                            <option value="" disabled selected>Chọn tỉnh/ thành phố</option>
+                        <input type="text" id="input_province" value="Chọn tỉnh/ thành phố" readonly >
+                        <input type="hidden" name="city" id="value_city" value="" readonly >
+                        <div id="city">
                             @if(!empty($listCity))
                                 @foreach ($listCity as $city)
-                                    <option value="{{ $city->name }}"
-                                            data-cityid="{{ $city->id }}">{{ !empty($city->name) ? $city->name: null }}</option>
+                                    <span data-value="{{ $city->name }}"
+                                            data-cityid="{{ $city->id }}">{{ !empty($city->name) ? $city->name: null }}</span>
                                 @endforeach
                             @endif
-                        </select>
+                        </div>
                     </div>
                 </div>
                 <div class="col m6 s12 form-input">
                     <div class="input-field">
-                        <select name="district" id="district">
-                            <option value="" disabled selected>Chọn quận/ huyện</option>
-                        </select>
+                        <input type="text" id="input_district" value="Chọn quận/ huyện" readonly >
+                        <input type="hidden" name="district" id="value_district" value="" readonly >
+                        <div id="district"></div>
                     </div>
                 </div>
                 <div class="col m6 s12 form-input">
                     <div class="input-field">
-                        <select name="ward" id="ward">
-                            <option value="" disabled selected>Chọn phường/ xã</option>
-                        </select>
+                        <input type="text" id="input_ward" value="Chọn phường/ xã" readonly >
+                        <input type="hidden" name="ward" id="value_ward" value="" readonly >
+                        <div id="ward"></div>
                     </div>
                 </div>
                 <div class="col m6 s12 form-input">
@@ -172,11 +173,139 @@
             </form>
         </div>
     </div>
+    <style>
+        #input_province, #input_district, #input_ward{
+            border-bottom: 0.5px solid;
+            position: relative;
+            background-image: url("/public/assets/images/icon.svg");
+            background-repeat: no-repeat;
+            background-position: center right;
+            border-bottom: 0.5px solid;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+        #city, #district, #ward{ 
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 9;
+            overflow-y: scroll;
+            height: 0;
+        }
+
+        .height{
+            height: 40vh !important;
+        }
+
+        #city > span, #district > span, #ward > span {
+            background-color: white;
+            border: 0.5px solid #ccc;
+            padding: 15px 10px;
+            font-size: 14px !important;
+        }
+    </style>
 @endsection
 
 @section('scripts')
     <script>
+        $(document).click(function(event) { 
+            var $target = $(event.target);
+            
+            if(!$target.closest('#input_province').length) {
+                $('#city').removeClass('height');
+            }
+
+            if(!$target.closest('#input_district').length) {
+                $('#district').removeClass('height');
+            }
+
+            if(!$target.closest('#input_ward').length) {
+                $('#ward').removeClass('height');
+            }
+        });
+
         $(document).ready(function () {
+            $('#input_province').click(function() {
+                $('#city').addClass('height');
+            })
+            
+            $('#city span').click(function(event) {
+                $('#input_district').val('Chọn quận/ huyện');
+                $('#district span').remove();
+
+                $('#input_ward').val('Chọn phường/ xã');
+                $('#ward span').remove();
+                
+                $('#value_district').val('');
+                $('#value_ward').val('');
+
+                const cityId = $(this).attr('data-cityid');
+                const cityValue = $(this).attr('data-value');
+                $.get(
+                    "{{ URL::to('/') }}/location/DISTRICT/" + cityId,
+                    function (data) {
+                        let districts = JSON.parse(data);
+                        let dis;
+                        let a = '';
+                        do {
+                            dis = districts.pop();
+                            a += '<span data-value="' + dis.name + '" data-districtid="' + dis.id + '">' + dis.name + '</span>';
+                        }
+                        while (districts.length > 0);
+                        $('#district').html(a);
+                        $(".ipk-preloader").addClass('hide');
+                        $('#input_province').val(cityValue);
+                        $('#value_city').val(cityValue);
+                    }
+                );
+            })
+
+            $('#input_district').click(function() {
+                if($("#district span").length) {
+                    $('#district').addClass('height');
+                }
+            })
+
+            $(document).on('click', '#district span', function(event) {
+                $('#input_ward').val('Chọn phường/ xã');
+                $('#ward span').remove();
+                $('#value_ward').val('');
+
+                const districtId =  $(this).attr('data-districtid');
+                const districtValue =  $(this).attr('data-value');
+                $.get(
+                    "{{ URL::to('/') }}/location/WARD/" + districtId,
+                    function (data) {
+                        let wards = JSON.parse(data);
+                        let ward;
+                        let a = '';
+                        do {
+                            ward = wards.pop();
+                            a += '<span data-value="' + ward.name + '" data-wardid="' + ward.id + '">' + ward.name + '</span>';
+                        }
+                        while (wards.length > 0);
+                        $('#ward').html(a);
+                        $('#input_district').val(districtValue);
+                        $('#value_district').val(districtValue);
+                    }
+                );
+            })
+
+
+            $('#input_ward').click(function() {
+                if($("#ward span").length) {
+                    $('#ward').addClass('height');
+                }
+            })
+
+            $(document).on('click', '#ward span', function(event) {
+                const wardValue =  $(this).attr('data-value');
+                $('#input_ward').val(wardValue);
+                $('#ward').addClass('height');
+                $('#value_ward').val(wardValue);
+            })
+
+            
             $(".ipk-preloader").removeClass('hide');
             var elems = document.querySelectorAll('#new-address-popup');
             M.Modal.init(elems, {"endingTop": '5%'});
@@ -245,45 +374,46 @@
             $('.delivery-method-item').removeClass('selected');
             $(this).addClass('selected');
         });
-        $(document).on("change", "#city", function () {
-            $(".ipk-preloader").removeClass('hide');
-            let cityId = $("#city option:selected").data('cityid');
-            $("#district option").remove();
-            $.get(
-                "{{ URL::to('/') }}/location/DISTRICT/" + cityId,
-                function (data) {
-                    let districts = JSON.parse(data);
-                    let dis;
-                    do {
-                        dis = districts.pop();
-                        $("#district").formSelect().append('<option value="' + dis.name + '" data-districtid="' + dis.id + '">' + dis.name + '</option>');
-                    }
-                    while (districts.length > 0);
-                    $("#district").formSelect();
-                    $(".ipk-preloader").addClass('hide');
-                }
-            );
+        // $(document).on("change", "#city", function () {
+        //     $(".ipk-preloader").removeClass('hide');
+        //     let cityId = $("#city option:selected").data('cityid');
+        //     $("#district option").remove();
+        //     $.get(
+        //         "{{ URL::to('/') }}/location/DISTRICT/" + cityId,
+        //         function (data) {
+        //             let districts = JSON.parse(data);
+        //             let dis;
+        //             do {
+        //                 dis = districts.pop();
+        //                 $("#district").formSelect().append('<option value="' + dis.name + '" data-districtid="' + dis.id + '">' + dis.name + '</option>');
+        //             }
+        //             while (districts.length > 0);
+        //             $("#district").formSelect();
+        //             $(".ipk-preloader").addClass('hide');
+        //         }
+        //     );
 
-        });
-        $(document).on("change", "#district", function () {
-            $(".ipk-preloader").removeClass('hide');
-            let districtId = $("#district option:selected").data('districtid');
-            $("#ward option").remove();
-            $.get(
-                "{{ URL::to('/') }}/location/WARD/" + districtId,
-                function (data) {
-                    let wards = JSON.parse(data);
-                    let ward;
-                    do {
-                        ward = wards.pop();
-                        $("#ward").formSelect().append('<option value="' + ward.name + '" data-wardid="' + ward.id + '">' + ward.name + '</option>');
-                    }
-                    while (wards.length > 0);
-                    $("#ward").formSelect();
-                    $(".ipk-preloader").addClass('hide');
-                }
-            );
-        });
+        // });
+        // $(document).on("change", "#district", function () {
+        //     $(".ipk-preloader").removeClass('hide');
+        //     let districtId = $("#district option:selected").data('districtid');
+        //     $("#ward option").remove();
+        //     $.get(
+        //         "{{ URL::to('/') }}/location/WARD/" + districtId,
+        //         function (data) {
+        //             let wards = JSON.parse(data);
+        //             let ward;
+        //             do {
+        //                 ward = wards.pop();
+        //                 $("#ward").formSelect().append('<option value="' + ward.name + '" data-wardid="' + ward.id + '">' + ward.name + '</option>');
+        //             }
+        //             while (wards.length > 0);
+        //             $("#ward").formSelect();
+        //             $(".ipk-preloader").addClass('hide');
+        //         }
+        //     );
+        // });
+        
         $(document).on("click", ".complete", function () {
             $(".ipk-preloader").removeClass('hide');
             let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
