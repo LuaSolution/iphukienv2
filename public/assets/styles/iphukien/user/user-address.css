@@ -33,7 +33,6 @@
     font-weight: 500;
     font-size: 13px;
     line-height: 16px;
-    text-transform: uppercase;
     color: #5B5B5B;
 }
 #new-address-popup .form-input select {
@@ -93,7 +92,6 @@
     border-radius: 18px;
     position: relative;
     margin-top: 23px;
-    margin-left: 125px;
     cursor: pointer;
 }
 .list-address .address .list-action {
@@ -206,5 +204,12 @@ select.browser-default {
 {
     .list-address .address {
         width: 100%;
+    }
+}
+
+@media only screen and (min-width: 426px)
+{
+    .list-address .address {
+        margin-left: 125px;
     }
 }

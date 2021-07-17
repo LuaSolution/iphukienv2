@@ -335,6 +335,26 @@
     .item-infos .price .origin {
         margin-left: 0px;
     }
+
+    .description-mobile p {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis; 
+        text-align:justify
+    }
+
+    .sale-products .button-detail {
+        position: unset;
+        margin-top: 360px;
+        display: flex;
+        justify-content: center;
+    }
+
+    #carousel-button {
+        height: 425px !important;
+    }
 }
 
 /* end 414 */
