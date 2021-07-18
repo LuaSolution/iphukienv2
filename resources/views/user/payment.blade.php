@@ -108,7 +108,7 @@
     <div id="new-address-popup" class="modal">
         <div class="modal-content">
             <a href="#!" class="modal-close close-add-address-popup"></a>
-            <div class="new-address-popup-title">
+            <div class="new-address-popup-title" style="text-transform: uppercase;">
                 Thêm địa chỉ mới
             </div>
             <form method="post" action="{{route('user.add-new-address')}}" class="row add-new-address-form">
@@ -340,12 +340,12 @@
                         let totalShipFee = parseInt(shipService.shipFee) + parseInt(shipService.codFee) + parseInt(shipService.declaredFee);
                         let orderPrice = sum + totalShipFee;
 
-                        if (sum < 500000) {
-                            $("#total-ship-fee").html(`${numberWithCommas(totalShipFee)} VNĐ`);
-                        } else {
+                        // if (sum < 500000) {
+                        //     $("#total-ship-fee").html(`${numberWithCommas(totalShipFee)} VNĐ`);
+                        // } else {
                             $("#total-ship-fee").html(`0 VNĐ`);
                             orderPrice = sum
-                        }
+                        // }
                         let today = new Date();
                         today.setHours(today.getHours() + shipService.estimatedDeliveryTime);
                         let cYear = today.getFullYear();

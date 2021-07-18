@@ -39,7 +39,7 @@
 <div id="new-address-popup" class="modal">
     <div class="modal-content">
         <a href="#!" class="modal-close close-add-address-popup"><a>
-        <div class="new-address-popup-title">
+        <div class="new-address-popup-title"  style="text-transform: uppercase;">
             Thêm địa chỉ mới
         </div>
         <form method="post" action="{{route('user.add-new-address')}}" class="row add-new-address-form">

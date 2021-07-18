@@ -75,11 +75,13 @@ $img = count($listImg) > 0 ? asset('public/' . $listImg[0]->image) : asset('publ
                 </div>
                 <div class="right-info">
                     <span>Phí giao hàng</span>
-                    <span>{{$countAllOrderPrice < 500000 ? number_format($order->ship_fee , 0, ',', '.') : 0 }} VNĐ</span>
+                    <span>0 VNĐ</span>
+                    <!-- <span>{{$countAllOrderPrice < 500000 ? number_format($order->ship_fee , 0, ',', '.') : 0 }} VNĐ</span> -->
                 </div>
                 <div class="right-info sum">
                     <span>Tổng cộng</span>
-                    @if($countAllOrderPrice > 500000)
+                    <!-- @if($countAllOrderPrice > 500000) -->
+                    @if($countAllOrderPrice > 0)
                     <span>{{ number_format($countAllOrderPrice , 0, ',', '.') }} VNĐ</span>
                     @else
                     <span>{{ number_format($order->ship_fee+$countAllOrderPrice , 0, ',', '.') }} VNĐ</span>

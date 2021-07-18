@@ -199,7 +199,7 @@ class UserController extends Controller
             $data['productName'] .= $detail->product_name;
             $data['totalCost'] += $detail->total_price;
         }
-        $data['totalCost'] += $data['order']->ship_fee;
+        // $data['totalCost'] += $data['order']->ship_fee;
 
         return view('user/payment-complete', $data);
     }

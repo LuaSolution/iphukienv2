@@ -6,7 +6,7 @@
     font-weight: bold;
     font-size: 30px;
     line-height: 37px;
-    text-transform: uppercase;
+    
     color: #000000;
 }
 
@@ -47,7 +47,7 @@
     font-weight: 500;
     font-size: 20px;
     line-height: 24px;
-    text-transform: uppercase;
+    
     color: #000;
     border: 1px solid #000000;
     margin-top: 30px;
@@ -64,7 +64,7 @@
     font-size: 20px;
     line-height: 50px;
     text-align: center;
-    text-transform: uppercase;
+    
     color: #000000;
     border: 1px solid #000000;
     display: block;
@@ -143,7 +143,7 @@
         font-weight: bold;
         font-size: 22px;
         line-height: 22px;
-        text-transform: uppercase;
+        
         color: #000000;
         margin-top: 40px;
     }

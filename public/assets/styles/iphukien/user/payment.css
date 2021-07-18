@@ -13,7 +13,7 @@
     background-size: 23px 8px;
     background-repeat: no-repeat;
     padding-right: 35px;
-    text-transform: uppercase;
+    
 }
 
 .order-infos .address-block-title span {
@@ -21,14 +21,14 @@
     font-size: 25px;
     line-height: 41px;
     color: #000;
-    text-transform: uppercase;
+    
 }
 
 .address-block .title {
     font-weight: bold;
     font-size: 34px;
     line-height: 41px;
-    text-transform: uppercase;
+    
     color: #000;
     margin-top: 50px;
 }
@@ -228,7 +228,7 @@
 }
 
 .payment-infos .info.sum span {
-    text-transform: uppercase;
+    
     font-weight: bold;
     font-size: 28px;
     line-height: 35px;
@@ -307,7 +307,7 @@
     font-weight: bold;
     font-size: 33px;
     line-height: 41px;
-    text-transform: uppercase;
+    
     color: #000;
     text-align: center;
 }
@@ -338,7 +338,7 @@
     font-weight: 500;
     font-size: 13px;
     line-height: 16px;
-    text-transform: uppercase;
+    
     color: #5B5B5B;
 }
 
@@ -357,7 +357,7 @@
     font-size: 14px;
     line-height: 17px;
     text-align: center;
-    text-transform: uppercase;
+    
     color: #000000;
     margin: 0 auto;
 }
