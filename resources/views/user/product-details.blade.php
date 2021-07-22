@@ -26,7 +26,6 @@
 <meta property="og:description" content="{{ $product->full_description }}" />
 <meta property="og:image" content="{{ asset('public/assets/images/demo/watch.png') }}" />
 @endsection -->
-
 @section('content')
 <div class="ipk-container product-breadcrumbs">
     <div class="ipk-content-container">
@@ -413,7 +412,6 @@ $(document).on("click", ".add-wishlist-button", function () {
 
 
 $(document).on("click", ".thumbs span", function () {
-    console.log(1234)
     $('.main-image').addClass('is-image');
     $('.main-image').html('');
     $('.main-image')[0].style.backgroundImage = "url(" + $(this).data('img') + ")";
@@ -423,7 +421,13 @@ $(document).on("click", ".custom-fb-share-button", function () {
 });
 $(document).on("click", ".video-icon", function () {
     $(".ipk-preloader").removeClass('hide');
-    let str = `<iframe class="yt-player" src="${$(this).data('video')}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    const video = $(this).data('video');
+    let video_id = video.split("v=")[1];
+const ampersand_pos = video.indexOf("&");
+if (ampersand_pos != -1) {
+video_id = video_id.substring(0, ampersand_pos)
+}
+    let str = `<iframe class="yt-player" src="https://www.youtube.com/embed/${video_id}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     $('.main-image')[0].style.backgroundImage = 'unset';
     $('.main-image').removeClass('is-image');
     $('.main-image').html(str);

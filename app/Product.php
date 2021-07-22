@@ -57,10 +57,7 @@ class Product extends Model
                 ->select('products.*', 'categories.title as category_name', 'categories.slug as category_slug')
                 ->where('products.slug', $id)->first();
         }
-      
-        parse_str(parse_url($res->video, PHP_URL_QUERY), $embed_link);
-        $res->video = $embed_link['v'];
-
+  
         return $res;
     }
     public function getChildProductByParentSizeColor($parentId, $sizeId, $colorId)
