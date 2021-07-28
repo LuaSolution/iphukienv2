@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /public/img
+/public/images
 /storage/*.key
 /.idea
 /.vagrant
