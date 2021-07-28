@@ -1,7 +1,7 @@
 <header class="ipk-container">
     <div class="ipk-left-header">
         <a href="#" data-target="slide-out" class="sidenav-trigger ipk-menu-icon"></a>
-        <a href="https://www.facebook.com/iPhukien//" class="ipk-header-icon facebook-icon hide-on-small-only"></a>
+        <a href="https://www.facebook.com/iPhukien/" class="ipk-header-icon facebook-icon hide-on-small-only"></a>
         <a href="http://instagram.com/iphukienshop" class="ipk-header-icon instagram-icon hide-on-small-only"></a>
         <a href="https://www.youtube.com/channel/UCXsSaOaLLCDP2pzKjV312wg"
             class="ipk-header-icon youtube-icon hide-on-small-only"></a>
@@ -47,7 +47,7 @@
                     </div>
                 @endif
                 <div class="ipk-mobile-link class-social-1">
-                    <a href="https://www.facebook.com/iPhukien//"
+                    <a href="https://www.facebook.com/iPhukien/"
                         class="ipk-mobile-header-icon facebook-mobile-icon"></a>
                     <a href="http://instagram.com/iphukienshop"
                         class="ipk-mobile-header-icon instagram-mobile-icon"></a>
@@ -125,7 +125,7 @@
                     </div>
                 @endif
                 <div class="ipk-mobile-link class-social">
-                    <a href="https://www.facebook.com/iPhukien//"
+                    <a href="https://www.facebook.com/iPhukien/"
                         class="ipk-mobile-header-icon facebook-mobile-icon"></a>
                     <a href="http://instagram.com/iphukienshop"
                         class="ipk-mobile-header-icon instagram-mobile-icon"></a>
