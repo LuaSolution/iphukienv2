@@ -52,13 +52,14 @@ class PaymentController extends Controller
         $order = Order::with(['OrderDetailInfo'])->where(['order_code' => $vnp_TxnRef])->first();
         $checkPayment = Order::checkResponseVnPay($request, $order);
 
+
         if ($checkPayment['RspCode'] === '00' || $checkPayment['RspCode'] === '02') {
             toast()->success('Order is being processed!');
         } else {
             toast()->error($checkPayment['Message']);
         }
 
-        return redirect('/');
+        return redirect('/payment-complete/' . $order->id);
     }
 
     public function verifyConfirm()
