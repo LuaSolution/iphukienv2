@@ -18,6 +18,7 @@ class UserController extends Controller
 {
     public function login(Request $request)
     {
+        session(['link' => url()->previous()]);
         if (Auth::check()) {
             if (Auth::user()->role_id == 1) {
                 return redirect()->route('adMgetHome');
@@ -31,11 +32,12 @@ class UserController extends Controller
 
     public function doLogin(Request $request)
     {
+        $link = session('link');
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             // Authentication passed...
             if (Auth::user()->role_id == 2) {
                 toast()->success('Đăng nhập thành công');
-                return redirect()->route('getHome');
+                return redirect($link);
             }
         } else {
             toast()->error('Mật khẩu hoặc tài khoản không đúng');
@@ -210,7 +212,13 @@ class UserController extends Controller
             return redirect()->route('login');
         }
 
+
         $data['order'] = (new Order())->getById($orderId);
+        if(empty($data['order'])){
+            toast()->error('Không có đơn hàng nào!');
+           return redirect('/');
+        }
+
         $data['orderDetail'] = (new OrderDetail())->getListOrderDetailByOrder($orderId);
         $checkSumData = config('app.nhanh_api_user_name') . $data['order']->order_code;
         $checksum = md5(md5(config('app.nhanh_api_secret_key') . $checkSumData) . $checkSumData);
