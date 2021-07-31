@@ -411,7 +411,7 @@
 #list-image-popup {
     width: 90%;
     padding: 25px 0;
-    background-color: rgba(7, 53, 82);
+    background-color: #eee;
     max-height: 90%;
     top: 5% !important;
 }
@@ -422,7 +422,7 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: #ccc;
+    background-color: #eee;
 }
 
 #list-image-popup .list-thumbs-popup {
