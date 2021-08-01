@@ -793,7 +793,7 @@ img {
   }
 
   .sale-products .carousel.carousel-slider {
-    height: 350px !important;
+    /*height: 350px !important;*/
   }
 
   .sale-products .carousel.carousel-slider .carousel-item {
