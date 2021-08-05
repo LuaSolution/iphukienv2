@@ -12,16 +12,7 @@
 
 @section('fb-sdk')
 <div id="fb-root"></div>
-<script>
-(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=595244321434114";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v11.0&appId=334203584515317&autoLogAppEvents=1" nonce="uXV7kukN"></script>
 @endsection
 
 @section('content')
@@ -94,7 +85,7 @@ function doLogin(name, email, pass) {
 /**  facebook */
 window.fbAsyncInit = function() {
     FB.init({
-      appId      : '595244321434114',
+      appId      : '334203584515317',
       cookie     : true,
       xfbml      : true,
       version    : 'v10.0'
