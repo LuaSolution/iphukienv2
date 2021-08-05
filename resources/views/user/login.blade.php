@@ -85,7 +85,7 @@ function doLogin(name, email, pass) {
 /**  facebook */
 window.fbAsyncInit = function() {
     FB.init({
-      appId      : '334203584515317',
+      appId      : '382104630145603',
       cookie     : true,
       xfbml      : true,
       version    : 'v10.0'
