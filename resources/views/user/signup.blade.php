@@ -12,7 +12,7 @@
 
 @section('fb-sdk')
 <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v11.0&appId=334203584515317&autoLogAppEvents=1" nonce="uXV7kukN"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v11.0&appId=382104630145603&autoLogAppEvents=1" nonce="IuDSIZnx"></script>
 @endsection
 
 @section('content')
