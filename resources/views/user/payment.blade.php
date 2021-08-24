@@ -50,7 +50,7 @@
                 </div>
                 <div class="payment-delivery-block">
                     <div class="methods">
-                        <div class="methods-title">Chọn hình thức thanh toán</div>
+                        <div class="methods-title">Hình thức thanh toán</div>
                         <div class="list-method">
                             @foreach($paymentMethods as $key => $item)
                                 <div class="method-item payment-method-item {{$key == 0 ? 'selected' : ''}}"
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="methods">
-                        <div class="methods-title">Chọn hình thức vận chuyển</div>
+                        <div class="methods-title">Hình thức vận chuyển</div>
                         <div class="list-method">
                             @foreach($deliveries as $key => $item)
                                 <div class="method-item delivery-method-item {{$key == 0 ? 'selected' : ''}}"

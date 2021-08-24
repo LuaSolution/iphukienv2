@@ -49,7 +49,8 @@
                     <a href="https://vt.tiktok.com/ZSJU4Q1PE/" class="ipk-footer-icon tiktok-icon"></a>
                 </div>
                 <div class="bo-cong-thuong-icon">
-                    <!-- <img src="{{ asset('public/assets/images/footer/cong-thuong.svg') }}" /> -->
+                <a href='http://online.gov.vn/Home/WebDetails/85480'>
+                <img alt='' title='' src='http://online.gov.vn/Content/EndUser/LogoCCDVSaleNoti/logoSaleNoti.png'/></a>
                 </div>
             </div>
         </div>
