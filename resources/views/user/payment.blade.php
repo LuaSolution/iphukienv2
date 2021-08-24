@@ -184,7 +184,7 @@
             cursor: pointer;
             margin-bottom: 0;
         }
-        #city, #district, #ward{ 
+        #city, #district, #ward{
             display: flex;
             flex-direction: column;
             position: relative;
@@ -208,9 +208,9 @@
 
 @section('scripts')
     <script>
-        $(document).click(function(event) { 
+        $(document).click(function(event) {
             var $target = $(event.target);
-            
+
             if(!$target.closest('#input_province').length) {
                 $('#city').removeClass('height');
             }
@@ -228,14 +228,14 @@
             $('#input_province').click(function() {
                 $('#city').addClass('height');
             })
-            
+
             $('#city span').click(function(event) {
                 $('#input_district').val('Chọn quận/ huyện');
                 $('#district span').remove();
 
                 $('#input_ward').val('Chọn phường/ xã');
                 $('#ward span').remove();
-                
+
                 $('#value_district').val('');
                 $('#value_ward').val('');
 
@@ -305,7 +305,7 @@
                 $('#value_ward').val(wardValue);
             })
 
-            
+
             $(".ipk-preloader").removeClass('hide');
             var elems = document.querySelectorAll('#new-address-popup');
             M.Modal.init(elems, {"endingTop": '5%'});
@@ -413,7 +413,7 @@
         //         }
         //     );
         // });
-        
+
         $(document).on("click", ".complete", function () {
             $(".ipk-preloader").removeClass('hide');
             let cart = localStorage.getItem('ipk_cart') ? JSON.parse(localStorage.getItem('ipk_cart')) : {};
