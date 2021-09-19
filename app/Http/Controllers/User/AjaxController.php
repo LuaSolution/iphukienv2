@@ -34,12 +34,14 @@ class AjaxController extends Controller
         $name = $request->input('name');
         $email = $request->input('email');
         $password = $request->input('password');
+        $link = session('link');
 
         $res = false;
 
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             // Authentication passed...
             if (Auth::user()->role_id == 2) {
+                return redirect($link);
                 return json_encode(['code' => 1]);
             }
         } else {
@@ -56,7 +58,7 @@ class AjaxController extends Controller
                 ]);
                 Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]);
             }
-
+            return redirect($link);
             return json_encode(['code' => 1]);
         }
 
