@@ -23,7 +23,7 @@
             {{ csrf_field() }}
             <div class="input-group">
                 <input type="text" name="name" placeholder="Họ & tên *" class="input" />
-                <span>Vui lòng điền đẩy đủ Họ & Tên</span>
+                <span>Vui lòng điền đầy đủ Họ & Tên</span>
             </div>
             <div class="input-group">
                 <input type="text" name="phone" placeholder="Số điện thoại *" class="input" />
