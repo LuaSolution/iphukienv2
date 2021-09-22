@@ -53,7 +53,7 @@
                 </div>
                 <div class="bo-cong-thuong-icon">
                     <a href='http://online.gov.vn/Home/WebDetails/85480'>
-                        <img
+                        <img style="height:100px"
                             src="{{ asset('public/assets/images/footer/cong-thuong.svg') }}" />
                     </a>
                 </div>
