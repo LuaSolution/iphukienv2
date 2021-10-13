@@ -341,7 +341,7 @@ function updateCart() {
     let listSizeElement = $(".sizes .size.active");
     if (listSizeElement.length == 0) {
       M.toast({
-        html: "Vui lòng chọn màu sác - kích thước",
+        html: "Vui lòng chọn màu sắc - kích thước",
         classes: "add-cart-fail",
       });
       return false;
@@ -351,7 +351,7 @@ function updateCart() {
     let listColorElement = $(".colors .color.active");
     if (listColorElement.length == 0) {
       M.toast({
-        html: "Vui lòng chọn màu sác - kích thước",
+        html: "Vui lòng chọn màu sắc - kích thước",
         classes: "add-cart-fail",
       });
       return false;
