@@ -18,7 +18,7 @@
                     <div class="company-info">Địa chỉ: 270/2/1 Phan Đình Phùng, Phú Nhuận, Tp. Hồ Chí Minh</div>
                     <div class="company-info">Email: <a href="mailto:iphukien270@gmail.com"
                             style="color:#000">iphukien270@gmail.com</a></div>
-                    <div class="company-info">Hotline: <a href="tel:0989102456" style="color:#000">0989102456</a></div>
+                    <div class="company-info">Hotline: <a href="tel:0795712079" style="color:#000">079 571 2079</a></div>
                 </div>
             </div>
             <div class="col l2 s12">
