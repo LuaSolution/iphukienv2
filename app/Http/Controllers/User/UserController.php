@@ -202,7 +202,6 @@ class UserController extends Controller
             $data['totalCost'] += $detail->total_price;
         }
         // $data['totalCost'] += $data['order']->ship_fee;
-
         return view('user/payment-complete', $data);
     }
 
@@ -220,8 +219,8 @@ class UserController extends Controller
         }
 
         $data['orderDetail'] = (new OrderDetail())->getListOrderDetailByOrder($orderId);
-        $checkSumData = config('app.nhanh_api_user_name') . $data['order']->order_code;
-        $checksum = md5(md5(config('app.nhanh_api_secret_key') . $checkSumData) . $checkSumData);
+        // $checkSumData = config('app.nhanh_api_user_name') . $data['order']->order_code;
+        // $checksum = md5(md5(config('app.nhanh_api_secret_key') . $checkSumData) . $checkSumData);
         // $data['orderDetailUrl'] = config('app.nhanh_api_host') . "/shipping/trackingframe?apiUsername=" . config('app.nhanh_api_user_name') . "&orderId=" . $data['order']->order_code . "&checksum=" . $checksum;
         $data['countAllOrderProduct'] = 0;
         $data['countAllOrderPrice'] = 0;
@@ -229,7 +228,7 @@ class UserController extends Controller
             $data['countAllOrderProduct'] += $oD->total_count;
             $data['countAllOrderPrice'] += $oD->total_price;
         }
-
+// dd($data);
         return view('user/order-details', $data);
     }
 

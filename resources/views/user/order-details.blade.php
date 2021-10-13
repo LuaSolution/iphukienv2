@@ -28,8 +28,6 @@
             <div class="status"><span>Thành công</span></div>
         </div> -->
 
-        <!-- <iframe class="order-detail-iframe" src="{{$orderDetailUrl}}"  width="100%" height="600"></iframe> -->
-
         <div class="list-products">
             <div class="row products">
                 @foreach($orderDetail as $detail)
@@ -64,6 +62,7 @@ $img = count($listImg) > 0 ? asset('public/' . $listImg[0]->image) : asset('publ
                 <div class="left-info">Số điện thoại: {{$order->receiver_phone}}</div>
                 <div class="left-info">Email: {{$order->receiver_email}}</div>
             </div>
+
             <div class="col l6 s12 order-detail-right">
                 <div class="right-info">
                     <span>Số lượng sản phẩm</span>
@@ -80,14 +79,11 @@ $img = count($listImg) > 0 ? asset('public/' . $listImg[0]->image) : asset('publ
                 </div>
                 <div class="right-info sum">
                     <span>Tổng cộng</span>
-                    <!-- @if($countAllOrderPrice > 500000) -->
-                    @if($countAllOrderPrice > 0)
-                    <span>{{ number_format($countAllOrderPrice , 0, ',', '.') }} VNĐ</span>
-                    @else
-                    <span>{{ number_format($order->ship_fee+$countAllOrderPrice , 0, ',', '.') }} VNĐ</span>
-                    @endif
+                    <span>{{$countAllOrderPrice > 0 ? number_format($countAllOrderPrice , 0, ',', '.'):number_format($order->ship_fee+$countAllOrderPrice , 0, ',', '.') }} VNĐ</span>
                 </div>
             </div>
+
+
         </div>
     </div>
 </div>
