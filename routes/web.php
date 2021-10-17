@@ -1,8 +1,16 @@
 <?php
 
-
 Route::middleware(['locale'])->group(function () {
     Route::get('change-language/{language}', 'MainController@changeLanguage')->name('user.change-language');
+
+    Route::get('/cache', function () {
+        \Artisan::call('cache:clear');
+        \Artisan::call('route:clear');
+        \Artisan::call('config:cache');
+
+        return 'OK !';
+    });
+
     Auth::routes();
 
     // Admin ***************************************
@@ -147,7 +155,6 @@ Route::middleware(['locale'])->group(function () {
             //Slider
             Route::resource('sliders', SliderController::class);
             Route::post('/sliders/{id}', 'SliderController@update')->name('sliders.update');
-            
 
             //Metatags
             Route::get('/metatags-edit/{id}', 'MetatagController@getEditMeta')->name('adMgetEditMeta');
@@ -155,10 +162,10 @@ Route::middleware(['locale'])->group(function () {
             Route::get('/metatags', 'MetatagController@getListMeta')->name('adMgetListMeta');
             Route::get('/metatags-del/{id}', 'MetatagController@getDelMeta')->name('adMgetDelMeta');
 
-             //promotions
-             Route::get('/promotions-edit/{id}', 'PromotionController@getEdit')->name('adMgetEditPromotion');
-             Route::post('/promotions-edit/{id}', 'PromotionController@postEdit')->name('adMpostEditPromotion');
-             Route::get('/promotions', 'PromotionController@getList')->name('adMgetListPromotion');
+            //promotions
+            Route::get('/promotions-edit/{id}', 'PromotionController@getEdit')->name('adMgetEditPromotion');
+            Route::post('/promotions-edit/{id}', 'PromotionController@postEdit')->name('adMpostEditPromotion');
+            Route::get('/promotions', 'PromotionController@getList')->name('adMgetListPromotion');
 
             //Partner
             Route::resource('partners', PartnerController::class);
