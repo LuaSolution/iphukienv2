@@ -39,7 +39,7 @@ class PaymentController extends Controller
         $vnp_Returnurl = env('URL_CALLBACK_VNPAY') . "/payment/vnpay/verify";
         $vnp_TmnCode = env('WEBSITE_CODE');
         $vnp_HashSecret = env('CHECKSUM_CODE');
-
+        dd(env('URL_VNPAY'));
         $urlVnPay = PaymentMethod::getUrlPaymentVnPay($id, $amount, $vnp_Url, $vnp_Returnurl, $vnp_TmnCode, $vnp_HashSecret);
 
         return redirect($urlVnPay);
